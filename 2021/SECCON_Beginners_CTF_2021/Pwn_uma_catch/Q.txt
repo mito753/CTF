@@ -1,0 +1,15 @@
+uma_catch
+×
+ウマを踊らせたりできるアプリケーションです．
+
+うーー(うまきゃっち)
+
+nc uma-catch.quals.beginners.seccon.jp 4101
+
+uma_catch.tar.gz 5c1caafc822cff02a55b95f54835e7b567618070
+
+想定難易度: Medium
+
+   
+
+ctf4b{}
