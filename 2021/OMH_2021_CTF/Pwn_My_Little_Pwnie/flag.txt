@@ -1,0 +1,12 @@
+$ id
+uid=65534 gid=65534 groups=65534
+$ ls -l
+total 16
+-rwxr-xr-x 1 65534 65534 5528 Apr 16 19:13 baby_pwn
+-rwxr-xr-x 1 65534 65534  356 May 15 15:02 entrypoint.sh
+-rw-r--r-- 1 65534 65534   46 Apr 16 15:51 flag
+$ cat flag
+p4{AT_ENTRY,AT_PLATFORM?-y0u_mean_l1ke_ATDT?}
+$ 
+[*] Interrupted
+[*] Closed connection to pwnie.zajebistyc.tf port 17003

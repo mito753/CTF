@@ -1,0 +1,13 @@
+pwn
+Framed
+Points: 121
+Solves: 32
+If you're not careful enough you can get framed into something you didn't do!
+
+nc framed.zajebistyc.tf 17005
+ef450372fa91137eb9cdc53d34b466cba26a323c0f0f2e2351a284c579526595_framed.tar.gz 4.0K
+The flag format is: flat{letters_digits_and_special_characters}.
+If you have any questions, you can find our team-members at the IRC channel  #p4team @ freenode .
+
+Flag
+Flag
