@@ -1,0 +1,9 @@
+Challenge
+15 Solves
+Formats last theorem
+400
+Pwn Format_string
+I dare you to hook the malloc
+nc dctf-chall-formats-last-theorem.westeurope.azurecontainer.io 7482
+
+Flag

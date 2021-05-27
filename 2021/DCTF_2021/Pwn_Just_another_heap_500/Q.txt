@@ -1,0 +1,9 @@
+Challenge
+4 Solves
+Just another heap
+500
+Pwn Heap
+There are so many ways you can pwn this.
+nc dctf-chall-just-another-heap.westeurope.azurecontainer.io 7481
+
+Flag

