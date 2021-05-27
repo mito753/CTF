@@ -1,5 +1,5 @@
 Challenge
-4 Solves
+24 Solves
 Just another heap
 500
 Pwn Heap
