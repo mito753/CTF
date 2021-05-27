@@ -1,5 +1,5 @@
 Challenge
-20 Solves
+99 Solves
 Magic trick
 300
 Pwn
