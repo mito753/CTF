@@ -1,0 +1,13 @@
+mito@ubuntu:~/CTF/DCTF_2021/Pwn_Magic_trick_300$ python solve.py r
+[*] '/home/mito/CTF/DCTF_2021/Pwn_Magic_trick_300/magic_trick'
+    Arch:     amd64-64-little
+    RELRO:    No RELRO
+    Stack:    Canary found
+    NX:       NX enabled
+    PIE:      No PIE (0x400000)
+[+] Opening connection to dctf-chall-magic-trick.westeurope.azurecontainer.io on port 7481: Done
+[*] Switching to interactive mode
+
+thanks
+You are a real magician
+dctf{1_L1k3_M4G1c}

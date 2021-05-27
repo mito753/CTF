@@ -1,0 +1,9 @@
+Challenge
+23 Solves
+Hotel ROP
+400
+pwn
+They say programmers' dream is California. And because they need somewhere to stay, we've built a hotel!
+nc dctf1-chall-hotel-rop.westeurope.azurecontainer.io 7480
+
+Flag

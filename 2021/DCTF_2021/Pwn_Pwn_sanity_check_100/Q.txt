@@ -1,0 +1,9 @@
+Challenge
+61 Solves
+Pwn sanity check
+100
+Pwn BOF
+This should take about 1337 seconds to solve.
+nc dctf-chall-pwn-sanity-check.westeurope.azurecontainer.io 7480
+
+Flag

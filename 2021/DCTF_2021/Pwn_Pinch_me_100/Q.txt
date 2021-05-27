@@ -1,0 +1,9 @@
+Challenge
+59 Solves
+Pinch me
+100
+pwn
+This should be easy!
+nc dctf1-chall-pinch-me.westeurope.azurecontainer.io 7480
+
+Flag

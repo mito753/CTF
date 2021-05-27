@@ -1,0 +1,9 @@
+Challenge
+38 Solves
+Readme
+150
+Pwn Format
+Read me to get the flag.
+nc dctf-chall-readme.westeurope.azurecontainer.io 7481
+
+Flag

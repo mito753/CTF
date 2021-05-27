@@ -1,0 +1,22 @@
+mito@ubuntu:~/CTF/DCTF_2021/Pwn_Readme_150$ python solve.py r
+[*] '/home/mito/CTF/DCTF_2021/Pwn_Readme_150/readme'
+    Arch:     amd64-64-little
+    RELRO:    Full RELRO
+    Stack:    Canary found
+    NX:       NX enabled
+    PIE:      PIE enabled
+[+] Opening connection to dctf-chall-readme.westeurope.azurecontainer.io on port 7481: Done
+dctf{n0w
+[*] Closed connection to dctf-chall-readme.westeurope.azurecontainer.io port 7481
+[+] Opening connection to dctf-chall-readme.westeurope.azurecontainer.io on port 7481: Done
+dctf{n0w_g0_r3ad
+[*] Closed connection to dctf-chall-readme.westeurope.azurecontainer.io port 7481
+[+] Opening connection to dctf-chall-readme.westeurope.azurecontainer.io on port 7481: Done
+dctf{n0w_g0_r3ad_s0me_b0
+[*] Closed connection to dctf-chall-readme.westeurope.azurecontainer.io port 7481
+[+] Opening connection to dctf-chall-readme.westeurope.azurecontainer.io on port 7481: Done
+dctf{n0w_g0_r3ad_s0me_b00k5\x00P\x7f\x00\x00
+[*] Closed connection to dctf-chall-readme.westeurope.azurecontainer.io port 7481
+mito@ubuntu:~/CTF/DCTF_2021/Pwn_Readme_150$ 
+
+dctf{n0w_g0_r3ad_s0me_b00k5}

