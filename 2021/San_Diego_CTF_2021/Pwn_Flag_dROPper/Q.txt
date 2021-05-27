@@ -1,0 +1,15 @@
+PWN - EASY
+Flag dROPper
+I heard that gadgets are very easy to find in C programs, so I coded my program in assembly to protect my program from hackers.
+Executable binary
+https://cdn.discordapp.com/attachments/840078376743206954/840079195894710272/flagDropper
+Connect via
+nc dropper.sdc.tf 1337
+By Rahil•今日 02:53
+:unlock: This challenge has been solved :unlock:
+The first to solve this challenge was zzz from Team Kalmarunionen
+Current # of Solves
+20
+Current Point Value
+243
+今日 02:53

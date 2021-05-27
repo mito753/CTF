@@ -1,0 +1,92 @@
+gdb-peda$ patto IAAe
+IAAe found at offset: 72
+gdb-peda$ s
+
+Program received signal SIGSEGV, Segmentation fault.
+
+[----------------------------------registers-----------------------------------]
+RAX: 0x6010ec ("IAAeAA4AAJAAfAA5AAKAAgAA6AALAAhAA7AAMAAiAA8AANAAjAA9AAOAAkAAPAAlAAQAAmAARAAoAASAApAATAAqAAUAArAAVAAtAAWAAuAAXAAvAAYAAwAAZAAxAAyA")
+RBX: 0x0 
+RCX: 0x4005c2 (<main+130>:	lea    rax,ds:0x6010a4)
+RDX: 0x40 ('@')
+RSI: 0x6010a4 ("AAA%AAsAABAA$AAnAACAA-AA(AADAA;AA)AAEAAaAA0AAFAAbAA1AAGAAcAA2AAHAAdAA3AAIAAeAA4AAJAAfAA5AAKAAgAA6AALAAhAA7AAMAAiAA8AANAAjAA9AAOAAkAAPAAlAAQAAmAARAAoAASAApAATAAqAAUAArAAVAAtAAWAAuAAXAAvAAYAAwAAZAAxAAyA")
+RDI: 0x1 
+RBP: 0x7fffffffddd0 --> 0x400630 (<__libc_csu_init>:	push   r15)
+RSP: 0x7fffffffddd0 --> 0x400630 (<__libc_csu_init>:	push   r15)
+RIP: 0x4005ce (<main+142>:	jmp    QWORD PTR [rax])
+R8 : 0x7ffff7dced80 --> 0x0 
+R9 : 0x7ffff7dced80 --> 0x0 
+R10: 0x0 
+R11: 0x202 
+R12: 0x400450 (<_start>:	xor    ebp,ebp)
+R13: 0x7fffffffdeb0 --> 0x1 
+R14: 0x0 
+R15: 0x0
+EFLAGS: 0x10202 (carry parity adjust zero sign trap INTERRUPT direction overflow)
+[-------------------------------------code-------------------------------------]
+   0x4005c0 <main+128>:	syscall 
+   0x4005c2 <main+130>:	lea    rax,ds:0x6010a4
+   0x4005ca <main+138>:	add    rax,0x48
+=> 0x4005ce <main+142>:	jmp    QWORD PTR [rax]
+   0x4005d0 <_exit>:	mov    eax,0x3c
+   0x4005d5 <_exit+5>:	xor    rdi,rdi
+   0x4005d8 <_exit+8>:	syscall 
+   0x4005da <win>:	mov    eax,0x0
+                                                              JUMP is NOT taken
+[------------------------------------stack-------------------------------------]
+0000| 0x7fffffffddd0 --> 0x400630 (<__libc_csu_init>:	push   r15)
+0008| 0x7fffffffddd8 --> 0x7ffff7a03bf7 (<__libc_start_main+231>:	mov    edi,eax)
+0016| 0x7fffffffdde0 --> 0x1 
+0024| 0x7fffffffdde8 --> 0x7fffffffdeb8 --> 0x7fffffffe1e3 ("/home/mito/CTF/San_Diego_CTF_2021/Pwn_Flag_dROPper/flagDropper")
+0032| 0x7fffffffddf0 --> 0x100008000 
+0040| 0x7fffffffddf8 --> 0x400540 (<main>:	push   rbp)
+0048| 0x7fffffffde00 --> 0x0 
+0056| 0x7fffffffde08 --> 0x8486ef066eeb733c 
+[------------------------------------------------------------------------------]
+Legend: code, data, rodata, value
+Stopped reason: SIGSEGV
+0x00000000004005ce in main ()
+gdb-peda$ vmmap
+Start              End                Perm	Name
+0x00400000         0x00401000         r-xp	/home/mito/CTF/San_Diego_CTF_2021/Pwn_Flag_dROPper/flagDropper
+0x00600000         0x00601000         r-xp	/home/mito/CTF/San_Diego_CTF_2021/Pwn_Flag_dROPper/flagDropper
+0x00601000         0x00602000         rwxp	/home/mito/CTF/San_Diego_CTF_2021/Pwn_Flag_dROPper/flagDropper
+0x00007ffff79e2000 0x00007ffff7bc9000 r-xp	/lib/x86_64-linux-gnu/libc-2.27.so
+0x00007ffff7bc9000 0x00007ffff7dc9000 ---p	/lib/x86_64-linux-gnu/libc-2.27.so
+0x00007ffff7dc9000 0x00007ffff7dcd000 r-xp	/lib/x86_64-linux-gnu/libc-2.27.so
+0x00007ffff7dcd000 0x00007ffff7dcf000 rwxp	/lib/x86_64-linux-gnu/libc-2.27.so
+0x00007ffff7dcf000 0x00007ffff7dd3000 rwxp	mapped
+0x00007ffff7dd3000 0x00007ffff7dfc000 r-xp	/lib/x86_64-linux-gnu/ld-2.27.so
+0x00007ffff7fd5000 0x00007ffff7fd7000 rwxp	mapped
+0x00007ffff7ff7000 0x00007ffff7ffa000 r--p	[vvar]
+0x00007ffff7ffa000 0x00007ffff7ffc000 r-xp	[vdso]
+0x00007ffff7ffc000 0x00007ffff7ffd000 r-xp	/lib/x86_64-linux-gnu/ld-2.27.so
+0x00007ffff7ffd000 0x00007ffff7ffe000 rwxp	/lib/x86_64-linux-gnu/ld-2.27.so
+0x00007ffff7ffe000 0x00007ffff7fff000 rwxp	mapped
+0x00007ffffffde000 0x00007ffffffff000 rwxp	[stack]
+0xffffffffff600000 0xffffffffff601000 r-xp	[vsyscall]
+gdb-peda$ x/80gx 0x00601000
+0x601000:	0x0000000000600e20	0x00007ffff7ffe170
+0x601010:	0x00007ffff7dea8f0	0x0000000000400436
+0x601020:	0x0000000000400446	0x0000000000000000
+0x601030:	0x0000000000000000	0x20656d6f636c6557
+0x601040:	0x4620656874206f74	0x706f72442067616c
+0x601050:	0x614d0a2021726570	0x206572757320656b
+0x601060:	0x6863746163206f74	0x616c662065687420
+0x601070:	0x69206e6568772067	0x70706f7264207374
+0x601080:	0x0a2c310a0a216465	0x41430a2c330a2c32
+0x601090:	0x67616c660a484354	0x000072007478742e
+0x6010a0 <completed.7698>:	0x2541414100000000	0x4141424141734141
+0x6010b0:	0x414341416e414124	0x4441412841412d41
+0x6010c0:	0x41412941413b4141	0x4130414161414145
+0x6010d0:	0x3141416241414641	0x4141634141474141
+0x6010e0:	0x4164414148414132	0x6541414941413341
+0x6010f0:	0x41414a4141344141	0x414b414135414166
+0x601100:	0x4c41413641416741	0x4141374141684141
+0x601110:	0x413841416941414d	0x3941416a41414e41
+0x601120:	0x41416b41414f4141	0x415141416c414150
+0x601130:	0x6f41415241416d41	0x4141704141534141
+0x601140:	0x4155414171414154	0x7441415641417241
+0x601150:	0x4141754141574141	0x4159414176414158
+0x601160:	0x7841415a41417741	0x0000000041794141
+0x601170:	0x0000000000000000	0x0000000000000000

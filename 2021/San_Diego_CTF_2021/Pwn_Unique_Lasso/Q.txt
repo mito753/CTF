@@ -1,0 +1,16 @@
+PWN - MEDIUM
+Unique Lasso
+I was just in the wild west and found this cool new lasso, I wonder how long it goes
+uniqueLasso
+https://cdn.discordapp.com/attachments/840092773461655602/840093332251082762/uniqueLasso
+Connect via
+nc lasso.sdc.tf 1337
+By Rahil•今日 03:23
+
+:unlock: This challenge has been solved :unlock:
+The first to solve this challenge was zzz from Team Kalmarunionen
+Current # of Solves
+16
+Current Point Value
+451
+今日 03:23

