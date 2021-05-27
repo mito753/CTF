@@ -1,5 +1,5 @@
 Challenge
-15 Solves
+41 Solves
 Formats last theorem
 400
 Pwn Format_string
