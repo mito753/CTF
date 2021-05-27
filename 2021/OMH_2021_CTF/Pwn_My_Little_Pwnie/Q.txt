@@ -1,7 +1,7 @@
 pwn
 My Little Pwnie
-Points: 237
-Solves: 14
+Points: 162
+Solves: 23
 Look at this smol executable. Isn't it adorable? There's almost no code in there. Do you think you could still pwn it?
 
 nc pwnie.zajebistyc.tf 17003
