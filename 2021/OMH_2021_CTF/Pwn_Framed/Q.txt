@@ -1,7 +1,7 @@
 pwn
 Framed
-Points: 121
-Solves: 32
+Points: 75
+Solves: 52
 If you're not careful enough you can get framed into something you didn't do!
 
 nc framed.zajebistyc.tf 17005
