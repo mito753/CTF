@@ -1,0 +1,65 @@
+[----------------------------------registers-----------------------------------]
+RAX: 0xffffffff 
+RBX: 0x0 
+RCX: 0x7ffff7dcda00 --> 0xfbad208b 
+RDX: 0x7ffff7dcf8d0 --> 0x0 
+RSI: 0x7ffff7dcda83 --> 0xdcf8d0000000000a 
+RDI: 0x0 
+RBP: 0x4141334141644141 ('AAdAA3AA')
+RSP: 0x7fffffffddd8 ("IAAeAA4AAJAAfAA5AAKAAgAA6AALAAhAA7AAMAAiAA8AANAAjAA9AAOAAkAAPAAlAAQAAmAARAAoAASAApAATAAqAAUAArAAVAAtAAWAAuAAXAAvAAYAAwAAZAAxAAyAAzA%%A%sA%BA%$A%nA%CA%-A%(A%DA%;A%)A%EA%aA%0A%FA%bA%1A%G")
+RIP: 0x40120a (<jump+45>:	ret)
+R8 : 0x7ffff7dcf8c0 --> 0x0 
+R9 : 0x7ffff7fd64c0 (0x00007ffff7fd64c0)
+R10: 0x3 
+R11: 0x246 
+R12: 0x4010b0 (<_start>:	endbr64)
+R13: 0x7fffffffded0 --> 0x1 
+R14: 0x0 
+R15: 0x0
+EFLAGS: 0x10246 (carry PARITY adjust ZERO sign trap INTERRUPT direction overflow)
+[-------------------------------------code-------------------------------------]
+   0x4011ff <jump+34>:	call   0x4010a0 <gets@plt>
+   0x401204 <jump+39>:	mov    eax,0xffffffff
+   0x401209 <jump+44>:	leave  
+=> 0x40120a <jump+45>:	ret    
+   0x40120b <main>:	endbr64 
+   0x40120f <main+4>:	push   rbp
+   0x401210 <main+5>:	mov    rbp,rsp
+   0x401213 <main+8>:	sub    rsp,0x10
+[------------------------------------stack-------------------------------------]
+0000| 0x7fffffffddd8 ("IAAeAA4AAJAAfAA5AAKAAgAA6AALAAhAA7AAMAAiAA8AANAAjAA9AAOAAkAAPAAlAAQAAmAARAAoAASAApAATAAqAAUAArAAVAAtAAWAAuAAXAAvAAYAAwAAZAAxAAyAAzA%%A%sA%BA%$A%nA%CA%-A%(A%DA%;A%)A%EA%aA%0A%FA%bA%1A%G")
+0008| 0x7fffffffdde0 ("AJAAfAA5AAKAAgAA6AALAAhAA7AAMAAiAA8AANAAjAA9AAOAAkAAPAAlAAQAAmAARAAoAASAApAATAAqAAUAArAAVAAtAAWAAuAAXAAvAAYAAwAAZAAxAAyAAzA%%A%sA%BA%$A%nA%CA%-A%(A%DA%;A%)A%EA%aA%0A%FA%bA%1A%G")
+0016| 0x7fffffffdde8 ("AAKAAgAA6AALAAhAA7AAMAAiAA8AANAAjAA9AAOAAkAAPAAlAAQAAmAARAAoAASAApAATAAqAAUAArAAVAAtAAWAAuAAXAAvAAYAAwAAZAAxAAyAAzA%%A%sA%BA%$A%nA%CA%-A%(A%DA%;A%)A%EA%aA%0A%FA%bA%1A%G")
+0024| 0x7fffffffddf0 ("6AALAAhAA7AAMAAiAA8AANAAjAA9AAOAAkAAPAAlAAQAAmAARAAoAASAApAATAAqAAUAArAAVAAtAAWAAuAAXAAvAAYAAwAAZAAxAAyAAzA%%A%sA%BA%$A%nA%CA%-A%(A%DA%;A%)A%EA%aA%0A%FA%bA%1A%G")
+0032| 0x7fffffffddf8 ("A7AAMAAiAA8AANAAjAA9AAOAAkAAPAAlAAQAAmAARAAoAASAApAATAAqAAUAArAAVAAtAAWAAuAAXAAvAAYAAwAAZAAxAAyAAzA%%A%sA%BA%$A%nA%CA%-A%(A%DA%;A%)A%EA%aA%0A%FA%bA%1A%G")
+0040| 0x7fffffffde00 ("AA8AANAAjAA9AAOAAkAAPAAlAAQAAmAARAAoAASAApAATAAqAAUAArAAVAAtAAWAAuAAXAAvAAYAAwAAZAAxAAyAAzA%%A%sA%BA%$A%nA%CA%-A%(A%DA%;A%)A%EA%aA%0A%FA%bA%1A%G")
+0048| 0x7fffffffde08 ("jAA9AAOAAkAAPAAlAAQAAmAARAAoAASAApAATAAqAAUAArAAVAAtAAWAAuAAXAAvAAYAAwAAZAAxAAyAAzA%%A%sA%BA%$A%nA%CA%-A%(A%DA%;A%)A%EA%aA%0A%FA%bA%1A%G")
+0056| 0x7fffffffde10 ("AkAAPAAlAAQAAmAARAAoAASAApAATAAqAAUAArAAVAAtAAWAAuAAXAAvAAYAAwAAZAAxAAyAAzA%%A%sA%BA%$A%nA%CA%-A%(A%DA%;A%)A%EA%aA%0A%FA%bA%1A%G")
+[------------------------------------------------------------------------------]
+Legend: code, data, rodata, value
+Stopped reason: SIGSEGV
+0x000000000040120a in jump ()
+gdb-peda$ patto IAAeA
+IAAeA found at offset: 72
+gdb-peda$ 
+
+
+gdb-peda$ vmmap
+Start              End                Perm	Name
+0x00400000         0x00403000         r-xp	/home/mito/CTF/UMDCTF_2021/Pwn_Jump_Is_Easy_100/JIE
+0x00403000         0x00404000         r-xp	/home/mito/CTF/UMDCTF_2021/Pwn_Jump_Is_Easy_100/JIE
+0x00404000         0x00405000         rwxp	/home/mito/CTF/UMDCTF_2021/Pwn_Jump_Is_Easy_100/JIE
+0x00007ffff79e2000 0x00007ffff7bc9000 r-xp	/lib/x86_64-linux-gnu/libc-2.27.so
+0x00007ffff7bc9000 0x00007ffff7dc9000 ---p	/lib/x86_64-linux-gnu/libc-2.27.so
+0x00007ffff7dc9000 0x00007ffff7dcd000 r-xp	/lib/x86_64-linux-gnu/libc-2.27.so
+0x00007ffff7dcd000 0x00007ffff7dcf000 rwxp	/lib/x86_64-linux-gnu/libc-2.27.so
+0x00007ffff7dcf000 0x00007ffff7dd3000 rwxp	mapped
+0x00007ffff7dd3000 0x00007ffff7dfc000 r-xp	/lib/x86_64-linux-gnu/ld-2.27.so
+0x00007ffff7fd5000 0x00007ffff7fd7000 rwxp	mapped
+0x00007ffff7ff7000 0x00007ffff7ffa000 r--p	[vvar]
+0x00007ffff7ffa000 0x00007ffff7ffc000 r-xp	[vdso]
+0x00007ffff7ffc000 0x00007ffff7ffd000 r-xp	/lib/x86_64-linux-gnu/ld-2.27.so
+0x00007ffff7ffd000 0x00007ffff7ffe000 rwxp	/lib/x86_64-linux-gnu/ld-2.27.so
+0x00007ffff7ffe000 0x00007ffff7fff000 rwxp	mapped
+0x00007ffffffde000 0x00007ffffffff000 rwxp	[stack]
+0xffffffffff600000 0xffffffffff601000 r-xp	[vsyscall]

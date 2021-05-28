@@ -1,0 +1,12 @@
+Challenge
+67 Solves
+Jump Not Working
+150
+We are trying to jump somewhere, but nothing is happening. Can you figure out what is going on?
+
+nc chals5.umdctf.io 7004
+
+author: WittsEnd2
+
+score: 3/10
+

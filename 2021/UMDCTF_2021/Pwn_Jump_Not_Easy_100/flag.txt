@@ -1,0 +1,10 @@
+mito@ubuntu:~/CTF/UMDCTF_2021/Pwn_Jump_Not_Easy_100$ python solve.py r
+[*] '/home/mito/CTF/UMDCTF_2021/Pwn_Jump_Not_Easy_100/JNE'
+    Arch:     amd64-64-little
+    RELRO:    Partial RELRO
+    Stack:    No canary found
+    NX:       NX enabled
+    PIE:      No PIE (0x400000)
+[+] Opening connection to chals5.umdctf.io on port 7003: Done
+[*] Switching to interactive mode
+UMDCTF-{wh323_423_WE_G01n9_n3xt?}
