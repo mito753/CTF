@@ -1,0 +1,52 @@
+pwndbg> vmmap
+LEGEND: STACK | HEAP | CODE | DATA | RWX | RODATA
+         0xa2af000          0xa2b1000 rw-p     2000 0      <explored>
+        0x53fb1000         0x53fb2000 r-xp     1000 0      /home/mito/CTF/Zh3r0_CTF_V2/Pwn_BabyArmROP/public/vuln/vuln
+        0x53fb2000         0x53fc1000 ---p     f000 0      /home/mito/CTF/Zh3r0_CTF_V2/Pwn_BabyArmROP/public/vuln/vuln
+        0x53fc1000         0x53fc2000 r--p     1000 0      /home/mito/CTF/Zh3r0_CTF_V2/Pwn_BabyArmROP/public/vuln/vuln
+        0x53fc2000         0x53fc3000 rw-p     1000 1000   /home/mito/CTF/Zh3r0_CTF_V2/Pwn_BabyArmROP/public/vuln/vuln
+        0x7a5af000         0x7a5d0000 r-xp    21000 0      [linker]
+        0x7a5af000         0x7a5d0000 r-xp    21000 0      /home/mito/CTF/Zh3r0_CTF_V2/Pwn_BabyArmROP/public/vuln/lib/ld-linux-aarch64.so.1
+        0x7a5d0000         0x7a5e0000 ---p    10000 21000  [linker]
+        0x7a5d0000         0x7a5e0000 ---p    10000 21000  /home/mito/CTF/Zh3r0_CTF_V2/Pwn_BabyArmROP/public/vuln/lib/ld-linux-aarch64.so.1
+        0x7a5e0000         0x7a5e1000 r--p     1000 21000  [linker]
+        0x7a5e0000         0x7a5e1000 r--p     1000 21000  /home/mito/CTF/Zh3r0_CTF_V2/Pwn_BabyArmROP/public/vuln/lib/ld-linux-aarch64.so.1
+        0x7a5e1000         0x7a5e3000 rw-p     2000 22000  [linker]
+        0x7a5e1000         0x7a5e3000 rw-p     2000 22000  /home/mito/CTF/Zh3r0_CTF_V2/Pwn_BabyArmROP/public/vuln/lib/ld-linux-aarch64.so.1
+    0x7ffff5664000     0x7ffff5667000 rw-p     3000 0      [stack]
+
+[QEMU target detected - vmmap result might not be accurate; see `help vmmap`]
+
+pwndbg> x/50gx 0x53fc2000
+0x53fc2000:	0x0000000053fb1690	0x000000003bf91ba8
+0x53fc2010:	0x0000000053fb1690	0x0000000053fb1690
+0x53fc2020:	0x000000003bfd44b8	0x0000000053fb1690
+0x53fc2030:	0x000000003bfbad38	0x0000000000000000
+0x53fc2040:	0x0000000053fc2040	0x0000000000000000
+0x53fc2050:	0x0000000000000000	0x0000000000000000
+0x53fc2060:	0x0000000000000000	0x0000000000000000
+0x53fc2070:	0x0000000000000000	0x0000000000000000
+
+
+pwndbg> x/80gx 0x7ffff5665f00
+0x7ffff5665f00:	0x00007ffff5665f20	0x000000003bfdfe58
+0x7ffff5665f10:	0x000000003c0de548	0x0000000000000000
+0x7ffff5665f20:	0x00007ffff5665f50	0x000000003bfd454c
+0x7ffff5665f30:	0x000000003c0de548	0x000000003c0da630
+0x7ffff5665f40:	0x00007ffff5665f70	0x0000000053fb18ac
+                                            ^ return value for vuln
+0x7ffff5665f50:	0x00007ffff5665f70	0x0000000053fb18a8
+0x7ffff5665f60:	0x0000000053fb18b8	0x0000000000000000
+0x7ffff5665f70:	0x00007ffff5665f80	0x000000003bf91c90
+                                            ^ return value for main
+0x7ffff5665f80:	0x0000000000000000	0x0000000053fb1754
+0x7ffff5665f90:	0x0000000000000000	0x0000000000000000
+0x7ffff5665fa0:	0x0000000053fb1720	0x0000000000000000
+0x7ffff5665fb0:	0x0000000000000000	0x0000000000000000
+0x7ffff5665fc0:	0x0000000000000000	0x0000000000000000
+0x7ffff5665fd0:	0x000000003bf81978	0x00007ffff56660d8
+0x7ffff5665fe0:	0x0000000100000000	0x0000000053fb1884
+0x7ffff5665ff0:	0xffffffffffffffff	0x0000000053fb18b8
+
+
+

