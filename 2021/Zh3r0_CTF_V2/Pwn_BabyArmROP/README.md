@@ -1,7 +1,7 @@
 ## BabyArmROP
 
-Points: 738
-Solves: 28
+> Points: 738
+> Solves: 28
 
 ### Description:
 ```
