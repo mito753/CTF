@@ -1,0 +1,23 @@
+Challenge
+5 Solves
+Babyjop
+250
+You managed to ROP me, but can you JOP me ?
+
+nc remote1.thcon.party 10902
+nc remote2.thcon.party 10902
+Files :
+
+babyjop
+Creator : Voydstack (Discord : voydstack#6035)
+
+
+
+Challenge
+5 Solves
+Name	Date
+RootMeUpBeforeYouGoGo	a day ago
+H4ck0liques	a day ago
+Infiniteloop	16 hours ago
+greunion	11 hours ago
+⛩️	6 hours ago

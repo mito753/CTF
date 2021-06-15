@@ -1,0 +1,35 @@
+Challenge
+10 Solves
+Inception
+488
+Do androids dream of pwn ?
+
+The flag is located at /home/user/flag.txt
+
+nc remote1.thcon.party 10904
+nc remote2.thcon.party 10904
+Files :
+
+inception
+libc.so.6
+Creator : voydstack (Discord : voydstack#6035)
+
+Flag
+
+
+
+
+
+Challenge
+10 Solves
+Name	Date
+DropSoft	a day ago
+RootMeUpBeforeYouGoGo	a day ago
+H4ck0liques	a day ago
+greunion	20 hours ago
+Infiniteloop	15 hours ago
+⛩️	14 hours ago
+m1t0	14 hours ago
+M30W	9 hours ago
+jt	9 hours ago
+Télécom Imp'Hackt	7 hours ago

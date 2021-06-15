@@ -1,0 +1,80 @@
+gdb-peda$ vmmap
+Start              End                Perm	Name
+0x00400000         0x00401000         r--p	/home/mito/CTF/THC_CTF_2021/Pwn_Babyrop_100/babyrop
+0x00401000         0x00402000         r-xp	/home/mito/CTF/THC_CTF_2021/Pwn_Babyrop_100/babyrop
+0x00402000         0x00403000         r--p	/home/mito/CTF/THC_CTF_2021/Pwn_Babyrop_100/babyrop
+0x00403000         0x00404000         r--p	/home/mito/CTF/THC_CTF_2021/Pwn_Babyrop_100/babyrop
+0x00404000         0x00405000         rw-p	/home/mito/CTF/THC_CTF_2021/Pwn_Babyrop_100/babyrop
+0x00007ffff79e2000 0x00007ffff7bc9000 r-xp	/lib/x86_64-linux-gnu/libc-2.27.so
+0x00007ffff7bc9000 0x00007ffff7dc9000 ---p	/lib/x86_64-linux-gnu/libc-2.27.so
+0x00007ffff7dc9000 0x00007ffff7dcd000 r--p	/lib/x86_64-linux-gnu/libc-2.27.so
+0x00007ffff7dcd000 0x00007ffff7dcf000 rw-p	/lib/x86_64-linux-gnu/libc-2.27.so
+0x00007ffff7dcf000 0x00007ffff7dd3000 rw-p	mapped
+0x00007ffff7dd3000 0x00007ffff7dfc000 r-xp	/lib/x86_64-linux-gnu/ld-2.27.so
+0x00007ffff7fd5000 0x00007ffff7fd7000 rw-p	mapped
+0x00007ffff7ff7000 0x00007ffff7ffa000 r--p	[vvar]
+0x00007ffff7ffa000 0x00007ffff7ffc000 r-xp	[vdso]
+0x00007ffff7ffc000 0x00007ffff7ffd000 r--p	/lib/x86_64-linux-gnu/ld-2.27.so
+0x00007ffff7ffd000 0x00007ffff7ffe000 rw-p	/lib/x86_64-linux-gnu/ld-2.27.so
+0x00007ffff7ffe000 0x00007ffff7fff000 rw-p	mapped
+0x00007ffffffde000 0x00007ffffffff000 rw-p	[stack]
+0xffffffffff600000 0xffffffffff601000 r-xp	[vsyscall]
+
+
+mito@ubuntu:~/CTF/THC_CTF_2021/Pwn_Babyrop_100$ gdb -q ./babyrop 
+Reading symbols from ./babyrop...(no debugging symbols found)...done.
+gdb-peda$ pattc 256
+'AAA%AAsAABAA$AAnAACAA-AA(AADAA;AA)AAEAAaAA0AAFAAbAA1AAGAAcAA2AAHAAdAA3AAIAAeAA4AAJAAfAA5AAKAAgAA6AALAAhAA7AAMAAiAA8AANAAjAA9AAOAAkAAPAAlAAQAAmAARAAoAASAApAATAAqAAUAArAAVAAtAAWAAuAAXAAvAAYAAwAAZAAxAAyAAzA%%A%sA%BA%$A%nA%CA%-A%(A%DA%;A%)A%EA%aA%0A%FA%bA%1A%G'
+gdb-peda$ 
+gdb-peda$ run
+Starting program: /home/mito/CTF/THC_CTF_2021/Pwn_Babyrop_100/babyrop 
+What's your name ?
+AAA%AAsAABAA$AAnAACAA-AA(AADAA;AA)AAEAAaAA0AAFAAbAA1AAGAAcAA2AAHAAdAA3AAIAAeAA4AAJAAfAA5AAKAAgAA6AALAAhAA7AAMAAiAA8AANAAjAA9AAOAAkAAPAAlAAQAAmAARAAoAASAApAATAAqAAUAArAAVAAtAAWAAuAAXAAvAAYAAwAAZAAxAAyAAzA%%A%sA%BA%$A%nA%CA%-A%(A%DA%;A%)A%EA%aA%0A%FA%bA%1A%G
+
+Program received signal SIGSEGV, Segmentation fault.
+
+[----------------------------------registers-----------------------------------]
+RAX: 0x7fffffffddb0 ("AAA%AAsAABAA$AAnAACAA-AA(AADAA;AA)AAEAAaAA0AAFAAbAA1AAGAAcAA2AAHAAdAA3AAIAAeAA4AAJAAfAA5AAKAAgAA6AALAAhAA7AAMAAiAA8AANAAjAA9AAOAAkAAPAAlAAQAAmAARAAoAASAApAATAAqAAUAArAAVAAtAAWAAuAAXAAvAAYAAwAAZAAxAAyA"...)
+RBX: 0x0 
+RCX: 0x7ffff7af2151 (<__GI___libc_read+17>:	cmp    rax,0xfffffffffffff000)
+RDX: 0x7ffff7dcf8d0 --> 0x0 
+RSI: 0x7fffffffddb0 ("AAA%AAsAABAA$AAnAACAA-AA(AADAA;AA)AAEAAaAA0AAFAAbAA1AAGAAcAA2AAHAAdAA3AAIAAeAA4AAJAAfAA5AAKAAgAA6AALAAhAA7AAMAAiAA8AANAAjAA9AAOAAkAAPAAlAAQAAmAARAAoAASAApAATAAqAAUAArAAVAAtAAWAAuAAXAAvAAYAAwAAZAAxAAyA"...)
+RDI: 0x0 
+RBP: 0x6141414541412941 ('A)AAEAAa')
+RSP: 0x7fffffffddd8 ("AA0AAFAAbAA1AAGAAcAA2AAHAAdAA3AAIAAeAA4AAJAAfAA5AAKAAgAA6AALAAhAA7AAMAAiAA8AANAAjAA9AAOAAkAAPAAlAAQAAmAARAAoAASAApAATAAqAAUAArAAVAAtAAWAAuAAXAAvAAYAAwAAZAAxAAyAAzA%%A%sA%BA%$A%nA%CA%-A%(A%DA%;A%)A%EA%"...)
+RIP: 0x4011c8 (<main_function+50>:	ret)
+R8 : 0x7ffff7dcf8c0 --> 0x0 
+R9 : 0x7ffff7fd64c0 (0x00007ffff7fd64c0)
+R10: 0x7ffff7fd64c0 (0x00007ffff7fd64c0)
+R11: 0x246 
+R12: 0x4010b0 (<_start>:	endbr64)
+R13: 0x7fffffffded0 --> 0x1 
+R14: 0x0 
+R15: 0x0
+EFLAGS: 0x10246 (carry PARITY adjust ZERO sign trap INTERRUPT direction overflow)
+[-------------------------------------code-------------------------------------]
+   0x4011c1 <main_function+43>:	call   0x401080 <fgets@plt>
+   0x4011c6 <main_function+48>:	nop
+   0x4011c7 <main_function+49>:	leave  
+=> 0x4011c8 <main_function+50>:	ret    
+   0x4011c9 <secret_func>:	endbr64 
+   0x4011cd <secret_func+4>:	push   rbp
+   0x4011ce <secret_func+5>:	mov    rbp,rsp
+   0x4011d1 <secret_func+8>:	sub    rsp,0x20
+[------------------------------------stack-------------------------------------]
+0000| 0x7fffffffddd8 ("AA0AAFAAbAA1AAGAAcAA2AAHAAdAA3AAIAAeAA4AAJAAfAA5AAKAAgAA6AALAAhAA7AAMAAiAA8AANAAjAA9AAOAAkAAPAAlAAQAAmAARAAoAASAApAATAAqAAUAArAAVAAtAAWAAuAAXAAvAAYAAwAAZAAxAAyAAzA%%A%sA%BA%$A%nA%CA%-A%(A%DA%;A%)A%EA%"...)
+0008| 0x7fffffffdde0 ("bAA1AAGAAcAA2AAHAAdAA3AAIAAeAA4AAJAAfAA5AAKAAgAA6AALAAhAA7AAMAAiAA8AANAAjAA9AAOAAkAAPAAlAAQAAmAARAAoAASAApAATAAqAAUAArAAVAAtAAWAAuAAXAAvAAYAAwAAZAAxAAyAAzA%%A%sA%BA%$A%nA%CA%-A%(A%DA%;A%)A%EA%aA%0A%FA"...)
+0016| 0x7fffffffdde8 ("AcAA2AAHAAdAA3AAIAAeAA4AAJAAfAA5AAKAAgAA6AALAAhAA7AAMAAiAA8AANAAjAA9AAOAAkAAPAAlAAQAAmAARAAoAASAApAATAAqAAUAArAAVAAtAAWAAuAAXAAvAAYAAwAAZAAxAAyAAzA%%A%sA%BA%$A%nA%CA%-A%(A%DA%;A%)A%EA%aA%0A%FA%bA%1A%")
+0024| 0x7fffffffddf0 ("AAdAA3AAIAAeAA4AAJAAfAA5AAKAAgAA6AALAAhAA7AAMAAiAA8AANAAjAA9AAOAAkAAPAAlAAQAAmAARAAoAASAApAATAAqAAUAArAAVAAtAAWAAuAAXAAvAAYAAwAAZAAxAAyAAzA%%A%sA%BA%$A%nA%CA%-A%(A%DA%;A%)A%EA%aA%0A%FA%bA%1A%")
+0032| 0x7fffffffddf8 ("IAAeAA4AAJAAfAA5AAKAAgAA6AALAAhAA7AAMAAiAA8AANAAjAA9AAOAAkAAPAAlAAQAAmAARAAoAASAApAATAAqAAUAArAAVAAtAAWAAuAAXAAvAAYAAwAAZAAxAAyAAzA%%A%sA%BA%$A%nA%CA%-A%(A%DA%;A%)A%EA%aA%0A%FA%bA%1A%")
+0040| 0x7fffffffde00 ("AJAAfAA5AAKAAgAA6AALAAhAA7AAMAAiAA8AANAAjAA9AAOAAkAAPAAlAAQAAmAARAAoAASAApAATAAqAAUAArAAVAAtAAWAAuAAXAAvAAYAAwAAZAAxAAyAAzA%%A%sA%BA%$A%nA%CA%-A%(A%DA%;A%)A%EA%aA%0A%FA%bA%1A%")
+0048| 0x7fffffffde08 ("AAKAAgAA6AALAAhAA7AAMAAiAA8AANAAjAA9AAOAAkAAPAAlAAQAAmAARAAoAASAApAATAAqAAUAArAAVAAtAAWAAuAAXAAvAAYAAwAAZAAxAAyAAzA%%A%sA%BA%$A%nA%CA%-A%(A%DA%;A%)A%EA%aA%0A%FA%bA%1A%")
+0056| 0x7fffffffde10 ("6AALAAhAA7AAMAAiAA8AANAAjAA9AAOAAkAAPAAlAAQAAmAARAAoAASAApAATAAqAAUAArAAVAAtAAWAAuAAXAAvAAYAAwAAZAAxAAyAAzA%%A%sA%BA%$A%nA%CA%-A%(A%DA%;A%)A%EA%aA%0A%FA%bA%1A%")
+[------------------------------------------------------------------------------]
+Legend: code, data, rodata, value
+Stopped reason: SIGSEGV
+0x00000000004011c8 in main_function ()
+
+0x00000000004012c3: pop rdi; ret; 
+0x00000000004012c1: pop rsi; pop r15; ret; 
+

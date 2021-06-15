@@ -1,0 +1,27 @@
+Challenge
+8 Solves
+Cheap Stack
+493
+I made this simple stack implementation, can you smash it for me ?
+
+nc remote1.thcon.party 10903
+nc remote2.thcon.party 10903
+Files :
+
+cheap_stack
+libc.so.6
+Creator : voydstack (Discord : voydstack#6035)
+
+
+
+Challenge
+8 Solves
+Name	Date
+RootMeUpBeforeYouGoGo	a day ago
+DropSoft	a day ago
+H4ck0liques	21 hours ago
+Infiniteloop	10 hours ago
+M30W	10 hours ago
+m1t0	10 hours ago
+jt	7 hours ago
+X3eRo0	7 hours ago
