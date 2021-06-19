@@ -14,9 +14,7 @@ nc gelcode.hsc.tf 1337
 
 ### Files:
 ```
-libc.so.6
-tourniquet
-Dockerfile
+chal
 ```
 
 ## Analysis:
@@ -60,6 +58,7 @@ void main(void)
 }
 ```
 
+memory map
 ```
 gdb-peda$ vmmap
 Start              End                Perm	Name
@@ -85,9 +84,9 @@ Start              End                Perm	Name
 
 ## Solution:
 
-This is a shellcode challenge limited to code from 0x00 to 0x0f.
-The number of input bytes is 1000 bytes.
-The initial setting at the start of the shellcode is to set the rax register to 0 and the rdx register to the start address(heap address) of the shellcode.
+This is a shellcode challenge limited to code from `0x00` to `0x0f`.
+The number of input bytes is `1000` bytes.
+The initial setting at the start of the shellcode is to set the `rax` register to 0 and the `rdx` register to the start address(heap address=0x555555559260) of the shellcode.
 
 ```
 [----------------------------------registers-----------------------------------]
@@ -122,7 +121,7 @@ No argument
 [------------------------------------stack-------------------------------------]
 ```
 
-I checked the available amd64 instructions using the command below.
+I checked the available `amd64` instructions using the following command of pwntools.
 I found that only `add` and `or` instructions are possible.
 
 ```
@@ -132,15 +131,16 @@ $ disasm -c amd64 "000000000000"
 ```
 
 I found that I could create an arbitrary instruction code by using the instruction below.
-First I wrote the code (xor ecx, ecx) to set the rcx register to 0.
+First I wrote the code (`xor ecx, ecx`) to set the rcx register to 0.
 ```
 add al, 0x01
 add BYTE PTR [rdx+rax*1], al
 add BYTE PTR [rdx+rcx*1], al
 add cl, byte PTR [rdx] 
+add ecx, DWORD PTR [rip+0x30f]
 ```
 
-I set 0x01 to the address of rdx (0x555555559260) to use the following instructions.
+I set `0x01` to the address of `rdx (0x555555559260)` to use the following instructions(for rcx increment).
 ```
 add cl, byte PTR [rdx] 
 ```
