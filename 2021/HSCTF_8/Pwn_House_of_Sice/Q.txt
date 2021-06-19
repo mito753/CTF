@@ -1,0 +1,12 @@
+pwn/House of Sice
+poortho
+54 solves / 481 points
+Welcome to the House of Sice! We hope you enjoy your stay.
+
+nc house-of-sice.hsc.tf 1337
+
+Flag (solved)
+Downloads
+
+libc-2.31.so
+house_of_sice

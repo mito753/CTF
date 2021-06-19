@@ -1,0 +1,11 @@
+pwn/stonks
+meow
+231 solves / 391 points
+check out my cool stock predictor!
+
+nc stonks.hsc.tf 1337
+
+Flag (solved)
+Downloads
+
+chal

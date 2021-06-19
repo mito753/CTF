@@ -1,0 +1,94 @@
+pwndbg> vmmap
+LEGEND: STACK | HEAP | CODE | DATA | RWX | RODATA
+    0x555555554000     0x555555557000 r-xp     3000 0      /home/mito/CTF/HSCTF_8/Pwn_gelcode/chal
+    0x555555557000     0x555555558000 r-xp     1000 2000   /home/mito/CTF/HSCTF_8/Pwn_gelcode/chal
+    0x555555558000     0x555555559000 rwxp     1000 3000   /home/mito/CTF/HSCTF_8/Pwn_gelcode/chal
+    0x555555559000     0x55555557a000 rwxp    21000 0      [heap]
+    0x7ffff79e2000     0x7ffff7bc9000 r-xp   1e7000 0      /lib/x86_64-linux-gnu/libc-2.27.so
+    0x7ffff7bc9000     0x7ffff7dc9000 ---p   200000 1e7000 /lib/x86_64-linux-gnu/libc-2.27.so
+    0x7ffff7dc9000     0x7ffff7dcd000 r-xp     4000 1e7000 /lib/x86_64-linux-gnu/libc-2.27.so
+    0x7ffff7dcd000     0x7ffff7dcf000 rwxp     2000 1eb000 /lib/x86_64-linux-gnu/libc-2.27.so
+    0x7ffff7dcf000     0x7ffff7dd3000 rwxp     4000 0      
+    0x7ffff7dd3000     0x7ffff7dfc000 r-xp    29000 0      /lib/x86_64-linux-gnu/ld-2.27.so
+    0x7ffff7fd5000     0x7ffff7fd7000 rwxp     2000 0      
+    0x7ffff7ff7000     0x7ffff7ffa000 r--p     3000 0      [vvar]
+    0x7ffff7ffa000     0x7ffff7ffc000 r-xp     2000 0      [vdso]
+    0x7ffff7ffc000     0x7ffff7ffd000 r-xp     1000 29000  /lib/x86_64-linux-gnu/ld-2.27.so
+    0x7ffff7ffd000     0x7ffff7ffe000 rwxp     1000 2a000  /lib/x86_64-linux-gnu/ld-2.27.so
+    0x7ffff7ffe000     0x7ffff7fff000 rwxp     1000 0      
+    0x7ffffffde000     0x7ffffffff000 rwxp    21000 0      [stack]
+0xffffffffff600000 0xffffffffff601000 r-xp     1000 0      [vsyscall]
+
+
+void main(void)
+{
+  code *__ptr;
+  int local_14;
+  
+  setvbuf(stdin,(char *)0x0,2,0);
+  setvbuf(stdout,(char *)0x0,2,0);
+  setvbuf(stderr,(char *)0x0,2,0);
+  __ptr = (code *)malloc(1000);
+  mprotect((void *)((ulong)__ptr & 0xfffffffffffff000),0x1000,7);
+  puts("Input, please.");
+  fread(__ptr,1,1000,stdin);
+  local_14 = 0;
+  while (local_14 < 1000) {
+    if (0xf < (byte)__ptr[local_14]) {
+      __ptr[local_14] = (code)0x0;
+    }
+    local_14 = local_14 + 1;
+  }
+  (*__ptr)();
+  free(__ptr);
+                    /* WARNING: Subroutine does not return */
+  exit(0);
+}
+
+[----------------------------------registers-----------------------------------]
+RAX: 0x0 
+RBX: 0x0 
+RCX: 0x7ffff7af2151 (<__GI___libc_read+17>:	cmp    rax,0xfffffffffffff000)
+RDX: 0x555555559260 --> 0x0 
+RSI: 0x7ffff7dcf8d0 --> 0x0 
+RDI: 0x0 
+RBP: 0x7fffffffde00 --> 0x555555555320 (<__libc_csu_init>:	endbr64)
+RSP: 0x7fffffffddf0 --> 0x3e8ffffdee0 
+RIP: 0x555555555308 (<main+255>:	call   rdx)
+R8 : 0xb40 ('@\x0b')
+R9 : 0x555555559260 --> 0x0 
+R10: 0x7ffff7dcf8d0 --> 0x0 
+R11: 0x246 
+R12: 0x555555555120 (<_start>:	endbr64)
+R13: 0x7fffffffdee0 --> 0x1 
+R14: 0x0 
+R15: 0x0
+EFLAGS: 0x202 (carry parity adjust zero sign trap INTERRUPT direction overflow)
+[-------------------------------------code-------------------------------------]
+   0x5555555552fd <main+244>:	jle    0x5555555552ce <main+197>
+   0x5555555552ff <main+246>:	mov    rdx,QWORD PTR [rbp-0x8]
+   0x555555555303 <main+250>:	mov    eax,0x0
+=> 0x555555555308 <main+255>:	call   rdx
+   0x55555555530a <main+257>:	mov    rax,QWORD PTR [rbp-0x8]
+   0x55555555530e <main+261>:	mov    rdi,rax
+   0x555555555311 <main+264>:	call   0x5555555550b0 <free@plt>
+   0x555555555316 <main+269>:	mov    edi,0x0
+No argument
+[------------------------------------stack-------------------------------------]
+0000| 0x7fffffffddf0 --> 0x3e8ffffdee0 
+0008| 0x7fffffffddf8 --> 0x555555559260 --> 0x0 
+0016| 0x7fffffffde00 --> 0x555555555320 (<__libc_csu_init>:	endbr64)
+0024| 0x7fffffffde08 --> 0x7ffff7a03bf7 (<__libc_start_main+231>:	mov    edi,eax)
+0032| 0x7fffffffde10 --> 0x1 
+0040| 0x7fffffffde18 --> 0x7fffffffdee8 --> 0x7fffffffe216 ("/home/mito/CTF/HSCTF_8/Pwn_gelcode/chal")
+0048| 0x7fffffffde20 --> 0x100008000 
+0056| 0x7fffffffde28 --> 0x555555555209 (<main>:	endbr64)
+[------------------------------------------------------------------------------]
+
+add al, 0x0d
+add BYTE PTR [rdx+rax*1], al
+add BYTE PTR [rdx+rcx*1], al
+add cl, byte PTR [rdx] 
+
+
+

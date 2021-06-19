@@ -1,0 +1,11 @@
+pwn/gelcode
+PMP
+29 solves / 490 points
+Input restrictions are annoying to deal with.
+
+nc gelcode.hsc.tf 1337
+
+Flag (solved)
+Downloads
+
+chal

