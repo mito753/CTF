@@ -31,7 +31,7 @@ $ checksec chal
 
 Compile result by Ghidra
 
-```
+```c
 void main(void)
 {
   code *__ptr;
