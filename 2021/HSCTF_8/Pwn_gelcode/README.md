@@ -18,7 +18,7 @@ chal
 ```
 
 ## Analysis:
-```
+```asm
 $ checksec chal
 [*] '/home/mito/CTF/HSCTF_8/Pwn_gelcode/chal'
     Arch:     amd64-64-little
@@ -59,7 +59,7 @@ void main(void)
 ```
 
 memory map
-```
+```asm
 gdb-peda$ vmmap
 Start              End                Perm	Name
 0x0000555555554000 0x0000555555557000 r-xp	/home/mito/CTF/HSCTF_8/Pwn_gelcode/chal
@@ -88,7 +88,7 @@ This is a shellcode challenge limited to code from `0x00` to `0x0f`.
 The number of input bytes is `1000` bytes.
 The initial setting at the start of the shellcode is to set the `rax` register to 0 and the `rdx` register to the start address(heap address=0x555555559260) of the shellcode.
 
-```
+```asm
 [----------------------------------registers-----------------------------------]
 RAX: 0x0 
 RBX: 0x0 
@@ -124,7 +124,7 @@ No argument
 I checked the available `amd64` instructions using the following command of pwntools.
 I found that only `add` and `or` instructions are possible.
 
-```
+```asm
 $ disasm -c amd64 "000000000000"
    0:    00 00                    add    BYTE PTR [rax],  al
    2:    00 00                    add    BYTE PTR [rax],  al
@@ -132,7 +132,7 @@ $ disasm -c amd64 "000000000000"
 
 I found that I could create an arbitrary instruction code by using the instruction below.
 First I wrote the code (`xor ecx, ecx`) to set the rcx register to 0.
-```
+```asm
 add al, 0x01
 add BYTE PTR [rdx+rax*1], al
 add BYTE PTR [rdx+rcx*1], al
@@ -141,7 +141,7 @@ add ecx, DWORD PTR [rip+0x30f]
 ```
 
 I set `0x01` to the address of `rdx (0x555555559260)` to use the following instructions(for rcx increment).
-```
+```asm
 add cl, byte PTR [rdx] 
 ```
 
@@ -377,7 +377,7 @@ s.interactive()
 ```
 
 ## Results:
-```
+```bash
 mito@ubuntu:~/CTF/HSCTF_8/Pwn_gelcode$ python solve.py r
 [*] '/home/mito/CTF/HSCTF_8/Pwn_gelcode/chal'
     Arch:     amd64-64-little
