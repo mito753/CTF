@@ -1,0 +1,12 @@
+pwn/Use After Freedom
+poortho
+21 solves / 493 points
+Use after free vulnerabilities are easy to exploit, right?
+
+nc use-after-freedom.hsc.tf 1337
+
+Flag
+Downloads
+
+use_after_freedom
+libc-2.27.so
