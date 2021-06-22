@@ -59,7 +59,7 @@ LEGEND: STACK | HEAP | CODE | DATA | RWX | RODATA
 The vulnerability of this challenge is UAF.
 
 However, the address malloced from the following function must satisfy the following conditions.
- 0x555555757260 < malloc address < 0x600000000000
+> 0x555555757260 < malloc address < 0x600000000000
 
 ```c
 void * FUN_0010092a(int param_1)
