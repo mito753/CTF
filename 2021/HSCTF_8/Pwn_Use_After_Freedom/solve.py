@@ -36,9 +36,6 @@ def View(idx):
   s.sendlineafter("> ", "4")
   s.sendlineafter("> ", str(idx))
 
-def offset2size(ofs):
-  return((ofs) * 2 - 0x10)
-
 MAIN_ARENA      = libc.sym.__malloc_hook + 0x10
 FREE_HOOK       = libc.sym.__free_hook
 GLOBAL_MAX_FAST = 0x3ed940 # 0x7ffff7dcf940 - 0x7ffff79e2000
