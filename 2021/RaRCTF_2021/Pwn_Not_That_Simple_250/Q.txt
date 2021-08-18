@@ -1,0 +1,11 @@
+Not That Simple
+easy
+Day
+Back to challenges
+250 points - First blood by Linz, 104 solves in total - 91.7% positive votes
+
+Challenge instance ready at 193.57.159.27:46343. Click here to request a new instance.
+You didn't think it would be that easy... right?
+
+NOTE: The flag is a filename in the current working directory of the server. See the docker for reference.
+

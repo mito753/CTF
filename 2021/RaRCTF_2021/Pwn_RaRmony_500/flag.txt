@@ -1,0 +1,14 @@
+mito@ubuntu:~/CTF/RaRCTF_2021/Pwn_RaRmony_500/rarmony$ python solve.py r
+[*] '/home/mito/CTF/RaRCTF_2021/Pwn_RaRmony_500/rarmony/harmony'
+    Arch:     amd64-64-little
+    RELRO:    Partial RELRO
+    Stack:    Canary found
+    NX:       NX enabled
+    PIE:      No PIE (0x400000)
+[+] Opening connection to 193.57.159.27 on port 28484: Done
+[*] Switching to interactive mode
+secret-admin-chat
+Tony: In case I forget it, here's the flag for Harmony
+Tony: rarctf{:O,Y0U-f0und-4-z3r0-d4y!!1!_0038abff7c}
+wiwam845: no leek nerd smh
+Tony: sad!

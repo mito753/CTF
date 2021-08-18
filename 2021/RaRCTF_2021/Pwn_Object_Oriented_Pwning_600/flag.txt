@@ -1,0 +1,19 @@
+mito@ubuntu:~/CTF/RaRCTF_2021/Pwn_Object_Oriented_Pwning_600/OOP$ python solve.py r
+[*] '/home/mito/CTF/RaRCTF_2021/Pwn_Object_Oriented_Pwning_600/OOP/oop'
+    Arch:     amd64-64-little
+    RELRO:    Partial RELRO
+    Stack:    Canary found
+    NX:       NX enabled
+    PIE:      No PIE (0x400000)
+[+] Opening connection to 193.57.159.27 on port 25295: Done
+heap_leak = 0x69cf80
+heap_base = 0x68a000
+[*] Switching to interactive mode
+ __________
+< Feed me! >
+ ----------
+  \
+    \
+rarctf{C0w_s4y_m00_p1g_s4y_01nk_fl4g_s4y-251e363a}
+Unknown option
+Your current balance is 857

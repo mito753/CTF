@@ -1,0 +1,73 @@
+gdb-peda$ vmmap
+Start              End                Perm	Name
+0x00400000         0x00403000         r-xp	/home/mito/CTF/RaRCTF_2021/Pwn_Not_That_Simple_250/notsimple
+0x00403000         0x00404000         r-xp	/home/mito/CTF/RaRCTF_2021/Pwn_Not_That_Simple_250/notsimple
+0x00404000         0x00405000         rwxp	/home/mito/CTF/RaRCTF_2021/Pwn_Not_That_Simple_250/notsimple
+0x00007ffff79e2000 0x00007ffff7bc9000 r-xp	/lib/x86_64-linux-gnu/libc-2.27.so
+0x00007ffff7bc9000 0x00007ffff7dc9000 ---p	/lib/x86_64-linux-gnu/libc-2.27.so
+0x00007ffff7dc9000 0x00007ffff7dcd000 r-xp	/lib/x86_64-linux-gnu/libc-2.27.so
+0x00007ffff7dcd000 0x00007ffff7dcf000 rwxp	/lib/x86_64-linux-gnu/libc-2.27.so
+0x00007ffff7dcf000 0x00007ffff7dd3000 rwxp	mapped
+0x00007ffff7dd3000 0x00007ffff7dfc000 r-xp	/lib/x86_64-linux-gnu/ld-2.27.so
+0x00007ffff7fd5000 0x00007ffff7fd7000 rwxp	mapped
+0x00007ffff7ff7000 0x00007ffff7ffa000 r--p	[vvar]
+0x00007ffff7ffa000 0x00007ffff7ffc000 r-xp	[vdso]
+0x00007ffff7ffc000 0x00007ffff7ffd000 r-xp	/lib/x86_64-linux-gnu/ld-2.27.so
+0x00007ffff7ffd000 0x00007ffff7ffe000 rwxp	/lib/x86_64-linux-gnu/ld-2.27.so
+0x00007ffff7ffe000 0x00007ffff7fff000 rwxp	mapped
+0x00007ffffffde000 0x00007ffffffff000 rwxp	[stack]
+0xffffffffff600000 0xffffffffff601000 r-xp	[vsyscall]
+
+
+gdb-peda$ run
+Starting program: /home/mito/CTF/RaRCTF_2021/Pwn_Not_That_Simple_250/notsimple 
+Oops, I'm leaking! 0x7fffffffdd50
+Pwn me ¯\_(ツ)_/¯
+> AAA%AAsAABAA$AAnAACAA-AA(AADAA;AA)AAEAAaAA0AAFAAbAA1AAGAAcAA2AAHAAdAA3AAIAAeAA4AAJAAfAA5AAKAAgAA6AALAAhAA7AAMAAiAA8AANAAjAA9AAOA
+Hah! You didn't seriously think it was that simple?
+
+Program received signal SIGSEGV, Segmentation fault.
+
+[----------------------------------registers-----------------------------------]
+RAX: 0x0 
+RBX: 0x0 
+RCX: 0x7ffff7af2224 (<__GI___libc_write+20>:	cmp    rax,0xfffffffffffff000)
+RDX: 0x7ffff7dcf8c0 --> 0x0 
+RSI: 0x405260 ("Hah! You didn't seriously think it was that simple?\n")
+RDI: 0x1 
+RBP: 0x3541416641414a41 ('AJAAfAA5')
+RSP: 0x7fffffffdda8 ("AAKAAgAA6AALAAhAA7AAMAAiAA8AANAAjAA9AAOA")
+RIP: 0x40128a (<main+121>:	ret)
+R8 : 0x7ffff7fd64c0 (0x00007ffff7fd64c0)
+R9 : 0x7ffff7fd64c0 (0x00007ffff7fd64c0)
+R10: 0x405010 --> 0x0 
+R11: 0x246 
+R12: 0x4010a0 (<_start>:	xor    ebp,ebp)
+R13: 0x7fffffffde80 --> 0x1 
+R14: 0x0 
+R15: 0x0
+EFLAGS: 0x10206 (carry PARITY adjust zero sign trap INTERRUPT direction overflow)
+[-------------------------------------code-------------------------------------]
+   0x40127f <main+110>:	call   0x401030 <puts@plt>
+   0x401284 <main+115>:	mov    eax,0x0
+   0x401289 <main+120>:	leave  
+=> 0x40128a <main+121>:	ret    
+   0x40128b:	nop    DWORD PTR [rax+rax*1+0x0]
+   0x401290 <__libc_csu_init>:	push   r15
+   0x401292 <__libc_csu_init+2>:	lea    r15,[rip+0x2b77]        # 0x403e10
+   0x401299 <__libc_csu_init+9>:	push   r14
+[------------------------------------stack-------------------------------------]
+0000| 0x7fffffffdda8 ("AAKAAgAA6AALAAhAA7AAMAAiAA8AANAAjAA9AAOA")
+0008| 0x7fffffffddb0 ("6AALAAhAA7AAMAAiAA8AANAAjAA9AAOA")
+0016| 0x7fffffffddb8 ("A7AAMAAiAA8AANAAjAA9AAOA")
+0024| 0x7fffffffddc0 ("AA8AANAAjAA9AAOA")
+0032| 0x7fffffffddc8 ("jAA9AAOA")
+0040| 0x7fffffffddd0 --> 0x0 
+0048| 0x7fffffffddd8 --> 0xd019b05e9456178b 
+0056| 0x7fffffffdde0 --> 0x4010a0 (<_start>:	xor    ebp,ebp)
+[------------------------------------------------------------------------------]
+Legend: code, data, rodata, value
+Stopped reason: SIGSEGV
+0x000000000040128a in main ()
+gdb-peda$ patto AAKA
+AAKA found at offset: 88

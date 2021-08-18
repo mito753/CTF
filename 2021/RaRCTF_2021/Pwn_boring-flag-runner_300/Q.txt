@@ -1,0 +1,12 @@
+boring-flag-runner
+medium
+willwam845
+Back to challenges
+300 points - First blood by zer0pts, 19 solves in total - 100% positive votes
+
+Challenge instance ready at 193.57.159.27:28643. Click here to request a new instance.
+'willwam writes pwn?' - fizzbuzz101
+
+  Note: This challenge has the same binary as boring-flag-checker
+  Note 2: please use the docker to test your solution locally, there should be no bruteforce required on remote
+

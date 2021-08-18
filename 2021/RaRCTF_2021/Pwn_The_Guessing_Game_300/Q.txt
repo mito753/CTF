@@ -1,0 +1,16 @@
+The Guessing Game
+medium
+clubby789
+Back to challenges
+300 points - First blood by ryaagard, 53 solves in total - 69.6% positive votes
+
+🚨 This challenge is in maintenance mode.
+We've received reports of problems with this challenge which we are investigating. Participants are still free to attempt the challenge but may experience issues locating or submitting the solution.
+Challenge instance ready at 193.57.159.27:42134. Click here to request a new instance.
+The number one complaint I've had about recent CTFs is that there's not enough guessing. Time for that to change!
+
+NOTE: Deployments are not currently working, please use one of these ports:
+55206, 25262, 45517, 49437, 23476
+while the issue is resolved.
+
+You have already solved this challenge! Want to submit feedback?

