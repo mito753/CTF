@@ -1,0 +1,15 @@
+It's Not Web, I Swear!
+Description
+In the spirit of DEFCON, I present you with this challenge that is not a web challenge! Go forth and pwn this notweb challenge.
+
+Attachments
+https://imaginaryctf.org/r/0AEB-server http://not-web.chal.imaginaryctf.org:42042
+
+Author
+puzzler7
+
+Points
+450
+
+Solves
+14

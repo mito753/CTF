@@ -1,0 +1,5 @@
+mito@ubuntu:~/Desktop$ nc -lvvp 31337
+Listening on [0.0.0.0] (family 0, port 31337)
+Connection from localhost 60696 received!
+id
+uid=1000(mito) gid=1000(mito) groups=1000(mito),4(adm),24(cdrom),27(sudo),30(dip),46(plugdev),118(lpadmin),128(sambashare)

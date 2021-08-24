@@ -1,0 +1,15 @@
+Gotta Go Fast
+Description
+People keep volunteering to be tributes. I really think they should stop doing that, I've seen the management system get messed up by this.
+
+Attachments
+https://imaginaryctf.org/r/E284-gotta_go_fast https://imaginaryctf.org/r/A848-gotta_go_fast.c nc chal.imaginaryctf.org 42009
+
+Author
+Robin_Jadoul
+
+Points
+400
+
+Solves
+23

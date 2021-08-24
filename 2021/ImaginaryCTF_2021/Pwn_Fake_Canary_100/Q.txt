@@ -1,0 +1,15 @@
+Fake Canary
+Description
+Here at Stack Smasher Inc, we protect all our stacks with industry grade canaries!
+
+Attachments
+https://2021.imaginaryctf.org/r/fake_canary nc chal.imaginaryctf.org 42002
+
+Author
+Eth007
+
+Points
+100
+
+Solves
+189
