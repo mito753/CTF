@@ -1,0 +1,20 @@
+String Editor 2
+Description
+The last version was WAY too vulnerable. Who had the idea to leave debug info in? Changelog:
+
+removed debug info
+new sponsors who won't leak our secrets
+ui improvements
+new util tab
+you can't edit stuff other than your string anymore
+Attachments
+https://imaginaryctf.org/r/E607-string_editor_2 https://imaginaryctf.org/r/FBE7-libc.so.6 nc chal.imaginaryctf.org 42005
+
+Author
+Eth007
+
+Points
+300
+
+Solves
+36
