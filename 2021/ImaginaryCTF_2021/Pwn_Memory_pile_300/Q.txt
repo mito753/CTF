@@ -1,0 +1,15 @@
+Memory pile
+Description
+Memory leaks can be fun, but do you know what's even more fun? Heap exploits!
+
+Attachments
+https://imaginaryctf.org/r/4235-memory_pile https://imaginaryctf.org/r/9C87-libc-2.27.so https://imaginaryctf.org/r/169E-ld-2.27.so nc chal.imaginaryctf.org 42007
+
+Author
+Robin_Jadoul
+
+Points
+300
+
+Solves
+42

