@@ -1,10 +1,11 @@
 pwn/Chainblock
 EhhThing
-0 solves / 500 points
+176 solves / 394 points
 I made a chain of blocks!
 
 nc pwn.be.ax 5000
 
-chainblock.tar.xz
+Flag (solved)
+Downloads
 
-Flag
+chainblock.tar.xz
