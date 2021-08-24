@@ -1,0 +1,15 @@
+linonophobia
+Description
+im scared of format strings
+
+Attachments
+https://imaginaryctf.org/r/9F23-linonophobia nc chal.imaginaryctf.org 42006
+
+Author
+Eth007
+
+Points
+200
+
+Solves
+61

