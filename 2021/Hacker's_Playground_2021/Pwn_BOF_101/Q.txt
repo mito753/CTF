@@ -1,0 +1,19 @@
+BOF 101
+50pt
+373solves
+Fastest Solvers
+08/16, 15:04:22The Duck
+08/16, 15:05:05$wag
+08/16, 15:05:15Haim
+You might have heard about BOF.
+It's the most common vulnerability in executable binaries.
+
+Here is a vulnerable binary(Download).
+The binary is running at: nc bof101.sstf.site 1337.
+
+Can you smash it?
+Just execute printflag() function and get the flag!
+
+This is a tutorial challenge from Hacker's Playground 2020.
+If you are not sure how to solve this,
+please refer to the tutorial guide(Eng | Kor).

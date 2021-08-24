@@ -1,0 +1,57 @@
+Start      End        Perm	Name
+0x08048000 0x08049000 r-xp	/home/mito/CTF/Hacker's_Playground_2021/Pwn_BOF_102/bof102
+0x08049000 0x0804a000 r--p	/home/mito/CTF/Hacker's_Playground_2021/Pwn_BOF_102/bof102
+0x0804a000 0x0804b000 rw-p	/home/mito/CTF/Hacker's_Playground_2021/Pwn_BOF_102/bof102
+0x0804b000 0x0806d000 rw-p	[heap]
+0xf7dd3000 0xf7fa8000 r-xp	/lib/i386-linux-gnu/libc-2.27.so
+0xf7fa8000 0xf7fa9000 ---p	/lib/i386-linux-gnu/libc-2.27.so
+0xf7fa9000 0xf7fab000 r--p	/lib/i386-linux-gnu/libc-2.27.so
+0xf7fab000 0xf7fac000 rw-p	/lib/i386-linux-gnu/libc-2.27.so
+0xf7fac000 0xf7faf000 rw-p	mapped
+0xf7fcf000 0xf7fd1000 rw-p	mapped
+0xf7fd1000 0xf7fd4000 r--p	[vvar]
+0xf7fd4000 0xf7fd6000 r-xp	[vdso]
+0xf7fd6000 0xf7ffc000 r-xp	/lib/i386-linux-gnu/ld-2.27.so
+0xf7ffc000 0xf7ffd000 r--p	/lib/i386-linux-gnu/ld-2.27.so
+0xf7ffd000 0xf7ffe000 rw-p	/lib/i386-linux-gnu/ld-2.27.so
+0xfffdd000 0xffffe000 rw-p	[stack]
+
+
+[----------------------------------registers-----------------------------------]
+EAX: 0x6 
+EBX: 0x0 
+ECX: 0x804b160 ("Good.\n%AAsAABAA$AAnAACAA-AA(AADAA;AA)AAEAAaAA0AAFAAbAA1AAGAAcAA2AAHAAdAA3AAIAAeAA4AAJAAfAA5AAKAAgAA6AALAAhAA7AAMAAiAA8AANAAjAA9AAOA!!!\n")
+EDX: 0xf7fac890 --> 0x0 
+ESI: 0xf7fab000 --> 0x1d7d8c 
+EDI: 0x0 
+EBP: 0x41434141 ('AACA')
+ESP: 0xffffcfe8 ("(AADAA;AA)AAEAAaAA0AAFAAbAA1AAGAAcAA2AAHAAdAA3AAIAAeAA4AAJAAfAA5AAKAAgAA6AALAAhAA7AAMAAiAA8AANAAjAA9AAOA")
+EIP: 0x41412d41 ('A-AA')
+EFLAGS: 0x10292 (carry parity ADJUST zero SIGN trap INTERRUPT direction overflow)
+[-------------------------------------code-------------------------------------]
+Invalid $PC address: 0x41412d41
+[------------------------------------stack-------------------------------------]
+0000| 0xffffcfe8 ("(AADAA;AA)AAEAAaAA0AAFAAbAA1AAGAAcAA2AAHAAdAA3AAIAAeAA4AAJAAfAA5AAKAAgAA6AALAAhAA7AAMAAiAA8AANAAjAA9AAOA")
+0004| 0xffffcfec ("AA;AA)AAEAAaAA0AAFAAbAA1AAGAAcAA2AAHAAdAA3AAIAAeAA4AAJAAfAA5AAKAAgAA6AALAAhAA7AAMAAiAA8AANAAjAA9AAOA")
+0008| 0xffffcff0 ("A)AAEAAaAA0AAFAAbAA1AAGAAcAA2AAHAAdAA3AAIAAeAA4AAJAAfAA5AAKAAgAA6AALAAhAA7AAMAAiAA8AANAAjAA9AAOA")
+0012| 0xffffcff4 ("EAAaAA0AAFAAbAA1AAGAAcAA2AAHAAdAA3AAIAAeAA4AAJAAfAA5AAKAAgAA6AALAAhAA7AAMAAiAA8AANAAjAA9AAOA")
+0016| 0xffffcff8 ("AA0AAFAAbAA1AAGAAcAA2AAHAAdAA3AAIAAeAA4AAJAAfAA5AAKAAgAA6AALAAhAA7AAMAAiAA8AANAAjAA9AAOA")
+0020| 0xffffcffc ("AFAAbAA1AAGAAcAA2AAHAAdAA3AAIAAeAA4AAJAAfAA5AAKAAgAA6AALAAhAA7AAMAAiAA8AANAAjAA9AAOA")
+0024| 0xffffd000 ("bAA1AAGAAcAA2AAHAAdAA3AAIAAeAA4AAJAAfAA5AAKAAgAA6AALAAhAA7AAMAAiAA8AANAAjAA9AAOA")
+0028| 0xffffd004 ("AAGAAcAA2AAHAAdAA3AAIAAeAA4AAJAAfAA5AAKAAgAA6AALAAhAA7AAMAAiAA8AANAAjAA9AAOA")
+[------------------------------------------------------------------------------]
+Legend: code, data, rodata, value
+Stopped reason: SIGSEGV
+0x41412d41 in ?? ()
+gdb-peda$ patto A-AA
+A-AA found at offset: 20
+gdb-peda$ 
+
+gdb-peda$ x/100wx 0x0804a004
+0x804a004:	0xf7ffd940	0xf7feadd0	0xf7e24430	0xf7e38e10
+0x804a014:	0xf7e3aca0	0xf7e102e0	0xf7debe30	0xf7e36d10
+0x804a024:	0x00000000	0x00000000	0xf7fabd80	0x00000000
+0x804a034 <name>:	0x61616161	0x00000061	0x00000000	0x00000000
+
+gdb-peda$ p system
+$1 = {int (const char *)} 0xf7e102e0 <__libc_system>

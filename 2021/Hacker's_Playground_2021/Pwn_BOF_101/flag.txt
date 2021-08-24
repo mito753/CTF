@@ -1,0 +1,11 @@
+mito@ubuntu:~/CTF/Hacker's_Playground_2021/Pwn_BOF_101$ python solve.py r
+[*] "/home/mito/CTF/Hacker's_Playground_2021/Pwn_BOF_101/bof101"
+    Arch:     amd64-64-little
+    RELRO:    Full RELRO
+    Stack:    No canary found
+    NX:       NX enabled
+    PIE:      PIE enabled
+[+] Opening connection to bof101.sstf.site on port 1337: Done
+[*] Switching to interactive mode
+What is your name?
+: SCTF{n0w_U_R_B0F_3xpEr7}

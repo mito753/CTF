@@ -1,0 +1,44 @@
+[----------------------------------registers-----------------------------------]
+RAX: 0x0 
+RBX: 0x0 
+RCX: 0x7ffff7dce560 --> 0x7ffff7dca580 --> 0x7ffff7b978e1 --> 0x636d656d5f5f0043 ('C')
+RDX: 0x7ffff7dcf8d0 --> 0x0 
+RSI: 0x1 
+RDI: 0x0 
+RBP: 0x415341416f414152 ('RAAoAASA')
+RSP: 0x7fffffffddb8 ("ApAATAAqAAUAArAAVAAtAAWAAuAAXAAvAAYAAwAAZAAxAAyAAzA%%A%sA%BA%$A%nA%CA%-A%(A%DA%;A%)A%EA%aA%0A%FA%bA%1A%G")
+RIP: 0x55555555533c (<main+157>:	ret)
+R8 : 0x0 
+R9 : 0x0 
+R10: 0x0 
+R11: 0x55555555600e --> 0x6c66746e69727000 ('')
+R12: 0x555555555140 (<_start>:	endbr64)
+R13: 0x7fffffffde90 --> 0x1 
+R14: 0x0 
+R15: 0x0
+EFLAGS: 0x10202 (carry parity adjust zero sign trap INTERRUPT direction overflow)
+[-------------------------------------code-------------------------------------]
+   0x555555555331 <main+146>:	call   0x555555555130 <exit@plt>
+   0x555555555336 <main+151>:	mov    eax,0x0
+   0x55555555533b <main+156>:	leave  
+=> 0x55555555533c <main+157>:	ret    
+   0x55555555533d:	nop    DWORD PTR [rax]
+   0x555555555340 <__libc_csu_init>:	endbr64 
+   0x555555555344 <__libc_csu_init+4>:	push   r15
+   0x555555555346 <__libc_csu_init+6>:	lea    r15,[rip+0x2a33]        # 0x555555557d80
+[------------------------------------stack-------------------------------------]
+0000| 0x7fffffffddb8 ("ApAATAAqAAUAArAAVAAtAAWAAuAAXAAvAAYAAwAAZAAxAAyAAzA%%A%sA%BA%$A%nA%CA%-A%(A%DA%;A%)A%EA%aA%0A%FA%bA%1A%G")
+0008| 0x7fffffffddc0 ("AAUAArAAVAAtAAWAAuAAXAAvAAYAAwAAZAAxAAyAAzA%%A%sA%BA%$A%nA%CA%-A%(A%DA%;A%)A%EA%aA%0A%FA%bA%1A%G")
+0016| 0x7fffffffddc8 ("VAAtAAWAAuAAXAAvAAYAAwAAZAAxAAyAAzA%%A%sA%BA%$A%nA%CA%-A%(A%DA%;A%)A%EA%aA%0A%FA%bA%1A%G")
+0024| 0x7fffffffddd0 ("AuAAXAAvAAYAAwAAZAAxAAyAAzA%%A%sA%BA%$A%nA%CA%-A%(A%DA%;A%)A%EA%aA%0A%FA%bA%1A%G")
+0032| 0x7fffffffddd8 ("AAYAAwAAZAAxAAyAAzA%%A%sA%BA%$A%nA%CA%-A%(A%DA%;A%)A%EA%aA%0A%FA%bA%1A%G")
+0040| 0x7fffffffdde0 ("ZAAxAAyAAzA%%A%sA%BA%$A%nA%CA%-A%(A%DA%;A%)A%EA%aA%0A%FA%bA%1A%G")
+0048| 0x7fffffffdde8 ("AzA%%A%sA%BA%$A%nA%CA%-A%(A%DA%;A%)A%EA%aA%0A%FA%bA%1A%G")
+0056| 0x7fffffffddf0 ("A%BA%$A%nA%CA%-A%(A%DA%;A%)A%EA%aA%0A%FA%bA%1A%G")
+[------------------------------------------------------------------------------]
+Legend: code, data, rodata, value
+Stopped reason: SIGSEGV
+0x000055555555533c in main () at bof101.c:29
+29	}
+gdb-peda$ patto ApAA
+ApAA found at offset: 152

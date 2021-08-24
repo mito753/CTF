@@ -1,0 +1,12 @@
+LostArk2
+159pt
+23solves
+Fastest Solvers
+08/17, 01:31:39C4T BuT S4D
+08/17, 01:42:10Ramily
+08/17, 01:42:10Super Guesser
+It's not over yet
+
+nc lostark2.sstf.site 1337
+
+Download: L0stArk2.zip

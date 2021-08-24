@@ -1,0 +1,13 @@
+LostArk
+132pt
+39solves
+Fastest Solvers
+08/16, 19:17:31CyKor
+08/16, 19:18:12Super Guesser
+08/16, 19:32:19The Duck
+Pwn the Acracia!
+
+nc lostark.sstf.site 1337
+
+Download: L0stArk
+SCTF{some string here}

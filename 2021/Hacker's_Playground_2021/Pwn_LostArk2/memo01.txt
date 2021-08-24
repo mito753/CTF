@@ -1,0 +1,139 @@
+mito@ubuntu:~/CTF/Hacker's_Playground_2021/Pwn_LostArk2$ ./patch 
+
+=== menu ===
+1. Create a new character
+2. Delete a character
+3. List
+4. Choose a character
+5. Set skill
+6. Use skill
+7. Exit
+pick: 1
+
+== create ==
+1) Reaper 2) Bard 3) Warlord
+pick: 7
+
+=== menu ===
+1. Create a new character
+2. Delete a character
+3. List
+4. Choose a character
+5. Set skill
+6. Use skill
+7. Exit
+pick: 2
+
+== delete ==
+pick: 0
+
+=== menu ===
+1. Create a new character
+2. Delete a character
+3. List
+4. Choose a character
+5. Set skill
+6. Use skill
+7. Exit
+pick: 3
+
+=== list ===
+
+=== menu ===
+1. Create a new character
+2. Delete a character
+3. List
+4. Choose a character
+5. Set skill
+6. Use skill
+7. Exit
+pick: 1
+
+== create ==
+1) Reaper 2) Bard 3) Warlord
+pick: 1
+name: aaa
+Hi aaa
+
+=== menu ===
+1. Create a new character
+2. Delete a character
+3. List
+4. Choose a character
+5. Set skill
+6. Use skill
+7. Exit
+pick: 6
+
+= use skill =
+Choose a character
+
+=== menu ===
+1. Create a new character
+2. Delete a character
+3. List
+4. Choose a character
+5. Set skill
+6. Use skill
+7. Exit
+pick: 4
+
+== choose ==
+pick: 0
+
+=== menu ===
+You: [Reaper] aaa
+1. Create a new character
+2. Delete a character
+3. List
+4. Choose a character
+5. Set skill
+6. Use skill
+7. Exit
+pick: 6
+
+= use skill =
+Set skill first
+
+=== menu ===
+You: [Reaper] aaa
+1. Create a new character
+2. Delete a character
+3. List
+4. Choose a character
+5. Set skill
+6. Use skill
+7. Exit
+pick: 1
+
+== create ==
+1) Reaper 2) Bard 3) Warlord
+pick: 7
+
+=== menu ===
+You: [Reaper] aaa
+1. Create a new character
+2. Delete a character
+3. List
+4. Choose a character
+5. Set skill
+6. Use skill
+7. Exit
+pick: 4
+
+== choose ==
+pick: 1
+
+=== menu ===
+You: [Special] Lupeon
+1. Create a new character
+2. Delete a character
+3. List
+4. Choose a character
+5. Set skill
+6. Use skill
+7. Exit
+pick: 3
+
+=== list ===
+0. Segmentation fault (core dumped)
