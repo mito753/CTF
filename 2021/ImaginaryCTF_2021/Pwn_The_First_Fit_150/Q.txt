@@ -1,0 +1,15 @@
+The First Fit
+Description
+Let's get started with a simple heap exploit!
+
+Attachments
+https://imaginaryctf.org/r/7459-the_first_fit https://imaginaryctf.org/r/708A-the_first_fit.c nc chal.imaginaryctf.org 42003
+
+Author
+Eth007
+
+Points
+150
+
+Solves
+122
