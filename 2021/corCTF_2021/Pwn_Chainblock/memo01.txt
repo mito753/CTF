@@ -1,0 +1,74 @@
+gdb-peda$ vmmap
+Start              End                Perm	Name
+0x003ff000         0x00400000         rw-p	/home/mito/CTF/corCTF_2021/Pwn_Chainblock/chainblock
+0x00400000         0x00401000         r--p	/home/mito/CTF/corCTF_2021/Pwn_Chainblock/chainblock
+0x00401000         0x00402000         r-xp	/home/mito/CTF/corCTF_2021/Pwn_Chainblock/chainblock
+0x00402000         0x00403000         r--p	/home/mito/CTF/corCTF_2021/Pwn_Chainblock/chainblock
+0x00403000         0x00404000         r--p	/home/mito/CTF/corCTF_2021/Pwn_Chainblock/chainblock
+0x00404000         0x00405000         rw-p	/home/mito/CTF/corCTF_2021/Pwn_Chainblock/chainblock
+0x00405000         0x00426000         rw-p	[heap]
+0x00007ffff7dd8000 0x00007ffff7dda000 rw-p	mapped
+0x00007ffff7dda000 0x00007ffff7e00000 r--p	/home/mito/CTF/corCTF_2021/Pwn_Chainblock/libc.so.6
+0x00007ffff7e00000 0x00007ffff7f6b000 r-xp	/home/mito/CTF/corCTF_2021/Pwn_Chainblock/libc.so.6
+0x00007ffff7f6b000 0x00007ffff7fb7000 r--p	/home/mito/CTF/corCTF_2021/Pwn_Chainblock/libc.so.6
+0x00007ffff7fb7000 0x00007ffff7fba000 r--p	/home/mito/CTF/corCTF_2021/Pwn_Chainblock/libc.so.6
+0x00007ffff7fba000 0x00007ffff7fbd000 rw-p	/home/mito/CTF/corCTF_2021/Pwn_Chainblock/libc.so.6
+0x00007ffff7fbd000 0x00007ffff7fc8000 rw-p	mapped
+0x00007ffff7fc8000 0x00007ffff7fcc000 r--p	[vvar]
+0x00007ffff7fcc000 0x00007ffff7fce000 r-xp	[vdso]
+0x00007ffff7fce000 0x00007ffff7fcf000 r--p	/usr/lib/x86_64-linux-gnu/ld-2.32.so
+0x00007ffff7fcf000 0x00007ffff7ff3000 r-xp	/usr/lib/x86_64-linux-gnu/ld-2.32.so
+0x00007ffff7ff3000 0x00007ffff7ffc000 r--p	/usr/lib/x86_64-linux-gnu/ld-2.32.so
+0x00007ffff7ffc000 0x00007ffff7ffd000 r--p	/usr/lib/x86_64-linux-gnu/ld-2.32.so
+0x00007ffff7ffd000 0x00007ffff7fff000 rw-p	/usr/lib/x86_64-linux-gnu/ld-2.32.so
+0x00007ffffffde000 0x00007ffffffff000 rw-p	[stack]
+0xffffffffff600000 0xffffffffff601000 --xp	[vsyscall]
+
+
+Please enter your name: AAA%AAsAABAA$AAnAACAA-AA(AADAA;AA)AAEAAaAA0AAFAAbAA1AAGAAcAA2AAHAAdAA3AAIAAeAA4AAJAAfAA5AAKAAgAA6AALAAhAA7AAMAAiAA8AANAAjAA9AAOAAkAAPAAlAAQAAmAARAAoAASAApAATAAqAAUAArAAVAAtAAWAAuAAXAAvAAYAAwAAZAAxAAyAAzA%%A%sA%BA%$A%nA%CA%-A%(A%DA%;A%)A%EA%aA%0A%FA%bA%1A%GA%cA%2A%HA%dA%3A%IA%eA%4A%JA%fA%5A%KA%gA%6A%LA%hA%7A%MA%iA%8A%NA%jA%9A%OA%kA%PA%lA%QA%mA%RA%oA%SA%pA%TA%qA%UA%rA%VA%tA%WA%uA%XA%vA%YA%wA%ZA%xA%yA%zAs%AssAsBAs$AsnAsCAs-As(AsDAs;As)AsEAsaAs0AsFAsbAs1AsGAscAs2AsHAsdAs3AsIAseAs4AsJAsfAs5AsKAsgAs6AsLAshAs7AsMA
+KYC failed, wrong identity!
+
+Program received signal SIGSEGV, Segmentation fault.
+[----------------------------------registers-----------------------------------]
+RAX: 0x1c 
+RBX: 0x401430 (<__libc_csu_init>:	endbr64)
+RCX: 0x7ffff7ee1c27 (<write+23>:	cmp    rax,0xfffffffffffff000)
+RDX: 0x0 
+RSI: 0x7ffff7fbb743 --> 0xfbd670000000000a 
+RDI: 0x7ffff7fbd670 --> 0x0 
+RBP: 0x2541322541632541 ('A%cA%2A%')
+RSP: 0x7fffffffde58 ("HA%dA%3A%IA%eA%4A%JA%fA%5A%KA%gA%6A%LA%hA%7A%MA%iA%8A%NA%jA%9A%OA%kA%PA%lA%QA%mA%RA%oA%SA%pA%TA%qA%UA%rA%VA%tA%WA%uA%XA%vA%YA%wA%ZA%xA%yA%zAs%AssAsBAs$AsnAsCAs-As(AsDAs;As)AsEAsaAs0AsFAsbAs1AsGAscAs2A"...)
+RIP: 0x40124a (<verify+148>:	ret)
+R8 : 0x1c 
+R9 : 0x416e414124414142 ('BAA$AAnA')
+R10: 0x3ff589 --> 0x5f00706d63727473 ('strcmp')
+R11: 0x246 
+R12: 0x4010d0 (<_start>:	endbr64)
+R13: 0x0 
+R14: 0x0 
+R15: 0x0
+EFLAGS: 0x10246 (carry PARITY adjust ZERO sign trap INTERRUPT direction overflow)
+[-------------------------------------code-------------------------------------]
+   0x40123f <verify+137>:	mov    eax,0x0
+   0x401244 <verify+142>:	call   0x401090 <printf@plt>
+   0x401249 <verify+147>:	leave  
+=> 0x40124a <verify+148>:	ret    
+   0x40124b <main>:	endbr64 
+   0x40124f <main+4>:	push   rbp
+   0x401250 <main+5>:	mov    rbp,rsp
+   0x401253 <main+8>:	mov    rax,QWORD PTR [rip+0x2e06]        # 0x404060 <stdout@GLIBC_2.2.5>
+[------------------------------------stack-------------------------------------]
+0000| 0x7fffffffde58 ("HA%dA%3A%IA%eA%4A%JA%fA%5A%KA%gA%6A%LA%hA%7A%MA%iA%8A%NA%jA%9A%OA%kA%PA%lA%QA%mA%RA%oA%SA%pA%TA%qA%UA%rA%VA%tA%WA%uA%XA%vA%YA%wA%ZA%xA%yA%zAs%AssAsBAs$AsnAsCAs-As(AsDAs;As)AsEAsaAs0AsFAsbAs1AsGAscAs2A"...)
+0008| 0x7fffffffde60 ("%IA%eA%4A%JA%fA%5A%KA%gA%6A%LA%hA%7A%MA%iA%8A%NA%jA%9A%OA%kA%PA%lA%QA%mA%RA%oA%SA%pA%TA%qA%UA%rA%VA%tA%WA%uA%XA%vA%YA%wA%ZA%xA%yA%zAs%AssAsBAs$AsnAsCAs-As(AsDAs;As)AsEAsaAs0AsFAsbAs1AsGAscAs2AsHAsdAs3"...)
+0016| 0x7fffffffde68 ("A%JA%fA%5A%KA%gA%6A%LA%hA%7A%MA%iA%8A%NA%jA%9A%OA%kA%PA%lA%QA%mA%RA%oA%SA%pA%TA%qA%UA%rA%VA%tA%WA%uA%XA%vA%YA%wA%ZA%xA%yA%zAs%AssAsBAs$AsnAsCAs-As(AsDAs;As)AsEAsaAs0AsFAsbAs1AsGAscAs2AsHAsdAs3AsIAseAs"...)
+0024| 0x7fffffffde70 ("5A%KA%gA%6A%LA%hA%7A%MA%iA%8A%NA%jA%9A%OA%kA%PA%lA%QA%mA%RA%oA%SA%pA%TA%qA%UA%rA%VA%tA%WA%uA%XA%vA%YA%wA%ZA%xA%yA%zAs%AssAsBAs$AsnAsCAs-As(AsDAs;As)AsEAsaAs0AsFAsbAs1AsGAscAs2AsHAsdAs3AsIAseAs4AsJAsfA"...)
+0032| 0x7fffffffde78 ("%6A%LA%hA%7A%MA%iA%8A%NA%jA%9A%OA%kA%PA%lA%QA%mA%RA%oA%SA%pA%TA%qA%UA%rA%VA%tA%WA%uA%XA%vA%YA%wA%ZA%xA%yA%zAs%AssAsBAs$AsnAsCAs-As(AsDAs;As)AsEAsaAs0AsFAsbAs1AsGAscAs2AsHAsdAs3AsIAseAs4AsJAsfAs5AsKAsg"...)
+0040| 0x7fffffffde80 ("A%7A%MA%iA%8A%NA%jA%9A%OA%kA%PA%lA%QA%mA%RA%oA%SA%pA%TA%qA%UA%rA%VA%tA%WA%uA%XA%vA%YA%wA%ZA%xA%yA%zAs%AssAsBAs$AsnAsCAs-As(AsDAs;As)AsEAsaAs0AsFAsbAs1AsGAscAs2AsHAsdAs3AsIAseAs4AsJAsfAs5AsKAsgAs6AsLAs"...)
+0048| 0x7fffffffde88 ("iA%8A%NA%jA%9A%OA%kA%PA%lA%QA%mA%RA%oA%SA%pA%TA%qA%UA%rA%VA%tA%WA%uA%XA%vA%YA%wA%ZA%xA%yA%zAs%AssAsBAs$AsnAsCAs-As(AsDAs;As)AsEAsaAs0AsFAsbAs1AsGAscAs2AsHAsdAs3AsIAseAs4AsJAsfAs5AsKAsgAs6AsLAshAs7AsMA")
+0056| 0x7fffffffde90 ("%jA%9A%OA%kA%PA%lA%QA%mA%RA%oA%SA%pA%TA%qA%UA%rA%VA%tA%WA%uA%XA%vA%YA%wA%ZA%xA%yA%zAs%AssAsBAs$AsnAsCAs-As(AsDAs;As)AsEAsaAs0AsFAsbAs1AsGAscAs2AsHAsdAs3AsIAseAs4AsJAsfAs5AsKAsgAs6AsLAshAs7AsMA")
+[------------------------------------------------------------------------------]
+Legend: code, data, rodata, value
+Stopped reason: SIGSEGV
+0x000000000040124a in verify ()
+gdb-peda$ patto HA%d
+HA%d found at offset: 264

