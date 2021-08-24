@@ -1,0 +1,15 @@
+Speedrun
+Description
+I've seen some teams solve pwn challenges almost instantly. I'm sure y'all wonder how. Well, you're about to find out!
+
+Attachments
+https://imaginaryctf.org/r/4E9F-speedrun.py nc chal.imaginaryctf.org 42020
+
+Author
+Eth007
+
+Points
+200
+
+Solves
+51

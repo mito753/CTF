@@ -1,0 +1,52 @@
+gdb-peda$ pattc 1024
+'AAA%AAsAABAA$AAnAACAA-AA(AADAA;AA)AAEAAaAA0AAFAAbAA1AAGAAcAA2AAHAAdAA3AAIAAeAA4AAJAAfAA5AAKAAgAA6AALAAhAA7AAMAAiAA8AANAAjAA9AAOAAkAAPAAlAAQAAmAARAAoAASAApAATAAqAAUAArAAVAAtAAWAAuAAXAAvAAYAAwAAZAAxAAyAAzA%%A%sA%BA%$A%nA%CA%-A%(A%DA%;A%)A%EA%aA%0A%FA%bA%1A%GA%cA%2A%HA%dA%3A%IA%eA%4A%JA%fA%5A%KA%gA%6A%LA%hA%7A%MA%iA%8A%NA%jA%9A%OA%kA%PA%lA%QA%mA%RA%oA%SA%pA%TA%qA%UA%rA%VA%tA%WA%uA%XA%vA%YA%wA%ZA%xA%yA%zAs%AssAsBAs$AsnAsCAs-As(AsDAs;As)AsEAsaAs0AsFAsbAs1AsGAscAs2AsHAsdAs3AsIAseAs4AsJAsfAs5AsKAsgAs6AsLAshAs7AsMAsiAs8AsNAsjAs9AsOAskAsPAslAsQAsmAsRAsoAsSAspAsTAsqAsUAsrAsVAstAsWAsuAsXAsvAsYAswAsZAsxAsyAszAB%ABsABBAB$ABnABCAB-AB(ABDAB;AB)ABEABaAB0ABFABbAB1ABGABcAB2ABHABdAB3ABIABeAB4ABJABfAB5ABKABgAB6ABLABhAB7ABMABiAB8ABNABjAB9ABOABkABPABlABQABmABRABoABSABpABTABqABUABrABVABtABWABuABXABvABYABwABZABxAByABzA$%A$sA$BA$$A$nA$CA$-A$(A$DA$;A$)A$EA$aA$0A$FA$bA$1A$GA$cA$2A$HA$dA$3A$IA$eA$4A$JA$fA$5A$KA$gA$6A$LA$hA$7A$MA$iA$8A$NA$jA$9A$OA$kA$PA$lA$QA$mA$RA$oA$SA$pA$TA$qA$UA$rA$VA$tA$WA$uA$XA$vA$YA$wA$ZA$xA$yA$zAn%AnsAnBAn$AnnAnC'
+gdb-peda$ run
+Starting program: /home/mito/CTF/ImaginaryCTF_2021/Pwn_Speedrun_200/chal 
+AAA%AAsAABAA$AAnAACAA-AA(AADAA;AA)AAEAAaAA0AAFAAbAA1AAGAAcAA2AAHAAdAA3AAIAAeAA4AAJAAfAA5AAKAAgAA6AALAAhAA7AAMAAiAA8AANAAjAA9AAOAAkAAPAAlAAQAAmAARAAoAASAApAATAAqAAUAArAAVAAtAAWAAuAAXAAvAAYAAwAAZAAxAAyAAzA%%A%sA%BA%$A%nA%CA%-A%(A%DA%;A%)A%EA%aA%0A%FA%bA%1A%GA%cA%2A%HA%dA%3A%IA%eA%4A%JA%fA%5A%KA%gA%6A%LA%hA%7A%MA%iA%8A%NA%jA%9A%OA%kA%PA%lA%QA%mA%RA%oA%SA%pA%TA%qA%UA%rA%VA%tA%WA%uA%XA%vA%YA%wA%ZA%xA%yA%zAs%AssAsBAs$AsnAsCAs-As(AsDAs;As)AsEAsaAs0AsFAsbAs1AsGAscAs2AsHAsdAs3AsIAseAs4AsJAsfAs5AsKAsgAs6AsLAshAs7AsMAsiAs8AsNAsjAs9AsOAskAsPAslAsQAsmAsRAsoAsSAspAsTAsqAsUAsrAsVAstAsWAsuAsXAsvAsYAswAsZAsxAsyAszAB%ABsABBAB$ABnABCAB-AB(ABDAB;AB)ABEABaAB0ABFABbAB1ABGABcAB2ABHABdAB3ABIABeAB4ABJABfAB5ABKABgAB6ABLABhAB7ABMABiAB8ABNABjAB9ABOABkABPABlABQABmABRABoABSABpABTABqABUABrABVABtABWABuABXABvABYABwABZABxAByABzA$%A$sA$BA$$A$nA$CA$-A$(A$DA$;A$)A$EA$aA$0A$FA$bA$1A$GA$cA$2A$HA$dA$3A$IA$eA$4A$JA$fA$5A$KA$gA$6A$LA$hA$7A$MA$iA$8A$NA$jA$9A$OA$kA$PA$lA$QA$mA$RA$oA$SA$pA$TA$qA$UA$rA$VA$tA$WA$uA$XA$vA$YA$wA$ZA$xA$yA$zAn%AnsAnBAn$AnnAnC
+Thanks!
+
+Program received signal SIGSEGV, Segmentation fault.
+[----------------------------------registers-----------------------------------]
+RAX: 0x0 
+RBX: 0x4011f0 (<__libc_csu_init>:	endbr64)
+RCX: 0x7ffff7ed0057 (<__GI___libc_write+23>:	cmp    rax,0xfffffffffffff000)
+RDX: 0x0 
+RSI: 0x7ffff7fab723 --> 0xfad4c0000000000a 
+RDI: 0x7ffff7fad4c0 --> 0x0 
+RBP: 0x7824415a24417724 ('$wA$ZA$x')
+RSP: 0x7fffffffdf68 ("A$yA$zAn%AnsAnBAn$AnnAnC")
+RIP: 0x4011e7 (<main+113>:	ret)
+R8 : 0x8 
+R9 : 0x0 
+R10: 0x400498 --> 0x6474730073747570 ('puts')
+R11: 0x246 
+R12: 0x401090 (<_start>:	endbr64)
+R13: 0x7fffffffe050 --> 0x1 
+R14: 0x0 
+R15: 0x0
+EFLAGS: 0x10246 (carry PARITY adjust ZERO sign trap INTERRUPT direction overflow)
+[-------------------------------------code-------------------------------------]
+   0x4011dc <main+102>:	call   0x401060 <puts@plt>
+   0x4011e1 <main+107>:	mov    eax,0x0
+   0x4011e6 <main+112>:	leave  
+=> 0x4011e7 <main+113>:	ret    
+   0x4011e8:	nop    DWORD PTR [rax+rax*1+0x0]
+   0x4011f0 <__libc_csu_init>:	endbr64 
+   0x4011f4 <__libc_csu_init+4>:	push   r15
+   0x4011f6 <__libc_csu_init+6>:	lea    r15,[rip+0x2c13]        # 0x403e10
+[------------------------------------stack-------------------------------------]
+0000| 0x7fffffffdf68 ("A$yA$zAn%AnsAnBAn$AnnAnC")
+0008| 0x7fffffffdf70 ("%AnsAnBAn$AnnAnC")
+0016| 0x7fffffffdf78 ("n$AnnAnC")
+0024| 0x7fffffffdf80 --> 0x100000000 
+0032| 0x7fffffffdf88 --> 0x401176 (<main>:	endbr64)
+0040| 0x7fffffffdf90 --> 0x4011f0 (<__libc_csu_init>:	endbr64)
+0048| 0x7fffffffdf98 --> 0x8fe5a0e7cd126efa 
+0056| 0x7fffffffdfa0 --> 0x401090 (<_start>:	endbr64)
+[------------------------------------------------------------------------------]
+Legend: code, data, rodata, value
+Stopped reason: SIGSEGV
+0x00000000004011e7 in main ()
+gdb-peda$ patto A$yA
+A$yA found at offset: 1000
+gdb-peda$ 

