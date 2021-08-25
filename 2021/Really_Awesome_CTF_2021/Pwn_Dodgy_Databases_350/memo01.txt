@@ -1,0 +1,37 @@
+gdb-peda$ vmmap
+Start              End                Perm	Name
+0x00400000         0x00402000         r-xp	/home/mito/CTF/Really_Awesome_CTF_2021/Pwn_Dodgy_Databases/chal
+0x00601000         0x00602000         r--p	/home/mito/CTF/Really_Awesome_CTF_2021/Pwn_Dodgy_Databases/chal
+0x00602000         0x00603000         rw-p	/home/mito/CTF/Really_Awesome_CTF_2021/Pwn_Dodgy_Databases/chal
+0x00603000         0x00624000         rw-p	[heap]
+0x00007ffff79e2000 0x00007ffff7bc9000 r-xp	/lib/x86_64-linux-gnu/libc-2.27.so
+0x00007ffff7bc9000 0x00007ffff7dc9000 ---p	/lib/x86_64-linux-gnu/libc-2.27.so
+0x00007ffff7dc9000 0x00007ffff7dcd000 r--p	/lib/x86_64-linux-gnu/libc-2.27.so
+0x00007ffff7dcd000 0x00007ffff7dcf000 rw-p	/lib/x86_64-linux-gnu/libc-2.27.so
+0x00007ffff7dcf000 0x00007ffff7dd3000 rw-p	mapped
+0x00007ffff7dd3000 0x00007ffff7dfc000 r-xp	/lib/x86_64-linux-gnu/ld-2.27.so
+0x00007ffff7fd5000 0x00007ffff7fd7000 rw-p	mapped
+0x00007ffff7ff7000 0x00007ffff7ffa000 r--p	[vvar]
+0x00007ffff7ffa000 0x00007ffff7ffc000 r-xp	[vdso]
+0x00007ffff7ffc000 0x00007ffff7ffd000 r--p	/lib/x86_64-linux-gnu/ld-2.27.so
+0x00007ffff7ffd000 0x00007ffff7ffe000 rw-p	/lib/x86_64-linux-gnu/ld-2.27.so
+0x00007ffff7ffe000 0x00007ffff7fff000 rw-p	mapped
+0x00007ffffffde000 0x00007ffffffff000 rw-p	[stack]
+0xffffffffff600000 0xffffffffff601000 r-xp	[vsyscall]
+
+
+=> 0x400f10 <users_register_user+64>:	cmp    DWORD PTR [rax+0x14],0xbeefcafe
+
+
+gdb-peda$ x/30gx $rax+0x14
+0x604654:	0x3131313131313131	0x0000000000000031
+0x604664:	0x0000000000000000	0x0000000000000000
+
+gdb-peda$ x/30gx 0x0000000000604600
+0x604600:	0x0000000000000000	0x0000000000000000
+0x604610:	0x0000000000000000	0x0000000000000000
+0x604620:	0x0000000000000000	0x0000000000000000
+0x604630:	0x0000000000000000	0x0000000000000021
+0x604640:	0x3131313131313131	0x3131313131313131
+0x604650:	0x3131313131313131	0x0000003131313131
+0x604660:	0x0000000000000000	0x0000000000000000

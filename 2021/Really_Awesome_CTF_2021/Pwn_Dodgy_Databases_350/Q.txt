@@ -1,0 +1,9 @@
+Dodgy Databases
+blood-t2
+Back to challenges
+350 points - First solved by Day, 108 solves in total - 88.2% positive votes
+
+Challenge instance ready at 193.57.159.27:54007. Click here to request a new instance.
+One of our most senior engineers wrote this database code, it's super well commented code, but it does seem like they have a bit of a god complex. See if you can help them out.
+
+You have already solved this challenge! Want to submit feedback?
