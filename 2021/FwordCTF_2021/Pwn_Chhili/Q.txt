@@ -1,0 +1,11 @@
+Challenge
+62 Solves
+Chhili
+666
+A wise man once said "Ejrili denya Chhili"
+Get a shell before the Chhili comes !
+nc 40.71.72.198 1234
+Run on UBUNTU 20.04
+Author : haflout
+
+Flag

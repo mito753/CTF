@@ -1,0 +1,13 @@
+0.453144073486
+[*] Closed connection to 40.71.72.198 port 1236
+53 { FwordCTF{you_aRe_aw3s0Me_!_you_d1d_i7_again_th1s_Ye4r
+[+] Opening connection to 40.71.72.198 on port 1236: Done
+0.490801095963
+[*] Closed connection to 40.71.72.198 port 1236
+53 } FwordCTF{you_aRe_aw3s0Me_!_you_d1d_i7_again_th1s_Ye4r
+[+] Opening connection to 40.71.72.198 on port 1236: Done
+2.00382494926
+************** HIT ! **************
+} FwordCTF{you_aRe_aw3s0Me_!_you_d1d_i7_again_th1s_Ye4r}
+[*] Closed connection to 40.71.72.198 port 1236
+54 1 FwordCTF{you_aRe_aw3s0Me_!_you_d1d_i7_again_th1s_Ye4r}

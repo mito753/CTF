@@ -1,0 +1,11 @@
+Challenge
+35 Solves
+Blacklist Revenge
+896
+It's time to revenge !
+flag is in /home/fbi/flag.txt
+Note : There is no stdout/stderr in the server , can you manage it this year?
+nc 40.71.72.198 1236
+Author : haflout
+
+Flag
