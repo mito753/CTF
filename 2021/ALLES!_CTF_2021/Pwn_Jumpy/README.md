@@ -18,7 +18,7 @@ jumpy.c  https://static.allesctf.net/e8f31b0fc631eb709049df0d42491ddca1562a01647
 The C language source code is provided below.
 https://github.com/mito753/CTF/blob/main/2021/ALLES!_CTF_2021/Pwn_Jumpy/jumpy.c
 
-When we execute the jampy program, we can see that only 3 instructions can be specified.
+When we execute the jumpy program, we can see that only 3 instructions can be specified.
 supported insns:
 - moveax $imm32
 - jmp $imm8
