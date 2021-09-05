@@ -1,0 +1,17 @@
+Jumpy
+Category: Pwn
+Difficulty: Easy
+Author: Flo
+First Blood: Synacktiv
+
+Show all solves (82)
+Solved By: Synacktiv, C4T BuT S4D, Goburin', H4K47L4N1M, r3billions, WE_0WN_Y0U, GetInTheBin, Super Guesser, irNoobs, Knightsec, fibonHack, perfect blue, kalmarunionen, More Smoked Leet Chicken, DooM_CaaT, mikecat, noraneco, VN_MSEC, Plaid Parliament of Pwning, 0ops, Azure Assassin Alliance, ret2rev, 0rganizers, AlPray, Nu_N0x41m, Lonely_Gang, thehackerscrew, ./Vespiary, efiens, KITCTF, W&M, DiceGang, uetctf, MoeCafe, L-Team, KerKerYuan, Sentry Up Before You Nops Nops, boiBN, Nu_tra.nm200624, TSG, PwN3v3rY7h1nG, r3kapig, scsc, Zeynarz, WreckTheLine, bi0s, m1t0, Balsn, Black Bauhinia, Water Paddler, Nu_Oggy, xtal, Nest1, CYberMouflons, krzyztof1222, No Pwn Intended, Tower of Hanoi, KTHCTF0x1, VTeam, LuftensHjaltar, ST4RT, Ph0t1n1a, ARESx, RadboudInstOfPwning, 3k, onepunchpwn, TheTeamless, Sp33d_0f_T1m3, mode13h, zer0pts, 5h4d0wb10k3r, idek, xiaolaba, InfoSecIITR, Cybernatural, sln.1550, Dragon Sector, RedRocket, zehrileLau(n)de, OnlyFeet, A/B/C, Shellphish
+Jumpy
+
+Challenge Files:jumpyjumpy.c
+
+Danger alert:Failed to request session status:
+session "7b000000d136daaf77c18b37" not found
+You have an active session with ID 7b000000d136daaf77c18b37 with state:Fetching session status...
+Info alert:Flag submission is closed.
+Please consider leaving your feedback here.

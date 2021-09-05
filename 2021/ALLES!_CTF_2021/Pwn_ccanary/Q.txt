@@ -1,0 +1,17 @@
+ccanary
+Category: Pwn
+Difficulty: 👶
+Author: Flo
+First Blood: perfect blue
+
+Show all solves (89)
+Solved By: perfect blue, Super Guesser, Sentry Up Before You Nops Nops, thehackerscrew, AlPray, KITCTF, GetInTheBin, Lonely_Gang, Goburin', onepunchpwn, xtal, ST4RT, L-Team, Synacktiv, WreckTheLine, C4T BuT S4D, 0ops, PwN3v3rY7h1nG, ola, More Smoked Leet Chicken, ECSC Team France, K3RN3L4RMY, irNoobs, order flag, ARESx, Tower of Hanoi, zer0pts, RadboudInstOfPwning, r3billions, burner_herz0g, xSTF, EvilBunnyWrote, MoeCafe, WE_0WN_Y0U, mode13h, Plaid Parliament of Pwning, DooM_CaaT, m1t0, LuftensHjaltar, noraneco, KerKerYuan, Nu_N0x41m, Azure Assassin Alliance, lawhackzz123, ret2rev, r3kapig, Ph0t1n1a, Sp33d_0f_T1m3, DiceGang, A/B/C, AmTra1n, TSG, ./Vespiary, UMDCSEC, W&M, konoah, uetctf, CSUI, Nu_Oggy, idek, boiBN, Nu_tra.nm200624, fibonHack, Water Paddler, Balsn, CYberMouflons, somayi2021, Zeynarz, kalmarunionen, H4K47L4N1M, 5h4d0wb10k3r, upbhack, e^iπ+1day, RedRocket, xiaolaba, bi0s, Nepnep, Dragon Sector, skateboarding dog, Cybernatural, Black Bauhinia, TomHatskevich, Beast_From_UIT, CyberErudites, VTeam, PwnProphecy, b01lers, Knightsec, Shellphish
+I'm using arch btw... ¯\_(ツ)_/¯
+
+Challenge Files:ccanaryccanary.c
+
+Danger alert:Failed to request session status:
+session "7b0000007c7be7ad4dab5be5" not found
+You have an active session with ID 7b0000007c7be7ad4dab5be5 with state:Fetching session status...
+Info alert:Flag submission is closed.
+Please consider leaving your feedback here.
