@@ -25,7 +25,7 @@ supported insns:
 - ret
 - (EOF)
 
-After the jmp instruction, it is checked if the next instruction is mov eax or jmp or ret.
+After the jmp instruction, it is checked if the next instruction is `moveax` or `jmp` or `ret`.
 
 ```c
 const instruction_t INSNS[3] = {
@@ -45,12 +45,12 @@ const instruction_t *isns_by_mnemonic(char *mnemonic)
 
 ## Solution:
 
-Since there is no instruction check after mov eax, I can execute any 4-byte instruction by made the following instruction sequence.
-
+Since there is no instruction check after `moveax`, I can execute any 4-byte instructions by made the following instruction sequence.
+```
 jmp 1
 moveax 0xb8
-moveax (Arbitrary 4-byte instruction)
-
+moveax (Arbitrary 4-byte instructions)
+```
 ```
              mov eax
           +-----------+
