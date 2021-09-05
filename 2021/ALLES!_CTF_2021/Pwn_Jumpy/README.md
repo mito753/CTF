@@ -1,6 +1,6 @@
 ## Jumpy
 
-> Points: 139
+> Points: 136
 >
 > Solves: 82
 
