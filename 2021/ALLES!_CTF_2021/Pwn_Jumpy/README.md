@@ -16,7 +16,7 @@ jumpy.c  https://static.allesctf.net/e8f31b0fc631eb709049df0d42491ddca1562a01647
 ## Analysis:
 
 The C language source code is provided below.
-
+![](./jumpy.c)
 
 When you execute the jampy program, you can see that only 3 instructions can be specified.
 supported insns:
