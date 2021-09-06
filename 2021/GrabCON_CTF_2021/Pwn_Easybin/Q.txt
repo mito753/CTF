@@ -1,0 +1,12 @@
+Challenge
+165 Solves
+Easybin
+100
+nc 35.205.161.145 49153
+
+backup : `nc 35.246.38.194 31337 easybin
+
+Author: 5h4rk
+
+Flag
+

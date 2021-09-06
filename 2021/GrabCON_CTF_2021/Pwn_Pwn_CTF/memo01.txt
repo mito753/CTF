@@ -1,0 +1,70 @@
+gdb-peda$ vmmap
+Start      End        Perm	Name
+0x56555000 0x56558000 r-xp	/home/mito/CTF/GrabCON_CTF_2021/Pwn_Pwn_CTF/pwn2
+0x56558000 0x56559000 r-xp	/home/mito/CTF/GrabCON_CTF_2021/Pwn_Pwn_CTF/pwn2
+0x56559000 0x5655a000 rwxp	/home/mito/CTF/GrabCON_CTF_2021/Pwn_Pwn_CTF/pwn2
+0x5655a000 0x5657c000 rwxp	[heap]
+0xf7dd3000 0xf7fa8000 r-xp	/lib/i386-linux-gnu/libc-2.27.so
+0xf7fa8000 0xf7fa9000 ---p	/lib/i386-linux-gnu/libc-2.27.so
+0xf7fa9000 0xf7fab000 r-xp	/lib/i386-linux-gnu/libc-2.27.so
+0xf7fab000 0xf7fac000 rwxp	/lib/i386-linux-gnu/libc-2.27.so
+0xf7fac000 0xf7faf000 rwxp	mapped
+0xf7fcf000 0xf7fd1000 rwxp	mapped
+0xf7fd1000 0xf7fd4000 r--p	[vvar]
+0xf7fd4000 0xf7fd6000 r-xp	[vdso]
+0xf7fd6000 0xf7ffc000 r-xp	/lib/i386-linux-gnu/ld-2.27.so
+0xf7ffc000 0xf7ffd000 r-xp	/lib/i386-linux-gnu/ld-2.27.so
+0xf7ffd000 0xf7ffe000 rwxp	/lib/i386-linux-gnu/ld-2.27.so
+0xfffdd000 0xffffe000 rwxp	[stack]
+
+gdb-peda$ pattc 512
+'AAA%AAsAABAA$AAnAACAA-AA(AADAA;AA)AAEAAaAA0AAFAAbAA1AAGAAcAA2AAHAAdAA3AAIAAeAA4AAJAAfAA5AAKAAgAA6AALAAhAA7AAMAAiAA8AANAAjAA9AAOAAkAAPAAlAAQAAmAARAAoAASAApAATAAqAAUAArAAVAAtAAWAAuAAXAAvAAYAAwAAZAAxAAyAAzA%%A%sA%BA%$A%nA%CA%-A%(A%DA%;A%)A%EA%aA%0A%FA%bA%1A%GA%cA%2A%HA%dA%3A%IA%eA%4A%JA%fA%5A%KA%gA%6A%LA%hA%7A%MA%iA%8A%NA%jA%9A%OA%kA%PA%lA%QA%mA%RA%oA%SA%pA%TA%qA%UA%rA%VA%tA%WA%uA%XA%vA%YA%wA%ZA%xA%yA%zAs%AssAsBAs$AsnAsCAs-As(AsDAs;As)AsEAsaAs0AsFAsbAs1AsGAscAs2AsHAsdAs3AsIAseAs4AsJAsfAs5AsKAsgAs6AsLAshAs7AsMA'
+gdb-peda$ run
+Starting program: /home/mito/CTF/GrabCON_CTF_2021/Pwn_Pwn_CTF/pwn2 
+Hello hakur!!
+eat some 0xffffce4e!
+AAA%AAsAABAA$AAnAACAA-AA(AADAA;AA)AAEAAaAA0AAFAAbAA1AAGAAcAA2AAHAAdAA3AAIAAeAA4AAJAAfAA5AAKAAgAA6AALAAhAA7AAMAAiAA8AANAAjAA9AAOAAkAAPAAlAAQAAmAARAAoAASAApAATAAqAAUAArAAVAAtAAWAAuAAXAAvAAYAAwAAZAAxAAyAAzA%%A%sA%BA%$A%nA%CA%-A%(A%DA%;A%)A%EA%aA%0A%FA%bA%1A%GA%cA%2A%HA%dA%3A%IA%eA%4A%JA%fA%5A%KA%gA%6A%LA%hA%7A%MA%iA%8A%NA%jA%9A%OA%kA%PA%lA%QA%mA%RA%oA%SA%pA%TA%qA%UA%rA%VA%tA%WA%uA%XA%vA%YA%wA%ZA%xA%yA%zAs%AssAsBAs$AsnAsCAs-As(AsDAs;As)AsEAsaAs0AsFAsbAs1AsGAscAs2AsHAsdAs3AsIAseAs4AsJAsfAs5AsKAsgAs6AsLAshAs7AsM
+
+Program received signal SIGSEGV, Segmentation fault.
+
+[----------------------------------registers-----------------------------------]
+EAX: 0xffffce4e ("AAA%AAsAABAA$AAnAACAA-AA(AADAA;AA)AAEAAaAA0AAFAAbAA1AAGAAcAA2AAHAAdAA3AAIAAeAA4AAJAAfAA5AAKAAgAA6AALAAhAA7AAMAAiAA8AANAAjAA9AAOAAkAAPAAlAAQAAmAARAAoAASAApAATAAqAAUAArAAVAAtAAWAAuAAXAAvAAYAAwAAZAAxAAyA"...)
+EBX: 0x36254167 ('gA%6')
+ECX: 0xf7fab5c0 --> 0xfbad2288 
+EDX: 0xf7fac89c --> 0x0 
+ESI: 0xf7fab000 --> 0x1d7d8c 
+EDI: 0x0 
+EBP: 0x414c2541 ('A%LA')
+ESP: 0xffffcf80 ("7A%MA%iA%8A%NA%jA%9A%OA%kA%PA%lA%QA%mA%RA%oA%SA%pA%TA%qA%UA%rA%VA%tA%WA%uA%XA%vA%YA%wA%ZA%xA%yA%zAs%AssAsBAs$AsnAsCAs-As(AsDAs;As)AsEAsaAs0AsFAsbAs1AsGAscAs2AsHAsdAs3AsIAseAs4AsJAsfAs5AsKAsgAs6AsLAshA"...)
+EIP: 0x25416825 ('%hA%')
+EFLAGS: 0x10282 (carry parity adjust zero SIGN trap INTERRUPT direction overflow)
+[-------------------------------------code-------------------------------------]
+Invalid $PC address: 0x25416825
+[------------------------------------stack-------------------------------------]
+0000| 0xffffcf80 ("7A%MA%iA%8A%NA%jA%9A%OA%kA%PA%lA%QA%mA%RA%oA%SA%pA%TA%qA%UA%rA%VA%tA%WA%uA%XA%vA%YA%wA%ZA%xA%yA%zAs%AssAsBAs$AsnAsCAs-As(AsDAs;As)AsEAsaAs0AsFAsbAs1AsGAscAs2AsHAsdAs3AsIAseAs4AsJAsfAs5AsKAsgAs6AsLAshA"...)
+0004| 0xffffcf84 ("A%iA%8A%NA%jA%9A%OA%kA%PA%lA%QA%mA%RA%oA%SA%pA%TA%qA%UA%rA%VA%tA%WA%uA%XA%vA%YA%wA%ZA%xA%yA%zAs%AssAsBAs$AsnAsCAs-As(AsDAs;As)AsEAsaAs0AsFAsbAs1AsGAscAs2AsHAsdAs3AsIAseAs4AsJAsfAs5AsKAsgAs6AsLAshAs7As"...)
+0008| 0xffffcf88 ("%8A%NA%jA%9A%OA%kA%PA%lA%QA%mA%RA%oA%SA%pA%TA%qA%UA%rA%VA%tA%WA%uA%XA%vA%YA%wA%ZA%xA%yA%zAs%AssAsBAs$AsnAsCAs-As(AsDAs;As)AsEAsaAs0AsFAsbAs1AsGAscAs2AsHAsdAs3AsIAseAs4AsJAsfAs5AsKAsgAs6AsLAshAs7AsM")
+0012| 0xffffcf8c ("NA%jA%9A%OA%kA%PA%lA%QA%mA%RA%oA%SA%pA%TA%qA%UA%rA%VA%tA%WA%uA%XA%vA%YA%wA%ZA%xA%yA%zAs%AssAsBAs$AsnAsCAs-As(AsDAs;As)AsEAsaAs0AsFAsbAs1AsGAscAs2AsHAsdAs3AsIAseAs4AsJAsfAs5AsKAsgAs6AsLAshAs7AsM")
+0016| 0xffffcf90 ("A%9A%OA%kA%PA%lA%QA%mA%RA%oA%SA%pA%TA%qA%UA%rA%VA%tA%WA%uA%XA%vA%YA%wA%ZA%xA%yA%zAs%AssAsBAs$AsnAsCAs-As(AsDAs;As)AsEAsaAs0AsFAsbAs1AsGAscAs2AsHAsdAs3AsIAseAs4AsJAsfAs5AsKAsgAs6AsLAshAs7AsM")
+0020| 0xffffcf94 ("%OA%kA%PA%lA%QA%mA%RA%oA%SA%pA%TA%qA%UA%rA%VA%tA%WA%uA%XA%vA%YA%wA%ZA%xA%yA%zAs%AssAsBAs$AsnAsCAs-As(AsDAs;As)AsEAsaAs0AsFAsbAs1AsGAscAs2AsHAsdAs3AsIAseAs4AsJAsfAs5AsKAsgAs6AsLAshAs7AsM")
+0024| 0xffffcf98 ("kA%PA%lA%QA%mA%RA%oA%SA%pA%TA%qA%UA%rA%VA%tA%WA%uA%XA%vA%YA%wA%ZA%xA%yA%zAs%AssAsBAs$AsnAsCAs-As(AsDAs;As)AsEAsaAs0AsFAsbAs1AsGAscAs2AsHAsdAs3AsIAseAs4AsJAsfAs5AsKAsgAs6AsLAshAs7AsM")
+0028| 0xffffcf9c ("A%lA%QA%mA%RA%oA%SA%pA%TA%qA%UA%rA%VA%tA%WA%uA%XA%vA%YA%wA%ZA%xA%yA%zAs%AssAsBAs$AsnAsCAs-As(AsDAs;As)AsEAsaAs0AsFAsbAs1AsGAscAs2AsHAsdAs3AsIAseAs4AsJAsfAs5AsKAsgAs6AsLAshAs7AsM")
+[------------------------------------------------------------------------------]
+Legend: code, data, rodata, value
+Stopped reason: SIGSEGV
+0x25416825 in ?? ()
+gdb-peda$ patto %hA%
+%hA% found at offset: 302
+
+gdb-peda$ x/80wx 0xffffce00
+0xffffce00:	0xf7fab000	0x00000000	0xffffcf78	0xffffce4e
+0xffffce10:	0xf7fabd80	0x5655702c	0xffffce34	0x56558fc8
+0xffffce20:	0xf7fab000	0x00000000	0xffffcf78	0x5655634e
+0xffffce30:	0xffffce4e	0xffffce4e	0xffffce5c	0x56556320
+0xffffce40:	0xf7fabd80	0x00000001	0xf7fabdc7	0x61619e57
+0xffffce50:	0x61616161	0x61616161	0x61616161	0x61616161
+0xffffce60:	0x61616161	0x61616161	0x61616161	0x61616161
+0xffffce70:	0x61616161	0x61616161	0x00006161	0xf7e44f3b
+0xffffce80:	0x00000001	0x56557024	0x00000007	0xf7fabd80
+0xffffce90:	0xf7fa9220	0xf7fabdc7	0xf7fabdc7	0xf7e44007
+302

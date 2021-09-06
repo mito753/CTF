@@ -1,0 +1,34 @@
+gdb-peda$ vmmap
+Start      End        Perm	Name
+0x08048000 0x08049000 r--p	/home/mito/CTF/GrabCON_CTF_2021/Pwn_Can_you/cancancan
+0x08049000 0x0804a000 r-xp	/home/mito/CTF/GrabCON_CTF_2021/Pwn_Can_you/cancancan
+0x0804a000 0x0804b000 r--p	/home/mito/CTF/GrabCON_CTF_2021/Pwn_Can_you/cancancan
+0x0804b000 0x0804c000 r--p	/home/mito/CTF/GrabCON_CTF_2021/Pwn_Can_you/cancancan
+0x0804c000 0x0804d000 rw-p	/home/mito/CTF/GrabCON_CTF_2021/Pwn_Can_you/cancancan
+0xf7dd3000 0xf7fa8000 r-xp	/lib/i386-linux-gnu/libc-2.27.so
+0xf7fa8000 0xf7fa9000 ---p	/lib/i386-linux-gnu/libc-2.27.so
+0xf7fa9000 0xf7fab000 r--p	/lib/i386-linux-gnu/libc-2.27.so
+0xf7fab000 0xf7fac000 rw-p	/lib/i386-linux-gnu/libc-2.27.so
+0xf7fac000 0xf7faf000 rw-p	mapped
+0xf7fcf000 0xf7fd1000 rw-p	mapped
+0xf7fd1000 0xf7fd4000 r--p	[vvar]
+0xf7fd4000 0xf7fd6000 r-xp	[vdso]
+0xf7fd6000 0xf7ffc000 r-xp	/lib/i386-linux-gnu/ld-2.27.so
+0xf7ffc000 0xf7ffd000 r--p	/lib/i386-linux-gnu/ld-2.27.so
+0xf7ffd000 0xf7ffe000 rw-p	/lib/i386-linux-gnu/ld-2.27.so
+0xfffdd000 0xffffe000 rw-p	[stack]
+
+mito@ubuntu:~/CTF/GrabCON_CTF_2021/Pwn_Can_you$ ./cancancan 
+can you bypass me???
+AAAA,%p,%p,%p,%p,%p,%p,%p,%p,%p,%p,%p
+AAAA,0xffffcf78,0x200,0x80492d6,0xf7fabd80,(nil),0x41414141,0x2c70252c,0x252c7025,0x70252c70,0x2c70252c,0x252c7025
+������
+
+gdb-peda$ x/80wx 0x0804c000
+0x804c000:	0x0804bf08	0xf7ffd940	0xf7feadd0	0xf7eb9d60
+0x804c010:	0x08049050	0x08049060	0xf7e3aca0	0x08049080
+0x804c020:	0xf7debe30	0xf7e3b410	0x00000000	0x00000000
+0x804c030 <completed.7622>:	0x00000000	0x00000000	0x00000000	0x00000000
+0x804c040:	0x00000000	0x00000000	0x00000000	0x00000000
+0x804c050:	0x00000000	0x00000000	0x00000000	0x00000000
+

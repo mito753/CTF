@@ -1,0 +1,10 @@
+Challenge
+94 Solves
+Can you?
+100
+nc 35.246.42.94 31337
+
+Author: 5h4rk
+
+Flag
+

@@ -1,0 +1,9 @@
+Challenge
+77 Solves
+Pwn CTF
+150
+nc 35.246.42.94 1337
+
+Author: 5h4rk
+
+Flag

