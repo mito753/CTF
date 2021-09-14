@@ -205,7 +205,7 @@ $ cat flag.txt
 COMPFEST13{570PPPP_I7___937_0U7_0f_my_H34d___b6fc1236d6}
 ```
 
-The administrator sent me the Exploit code, so I'll attach `exploit.py`.
+The administrator sent me the Exploit code, so I attach `exploit.py`.
 Thank you for your polite response even after the competition.
 
 ## Reference:
