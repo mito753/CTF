@@ -97,7 +97,7 @@ I can create a 0x430 size unsorted bin chunk by deleting the 1st Item.
 0x604300:	0x0000000000000000	0x0000000000000021
 ```
 
-Furthermore, if I execute the `Add` function, I can put the address of the unsorted bin chunk in the 2nd chunk, so you can leak the libc address with the` List` function.
+Furthermore, if I execute the `Add` function, I can put the address of the unsorted bin chunk in the 2nd chunk, so you can leak the libc address with the `List` function.
 ```
     'Name: `G`\n'
     'Price: 140737351834784\n'      =>  0x00007ffff7dcdca0
