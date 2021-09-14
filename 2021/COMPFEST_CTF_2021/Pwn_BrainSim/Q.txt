@@ -1,0 +1,25 @@
+[500 pts] BrainSim
+Description
+Heyy! So, I found this BF simulator thing. I thought it's hackable-ish? Because my friend told me there's flag file in it. Maybe you could help me while I'm having my breakfast ? Ehehe...
+
+nc 103.152.242.242 29461
+
+Author: xMaximusKl
+
+Attachments
+brainsim-master-public.zip
+
+Hints
+Submission
+Flag
+View solves (0 teams)
+
+
+Hint
+×
+Simple BOF using brainfuck, I wonder what you could with that ? Maybe hanging around in a forbidden place ? :)
+
+
+ヒント
+×
+brainfuckを使用した単純なBOF、それで何ができるのだろうか？多分禁じられた場所でぶらぶらしている？:)
