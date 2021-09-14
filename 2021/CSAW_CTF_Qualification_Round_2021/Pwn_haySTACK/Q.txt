@@ -1,0 +1,9 @@
+Challenge
+189 Solves
+haySTACK
+290
+Help! I've lost my favorite needle!
+
+nc pwn.chal.csaw.io 5002
+
+Flag

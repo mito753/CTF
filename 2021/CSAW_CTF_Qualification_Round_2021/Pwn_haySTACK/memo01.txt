@@ -1,0 +1,98 @@
+gdb-peda$ vmmap
+Start              End                Perm	Name
+0x0000555555554000 0x0000555555555000 r--p	/home/mito/CTF/CSAW_CTF_Qualification_Round_2021/Pwn_haySTACK/haySTACK
+0x0000555555555000 0x0000555555556000 r-xp	/home/mito/CTF/CSAW_CTF_Qualification_Round_2021/Pwn_haySTACK/haySTACK
+0x0000555555556000 0x0000555555557000 r--p	/home/mito/CTF/CSAW_CTF_Qualification_Round_2021/Pwn_haySTACK/haySTACK
+0x0000555555557000 0x0000555555558000 r--p	/home/mito/CTF/CSAW_CTF_Qualification_Round_2021/Pwn_haySTACK/haySTACK
+0x0000555555558000 0x0000555555559000 rw-p	/home/mito/CTF/CSAW_CTF_Qualification_Round_2021/Pwn_haySTACK/haySTACK
+0x0000555555559000 0x000055555557a000 rw-p	[heap]
+0x00007ffff79e2000 0x00007ffff7bc9000 r-xp	/lib/x86_64-linux-gnu/libc-2.27.so
+0x00007ffff7bc9000 0x00007ffff7dc9000 ---p	/lib/x86_64-linux-gnu/libc-2.27.so
+0x00007ffff7dc9000 0x00007ffff7dcd000 r--p	/lib/x86_64-linux-gnu/libc-2.27.so
+0x00007ffff7dcd000 0x00007ffff7dcf000 rw-p	/lib/x86_64-linux-gnu/libc-2.27.so
+0x00007ffff7dcf000 0x00007ffff7dd3000 rw-p	mapped
+0x00007ffff7dd3000 0x00007ffff7dfc000 r-xp	/lib/x86_64-linux-gnu/ld-2.27.so
+0x00007ffff7fd5000 0x00007ffff7fd7000 rw-p	mapped
+0x00007ffff7ff7000 0x00007ffff7ffa000 r--p	[vvar]
+0x00007ffff7ffa000 0x00007ffff7ffc000 r-xp	[vdso]
+0x00007ffff7ffc000 0x00007ffff7ffd000 r--p	/lib/x86_64-linux-gnu/ld-2.27.so
+0x00007ffff7ffd000 0x00007ffff7ffe000 rw-p	/lib/x86_64-linux-gnu/ld-2.27.so
+0x00007ffff7ffe000 0x00007ffff7fff000 rw-p	mapped
+0x00007fffffbfd000 0x00007ffffffff000 rw-p	[stack]
+0xffffffffff600000 0xffffffffff601000 r-xp	[vsyscall]
+
+
+gdb-peda$ x/100gx 0x7fffffbfdc00
+0x7fffffbfdc00:	0x0000000000000d68	0x00007ffff7a6f218
+0x7fffffbfdc10:	0x00007ffff7dcda00	0x00007ffff7dca2a0
+0x7fffffbfdc20:	0x000000000000000a	0x0000000000000000
+0x7fffffbfdc30:	0x00007ffff7dcda00	0x00007ffff7a704c2
+0x7fffffbfdc40:	0x0000000000000025	0x0000000000000000
+0x7fffffbfdc50:	0x00007fffffbfdcf0	0x00007ffff7a61fb2
+0x7fffffbfdc60:	0x0000555555559264	0x00000001f7dce760
+0x7fffffbfdc70:	0x0000000100050001	0xffffffffffffffff
+0x7fffffbfdc80:	0x00007fffffbfdcf0	0x0000000000000000
+0x7fffffbfdc90:	0x00007fffffbfdd20	0x00005555555550f0
+0x7fffffbfdca0:	0x00007fffffffde60	0x0000000000000000
+0x7fffffbfdcb0:	0x0000000000000000	0x00007ffff7a227b0
+0x7fffffbfdcc0:	0x0000000000000008	0x0000555555555328
+0x7fffffbfdcd0:	0x0000000000000000	0x00007fffffbfdd40
+0x7fffffbfdce0:	0x0000000000000000	0xfffffff6000c906a
+0x7fffffbfdcf0:	0x000000000a30312d	0x0000000000000000
+0x7fffffbfdd00:	0x0000000000000000	0x0000000000000000
+0x7fffffbfdd10:	0x0000000000000000	0x3799a796aa470000
+0x7fffffbfdd20:	0x00007fffffffdd50	0x000055555555549b
+0x7fffffbfdd30:	0x0000000000000000	0x0010000000000000
+0x7fffffbfdd40:	0x00000b0000000b00	0x00000b0000000b00
+0x7fffffbfdd50:	0x00000b0000000b00	0x00000b0000000b00
+0x7fffffbfdd60:	0x00000b0000000b00	0x00000b0000000b00
+0x7fffffbfdd70:	0x00000b0000000b00	0x00000b0000000b00
+0x7fffffbfdd80:	0x00000b0000000b00	0x00000b0000000b00
+0x7fffffbfdd90:	0x00000b0000000b00	0x00000b0000000b00
+0x7fffffbfdda0:	0x00000b0000000b00	0x00000b0000000b00
+
+gdb-peda$ run
+Starting program: /home/mito/CTF/CSAW_CTF_Qualification_Round_2021/Pwn_haySTACK/haySTACK 
+Help! I have lost my favorite needle in one of my 4096 identical haystacks!
+Unfortunately, I can't remember which one. Can you help me??
+Which haystack do you want to check?
+-10
+Hey, you found a needle, but it's number is 0xc5c47a00. I don't like that one
+Shoot, I forgot to tell you that I hid a needle in every stack. But I only have one favorite needle
+Let's try again!
+Which haystack do you want to check?
+-9
+Hey, you found a needle, but it's number is 0x61916e74. I don't like that one
+Did I mention I'm in a hurry? I need you to find it on your next guess
+Let's try again!
+Which haystack do you want to check?
+^C
+Program received signal SIGINT, Interrupt.
+
+0x7fffffbfdd00:	0x0000000000000000	0x0000000000000000
+0x7fffffbfdd10:	0x0000000000000000	0x61916e74c5c47a00
+0x7fffffbfdd20:	0x00007fffffffdd50	0x000055555555549b
+0x7fffffbfdd30:	0x0000000000000000	0x0010000000000000
+0x7fffffbfdd40:	0x00000b0000000b00	0x00000b0000000b00
+0x7fffffbfdd50:	0x00000b0000000b00	0x00000b0000000b00
+
+
+Let's try again!
+Which haystack do you want to check?
+-22
+Hey, you found a needle, but it's number is 0x000fdf2a. I don't like that one
+Did I mention I'm in a hurry? I need you to find it on your next guess
+Let's try again!
+Which haystack do you want to check?
+
+0x7fffffbfdcc0:	0x00005555555550f0	0x000055555555531c
+0x7fffffbfdcd0:	0x0000000000000000	0x00007fffffbfdd40
+0x7fffffbfdce0:	0x0000000200000000	0xffffffea000fdf2a
+0x7fffffbfdcf0:	0x000000000a32322d	0x0000000000000000
+0x7fffffbfdd00:	0x0000000000000000	0x0000000000000000
+0x7fffffbfdd10:	0x0000000000000000	0x6a6b06bf563a4e00
+0x7fffffbfdd20:	0x00007fffffffdd50	0x000055555555549b
+0x7fffffbfdd30:	0x0000000000000000	0x0010000000000000
+0x7fffffbfdd40:	0x00000b0000000b00	0x00000b0000000b00
+0x7fffffbfdd50:	0x00000b0000000b00	0x00000b0000000b00
+

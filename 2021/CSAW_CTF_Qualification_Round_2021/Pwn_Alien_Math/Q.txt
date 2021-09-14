@@ -1,0 +1,9 @@
+Challenge
+272 Solves
+Alien Math
+60
+Brush off your Flirbgarple textbooks!
+
+nc pwn.chal.csaw.io 5004
+
+Flag

