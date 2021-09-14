@@ -31,7 +31,7 @@ total 48
 When I checked with the administrator on Discord, it seems that the administrator forgot to update the attachment.
 
 I got the binaries from the server and checked the difference between the two binaries.
-The following parts of the Interpret function are different. There is one more getchar () in the attachment binary.
+The following parts of the `Interpret` function are different. There is one more `getchar()` in the attachment binary.
 
 ```
           case 0x2c:
@@ -68,9 +68,9 @@ mp:     Memory pointer
 brack:  Flag to check the number before and after the bracket
 ```
 
-Since the range of the value of `mp` is not checked when executing the Brainfuck code, you can read the value on the stack and write arbitrary data by specifying the following character string.
+Since the range of the value of `mp` is not checked when executing the Brainfuck code, I can read the value on the stack and write arbitrary data by specifying the following character string.
 ```
-".,[>.,]"
+.,[>.,]
 ```
 
 ## Solution:
@@ -101,7 +101,7 @@ Then I used `, [>,]` to write the shellcode and then change the return address o
 0x7fffffffde00:	0x0000555555555700	0x00007ffff7a03bf7
 ```
 
-I can start the shell by returning from the `Interpret` function to the `main` function with the Exit function.
+I can start the shellcode by returning from the `Interpret` function to the `main` function with the `Exit` function.
 
 
 ## Exploit code:
@@ -210,4 +210,5 @@ Thank you for your polite response even after the competition.
 
 ## Reference:
 https://en.wikipedia.org/wiki/Brainfuck
+
 https://www.notion.so/RCTF-2020-acfcdd0de8534ed0a7caef3549088281
