@@ -1,0 +1,8 @@
+Challenge
+39 Solves
+Fake Survey
+436
+Thank you for your participation. Your feedback on the competition is valuable to us. You must find the password to post your opinions.
+
+nc 185.235.41.205 7050, nc 185.97.118.167 7050
+Flag

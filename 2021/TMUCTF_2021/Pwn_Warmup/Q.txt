@@ -1,0 +1,8 @@
+Challenge
+257 Solves
+Warmup
+50
+Just a simple warmup!
+
+nc 194.5.207.56 7000, nc 185.239.107.54 7000
+Flag

@@ -1,0 +1,51 @@
+mito@ubuntu:~/CTF/TMUCTF_2021/Pwn_Security_Code$ python solve.py r
+[*] '/home/mito/CTF/TMUCTF_2021/Pwn_Security_Code/securitycode'
+    Arch:     i386-32-little
+    RELRO:    Partial RELRO
+    Stack:    Canary found
+    NX:       NX enabled
+    PIE:      No PIE (0x8048000)
+[+] Opening connection to 185.235.41.205 on port 7040: Done
+TMUC
+[*] Closed connection to 185.235.41.205 port 7040
+[+] Opening connection to 185.235.41.205 on port 7040: Done
+TMUCTF{5
+[*] Closed connection to 185.235.41.205 port 7040
+[+] Opening connection to 185.235.41.205 on port 7040: Done
+TMUCTF{50_y0
+[*] Closed connection to 185.235.41.205 port 7040
+[+] Opening connection to 185.235.41.205 on port 7040: Done
+TMUCTF{50_y0u_kn
+[*] Closed connection to 185.235.41.205 port 7040
+[+] Opening connection to 185.235.41.205 on port 7040: Done
+TMUCTF{50_y0u_kn0w_5
+[*] Closed connection to 185.235.41.205 port 7040
+[+] Opening connection to 185.235.41.205 on port 7040: Done
+TMUCTF{50_y0u_kn0w_50m37
+[*] Closed connection to 185.235.41.205 port 7040
+[+] Opening connection to 185.235.41.205 on port 7040: Done
+TMUCTF{50_y0u_kn0w_50m37h1n6
+[*] Closed connection to 185.235.41.205 port 7040
+[+] Opening connection to 185.235.41.205 on port 7040: Done
+TMUCTF{50_y0u_kn0w_50m37h1n6_4b0
+[*] Closed connection to 185.235.41.205 port 7040
+[+] Opening connection to 185.235.41.205 on port 7040: Done
+TMUCTF{50_y0u_kn0w_50m37h1n6_4b0u7_f
+[*] Closed connection to 185.235.41.205 port 7040
+[+] Opening connection to 185.235.41.205 on port 7040: Done
+TMUCTF{50_y0u_kn0w_50m37h1n6_4b0u7_f0rm4
+[*] Closed connection to 185.235.41.205 port 7040
+[+] Opening connection to 185.235.41.205 on port 7040: Done
+TMUCTF{50_y0u_kn0w_50m37h1n6_4b0u7_f0rm47_57
+[*] Closed connection to 185.235.41.205 port 7040
+[+] Opening connection to 185.235.41.205 on port 7040: Done
+TMUCTF{50_y0u_kn0w_50m37h1n6_4b0u7_f0rm47_57r1n6
+[*] Closed connection to 185.235.41.205 port 7040
+[+] Opening connection to 185.235.41.205 on port 7040: Done
+TMUCTF{50_y0u_kn0w_50m37h1n6_4b0u7_f0rm47_57r1n6_0xf
+[*] Closed connection to 185.235.41.205 port 7040
+[+] Opening connection to 185.235.41.205 on port 7040: Done
+TMUCTF{50_y0u_kn0w_50m37h1n6_4b0u7_f0rm47_57r1n6_0xf7e11
+[*] Closed connection to 185.235.41.205 port 7040
+[+] Opening connection to 185.235.41.205 on port 7040: Done
+TMUCTF{50_y0u_kn0w_50m37h1n6_4b0u7_f0rm47_57r1n6_0xf7e11340}

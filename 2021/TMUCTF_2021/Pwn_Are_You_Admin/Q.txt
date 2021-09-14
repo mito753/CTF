@@ -1,0 +1,8 @@
+Challenge
+83 Solves
+Are You Admin?
+198
+Just admin can get the flag! Note that the admin likes integers!
+
+nc 194.5.207.113 7020, nc 185.97.117.19 7020
+Flag

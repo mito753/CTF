@@ -1,0 +1,8 @@
+Challenge
+47 Solves
+Canary
+405
+Welcome to our String Comparison System! It gets two strings as input and compares them. You cannot inject any shellcode into our system because a canary protects it.
+
+nc 194.5.207.113 7030, nc 185.97.117.19 7030
+Flag

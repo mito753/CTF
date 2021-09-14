@@ -1,0 +1,58 @@
+Challenge
+45 Solves
+Security Code
+413
+Can you print the flag?
+
+nc 185.235.41.205 7040, nc 185.97.118.167 7040
+Flag
+
+
+Challenge
+45 Solves
+Name	Date
+m1t0	a day ago
+Blitzkrieg(AU)	a day ago
+Shikataganai	a day ago
+Hagh Goyan	a day ago
+AbyssalCruelty	a day ago
+exec /bin/sh	a day ago
+PwN_3v3rY7h1nG	a day ago
+Acceleration	a day ago
+0nlyFlags	a day ago
+Red Knights	a day ago
+thehackerscrew	a day ago
+armitage	a day ago
+XONLAO	a day ago
+boiprcvn3	a day ago
+tepschu	21 hours ago
+4LEARN	21 hours ago
+POV i primi CTF	20 hours ago
+Deathpore	20 hours ago
+GEB2L	20 hours ago
+Canlex	20 hours ago
+k	19 hours ago
+Scavenger Security	19 hours ago
+PwningOfficers	19 hours ago
+ri5e	19 hours ago
+Love-SSW	18 hours ago
+s3cr3t	18 hours ago
+epta	17 hours ago
+pobateam	17 hours ago
+AntiBuddies	17 hours ago
+16j	17 hours ago
+105	17 hours ago
+Infinite loop	16 hours ago
+SOT	15 hours ago
+K3RN3L4RMY	15 hours ago
+kirito	15 hours ago
+Weak But Leet	15 hours ago
+SEKTE GADENG	14 hours ago
+acdwas	14 hours ago
+s3qu3nc3	9 hours ago
+bootplug	8 hours ago
+yodak	5 hours ago
+coldboots	5 hours ago
+AMJAC	2 hours ago
+nushmallows	an hour ago
+[sqrt(-1) + 1]	23 minutes ago
