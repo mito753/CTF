@@ -254,3 +254,5 @@ drwxr-xr-x  2 0 0    4096 Sep 12 04:33 lib64
 $ cat flag.txt
 COMPFEST13{I_us3_st4Ck_p1v0T1ng_How_bouT_Y0u_dd4dfcc265}
 ```
+
+I also wrote an Exploit code (`solve_stackpivot.py`) that uses the sell function.
