@@ -19,7 +19,6 @@ shop-manager-master-public.zip
 ## Analysis:
 
 The menu is as follows, and this binary has `Add`, `Delete`, `Edit`, `List`, `Sell` functions.
-
 ```
 Menu:
 1. Add item
@@ -29,6 +28,14 @@ Menu:
 5. Sell item
 6. Exit
 ```
+
+Since libc uses libc-2.27.so, I execute this binaries on Ubuntu 18.04 in my local environment.
+```
+-rwxr-xr-x 1 mito mito   13168 Sep  1 21:37 chall
+-rwxr-xr-x 1 mito mito  179152 Sep  1 21:37 ld-2.27.so
+-rwxr-xr-x 1 mito mito 2030928 Sep  1 21:37 libc-2.27.so
+```
+
 The `Item name` input for the `Add` and `Edit` functions uses `__isoc99_scanf("%s", buf)`. Therefore, it has a heap buffer overflow vulnerability because it does not check the size of the input string.
 
 Below is the compile result of `addItem()` by Ghidra.
