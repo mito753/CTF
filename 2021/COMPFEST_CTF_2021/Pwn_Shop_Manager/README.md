@@ -255,4 +255,4 @@ $ cat flag.txt
 COMPFEST13{I_us3_st4Ck_p1v0T1ng_How_bouT_Y0u_dd4dfcc265}
 ```
 
-I also wrote an Exploit code (`solve_stackpivot.py`) that uses the sell function.
+I also wrote an Exploit code (`solve_stackpivot.py`) that uses the sell function after the competition.
