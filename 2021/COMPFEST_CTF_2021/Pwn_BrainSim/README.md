@@ -75,7 +75,7 @@ Since the range of the value of data pointer`mp` is not checked when executing t
 
 ## Solution:
 
-First I used `.,[>.,]` To leak the stack address (mp = 0 address).
+First I used `.,[>.,]` to leak the stack address (mp = 0 address).
 
 ```
 0x7fffffffddb0:	0x0000000000000000	0x0000000000000000
