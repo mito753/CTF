@@ -16,7 +16,7 @@ imdeghost.zip
 
 ## Analysis:
 
-When I checked with the author, my solution was not an assumed solution, but I was able to solve it in a simpler way than the assumed solution.
+When I checked with the author after the competition, my solution was not an assumed solution, but I was able to solve it in a simpler way than the assumed solution.
 
 Regarding the shellcode challenge caused by ROP, the system calls of `mmap, mprotect, execve, remap_file_pages, execveat, and pkey_mprotect` were prohibited by seccomp. 
 
