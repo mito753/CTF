@@ -1,0 +1,166 @@
+mito@ubuntu:~/CTF/PBjar_CTF_2021/Pwn_ImDeGhost/imdeghost$ seccomp-tools dump ./imdeghost 
+You only see a ghost for a second, what was once there disappears in an instant, like a quick breeze in a still autumn forest.
+Many people will say it was never there, but cherish your encounter, for you will not be seeing it again.
+aaaaaaaaaaaa
+ line  CODE  JT   JF      K
+=================================
+ 0000: 0x20 0x00 0x00 0x00000004  A = arch
+ 0001: 0x15 0x00 0x0a 0xc000003e  if (A != ARCH_X86_64) goto 0012
+ 0002: 0x20 0x00 0x00 0x00000000  A = sys_number
+ 0003: 0x35 0x00 0x01 0x40000000  if (A < 0x40000000) goto 0005
+ 0004: 0x15 0x00 0x07 0xffffffff  if (A != 0xffffffff) goto 0012
+ 0005: 0x15 0x06 0x00 0x00000009  if (A == mmap) goto 0012
+ 0006: 0x15 0x05 0x00 0x0000000a  if (A == mprotect) goto 0012
+ 0007: 0x15 0x04 0x00 0x0000003b  if (A == execve) goto 0012
+ 0008: 0x15 0x03 0x00 0x000000d8  if (A == remap_file_pages) goto 0012
+ 0009: 0x15 0x02 0x00 0x00000142  if (A == execveat) goto 0012
+ 0010: 0x15 0x01 0x00 0x00000149  if (A == pkey_mprotect) goto 0012
+ 0011: 0x06 0x00 0x00 0x7fff0000  return ALLOW
+ 0012: 0x06 0x00 0x00 0x00000000  return KILL
+
+gdb-peda$ vmmap
+Start              End                Perm	Name
+0x0000006900000000 0x0000006900001000 rw-p	mapped
+0x0000133700000000 0x0000133700001000 --xp	mapped
+0x0000555555554000 0x0000555555555000 r--p	/home/mito/CTF/PBjar_CTF_2021/Pwn_ImDeGhost/imdeghost/imdeghost
+0x0000555555555000 0x0000555555556000 r-xp	/home/mito/CTF/PBjar_CTF_2021/Pwn_ImDeGhost/imdeghost/imdeghost
+0x0000555555556000 0x0000555555557000 r--p	/home/mito/CTF/PBjar_CTF_2021/Pwn_ImDeGhost/imdeghost/imdeghost
+0x0000555555557000 0x0000555555558000 r--p	/home/mito/CTF/PBjar_CTF_2021/Pwn_ImDeGhost/imdeghost/imdeghost
+0x0000555555558000 0x0000555555559000 rw-p	/home/mito/CTF/PBjar_CTF_2021/Pwn_ImDeGhost/imdeghost/imdeghost
+0x0000555555559000 0x000055555557a000 rw-p	[heap]
+0x00007ffff7d69000 0x00007ffff7d6c000 rw-p	mapped
+0x00007ffff7d6c000 0x00007ffff7d91000 r--p	/usr/lib/x86_64-linux-gnu/libc-2.31.so
+0x00007ffff7d91000 0x00007ffff7f09000 r-xp	/usr/lib/x86_64-linux-gnu/libc-2.31.so
+0x00007ffff7f09000 0x00007ffff7f53000 r--p	/usr/lib/x86_64-linux-gnu/libc-2.31.so
+0x00007ffff7f53000 0x00007ffff7f54000 ---p	/usr/lib/x86_64-linux-gnu/libc-2.31.so
+0x00007ffff7f54000 0x00007ffff7f57000 r--p	/usr/lib/x86_64-linux-gnu/libc-2.31.so
+0x00007ffff7f57000 0x00007ffff7f5a000 rw-p	/usr/lib/x86_64-linux-gnu/libc-2.31.so
+0x00007ffff7f5a000 0x00007ffff7f5e000 rw-p	mapped
+0x00007ffff7f5e000 0x00007ffff7f86000 r--p	/usr/lib/x86_64-linux-gnu/libseccomp.so.2.4.3
+0x00007ffff7f86000 0x00007ffff7f91000 r-xp	/usr/lib/x86_64-linux-gnu/libseccomp.so.2.4.3
+0x00007ffff7f91000 0x00007ffff7f95000 r--p	/usr/lib/x86_64-linux-gnu/libseccomp.so.2.4.3
+0x00007ffff7f95000 0x00007ffff7fb0000 r--p	/usr/lib/x86_64-linux-gnu/libseccomp.so.2.4.3
+0x00007ffff7fb0000 0x00007ffff7fb1000 rw-p	/usr/lib/x86_64-linux-gnu/libseccomp.so.2.4.3
+0x00007ffff7fb1000 0x00007ffff7fb3000 rw-p	mapped
+0x00007ffff7fcb000 0x00007ffff7fce000 r--p	[vvar]
+0x00007ffff7fce000 0x00007ffff7fcf000 r-xp	[vdso]
+0x00007ffff7fcf000 0x00007ffff7fd0000 r--p	/usr/lib/x86_64-linux-gnu/ld-2.31.so
+0x00007ffff7fd0000 0x00007ffff7ff3000 r-xp	/usr/lib/x86_64-linux-gnu/ld-2.31.so
+0x00007ffff7ff3000 0x00007ffff7ffb000 r--p	/usr/lib/x86_64-linux-gnu/ld-2.31.so
+0x00007ffff7ffc000 0x00007ffff7ffd000 r--p	/usr/lib/x86_64-linux-gnu/ld-2.31.so
+0x00007ffff7ffd000 0x00007ffff7ffe000 rw-p	/usr/lib/x86_64-linux-gnu/ld-2.31.so
+0x00007ffff7ffe000 0x00007ffff7fff000 rw-p	mapped
+0x00007ffffffde000 0x00007ffffffff000 rw-p	[stack]
+0xffffffffff600000 0xffffffffff601000 --xp	[vsyscall]
+
+[----------------------------------registers-----------------------------------]
+RAX: 0x12 
+RBX: 0x0 
+RCX: 0x13370000004d (test   r14,r14)
+RDX: 0x0 
+RSI: 0x0 
+RDI: 0x0 
+RBP: 0x0 
+RSP: 0x6900000000 ('a' <repeats 17 times>, "\n")
+RIP: 0x133700000055 (ret)
+R8 : 0x0 
+R9 : 0x0 
+R10: 0x0 
+R11: 0x246 
+R12: 0x0 
+R13: 0x0 
+R14: 0x0 
+R15: 0x12
+EFLAGS: 0x10246 (carry PARITY adjust ZERO sign trap INTERRUPT direction overflow)
+[-------------------------------------code-------------------------------------]
+   0x13370000004d:	test   r14,r14
+   0x133700000050:	jne    0x13370000003e
+   0x133700000052:	mov    rax,r15
+=> 0x133700000055:	ret    
+   0x133700000056:	add    BYTE PTR [rax],al
+   0x133700000058:	add    BYTE PTR [rax],al
+   0x13370000005a:	add    BYTE PTR [rax],al
+   0x13370000005c:	add    BYTE PTR [rax],al
+[------------------------------------stack-------------------------------------]
+0000| 0x6900000000 ('a' <repeats 17 times>, "\n")
+0008| 0x6900000008 ("aaaaaaaaa\n")
+0016| 0x6900000010 --> 0xa61 ('a\n')
+0024| 0x6900000018 --> 0x0 
+0032| 0x6900000020 --> 0x0 
+0040| 0x6900000028 --> 0x0 
+0048| 0x6900000030 --> 0x0 
+0056| 0x6900000038 --> 0x0 
+[------------------------------------------------------------------------------]
+Legend: code, data, rodata, value
+Stopped reason: SIGSEGV
+0x0000133700000055 in ?? ()
+
+0x00000000000014b4: pop r12; pop r13; pop r14; pop r15; ret; 
+0x00000000000014b6: pop r13; pop r14; pop r15; ret; 
+0x00000000000014b8: pop r14; pop r15; ret; 
+0x00000000000014ba: pop r15; ret; 
+0x00000000000014b3: pop rbp; pop r12; pop r13; pop r14; pop r15; ret; 
+0x00000000000014b7: pop rbp; pop r14; pop r15; ret; 
+0x0000000000001454: pop rbp; clc; leave; ret; 
+0x000000000000118f: pop rbp; ret; 
+0x00000000000014bb: pop rdi; ret; 
+0x00000000000014b9: pop rsi; pop r15; ret; 
+0x00000000000014b5: pop rsp; pop r13; pop r14; pop r15; ret; 
+0x00000000000012a8: leave; ret; 
+0x00000000000012a7: nop; leave; ret; 
+0x0000000000001016: ret; 
+
+=> 0x13370000004b:	syscall 
+   0x13370000004d:	test   r14,r14
+   0x133700000050:	jne    0x13370000003e
+   0x133700000052:	mov    rax,r15
+   0x133700000055:	ret
+
+db-peda$ x/30i 0x133700000000
+=> 0x133700000000:	mov    r15,rdi
+   0x133700000003:	xor    rax,rax
+   0x133700000006:	xor    rbx,rbx
+   0x133700000009:	xor    rcx,rcx
+   0x13370000000c:	xor    rdx,rdx
+   0x13370000000f:	xor    rdi,rdi
+   0x133700000012:	xor    rsi,rsi
+   0x133700000015:	xor    rbp,rbp
+   0x133700000018:	xor    r8,r8
+   0x13370000001b:	xor    r9,r9
+   0x13370000001e:	xor    r10,r10
+   0x133700000021:	xor    r11,r11
+   0x133700000024:	xor    r12,r12
+   0x133700000027:	xor    r13,r13
+   0x13370000002a:	xor    r14,r14
+   0x13370000002d:	movabs rsp,0x6900000000
+   0x133700000037:	mov    r14,0x3
+   0x13370000003e:	dec    r14
+   0x133700000041:	mov    rdi,r14
+   0x133700000044:	mov    rax,0x3
+   0x13370000004b:	syscall 
+   0x13370000004d:	test   r14,r14
+   0x133700000050:	jne    0x13370000003e
+   0x133700000052:	mov    rax,r15
+   0x133700000055:	ret    
+
+gdb-peda$ x/80gx 0x0000133700000000
+0x133700000000:	0x3148c03148ff8949	0x48d23148c93148db
+0x133700000010:	0xed3148f63148ff31	0x314dc9314dc0314d
+0x133700000020:	0x4de4314ddb314dd2	0x00bc48f6314ded31
+0x133700000030:	0x4900000069000000	0xff4900000003c6c7
+0x133700000040:	0x03c0c748f7894cce	0xf6854d050f000000
+0x133700000050:	0x0000c3f8894cec75	0x0000000000000000
+0x133700000060:	0x0000000000000000	0x0000000000000000
+0x133700000070:	0x0000000000000000	0x0000000000000000
+
+   0x13370000003f:	dec    esi
+   0x133700000041:	mov    rdi,r14
+   0x133700000044:	mov    rax,0x3
+
+   0x133700000042:	mov    edi,esi
+
+   0x13370000004a:	add    BYTE PTR [rdi],cl
+   0x13370000004c:	add    eax,0x75f6854d
+   0x133700000051:	in     al,dx
+   0x133700000052:	mov    rax,r15
+=> 0x133700000055:	ret    

@@ -1,0 +1,45 @@
+gdb-peda$ vmmap
+Start              End                Perm	Name
+0x00400000         0x00401000         r--p	/home/mito/CTF/PBjar_CTF_2021/Pwn_Walkthrough/walkthrough/walkthrough
+0x00401000         0x00402000         r-xp	/home/mito/CTF/PBjar_CTF_2021/Pwn_Walkthrough/walkthrough/walkthrough
+0x00402000         0x00405000         r--p	/home/mito/CTF/PBjar_CTF_2021/Pwn_Walkthrough/walkthrough/walkthrough
+0x00405000         0x00406000         r--p	/home/mito/CTF/PBjar_CTF_2021/Pwn_Walkthrough/walkthrough/walkthrough
+0x00406000         0x00407000         rw-p	/home/mito/CTF/PBjar_CTF_2021/Pwn_Walkthrough/walkthrough/walkthrough
+0x00407000         0x00428000         rw-p	[heap]
+0x00007ffff7dbf000 0x00007ffff7de4000 r--p	/usr/lib/x86_64-linux-gnu/libc-2.31.so
+0x00007ffff7de4000 0x00007ffff7f5c000 r-xp	/usr/lib/x86_64-linux-gnu/libc-2.31.so
+0x00007ffff7f5c000 0x00007ffff7fa6000 r--p	/usr/lib/x86_64-linux-gnu/libc-2.31.so
+0x00007ffff7fa6000 0x00007ffff7fa7000 ---p	/usr/lib/x86_64-linux-gnu/libc-2.31.so
+0x00007ffff7fa7000 0x00007ffff7faa000 r--p	/usr/lib/x86_64-linux-gnu/libc-2.31.so
+0x00007ffff7faa000 0x00007ffff7fad000 rw-p	/usr/lib/x86_64-linux-gnu/libc-2.31.so
+0x00007ffff7fad000 0x00007ffff7fb3000 rw-p	mapped
+0x00007ffff7fcb000 0x00007ffff7fce000 r--p	[vvar]
+0x00007ffff7fce000 0x00007ffff7fcf000 r-xp	[vdso]
+0x00007ffff7fcf000 0x00007ffff7fd0000 r--p	/usr/lib/x86_64-linux-gnu/ld-2.31.so
+0x00007ffff7fd0000 0x00007ffff7ff3000 r-xp	/usr/lib/x86_64-linux-gnu/ld-2.31.so
+0x00007ffff7ff3000 0x00007ffff7ffb000 r--p	/usr/lib/x86_64-linux-gnu/ld-2.31.so
+0x00007ffff7ffb000 0x00007ffff7ffc000 rw-p	mapped
+0x00007ffff7ffc000 0x00007ffff7ffd000 r--p	/usr/lib/x86_64-linux-gnu/ld-2.31.so
+0x00007ffff7ffd000 0x00007ffff7ffe000 rw-p	/usr/lib/x86_64-linux-gnu/ld-2.31.so
+0x00007ffff7ffe000 0x00007ffff7fff000 rw-p	mapped
+0x00007ffffffde000 0x00007ffffffff000 rw-p	[stack]
+0xffffffffff600000 0xffffffffff601000 --xp	[vsyscall]
+
+gdb-peda$ x/80gx 0x7fffffffdf00
+0x7fffffffdf00:	0x0000000000000000	0x0000000000000000
+0x7fffffffdf10:	0x0000000000000000	0x00007ffff7e45c2e
+0x7fffffffdf20:	0x0000000000401e40	0x0000000000401e40
+0x7fffffffdf30:	0x00007fffffffdfb0	0x00000000004010f0
+0x7fffffffdf40:	0x00007fffffffe0b0	0x000000000040147d
+0x7fffffffdf50:	0x0000000000000000	0x00007ffff7e53013
+0x7fffffffdf60:	0x4141414141414141	0x4141414141414141
+0x7fffffffdf70:	0x0000000000414141	0x00007ffff7e4671a
+0x7fffffffdf80:	0x0000000000401e40	0x00007fffffffdfb0
+0x7fffffffdf90:	0x00000000004010f0	0x00007fffffffe0b0
+0x7fffffffdfa0:	0x0000000000000000	0x321d8753097de300
+0x7fffffffdfb0:	0x00007fffffffdfc0	0x0000000000401e23
+0x7fffffffdfc0:	0x0000000000000000	0x00007ffff7de60b3
+0x7fffffffdfd0:	0x00007ffff7ffc620	0x00007fffffffe0b8
+0x7fffffffdfe0:	0x0000000100000000	0x0000000000401da0
+0x7fffffffdff0:	0x0000000000401e40	0xcb079c16f239748d
+0x7fffffffe000:	0x00000000004010f0	0x00007fffffffe0b0

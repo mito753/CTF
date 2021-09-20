@@ -1,0 +1,10 @@
+gdb-peda$ run
+Starting program: /home/mito/CTF/PBjar_CTF_2021/Pwn_1409F/1409F/1409F 
+2
+1
+yyzzzzzzzzzzzzzzzzzzzzzzzzzzzz
+2054847098
+
+
+123456789012345678901234567890
+yyzzzzzzzzzzzzzzzzzzzzzzzzzzzz

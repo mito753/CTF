@@ -1,0 +1,9 @@
+FmtStr
+Rythm
+8 solves / 465 points
+
+Just how powerful can a bad printf call be? Connect with "nc 143.198.127.103 42002".
+Flag
+Downloads
+
+fmtstr.zip

