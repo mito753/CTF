@@ -122,7 +122,7 @@ https://github.com/pbjar/Challenges/blob/main/Pwn/imdeghost/imdeghost.py
 Thanks to Rythm for the interesting challenges and post-competition supports.
 
 ## Exploit code:
-Python code to get the file name (If you get it from the server, you need to set NAT etc. separately.)
+Python code to get the file name (If you get it from the server, you need to set NAT etc on your router.)
 ```python
 from pwn import *
 
@@ -188,7 +188,7 @@ s.send(buf)
 s.interactive()
 ```
 
-Python code to get the flag file (If you get it from the server, you need to set NAT etc. separately.)
+Python code to get the flag file (If you get it from the server, you need to set NAT etc on your router.)
 ```python
 from pwn import *
 
