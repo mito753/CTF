@@ -22,6 +22,7 @@ This binary can be input 3 times, the first time(`Input 1`) it is output with `p
 However, since this binary is `Full RELRO`, `GOT` cannot be rewritten with `FSB`. The method of rewriting the return address with `FSB` does not have enough read input size.
 Also, since the third input is written to the area allocated by `malloc` in the heap, the address that can be used by `FSB` cannot be specified.
 
+Below is the compilation result of the main () function by `Ghidra`.
 ```c
 undefined8 main(void)
 
