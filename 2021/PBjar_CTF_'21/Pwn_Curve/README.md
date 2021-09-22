@@ -79,7 +79,7 @@ BBBBBBBB,0x55555555a2a0,0x80,0x7ffff7ef5e8e,0xa,0x7ffff7fc5be0,(nil),0x55555555a
 
 ## Solution:
 
-First, the libc address leak can be done by entering a `0x98` size string in` Input 1` to leak the address `__libc_start_main + 234`. We can calculate the base address of libc.
+First, the libc address leak can be done by entering a `0x98` size string in `Input 1` to leak the address `__libc_start_main + 234`. We can calculate the base address of libc.
 
 ```bash
 gdb-peda$ x/80gx 0x7fffffffdec0
