@@ -98,7 +98,7 @@ gdb-peda$ x/80gx 0x7fffffffdec0
 ```
 
 Shell startup uses the `free (__ format)` call at the end of the binary. I use FSB to write the address of the `system` function in `__free_hook`.
-At this time, first write `/bin/sh` so that it is in the form of `free('/bin/sh; FSB string')`. Then, when we call free (), it will be in the form of `system(`/bin/sh; ...')`, so we can start the shell.
+At this time, first write `/bin/sh` so that it is in the form of `free('/bin/sh; FSB string')`. Then, when we call free (), it will be in the form of `system(/bin/sh; ...')`, so we can start the shell.
 
 Also, `Input 2` writes the address of `__free_hook`, and `INPUT 3` writes the character string of `FSB`. Since the input size of `Input 2` and` Input 3` is as large as `0x80`, we can write the same character string created by `fmtstr_payload` to `Input 2` and` Input 3` as shown below.
 
