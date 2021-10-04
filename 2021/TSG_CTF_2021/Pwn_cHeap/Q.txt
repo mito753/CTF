@@ -1,0 +1,13 @@
+
+cHeap 176pts
+28 solves - easy
+28 solves
+ JA /  EN
+Author: @moratorium08
+
+babyheapとしても知られている
+
+nc 34.146.101.4 30001
+
+ cheap.tar.gz
+TSGCTF{......}
