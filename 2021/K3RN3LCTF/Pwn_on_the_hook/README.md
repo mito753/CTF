@@ -76,10 +76,15 @@ Since Got overlay is not possible, I considered the following two methods, but I
 --Launch `/bin/sh` by writing One gadget to __malloc_hook
 
 The Exploit code has done the following steps:
+
 (1) Leak the Stack address using FSB to identify the return address
+
 (2) Libc address leak using FSB to identify the address of the system function
+
 (3) Using the ROP gadget of "add esp, 0x100; ret", write the address of the system function to the stack of the address where the return address to the main function is written + 0x104 bytes.
+
 (4) As in (3), write the address of `/bin/sh` to the stack of the address where the return address to the main function is written + 0x10c bytes.
+
 (5) Rewrite the return address that returns from printf to the main function to the address of "add esp, 0x100; ret".
 
 When returning from printf to the main function in the above procedure, system ('/ bin / sh') can be started after "add esp, 0x100; ret".
