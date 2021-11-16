@@ -1,0 +1,10 @@
+on_the_hook (499pts) - 4 solves
+by Bex
+Description
+Captain Malloc lost his hook find it and than grab a shell for your effort.
+
+nc ctf.k3rn3l4rmy.com 2201
+
+Attachments
+https://ctf.k3rn3l4rmy.com/kernelctf-distribution-challs/on_the_hook/on_the_hook https://ctf.k3rn3l4rmy.com/kernelctf-distribution-challs/on_the_hook/libc.so.6
+

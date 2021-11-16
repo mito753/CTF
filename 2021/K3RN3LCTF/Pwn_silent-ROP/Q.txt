@@ -1,0 +1,10 @@
+silent-ROP (496pts) - 7 solves
+by Bex
+Description
+SILENCE ... can you still pwn this ? (no output is intended)
+
+nc ctf.k3rn3l4rmy.com 2202
+
+Attachments
+https://ctf.k3rn3l4rmy.com/kernelctf-distribution-challs/silent-ROP/silent-ROP https://ctf.k3rn3l4rmy.com/kernelctf-distribution-challs/silent-ROP/libc.so.6
+
