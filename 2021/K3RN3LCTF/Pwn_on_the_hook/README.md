@@ -18,7 +18,7 @@ https://ctf.k3rn3l4rmy.com/kernelctf-distribution-challs/on_the_hook/libc.so.6
 
 ## Analysis:
 
-This binary is clearly vulnerable to FSB (Format String Bug). The binary uses a While Loop, so we can use the FSB 5 times.
+This binary is clearly vulnerable to FSB (Format String Bug). The binary uses a while Loop, so we can use the FSB 5 times.
 However, because it is Full Relro, GOT overwrite cannot be performed, and the main function ends with exit (0), so the return address of the main function cannot be changed.
 
 
