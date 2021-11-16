@@ -25,8 +25,8 @@ However, because it is Full Relro, GOT overwrite cannot be performed, and the ma
 ```c
 $ ./on_the_hook 
 echo:
-%p,%p,%p
-0x40,0xf7fa65a0,0x8049292     <---- FSB
+AAAA,%p,%p,%p,%p,%p,%p,%p,%p
+AAAA,0x40,0xf7fa65a0,0x8049292,(nil),0xffffd223,0x1,0x41414141,0x2c70252c     <---- FSB
 ```
 
 ```c
@@ -58,7 +58,7 @@ void main(void)
   local_58 = 1;
   while (local_58 < 6) {
     fgets(local_54,0x40,stdin);
-    printf(local_54);
+    printf(local_54);                <------------ FSB
     local_58 = local_58 + 1;
   }
                     /* WARNING: Subroutine does not return */
