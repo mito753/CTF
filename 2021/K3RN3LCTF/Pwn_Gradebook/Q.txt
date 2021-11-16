@@ -1,4 +1,4 @@
-Gradebook (495pts) - 8 solves
+Gradebook (454pts) - 24 solves
 by Playoff-Rondo
 Description
 My teachers been using a commandline gradebook made by a first year student, must be vulnerable somehow.
@@ -9,4 +9,3 @@ Attachments
 https://ctf.k3rn3l4rmy.com/kernelctf-distribution-challs/gradebook/gradebook
 
 https://ctf.k3rn3l4rmy.com/kernelctf-distribution-challs/gradebook/libc.so.6
-
