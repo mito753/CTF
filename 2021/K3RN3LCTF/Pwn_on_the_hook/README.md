@@ -70,8 +70,10 @@ void main(void)
 ## Solution:
 
 Since Got overlay is not possible, I considered the following two methods, but I used the former method. See the code in `solve_malloc_hook.py` for the latter.
---How to call system (/ bin / sh) by Stack pivot by rewriting the return address of printf
---Initiating a shell by writing One gadget to __malloc_hook
+
+--Call system('/bin/sh') by Stack pivot by rewriting the return address of printf
+
+--Launch `/bin/sh` by writing One gadget to __malloc_hook
 
 The Exploit code has done the following steps:
 (1) Leak the Stack address using FSB to identify the return address
