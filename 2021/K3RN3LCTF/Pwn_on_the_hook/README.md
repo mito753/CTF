@@ -75,6 +75,7 @@ Since Got overlay is not possible, I considered the following two methods, but I
 
 --Launch `/bin/sh` by writing One gadget to __malloc_hook
 
+
 The Exploit code has done the following steps:
 
 (1) Leak the Stack address using FSB to identify the return address
@@ -87,7 +88,7 @@ The Exploit code has done the following steps:
 
 (5) Rewrite the return address that returns from printf to the main function to the address of "add esp, 0x100; ret".
 
-When returning from printf to the main function in the above procedure, system ('/ bin / sh') can be started after "add esp, 0x100; ret".
+When returning from printf to the main function in the above procedure, system ('/bin/sh') can be started after "add esp, 0x100; ret".
 
 
 The address of Stack pivot is obtained below.
