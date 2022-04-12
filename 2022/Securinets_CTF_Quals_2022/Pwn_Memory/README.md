@@ -13,7 +13,7 @@
 
 
 ### C code:
-以下はGhidraを用いて`main`関数をデコンパイルした結果です。
+以下は`Ghidra`を用いて`main`関数をデコンパイルした結果です。
 ```c
 void main(void)
 
