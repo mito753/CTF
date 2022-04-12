@@ -1,0 +1,11 @@
+Challenge
+32 Solves
+FTP
+914
+Can you try my new FTP server ?
+
+nc 20.216.39.14 1234
+
+https://drive.google.com/file/d/11gl3AeGKn1v3bnwkvQt6iK1VqAdQ6S5N/view?usp=sharing
+
+Securinets{.*}
