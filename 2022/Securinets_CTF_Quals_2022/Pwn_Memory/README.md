@@ -156,8 +156,11 @@ pwndbg> x/80gx 0x555555558000
 ## Solution:
 
 dwrite()を使用して、tcachebinsのリンクを置き換えることで、比較的容易にlibcアドレスの取得と__free_hookの書き換えができる。
+
 dallocate()でnull終端してないのでヒープアドレスのリークも簡単にできる。
+
 seccompでシステムコールが制限されているので、setcontext関数などを試みたが、使えるROPガジェットがなかなか見つからなかった。
+
 `mov rdx, qword ptr [rdi + 8]; mov qword ptr [rsp], rax; call qword ptr [rdx + 0x20];`とsetcontext関数のROPガジェットを用いることでヒープメモリをスタックにしてROPにすることができた。
 
 
