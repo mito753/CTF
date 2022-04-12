@@ -156,8 +156,9 @@ pwndbg> x/80gx 0x555555558000
 ## Solution:
 Exploitのポイントは下記になります。
 
+* `dallocate()`でnull終端してないのでヒープアドレスのリークは簡単にできます
 * `dwrite()`を使用して、`tcachebins`のリンクを置き換えることで、比較的容易にlibcアドレスの取得と`__free_hook`の書き換えができます。
-* `dallocate()`でnull終端してないのでヒープアドレスのリークも簡単にできます。
+* `seccomp`でシステムコールが制限されているため`system`関数が使えません。
 * `mov rdx, qword ptr [rdi + 8]; mov qword ptr [rsp], rax; call qword ptr [rdx + 0x20];`と`setcontext`関数のROPガジェットを用いることでヒープメモリをスタックにしてROPにすることができます。
 
 以下にExploitの手順について簡単に説明します。
@@ -285,7 +286,7 @@ tcachebins
 0xd0 [  5]: 0x55555555a190 —▸ 0x555555559e60 —▸ 0x555555559b30 —▸ 0x555555559800 —▸ 0x555555559370 ◂— 0x0
 ```
 
-`__free_hook`には`seccomp`でシステムコールが制限されているため`system`関数が使えない。そのためROPにする必要があるが、`setcontext`関数で使用するレジスタが`rdx`に変更になっているため、直接は使用できません。
+`seccomp`でシステムコールが制限されているため`system`関数が使えません。そのためROPにする必要があるが、`setcontext`関数で使用するレジスタがlibc-2.31.soでは`rdx`に変更になっているため、`setcontext`関数を直接使用できません。
 
 他には`push rdi; ... ;pop rsp;...;ret;`のROPガジェットを探したが、利用できるものはありませんでした。
 
