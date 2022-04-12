@@ -1,0 +1,219 @@
+mito@ubuntu:~/CTF/Securinets_CTF_Quals_2022/Pwn_Memory$ seccomp-tools dump ./memory
+ line  CODE  JT   JF      K
+=================================
+ 0000: 0x20 0x00 0x00 0x00000004  A = arch
+ 0001: 0x15 0x00 0x09 0xc000003e  if (A != ARCH_X86_64) goto 0011
+ 0002: 0x20 0x00 0x00 0x00000000  A = sys_number
+ 0003: 0x35 0x00 0x01 0x40000000  if (A < 0x40000000) goto 0005
+ 0004: 0x15 0x00 0x06 0xffffffff  if (A != 0xffffffff) goto 0011
+ 0005: 0x15 0x04 0x00 0x00000000  if (A == read) goto 0010
+ 0006: 0x15 0x03 0x00 0x00000001  if (A == write) goto 0010
+ 0007: 0x15 0x02 0x00 0x00000002  if (A == open) goto 0010
+ 0008: 0x15 0x01 0x00 0x0000000a  if (A == mprotect) goto 0010
+ 0009: 0x15 0x00 0x01 0x000000e7  if (A != exit_group) goto 0011
+ 0010: 0x06 0x00 0x00 0x7fff0000  return ALLOW
+ 0011: 0x06 0x00 0x00 0x00000000  return KILL
+
+pwndbg> vmmap
+LEGEND: STACK | HEAP | CODE | DATA | RWX | RODATA
+    0x555555554000     0x555555555000 r--p     1000 0      /home/mito/CTF/Securinets_CTF_Quals_2022/Pwn_Memory
+    0x555555555000     0x555555556000 r-xp     1000 1000   /home/mito/CTF/Securinets_CTF_Quals_2022/Pwn_Memory
+    0x555555556000     0x555555557000 r--p     1000 2000   /home/mito/CTF/Securinets_CTF_Quals_2022/Pwn_Memory
+    0x555555557000     0x555555558000 r--p     1000 2000   /home/mito/CTF/Securinets_CTF_Quals_2022/Pwn_Memory
+    0x555555558000     0x555555559000 rw-p     1000 3000   /home/mito/CTF/Securinets_CTF_Quals_2022/Pwn_Memory
+    0x555555559000     0x55555557a000 rw-p    21000 0      [heap]
+    0x7ffff7d9c000     0x7ffff7d9f000 rw-p     3000 0      [anon_7ffff7d9c]
+    0x7ffff7d9f000     0x7ffff7dc1000 r--p    22000 0      /usr/lib/x86_64-linux-gnu/libc-2.31.so
+    0x7ffff7dc1000     0x7ffff7f39000 r-xp   178000 22000  /usr/lib/x86_64-linux-gnu/libc-2.31.so
+    0x7ffff7f39000     0x7ffff7f87000 r--p    4e000 19a000 /usr/lib/x86_64-linux-gnu/libc-2.31.so
+    0x7ffff7f87000     0x7ffff7f8b000 r--p     4000 1e7000 /usr/lib/x86_64-linux-gnu/libc-2.31.so
+    0x7ffff7f8b000     0x7ffff7f8d000 rw-p     2000 1eb000 /usr/lib/x86_64-linux-gnu/libc-2.31.so
+    0x7ffff7f8d000     0x7ffff7f91000 rw-p     4000 0      [anon_7ffff7f8d]
+    0x7ffff7f91000     0x7ffff7f93000 r--p     2000 0      /usr/lib/x86_64-linux-gnu/libseccomp.so.2.5.1
+    0x7ffff7f93000     0x7ffff7fa2000 r-xp     f000 2000   /usr/lib/x86_64-linux-gnu/libseccomp.so.2.5.1
+    0x7ffff7fa2000     0x7ffff7fb0000 r--p     e000 11000  /usr/lib/x86_64-linux-gnu/libseccomp.so.2.5.1
+    0x7ffff7fb0000     0x7ffff7fb1000 ---p     1000 1f000  /usr/lib/x86_64-linux-gnu/libseccomp.so.2.5.1
+    0x7ffff7fb1000     0x7ffff7fb2000 r--p     1000 1f000  /usr/lib/x86_64-linux-gnu/libseccomp.so.2.5.1
+    0x7ffff7fb2000     0x7ffff7fb3000 rw-p     1000 20000  /usr/lib/x86_64-linux-gnu/libseccomp.so.2.5.1
+    0x7ffff7fb3000     0x7ffff7fb5000 rw-p     2000 0      [anon_7ffff7fb3]
+    0x7ffff7fcb000     0x7ffff7fce000 r--p     3000 0      [vvar]
+    0x7ffff7fce000     0x7ffff7fcf000 r-xp     1000 0      [vdso]
+    0x7ffff7fcf000     0x7ffff7fd0000 r--p     1000 0      /usr/lib/x86_64-linux-gnu/ld-2.31.so
+    0x7ffff7fd0000     0x7ffff7ff3000 r-xp    23000 1000   /usr/lib/x86_64-linux-gnu/ld-2.31.so
+    0x7ffff7ff3000     0x7ffff7ffb000 r--p     8000 24000  /usr/lib/x86_64-linux-gnu/ld-2.31.so
+    0x7ffff7ffc000     0x7ffff7ffd000 r--p     1000 2c000  /usr/lib/x86_64-linux-gnu/ld-2.31.so
+    0x7ffff7ffd000     0x7ffff7ffe000 rw-p     1000 2d000  /usr/lib/x86_64-linux-gnu/ld-2.31.so
+    0x7ffff7ffe000     0x7ffff7fff000 rw-p     1000 0      [anon_7ffff7ffe]
+    0x7ffffffde000     0x7ffffffff000 rw-p    21000 0      [stack]
+0xffffffffff600000 0xffffffffff601000 --xp     1000 0      [vsyscall]
+
+pwndbg> x/80gx 0x555555558000
+0x555555558000:	0x0000000000000000	0x0000555555558008
+0x555555558010:	0x0000000000000000	0x0000000000000000
+0x555555558020 <stdout@@GLIBC_2.2.5>:	0x00007ffff7f8c6a0	0x0000000000000000
+0x555555558030 <stdin@@GLIBC_2.2.5>:	0x00007ffff7f8b980	0x0000000000000000
+0x555555558040 <stderr@@GLIBC_2.2.5>:	0x00007ffff7f8c5c0	0x0000000000000000
+0x555555558050 <count>:	0x00005555555592a0	0x0000000000000000
+0x555555558060:	0x0000000000000000	0x0000000000000000
+0x555555558070:	0x0000000000000000	0x0000000000000000
+0x555555558080:	0x0000000000000000	0x000000000000000
+
+pwndbg> disas setcontext
+Dump of assembler code for function setcontext:
+   0x00007ffff7df3f50 <+0>:	endbr64 
+   0x00007ffff7df3f54 <+4>:	push   rdi
+   0x00007ffff7df3f55 <+5>:	lea    rsi,[rdi+0x128]
+   0x00007ffff7df3f5c <+12>:	xor    edx,edx
+   0x00007ffff7df3f5e <+14>:	mov    edi,0x2
+   0x00007ffff7df3f63 <+19>:	mov    r10d,0x8
+   0x00007ffff7df3f69 <+25>:	mov    eax,0xe
+   0x00007ffff7df3f6e <+30>:	syscall 
+   0x00007ffff7df3f70 <+32>:	pop    rdx
+   0x00007ffff7df3f71 <+33>:	cmp    rax,0xfffffffffffff001
+   0x00007ffff7df3f77 <+39>:	jae    0x7ffff7df409f <setcontext+335>
+   0x00007ffff7df3f7d <+45>:	mov    rcx,QWORD PTR [rdx+0xe0]
+   0x00007ffff7df3f84 <+52>:	fldenv [rcx]
+   0x00007ffff7df3f86 <+54>:	ldmxcsr DWORD PTR [rdx+0x1c0]
+   0x00007ffff7df3f8d <+61>:	mov    rsp,QWORD PTR [rdx+0xa0]
+   0x00007ffff7df3f94 <+68>:	mov    rbx,QWORD PTR [rdx+0x80]
+   0x00007ffff7df3f9b <+75>:	mov    rbp,QWORD PTR [rdx+0x78]
+   0x00007ffff7df3f9f <+79>:	mov    r12,QWORD PTR [rdx+0x48]
+   0x00007ffff7df3fa3 <+83>:	mov    r13,QWORD PTR [rdx+0x50]
+   0x00007ffff7df3fa7 <+87>:	mov    r14,QWORD PTR [rdx+0x58]
+   0x00007ffff7df3fab <+91>:	mov    r15,QWORD PTR [rdx+0x60]
+   0x00007ffff7df3faf <+95>:	test   DWORD PTR fs:0x48,0x2
+   0x00007ffff7df3fbb <+107>:	je     0x7ffff7df4076 <setcontext+294>
+   0x00007ffff7df3fc1 <+113>:	mov    rsi,QWORD PTR [rdx+0x3a8]
+   0x00007ffff7df3fc8 <+120>:	mov    rdi,rsi
+   0x00007ffff7df3fcb <+123>:	mov    rcx,QWORD PTR [rdx+0x3b0]
+   0x00007ffff7df3fd2 <+130>:	cmp    rcx,QWORD PTR fs:0x78
+   0x00007ffff7df3fdb <+139>:	je     0x7ffff7df4015 <setcontext+197>
+   0x00007ffff7df3fdd <+141>:	mov    rax,QWORD PTR [rsi-0x8]
+   0x00007ffff7df3fe1 <+145>:	and    rax,0xfffffffffffffff8
+   0x00007ffff7df3fe5 <+149>:	cmp    rax,rsi
+   0x00007ffff7df3fe8 <+152>:	je     0x7ffff7df3ff0 <setcontext+160>
+   0x00007ffff7df3fea <+154>:	sub    rsi,0x8
+   0x00007ffff7df3fee <+158>:	jmp    0x7ffff7df3fdd <setcontext+141>
+   0x00007ffff7df3ff0 <+160>:	mov    rax,0x1
+   0x00007ffff7df3ff7 <+167>:	incsspq rax
+   0x00007ffff7df3ffc <+172>:	rstorssp QWORD PTR [rsi-0x8]
+   0x00007ffff7df4001 <+177>:	saveprevssp 
+   0x00007ffff7df4005 <+181>:	mov    rax,QWORD PTR [rdx+0x3b0]
+   0x00007ffff7df400c <+188>:	mov    QWORD PTR fs:0x78,rax
+   0x00007ffff7df4015 <+197>:	rdsspq rcx
+   0x00007ffff7df401a <+202>:	sub    rcx,rdi
+   0x00007ffff7df401d <+205>:	je     0x7ffff7df403c <setcontext+236>
+   0x00007ffff7df401f <+207>:	neg    rcx
+   0x00007ffff7df4022 <+210>:	shr    rcx,0x3
+   0x00007ffff7df4026 <+214>:	mov    esi,0xff
+   0x00007ffff7df402b <+219>:	cmp    rcx,rsi
+   0x00007ffff7df402e <+222>:	cmovb  rsi,rcx
+   0x00007ffff7df4032 <+226>:	incsspq rsi
+   0x00007ffff7df4037 <+231>:	sub    rcx,rsi
+   0x00007ffff7df403a <+234>:	ja     0x7ffff7df402b <setcontext+219>
+   0x00007ffff7df403c <+236>:	mov    rsi,QWORD PTR [rdx+0x70]
+   0x00007ffff7df4040 <+240>:	mov    rdi,QWORD PTR [rdx+0x68]
+   0x00007ffff7df4044 <+244>:	mov    rcx,QWORD PTR [rdx+0x98]
+   0x00007ffff7df404b <+251>:	mov    r8,QWORD PTR [rdx+0x28]
+   0x00007ffff7df404f <+255>:	mov    r9,QWORD PTR [rdx+0x30]
+   0x00007ffff7df4053 <+259>:	mov    r10,QWORD PTR [rdx+0xa8]
+   0x00007ffff7df405a <+266>:	mov    rdx,QWORD PTR [rdx+0x88]
+   0x00007ffff7df4061 <+273>:	rdsspq rax
+   0x00007ffff7df4066 <+278>:	cmp    r10,QWORD PTR [rax]
+   0x00007ffff7df4069 <+281>:	mov    eax,0x0
+   0x00007ffff7df406e <+286>:	jne    0x7ffff7df4073 <setcontext+291>
+   0x00007ffff7df4070 <+288>:	push   r10
+   0x00007ffff7df4072 <+290>:	ret    
+   0x00007ffff7df4073 <+291>:	jmp    r10
+   0x00007ffff7df4076 <+294>:	mov    rcx,QWORD PTR [rdx+0xa8]
+   0x00007ffff7df407d <+301>:	push   rcx
+   0x00007ffff7df407e <+302>:	mov    rsi,QWORD PTR [rdx+0x70]
+   0x00007ffff7df4082 <+306>:	mov    rdi,QWORD PTR [rdx+0x68]
+   0x00007ffff7df4086 <+310>:	mov    rcx,QWORD PTR [rdx+0x98]
+   0x00007ffff7df408d <+317>:	mov    r8,QWORD PTR [rdx+0x28]
+   0x00007ffff7df4091 <+321>:	mov    r9,QWORD PTR [rdx+0x30]
+   0x00007ffff7df4095 <+325>:	mov    rdx,QWORD PTR [rdx+0x88]
+   0x00007ffff7df409c <+332>:	xor    eax,eax
+   0x00007ffff7df409e <+334>:	ret    
+   0x00007ffff7df409f <+335>:	mov    rcx,QWORD PTR [rip+0x196dca]        # 0x7ffff7f8ae70
+   0x00007ffff7df40a6 <+342>:	neg    eax
+   0x00007ffff7df40a8 <+344>:	mov    DWORD PTR fs:[rcx],eax
+   0x00007ffff7df40ab <+347>:	or     rax,0xffffffffffffffff
+   0x00007ffff7df40af <+351>:	ret 
+
+────────────────────────────────────────────────────────────────────[ REGISTERS ]────────────────────────────────────────────────────────────────────
+*RAX  0x7ffff7df3f8d (setcontext+61) ◂— mov    rsp, qword ptr [rdx + 0xa0]
+ RBX  0x5555555557e0 (__libc_csu_init) ◂— endbr64 
+ RCX  0x0
+ RDX  0x5555555560c8 ◂— 0xfffff6c2fffff670
+ RDI  0x7ffff7f8de40 (__after_morecore_hook) —▸ 0x55555555b000 ◂— 0x0
+*RSI  0x5555555556ba (dfree+35) ◂— mov    qword ptr [rip + 0x2993], 0
+ R8   0xa
+ R9   0x0
+ R10  0x7ffff7f3aac0 (_nl_C_LC_CTYPE_toupper+512) ◂— 0x100000000
+ R11  0x0
+ R12  0x5555555551c0 (_start) ◂— endbr64 
+ R13  0x7fffffffe090 ◂— 0x1
+ R14  0x0
+ R15  0x0
+ RBP  0x7fffffffdf80 —▸ 0x7fffffffdfa0 ◂— 0x0
+ RSP  0x7fffffffdf78 —▸ 0x5555555556ba (dfree+35) ◂— mov    qword ptr [rip + 0x2993], 0
+*RIP  0x7ffff7df3f8d (setcontext+61) ◂— mov    rsp, qword ptr [rdx + 0xa0]
+─────────────────────────────────────────────────────────────────────[ DISASM ]──────────────────────────────────────────────────────────────────────
+ ► 0x7ffff7df3f8d <setcontext+61>     mov    rsp, qword ptr [rdx + 0xa0]   <0x555555556168>
+   0x7ffff7df3f94 <setcontext+68>     mov    rbx, qword ptr [rdx + 0x80]
+   0x7ffff7df3f9b <setcontext+75>     mov    rbp, qword ptr [rdx + 0x78]
+   0x7ffff7df3f9f <setcontext+79>     mov    r12, qword ptr [rdx + 0x48]
+   0x7ffff7df3fa3 <setcontext+83>     mov    r13, qword ptr [rdx + 0x50]
+   0x7ffff7df3fa7 <setcontext+87>     mov    r14, qword ptr [rdx + 0x58]
+   0x7ffff7df3fab <setcontext+91>     mov    r15, qword ptr [rdx + 0x60]
+   0x7ffff7df3faf <setcontext+95>     test   dword ptr fs:[0x48], 2
+   0x7ffff7df3fbb <setcontext+107>    je     setcontext+294                <setcontext+294>
+    ↓
+   0x7ffff7df4076 <setcontext+294>    mov    rcx, qword ptr [rdx + 0xa8]
+   0x7ffff7df407d <setcontext+301>    push   rcx
+──────────────────────────────────────────────────────────────────────[ STACK ]──────────────────────────────────────────────────────────────────────
+00:0000│ rsp 0x7fffffffdf78 —▸ 0x5555555556ba (dfree+35) ◂— mov    qword ptr [rip + 0x2993], 0
+01:0008│ rbp 0x7fffffffdf80 —▸ 0x7fffffffdfa0 ◂— 0x0
+02:0010│     0x7fffffffdf88 —▸ 0x5555555557b8 (main+202) ◂— jmp    0x5555555557d0
+03:0018│     0x7fffffffdf90 —▸ 0x7fffffffe090 ◂— 0x1
+04:0020│     0x7fffffffdf98 ◂— 0x400000000
+05:0028│     0x7fffffffdfa0 ◂— 0x0
+06:0030│     0x7fffffffdfa8 —▸ 0x7ffff7dc30b3 (__libc_start_main+243) ◂— mov    edi, eax
+07:0038│     0x7fffffffdfb0 —▸ 0x7ffff7ffc620 (_rtld_global_ro) ◂— 0x504a600000000
+────────────────────────────────────────────────────────────────────[ BACKTRACE ]────────────────────────────────────────────────────────────────────
+ ► f 0   0x7ffff7df3f8d setcontext+61
+─────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────
+pwndbg> 
+
+
+pwndbg> x/100gx 0x7fffffffdf00
+0x7fffffffdf00:	0x00007ffff7f8c6a0	0x0000555555556035
+0x7fffffffdf10:	0x0000555555558020	0x00007ffff7f884a0
+0x7fffffffdf20:	0x0000000000000000	0x00007ffff7e2fec3
+0x7fffffffdf30:	0x0000000000000007	0x00007ffff7f8c6a0
+0x7fffffffdf40:	0x0000555555556035	0x00007ffff7e235ca
+0x7fffffffdf50:	0x00005555555557e0	0x00007fffffffdf80
+0x7fffffffdf60:	0x00005555555551c0	0x000055555555543b
+0x7fffffffdf70:	0x0000000400000000	0x00005555555556ba
+0x7fffffffdf80:	0x00007fffffffdfa0	0x00005555555557b8
+0x7fffffffdf90:	0x00007fffffffe090	0x0000000400000000
+0x7fffffffdfa0:	0x0000000000000000	0x00007ffff7dc30b3
+0x7fffffffdfb0:	0x00007ffff7ffc620	0x00007fffffffe098
+0x7fffffffdfc0:	0x0000000100000000	0x00005555555556ee
+0x7fffffffdfd0:	0x00005555555557e0	0xaa4af8f8bc6667e1
+0x7fffffffdfe0:	0x00005555555551c0	0x00007fffffffe090
+0x7fffffffdff0:	0x0000000000000000	0x0000000000000000
+0x7fffffffe000:	0x55b50707030667e1	0x55b51740dca867e1
+0x7fffffffe010:	0x0000000000000000	0x0000000000000000
+0x7fffffffe020:	0x0000000000000000	0x0000000000000001
+0x7fffffffe030:	0x00007fffffffe098	0x00007fffffffe0a8
+0x7fffffffe040:	0x00007ffff7ffe190	0x0000000000000000
+0x7fffffffe050:	0x0000000000000000	0x00005555555551c0
+0x7fffffffe060:	0x00007fffffffe090	0x0000000000000000
+0x7fffffffe070:	0x0000000000000000	0x00005555555551ee
+0x7fffffffe080:	0x00007fffffffe088	0x000000000000001c
+0x7fffffffe090:	0x0000000000000001	0x00007fffffffe3bb
+0x7fffffffe0a0:	0x0000000000000000	0x00007fffffffe3c4
+0x7fffffffe0b0:	0x00007fffffffe3d4	0x00007fffffffe426
+
