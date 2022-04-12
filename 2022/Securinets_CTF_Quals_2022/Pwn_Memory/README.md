@@ -58,15 +58,15 @@ void main(void)
 ```
 ## Analysis:
 This binary has the following five functions.
-* `dread ()` displays 8 bytes of data at any address.
-* `dwrite ()` writes 8 bytes of data to any address.
-* `dallocate ()` can malloc a chunk of any size and write malloced size -8 data in the heap. Not terminated with null.
-* `dree ()` frees the chunk (the last malloced chunk) pointed to by the `ptr` variable.
-* `dview ()` displays the data of the chunk (the last malloced chunk) pointed to by the `ptr` variable.
+* `dread()` displays 8 bytes of data at any address.
+* `dwrite()` writes 8 bytes of data to any address.
+* `dallocate()` can malloc a chunk of any size and write malloced size -8 data in the heap. Not terminated with null.
+* `dree()` frees the chunk (the last malloced chunk) pointed to by the `ptr` variable.
+* `dview()` displays the data of the chunk (the last malloced chunk) pointed to by the `ptr` variable.
 
-However, `dread ()` and `dwrite ()` can only be used once.
+However, `dread()` and `dwrite()` can only be used once.
 
-First, the `sandbox` function is used to set` seccomp`.
+First, the `sandbox` function is used to set　`seccomp`.
 ```c
 void sandbox(void)
 
@@ -146,7 +146,7 @@ empty
 pwndbg> 
 ```
 
-The `BSS` area is as follows. Only `count` and` ptr` variables.
+The `BSS` area is as follows. Only `count` and　`ptr` variables.
 ```
 pwndbg> x/80gx 0x555555558000
 0x555555558000:	0x0000000000000000	0x0000555555558008
@@ -163,13 +163,13 @@ pwndbg> x/80gx 0x555555558000
 The points of Exploit are as follows.
 
 * Heap address leaks are easy because they are not null-terminated with `dallocate()`.
-* We can easily get the libc address and rewrite the `__free_hook` by using` dwrite() `to replace the link in the` tcachebins`.
+* We can easily get the libc address and rewrite the `__free_hook` by using `dwrite() `to replace the link in the `tcachebins`.
 * The `system` function cannot be used because the system call is restricted by` seccomp`.
 * We can use ROP by stacking heap memory using the the ROP gadget of `mov rdx, qword ptr [rdi + 8]; mov qword ptr [rsp], rax; call qword ptr [rdx + 0x20];` and the `setcontext` function.
 
 The following is a brief description of the Exploit procedure.
 
-For heap address leaks, we can `dallocate ()` a 0x10 size chunk, write only "\n" as data, and then call the `dview()` function to leak the top 7 bytes of the heap address.
+For heap address leaks, we can `dallocate()` a 0x10 size chunk, write only "\n" as data, and then call the `dview()` function to leak the top 7 bytes of the heap address.
 ```bash
 $ ./memory
 Memory can be easily accessed !
@@ -277,12 +277,12 @@ View()
 0x55555555af80:	0x0000000000000003	0x0000000000000000
 ```
 
-We can write the data of (`free_hook-0x10`) to the 0x80 size` tcachebins` by executing the following.
+We can write the data of (`free_hook-0x10`) to the 0x80 size `tcachebins` by executing the following.
 ```python
 Free()
 Alloc(0xe0, b"A"*0x78+p64(0x81)+p64(free_hook-0x10))
 ```
-The state where the address of `__free_hook` is written to` tcachebins` is as follows.
+The state where the address of `__free_hook` is written to `tcachebins` is as follows.
 ```
 pwndbg> bins
 tcachebins
@@ -292,7 +292,7 @@ tcachebins
 0xd0 [  5]: 0x55555555a190 —▸ 0x555555559e60 —▸ 0x555555559b30 —▸ 0x555555559800 —▸ 0x555555559370 ◂— 0x0
 ```
 
-The `system` function cannot be used because the system call is restricted by` seccomp`. Therefore, it needs to be ROP, but since the register used by the `setcontext` function has been changed to` rdx` in libc-2.31.so, the `setcontext` function cannot be used directly.
+The `system` function cannot be used because the system call is restricted by `seccomp`. Therefore, it needs to be ROP, but since the register used by the `setcontext` function has been changed to `rdx` in libc-2.31.so, the `setcontext` function cannot be used directly.
 
 The following is an excerpt from the `setcontext` function.
 ```
@@ -309,10 +309,10 @@ The following is an excerpt from the `setcontext` function.
 
 I searched for other `push rdi; ...; pop rsp; ...; ret;` ROP gadgets, but none were available.
 
-When I checked the following site, I was able to use ROP because I could set the address of the heap in the `rsp` register by using `mov rdx, qword ptr [rdi + 8]; mov qword ptr [rsp], rax; call qword ptr [rdx + 0x20];` and the ROP gadget of the` setcontext` function.
+When I checked the following site, I was able to use ROP because I could set the address of the heap in the `rsp` register by using `mov rdx, qword ptr [rdi + 8]; mov qword ptr [rsp], rax; call qword ptr [rdx + 0x20];` and the ROP gadget of the `setcontext` function.
 https://lkmidas.github.io/posts/20210103-heap-seccomp-rop/
 
-In ROP, We can read the flag file by `sys_open` the` ./flag.txt` file and system-calling `sys_read` and` sys_write` in that order.
+In ROP, We can read the flag file by `sys_open` the `./flag.txt` file and system-calling `sys_read` and `sys_write` in that order.
 
 The following is the state where the address of `mov rdx, qword ptr [rdi + 8]; ...` is set in `__free_hook`.
 ```
