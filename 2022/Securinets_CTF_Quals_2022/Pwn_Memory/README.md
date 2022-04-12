@@ -285,7 +285,7 @@ tcachebins
 0xd0 [  5]: 0x55555555a190 —▸ 0x555555559e60 —▸ 0x555555559b30 —▸ 0x555555559800 —▸ 0x555555559370 ◂— 0x0
 ```
 
-`__free_hook`には`seccomp`でシステムコールが制限されているためsystem関数が使えない。そのためROPにする必要があるが、`setcontext`関数で使用するレジスタが`rdx`に変更になっているため、直接は使用できません。
+`__free_hook`には`seccomp`でシステムコールが制限されているため`system`関数が使えない。そのためROPにする必要があるが、`setcontext`関数で使用するレジスタが`rdx`に変更になっているため、直接は使用できません。
 
 他には`push rdi; ... ;pop rsp;...;ret;`のROPガジェットを探したが、利用できるものはありませんでした。
 
@@ -484,4 +484,5 @@ Securinets{397b5541d6dacf89123c5a24eea45cb7cc526dade67d4a70}
 ```
 
 ## Reference:
+参考文献は下記になります。Midasさん、ありがとうございます！
 https://lkmidas.github.io/posts/20210103-heap-seccomp-rop/
