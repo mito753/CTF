@@ -53,14 +53,14 @@ void main(void)
 }
 ```
 ## Analysis:
-
+このバイナリでは下記の５つの機能があります。
 * dread()は任意のアドレスのデータを8バイト表示する。
 * dwrite()は任意のアドレスに8バイトのデータを書き込む。
 * dallocate()は任意のサイズのchunkをmallocして、mallocしたサイズ-8のデータをヒープに書き込むことができる。nullで終端されない。
 * dree()はptrが指すchunk（最後にmallocしたチャンク）をフリーする。
 * dview()はptrが指すchunk（最後にmallocしたチャンク）のデータを表示する。
 
-`sandbox`関数で`seccomp`の設定をしている。
+また最初に`sandbox`関数で`seccomp`の設定をしている。
 ```
 void sandbox(void)
 
@@ -92,7 +92,7 @@ void sandbox(void)
 
 `seccomp-tools`の結果は下記になります。
 
-sys_read, sys_write, sys_open, sys_mprotect, sys_exit_group以外のシステムコールを禁止しています。
+`sys_read`, `sys_write`, `sys_open`, `sys_mprotect`, `sys_exit_group`以外のシステムコールを禁止しています。
 ```
 $ seccomp-tools dump ./memory
  line  CODE  JT   JF      K
