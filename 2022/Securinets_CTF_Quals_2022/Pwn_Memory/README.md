@@ -59,6 +59,7 @@ void main(void)
 * `dallocate()`は、任意のサイズのchunkをmallocして、mallocしたサイズ-8のデータをヒープに書き込むことができる。nullで終端されない。
 * `dree()`は、`ptr`変数が指すchunk（最後にmallocしたチャンク）をフリーする。
 * `dview()`は、`ptr`変数が指すchunk（最後にmallocしたチャンク）のデータを表示する。
+
 ただし、`dread()`と`dwrite()`はどちらか１度しか使えません。
 
 また最初に`sandbox`関数で`seccomp`の設定をしています。
