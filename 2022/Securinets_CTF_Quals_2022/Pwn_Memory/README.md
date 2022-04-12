@@ -56,7 +56,7 @@ void main(void)
 このバイナリでは下記の５つの機能があります。
 * `dread()`は、任意のアドレスのデータを8バイト表示する。
 * `dwrite()`は、任意のアドレスに8バイトのデータを書き込む。
-* `dallocate()は、任意のサイズのchunkをmallocして、mallocしたサイズ-8のデータをヒープに書き込むことができる。nullで終端されない。
+* `dallocate()`は、任意のサイズのchunkをmallocして、mallocしたサイズ-8のデータをヒープに書き込むことができる。nullで終端されない。
 * `dree()`は、`ptr`変数が指すchunk（最後にmallocしたチャンク）をフリーする。
 * `dview()`は、`ptr`変数が指すchunk（最後にmallocしたチャンク）のデータを表示する。
 ただし、`dread()`と`dwrite()`はどちらか１度しか使えません。
