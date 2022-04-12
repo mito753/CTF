@@ -54,13 +54,14 @@ void main(void)
 ```
 ## Analysis:
 このバイナリでは下記の５つの機能があります。
-* dread()は任意のアドレスのデータを8バイト表示する。
-* dwrite()は任意のアドレスに8バイトのデータを書き込む。
-* dallocate()は任意のサイズのchunkをmallocして、mallocしたサイズ-8のデータをヒープに書き込むことができる。nullで終端されない。
-* dree()はptrが指すchunk（最後にmallocしたチャンク）をフリーする。
-* dview()はptrが指すchunk（最後にmallocしたチャンク）のデータを表示する。
+* `dread()`は、任意のアドレスのデータを8バイト表示する。
+* `dwrite()`は、任意のアドレスに8バイトのデータを書き込む。
+* `dallocate()は、任意のサイズのchunkをmallocして、mallocしたサイズ-8のデータをヒープに書き込むことができる。nullで終端されない。
+* `dree()`は、`ptr`変数が指すchunk（最後にmallocしたチャンク）をフリーする。
+* `dview()`は、`ptr`変数が指すchunk（最後にmallocしたチャンク）のデータを表示する。
+ただし、`dread()`と`dwrite()`はどちらか１度しか使えません。
 
-また最初に`sandbox`関数で`seccomp`の設定をしている。
+また最初に`sandbox`関数で`seccomp`の設定をしています。
 ```c
 void sandbox(void)
 
@@ -138,7 +139,7 @@ empty
 pwndbg> 
 ```
 
-BSS領域は下記になります。
+`BSS`領域は下記になります。`count`変数と`ptr`変数のみです。
 ```
 pwndbg> x/80gx 0x555555558000
 0x555555558000:	0x0000000000000000	0x0000555555558008
