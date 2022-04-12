@@ -156,7 +156,7 @@ pwndbg> x/80gx 0x555555558000
 ## Solution:
 Exploitのポイントは下記になります。
 
-* `dallocate()`でnull終端してないのでヒープアドレスのリークは簡単にできます
+* `dallocate()`でnull終端してないのでヒープアドレスのリークは簡単にできます。
 * `dwrite()`を使用して、`tcachebins`のリンクを置き換えることで、比較的容易にlibcアドレスの取得と`__free_hook`の書き換えができます。
 * `seccomp`でシステムコールが制限されているため`system`関数が使えません。
 * `mov rdx, qword ptr [rdi + 8]; mov qword ptr [rsp], rax; call qword ptr [rdx + 0x20];`と`setcontext`関数のROPガジェットを用いることでヒープメモリをスタックにしてROPにすることができます。
@@ -287,6 +287,19 @@ tcachebins
 ```
 
 `seccomp`でシステムコールが制限されているため`system`関数が使えません。そのためROPにする必要があるが、`setcontext`関数で使用するレジスタがlibc-2.31.soでは`rdx`に変更になっているため、`setcontext`関数を直接使用できません。
+
+以下は`setcontext`関数の抜粋です。
+```
+   0x00007ffff7df3f8d <+61>:	mov    rsp,QWORD PTR [rdx+0xa0]
+   0x00007ffff7df3f94 <+68>:	mov    rbx,QWORD PTR [rdx+0x80]
+   0x00007ffff7df3f9b <+75>:	mov    rbp,QWORD PTR [rdx+0x78]
+   0x00007ffff7df3f9f <+79>:	mov    r12,QWORD PTR [rdx+0x48]
+   0x00007ffff7df3fa3 <+83>:	mov    r13,QWORD PTR [rdx+0x50]
+   0x00007ffff7df3fa7 <+87>:	mov    r14,QWORD PTR [rdx+0x58]
+   0x00007ffff7df3fab <+91>:	mov    r15,QWORD PTR [rdx+0x60]
+   0x00007ffff7df3faf <+95>:	test   DWORD PTR fs:0x48,0x2
+   0x00007ffff7df3fbb <+107>:	je     0x7ffff7df4076 <setcontext+294>
+```
 
 他には`push rdi; ... ;pop rsp;...;ret;`のROPガジェットを探したが、利用できるものはありませんでした。
 
