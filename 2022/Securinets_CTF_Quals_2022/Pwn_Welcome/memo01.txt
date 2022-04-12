@@ -1,0 +1,79 @@
+gdb-peda$ vmmap
+Start              End                Perm	Name
+0x00400000         0x00401000         r--p	/home/mito/CTF/Securinets_CTF_Quals_2022/Pwn_Welcome/welc
+0x00401000         0x00402000         r-xp	/home/mito/CTF/Securinets_CTF_Quals_2022/Pwn_Welcome/welc
+0x00402000         0x00403000         r--p	/home/mito/CTF/Securinets_CTF_Quals_2022/Pwn_Welcome/welc
+0x00403000         0x00404000         r--p	/home/mito/CTF/Securinets_CTF_Quals_2022/Pwn_Welcome/welc
+0x00404000         0x00405000         rw-p	/home/mito/CTF/Securinets_CTF_Quals_2022/Pwn_Welcome/welc
+0x00007ffff79e2000 0x00007ffff7bc9000 r-xp	/lib/x86_64-linux-gnu/libc-2.27.so
+0x00007ffff7bc9000 0x00007ffff7dc9000 ---p	/lib/x86_64-linux-gnu/libc-2.27.so
+0x00007ffff7dc9000 0x00007ffff7dcd000 r--p	/lib/x86_64-linux-gnu/libc-2.27.so
+0x00007ffff7dcd000 0x00007ffff7dcf000 rw-p	/lib/x86_64-linux-gnu/libc-2.27.so
+0x00007ffff7dcf000 0x00007ffff7dd3000 rw-p	mapped
+0x00007ffff7dd3000 0x00007ffff7dfc000 r-xp	/lib/x86_64-linux-gnu/ld-2.27.so
+0x00007ffff7fd4000 0x00007ffff7fd6000 rw-p	mapped
+0x00007ffff7ff7000 0x00007ffff7ffa000 r--p	[vvar]
+0x00007ffff7ffa000 0x00007ffff7ffc000 r-xp	[vdso]
+0x00007ffff7ffc000 0x00007ffff7ffd000 r--p	/lib/x86_64-linux-gnu/ld-2.27.so
+0x00007ffff7ffd000 0x00007ffff7ffe000 rw-p	/lib/x86_64-linux-gnu/ld-2.27.so
+0x00007ffff7ffe000 0x00007ffff7fff000 rw-p	mapped
+0x00007ffffffde000 0x00007ffffffff000 rw-p	[stack]
+0xffffffffff600000 0xffffffffff601000 r-xp	[vsyscall]
+
+gdb-peda$ x/80gx 0x00404000
+0x404000:	0x0000000000403e20	0x00007ffff7ffe170
+0x404010:	0x00007ffff7dea8f0	0x00007ffff7a62970
+0x404020:	0x00007ffff7af2020	0x00007ffff7a632a0
+0x404030:	0x0000000000000000	0x0000000000000000
+0x404040 <stdout@@GLIBC_2.2.5>:	0x00007ffff7dce760	0x0000000000000000
+0x404050 <stdin@@GLIBC_2.2.5>:	0x00007ffff7dcda00	0x0000000000000000
+0x404060 <stderr@@GLIBC_2.2.5>:	0x00007ffff7dce680	0x0000000000000000
+0x404070:	0x0000000000000000	0x0000000000000000
+0x404080:	0x0000000000000000	0x0000000000000000
+
+
+[----------------------------------registers-----------------------------------]
+RAX: 0x0 
+RBX: 0x0 
+RCX: 0x7ffff7af2031 (<__GI___libc_read+17>:	cmp    rax,0xfffffffffffff000)
+RDX: 0x128 
+RSI: 0x7fffffffdd20 ("AAA%AAsAABAA$AAnAACAA-AA(AADAA;AA)AAEAAaAA0AAFAAbAA1AAGAAcAA2AAHAAdAA3AAIAAeAA4AAJAAfAA5AAKAAgAA6AALAAhAA7AAMAAiAA8AANAAjAA9AAOAAkAAPAAlAAQAAmAARAAoAASAApAATAAqAAUAArAAVAAtAAWAAuAAXAAvAAYAAwAAZAAxAAyA"...)
+RDI: 0x0 
+RBP: 0x6c41415041416b41 ('AkAAPAAl')
+RSP: 0x7fffffffdda8 ("AAQAAmAARAAoAASAApAATAAqAAUAArAAVAAtAAWAAuAAXAAvAAYAAwAAZAAxAAyAAzA%%A%sA%BA%$A%nA%CA%-A%(A%DA%;A%)A%EA%aA%0A%FA%bA%1A%GA%cA%2A%HA%dA%3A%IA%eA%4A%JA%fA%5A%KA%gA")
+RIP: 0x40121e (<main+67>:	ret)
+R8 : 0x2a ('*')
+R9 : 0x7ffff7fd54c0 (0x00007ffff7fd54c0)
+R10: 0x3 
+R11: 0x246 
+R12: 0x401090 (<_start>:	endbr64)
+R13: 0x7fffffffde80 --> 0x1 
+R14: 0x0 
+R15: 0x0
+EFLAGS: 0x10207 (CARRY PARITY adjust zero sign trap INTERRUPT direction overflow)
+[-------------------------------------code-------------------------------------]
+   0x401213 <main+56>:	call   0x401070 <read@plt>
+   0x401218 <main+61>:	mov    eax,0x0
+   0x40121d <main+66>:	leave  
+=> 0x40121e <main+67>:	ret    
+   0x40121f:	nop
+   0x401220 <__libc_csu_init>:	endbr64 
+   0x401224 <__libc_csu_init+4>:	push   r15
+   0x401226 <__libc_csu_init+6>:	lea    r15,[rip+0x2be3]        # 0x403e10
+[------------------------------------stack-------------------------------------]
+0000| 0x7fffffffdda8 ("AAQAAmAARAAoAASAApAATAAqAAUAArAAVAAtAAWAAuAAXAAvAAYAAwAAZAAxAAyAAzA%%A%sA%BA%$A%nA%CA%-A%(A%DA%;A%)A%EA%aA%0A%FA%bA%1A%GA%cA%2A%HA%dA%3A%IA%eA%4A%JA%fA%5A%KA%gA")
+0008| 0x7fffffffddb0 ("RAAoAASAApAATAAqAAUAArAAVAAtAAWAAuAAXAAvAAYAAwAAZAAxAAyAAzA%%A%sA%BA%$A%nA%CA%-A%(A%DA%;A%)A%EA%aA%0A%FA%bA%1A%GA%cA%2A%HA%dA%3A%IA%eA%4A%JA%fA%5A%KA%gA")
+0016| 0x7fffffffddb8 ("ApAATAAqAAUAArAAVAAtAAWAAuAAXAAvAAYAAwAAZAAxAAyAAzA%%A%sA%BA%$A%nA%CA%-A%(A%DA%;A%)A%EA%aA%0A%FA%bA%1A%GA%cA%2A%HA%dA%3A%IA%eA%4A%JA%fA%5A%KA%gA")
+0024| 0x7fffffffddc0 ("AAUAArAAVAAtAAWAAuAAXAAvAAYAAwAAZAAxAAyAAzA%%A%sA%BA%$A%nA%CA%-A%(A%DA%;A%)A%EA%aA%0A%FA%bA%1A%GA%cA%2A%HA%dA%3A%IA%eA%4A%JA%fA%5A%KA%gA")
+0032| 0x7fffffffddc8 ("VAAtAAWAAuAAXAAvAAYAAwAAZAAxAAyAAzA%%A%sA%BA%$A%nA%CA%-A%(A%DA%;A%)A%EA%aA%0A%FA%bA%1A%GA%cA%2A%HA%dA%3A%IA%eA%4A%JA%fA%5A%KA%gA")
+0040| 0x7fffffffddd0 ("AuAAXAAvAAYAAwAAZAAxAAyAAzA%%A%sA%BA%$A%nA%CA%-A%(A%DA%;A%)A%EA%aA%0A%FA%bA%1A%GA%cA%2A%HA%dA%3A%IA%eA%4A%JA%fA%5A%KA%gA")
+0048| 0x7fffffffddd8 ("AAYAAwAAZAAxAAyAAzA%%A%sA%BA%$A%nA%CA%-A%(A%DA%;A%)A%EA%aA%0A%FA%bA%1A%GA%cA%2A%HA%dA%3A%IA%eA%4A%JA%fA%5A%KA%gA")
+0056| 0x7fffffffdde0 ("ZAAxAAyAAzA%%A%sA%BA%$A%nA%CA%-A%(A%DA%;A%)A%EA%aA%0A%FA%bA%1A%GA%cA%2A%HA%dA%3A%IA%eA%4A%JA%fA%5A%KA%gA")
+[------------------------------------------------------------------------------]
+Legend: code, data, rodata, value
+Stopped reason: SIGSEGV
+0x000000000040121e in main ()
+gdb-peda$ %6A%LA%hA%7A%MA%iA%8A%NA%jA%9A%OA%kA%PA%lA%QA%mA%RA%oA%SA%pA%TA%qA%UA%rA%VA%tA%WA%uA%XA%vA%YA%wA%ZA%xA%yA%zAs%AssAsBAs$AsnAsCAs-As(AsDAs;As)AsEAsaAs0AsFAsbAs1AsGAscAs2AsHAsdAs3AsIAseAs4AsJAsfAs5AsKAsgAs6AsLAshAs7AsMA
+Undefined command: "".  Try "help".
+gdb-peda$ patto AAQA
+AAQA found at offset: 136

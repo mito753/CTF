@@ -1,0 +1,9 @@
+Challenge
+80 Solves
+Welcome
+439
+Welcome Pwners!
+nc 20.216.39.14 1237
+https://drive.google.com/file/d/1XKbHlYIRIBH2UcGgUbaGe8K-txQ0Zd5y/view
+
+Securinets{.*}

