@@ -54,9 +54,13 @@ void main(void)
 ## Analysis:
 
 dread()は任意のアドレスのデータを8バイト表示する。
+
 dwrite()は任意のアドレスに8バイトのデータを書き込む。
+
 dallocate()は任意のサイズのchunkをmallocして、mallocしたサイズ-8のデータをヒープに書き込むことができる。nullで終端されない。
+
 dree()はptrが指すchunk（最後にmallocしたチャンク）をフリーする。
+
 dview()はptrが指すchunk（最後にmallocしたチャンク）のデータを表示する。
 
 ```
@@ -89,6 +93,7 @@ void sandbox(void)
 ```
 
 seccomp-toolsの結果は下記になります。
+
 read, write, open, mprotect, exit_group以外のシステムコールを禁止する。
 ```
 $ seccomp-tools dump ./memory
