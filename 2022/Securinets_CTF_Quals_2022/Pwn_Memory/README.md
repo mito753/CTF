@@ -163,8 +163,8 @@ pwndbg> x/80gx 0x555555558000
 The points of Exploit are as follows.
 
 * Heap address leaks are easy because they are not null-terminated with `dallocate()`.
-* We can easily get the libc address and rewrite the `__free_hook` by using `dwrite() `to replace the link in the `tcachebins`.
-* The `system` function cannot be used because the system call is restricted by` seccomp`.
+* We can easily get the libc address and rewrite the `__free_hook` by using `dwrite()` to replace the link in the `tcachebins`.
+* The `system` function cannot be used because the system call is restricted by `seccomp`.
 * We can use ROP by stacking heap memory using the the ROP gadget of `mov rdx, qword ptr [rdi + 8]; mov qword ptr [rsp], rax; call qword ptr [rdx + 0x20];` and the `setcontext` function.
 
 The following is a brief description of the Exploit procedure.
@@ -206,7 +206,7 @@ tcachebins
 0xf0 [  2]: 0x55555555b0a0 —▸ 0x55555555a390 ◂— 0x0
 ```
 
-Use `dwrite()` to change the 0xf0 `tcachebin` free chunk from` 0x55555555a390` to `0x55555555aef0`.
+Use `dwrite()` to change the 0xf0 `tcachebin` free chunk from `0x55555555a390` to `0x55555555aef0`.
 ```
 State before change：0xf0 [  2]: 0x55555555b0a0 —▸ 0x55555555a390 ◂— 0x0
 　　　　　　　　　　　　　　　
@@ -309,10 +309,10 @@ The following is an excerpt from the `setcontext` function.
 
 I searched for other `push rdi; ...; pop rsp; ...; ret;` ROP gadgets, but none were available.
 
-When I checked the following site, I was able to use ROP because I could set the address of the heap in the `rsp` register by using `mov rdx, qword ptr [rdi + 8]; mov qword ptr [rsp], rax; call qword ptr [rdx + 0x20];` and the ROP gadget of the `setcontext` function.
+When I checked the following site, I was able to use ROP because I could set the address of the heap in the `rsp` register by using the ROP gadget of `mov rdx, qword ptr [rdi + 8]; mov qword ptr [rsp], rax; call qword ptr [rdx + 0x20];` and the `setcontext` function.
 https://lkmidas.github.io/posts/20210103-heap-seccomp-rop/
 
-In ROP, We can read the flag file by `sys_open` the `./flag.txt` file and system-calling `sys_read` and `sys_write` in that order.
+In ROP, we can read the flag file by `sys_open` the `./flag.txt` file and system-calling `sys_read` and `sys_write` in that order.
 
 The following is the state where the address of `mov rdx, qword ptr [rdi + 8]; ...` is set in `__free_hook`.
 ```
