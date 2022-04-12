@@ -66,7 +66,7 @@ This binary has the following five functions.
 
 However, `dread()` and `dwrite()` can only be used once.
 
-First, the `sandbox` function is used to set　`seccomp`.
+First, the `sandbox` function is used to set `seccomp`.
 ```c
 void sandbox(void)
 
