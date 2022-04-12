@@ -146,7 +146,7 @@ empty
 pwndbg> 
 ```
 
-The `BSS` area is as follows. Only `count` and　`ptr` variables.
+The `BSS` area is as follows. Only `count` and `ptr` variables.
 ```
 pwndbg> x/80gx 0x555555558000
 0x555555558000:	0x0000000000000000	0x0000555555558008
