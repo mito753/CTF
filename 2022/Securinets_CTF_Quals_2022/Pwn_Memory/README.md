@@ -154,10 +154,13 @@ pwndbg> x/80gx 0x555555558000
 ```
 
 ## Solution:
+Exploitのポイントは下記になります。
 
 * `dwrite()`を使用して、`tcachebins`のリンクを置き換えることで、比較的容易にlibcアドレスの取得と`__free_hook`の書き換えができます。
 * `dallocate()`でnull終端してないのでヒープアドレスのリークも簡単にできます。
 * `mov rdx, qword ptr [rdi + 8]; mov qword ptr [rsp], rax; call qword ptr [rdx + 0x20];`と`setcontext`関数のROPガジェットを用いることでヒープメモリをスタックにしてROPにすることができます。
+
+以下にExploitの手順について簡単に説明します。
 
 ヒープアドレスのリークは`tcachebins`にリンクされているchunkのアドレスをリークできるので、0x10サイズのchunkを`dallocate()`して、"\n"のみデータとして書き込み、その後に`dview()`するとヒープアドレスの上位7バイトをリークできます。
 ```bash
