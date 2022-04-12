@@ -12,7 +12,7 @@
 > https://drive.google.com/file/d/1_ZZmFWxE3SHuezNz9nOirl3RNNbgCHzF/view
 
 ### Attachments:
-> -rwxr-xr-x 1 mito mito  2029560 Apr 10 01:14 libc.so.6    --> libc-2.31.so
+> -rwxr-xr-x 1 mito mito  2029560 Apr 10 01:14 libc.so.6      --> libc-2.31.so
 > 
 > -rwxrwxr-x 1 mito mito    17648 Apr  3 23:03 memory
 
@@ -98,7 +98,7 @@ void sandbox(void)
 
 The result of `seccomp-tools` is as follows.
 
-System calls other than `sys_read`,` sys_write`, `sys_open`,` sys_mprotect`, and `sys_exit_group` are prohibited.
+System calls other than `sys_read`, `sys_write`, `sys_open`, `sys_mprotect`, and `sys_exit_group` are prohibited.
 
 ```bash
 $ seccomp-tools dump ./memory
