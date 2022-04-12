@@ -17,7 +17,7 @@
 > -rwxrwxr-x 1 mito mito    17648 Apr  3 23:03 memory
 
 ### C code:
-Below is the result of decompiling the `main` function using` Ghidra`.
+Below is the result of decompiling the `main` function using `Ghidra`.
 ```c
 void main(void)
 
