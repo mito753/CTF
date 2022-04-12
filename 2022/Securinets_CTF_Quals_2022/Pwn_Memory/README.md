@@ -286,7 +286,7 @@ tcachebins
 
 他には`push rdi; ... ;pop rsp;...;ret;`のROPガジェットを探したが、利用できるものはなかった。
 
-下記のサイトを確認したところ、`mov rdx, qword ptr [rdi + 8]; mov qword ptr [rsp], rax; call qword ptr [rdx + 0x20];`と`setcontext`関数のROPガジェットを利用することで、rspレジスタにヒープのアドレスを設定できるので、ROPを利用できる。
+下記のサイトを確認したところ、`mov rdx, qword ptr [rdi + 8]; mov qword ptr [rsp], rax; call qword ptr [rdx + 0x20];`と`setcontext`関数のROPガジェットを利用することで、`rsp`レジスタにヒープのアドレスを設定できるので、ROPを利用できる。
 https://lkmidas.github.io/posts/20210103-heap-seccomp-rop/
 
 ROPでは、`./flag.txt`ファイルを`sys_open`して、`sys_read`、`sys_write`の順にシステムコールすることで、フラグファイルを読み出すことができる。
