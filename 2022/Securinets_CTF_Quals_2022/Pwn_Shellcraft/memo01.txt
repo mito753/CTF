@@ -1,0 +1,87 @@
+mito@ubuntu:~/CTF/Securinets_CTF_Quals_2022/Pwn_Shellcraft$ seccomp-tools dump ./shellcraft 
+ line  CODE  JT   JF      K
+=================================
+ 0000: 0x20 0x00 0x00 0x00000004  A = arch
+ 0001: 0x15 0x00 0x0b 0xc000003e  if (A != ARCH_X86_64) goto 0013
+ 0002: 0x20 0x00 0x00 0x00000000  A = sys_number
+ 0003: 0x35 0x00 0x01 0x40000000  if (A < 0x40000000) goto 0005
+ 0004: 0x15 0x00 0x08 0xffffffff  if (A != 0xffffffff) goto 0013
+ 0005: 0x15 0x07 0x00 0x00000002  if (A == open) goto 0013
+ 0006: 0x15 0x06 0x00 0x00000038  if (A == clone) goto 0013
+ 0007: 0x15 0x05 0x00 0x00000039  if (A == fork) goto 0013
+ 0008: 0x15 0x04 0x00 0x0000003a  if (A == vfork) goto 0013
+ 0009: 0x15 0x03 0x00 0x0000003b  if (A == execve) goto 0013
+ 0010: 0x15 0x02 0x00 0x00000065  if (A == ptrace) goto 0013
+ 0011: 0x15 0x01 0x00 0x00000142  if (A == execveat) goto 0013
+ 0012: 0x06 0x00 0x00 0x7fff0000  return ALLOW
+ 0013: 0x06 0x00 0x00 0x00000000  return KILL
+
+
+gdb-peda$ vmmap
+Start              End                Perm	Name
+0x0000555555554000 0x0000555555557000 r-xp	/home/mito/CTF/Securinets_CTF_Quals_2022/Pwn_Shellcraft/shellcraft
+0x0000555555557000 0x0000555555558000 r-xp	/home/mito/CTF/Securinets_CTF_Quals_2022/Pwn_Shellcraft/shellcraft
+0x0000555555558000 0x0000555555559000 rwxp	/home/mito/CTF/Securinets_CTF_Quals_2022/Pwn_Shellcraft/shellcraft
+0x0000555555559000 0x000055555557a000 rwxp	[heap]
+0x00007ffff77c2000 0x00007ffff79a9000 r-xp	/lib/x86_64-linux-gnu/libc-2.27.so
+0x00007ffff79a9000 0x00007ffff7ba9000 ---p	/lib/x86_64-linux-gnu/libc-2.27.so
+0x00007ffff7ba9000 0x00007ffff7bad000 r-xp	/lib/x86_64-linux-gnu/libc-2.27.so
+0x00007ffff7bad000 0x00007ffff7baf000 rwxp	/lib/x86_64-linux-gnu/libc-2.27.so
+0x00007ffff7baf000 0x00007ffff7bb3000 rwxp	mapped
+0x00007ffff7bb3000 0x00007ffff7bd1000 r-xp	/lib/x86_64-linux-gnu/libseccomp.so.2.5.1
+0x00007ffff7bd1000 0x00007ffff7dd1000 ---p	/lib/x86_64-linux-gnu/libseccomp.so.2.5.1
+0x00007ffff7dd1000 0x00007ffff7dd2000 r-xp	/lib/x86_64-linux-gnu/libseccomp.so.2.5.1
+0x00007ffff7dd2000 0x00007ffff7dd3000 rwxp	/lib/x86_64-linux-gnu/libseccomp.so.2.5.1
+0x00007ffff7dd3000 0x00007ffff7dfc000 r-xp	/lib/x86_64-linux-gnu/ld-2.27.so
+0x00007ffff7fd1000 0x00007ffff7fd6000 rwxp	mapped
+0x00007ffff7ff7000 0x00007ffff7ffa000 r--p	[vvar]
+0x00007ffff7ffa000 0x00007ffff7ffc000 r-xp	[vdso]
+0x00007ffff7ffc000 0x00007ffff7ffd000 r-xp	/lib/x86_64-linux-gnu/ld-2.27.so
+0x00007ffff7ffd000 0x00007ffff7ffe000 rwxp	/lib/x86_64-linux-gnu/ld-2.27.so
+0x00007ffff7ffe000 0x00007ffff7fff000 rwxp	mapped
+0x00007ffffffde000 0x00007ffffffff000 rwxp	[stack]
+0xffffffffff600000 0xffffffffff601000 r-xp	[vsyscall]
+
+[----------------------------------registers-----------------------------------]
+RAX: 0x0 
+RBX: 0x0 
+RCX: 0x7ffff78d2031 (<__GI___libc_read+17>:	cmp    rax,0xfffffffffffff000)
+RDX: 0x7fffffffdb80 ('a' <repeats 23 times>, "\n\017\341\335\367\377\177")
+RSI: 0x7fffffffdb80 ('a' <repeats 23 times>, "\n\017\341\335\367\377\177")
+RDI: 0x0 
+RBP: 0x7fffffffdd80 --> 0x555555555320 (<__libc_csu_init>:	endbr64)
+RSP: 0x7fffffffdb80 ('a' <repeats 23 times>, "\n\017\341\335\367\377\177")
+RIP: 0x55555555530d (<main+77>:	call   rdx)
+R8 : 0xffffffff 
+R9 : 0x50 ('P')
+R10: 0x0 
+R11: 0x346 
+R12: 0x5555555550e0 (<_start>:	endbr64)
+R13: 0x7fffffffde60 --> 0x1 
+R14: 0x0 
+R15: 0x0
+EFLAGS: 0x207 (CARRY PARITY adjust zero sign trap INTERRUPT direction overflow)
+[-------------------------------------code-------------------------------------]
+   0x5555555552fc <main+60>:	call   0x5555555550c0 <read@plt>
+   0x555555555301 <main+65>:	lea    rdx,[rbp-0x200]
+   0x555555555308 <main+72>:	mov    eax,0x0
+=> 0x55555555530d <main+77>:	call   rdx
+   0x55555555530f <main+79>:	mov    eax,0x0
+   0x555555555314 <main+84>:	leave  
+   0x555555555315 <main+85>:	ret    
+   0x555555555316:	nop    WORD PTR cs:[rax+rax*1+0x0]
+No argument
+[------------------------------------stack-------------------------------------]
+0000| 0x7fffffffdb80 ('a' <repeats 23 times>, "\n\017\341\335\367\377\177")
+0008| 0x7fffffffdb88 ('a' <repeats 15 times>, "\n\017\341\335\367\377\177")
+0016| 0x7fffffffdb90 ("aaaaaaa\n\017\341\335\367\377\177")
+0024| 0x7fffffffdb98 --> 0x7ffff7dde10f (<do_lookup_x+3359>:	test   eax,eax)
+0032| 0x7fffffffdba0 --> 0x7ffff7ffe710 --> 0x7ffff7ffa000 (jg     0x7ffff7ffa047)
+0040| 0x7fffffffdba8 --> 0x0 
+0048| 0x7fffffffdbb0 --> 0x0 
+0056| 0x7fffffffdbb8 --> 0x7ffff7ffa298 (add    BYTE PTR [rdi+0x5f],bl)
+[------------------------------------------------------------------------------]
+Legend: code, data, rodata, value
+0x000055555555530d in main ()
+gdb-peda$ vmmap
+

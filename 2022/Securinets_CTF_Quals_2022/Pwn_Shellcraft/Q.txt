@@ -1,0 +1,10 @@
+Challenge
+48 Solves
+Shellcraft
+802
+Shellcodes everywhere !
+nc 20.216.39.14 1236
+
+https://drive.google.com/file/d/1LgJqrdtuerKOy4u77PHkUAczJPwW64zu/view?usp=sharing
+
+Securinets{.*}
