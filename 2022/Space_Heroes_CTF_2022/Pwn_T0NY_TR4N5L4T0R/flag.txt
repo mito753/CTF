@@ -1,0 +1,41 @@
+mito@ubuntu:~/CTF/Space_Heroes_CTF_2022/Pwn_T0NY_TR4N5L4T0R$ python solve.py r
+[*] '/home/mito/CTF/Space_Heroes_CTF_2022/Pwn_T0NY_TR4N5L4T0R/leet'
+    Arch:     i386-32-little
+    RELRO:    Partial RELRO
+    Stack:    No canary found
+    NX:       NX disabled
+    PIE:      No PIE (0x8048000)
+    RWX:      Has RWX segments
+[+] Opening connection to 0.cloud.chals.io on port 26008: Done
+[*] Switching to interactive mode
+W31c0m3 70 70ny'5 7r4n51470r.
+Translating the string AAA%AAsAABAA$AAnAACAA-AA(AADAA;AA)AAEAAaAA0AAFAAbAA1AAG\x1d\x92\x0 to 70NY 5P34K...
+Swapped a -> /
+Swapped a -> /
+Swapped a -> /
+Swapped a -> /
+Swapped a -> /
+Swapped a -> /
+Swapped a -> /
+Swapped a -> /
+Swapped a -> /
+Swapped a -> /
+Swapped a -> /
+Swapped a -> /
+Swapped a -> /
+Swapped a -> /
+Swapped a -> /
+Swapped a -> /
+Swapped a -> /
+Swapped a -> /
+Swapped a -> /
+Swapped a -> /
+Swapped a -> /
+Swapped a -> /
+Swapped a -> /
+Swapped a -> /
+Swapped a -> /
+aAA0AAFAAbAA1AAG\x1d\x92\x0 Translation: /\/\/\%/\/\s/\/\B/\/\$/\/\n/\/\C/\/\-/\/\(/\/\D/\/\;/\/\)/\/\EAAaAA0AAFAAbAA1AAG\x1d\x92\x0
+
+84ck 50 500n?
+shctf{Y00_175_70NY_574RK}

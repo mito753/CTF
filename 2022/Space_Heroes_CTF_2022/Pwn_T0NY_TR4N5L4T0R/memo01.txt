@@ -1,0 +1,66 @@
+[----------------------------------registers-----------------------------------]
+EAX: 0x1 
+EBX: 0x41384141 ('AA8A')
+ECX: 0x6941414d ('MAAi')
+EDX: 0xf7fab890 --> 0x0 
+ESI: 0x41414e41 ('ANAA')
+EDI: 0x0 
+EBP: 0x3941416a ('jAA9')
+ESP: 0x69414149 ('IAAi')
+EIP: 0x8049508 (<main+747>:	ret)
+EFLAGS: 0x10282 (carry parity adjust zero SIGN trap INTERRUPT direction overflow)
+[-------------------------------------code-------------------------------------]
+   0x8049503 <main+742>:	pop    esi
+   0x8049504 <main+743>:	pop    ebp
+   0x8049505 <main+744>:	lea    esp,[ecx-0x4]
+=> 0x8049508 <main+747>:	ret    
+   0x8049509 <__x86.get_pc_thunk.ax>:	mov    eax,DWORD PTR [esp]
+   0x804950c <__x86.get_pc_thunk.ax+3>:	ret    
+   0x804950d <__x86.get_pc_thunk.ax+4>:	xchg   ax,ax
+   0x804950f <__x86.get_pc_thunk.ax+6>:	nop
+[------------------------------------stack-------------------------------------]
+Invalid $SP address: 0x69414149
+[------------------------------------------------------------------------------]
+Legend: code, data, rodata, value
+Stopped reason: SIGSEGV
+0x08049508 in main ()
+gdb-peda$ vmmap
+Start      End        Perm	Name
+0x08048000 0x0804b000 r-xp	/home/mito/CTF/Space_Heroes_CTF_2022/Pwn_T0NY_TR4N5L4T0R/leet
+0x0804b000 0x0804c000 r-xp	/home/mito/CTF/Space_Heroes_CTF_2022/Pwn_T0NY_TR4N5L4T0R/leet
+0x0804c000 0x0804d000 rwxp	/home/mito/CTF/Space_Heroes_CTF_2022/Pwn_T0NY_TR4N5L4T0R/leet
+0x0804d000 0x0806f000 rwxp	[heap]
+0xf7dd2000 0xf7fa7000 r-xp	/lib/i386-linux-gnu/libc-2.27.so
+0xf7fa7000 0xf7fa8000 ---p	/lib/i386-linux-gnu/libc-2.27.so
+0xf7fa8000 0xf7faa000 r-xp	/lib/i386-linux-gnu/libc-2.27.so
+0xf7faa000 0xf7fab000 rwxp	/lib/i386-linux-gnu/libc-2.27.so
+0xf7fab000 0xf7fae000 rwxp	mapped
+0xf7fcf000 0xf7fd1000 rwxp	mapped
+0xf7fd1000 0xf7fd4000 r--p	[vvar]
+0xf7fd4000 0xf7fd6000 r-xp	[vdso]
+0xf7fd6000 0xf7ffc000 r-xp	/lib/i386-linux-gnu/ld-2.27.so
+0xf7ffc000 0xf7ffd000 r-xp	/lib/i386-linux-gnu/ld-2.27.so
+0xf7ffd000 0xf7ffe000 rwxp	/lib/i386-linux-gnu/ld-2.27.so
+0xfffdd000 0xffffe000 rwxp	[stack]
+gdb-peda$
+
+gdb-peda$ x/100wx 0xffffce80
+0xffffce80:	0xf7faad80	0x0000000a	0x0000002e	0x00000000
+0xffffce90:	0xf7fe4f19	0x0804c000	0xf7faad80	0xfbad2a84
+0xffffcea0:	0xffffcf58	0xf7feade0	0xf7e39d9b	0x0804c000
+0xffffceb0:	0xf7faa000	0x00000000	0xffffcf58	0x0804934f
+0xffffcec0:	0x0804a078	0xffffcee0	0x0804829c	0x08049235
+0xffffced0:	0xf7ffda9c	0x00000001	0xf7fcf410	0x00000001
+0xffffcee0:	0x41414141	0x41414141	0x41414141	0x41414141
+0xffffcef0:	0x41414141	0x41414141	0x41414141	0x41414141
+0xffffcf00:	0x41414141	0x41414141	0x41414141	0x41414141
+0xffffcf10:	0x41414141	0x41414141	0x41414141	0x41414141
+0xffffcf20:	0x41414141	0x41414141	0x41414141	0x41414141
+0xffffcf30:	0x41414141	0x41414141	0x41414141	0x41414141
+0xffffcf40:	0x41414141	0xffffd000	0xffffd00c	0xffffcf70
+0xffffcf50:	0x00000000	0xf7faa000	0x00000000	0xf7deafa1
+0xffffcf60:	0xf7faa000	0xf7faa000	0x00000000	0xf7deafa1
+0xffffcf70:	0x00000001	0xffffd004	0xffffd00c	0xffffcf94
+0xffffcf80:	0x00000001	0x00000000	0xf7faa000	0xf7fe571a
+0xffffcf90:	0xf7ffd000	0x00000000	0xf7faa000	0x00000000
+0xffffcfa0:	0x00000000	0x805bb04f	0xc29b965f	0x00000000

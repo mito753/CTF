@@ -1,0 +1,14 @@
+Challenge
+9 Solves
+Star Wars Galaxies 2
+344
+Medium
+Remember the golden years of MMO's? Here's a pwn challenge I made in reference to one of my favorites.
+
+nc 0.cloud.chals.io 34916
+
+Author: Nyt3_Jmp
+
+0/25 attempts
+
+Flag

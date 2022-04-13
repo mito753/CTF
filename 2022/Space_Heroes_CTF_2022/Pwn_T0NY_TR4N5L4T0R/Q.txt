@@ -1,0 +1,12 @@
+Challenge
+13 Solves
+T0NY TR4N5L4T0R
+336
+Medium
+Tony Stark has entered the edgy hacker stage of life and decided to make his own competitor to Grammarly. His program has some glaring flaws. Can you be super 1337 and use these flaws to retireve his signature flag?
+
+nc 0.cloud.chals.io 26008
+0.cloud.chals.io:26008
+0/25 attempts
+
+Flag

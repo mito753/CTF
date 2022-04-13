@@ -1,0 +1,17 @@
+Challenge
+6 Solves
+Use the Force, Luke
+496
+Hard
+nc 0.cloud.chals.io 11996
+
+Author: cdmann
+
+0/25 attempts
+
+Flag
+
+
+Hint
+×
+Anyone interested in heap exploitation should check out Max Kamper's courses on Udemy. They go on discount frequently!
