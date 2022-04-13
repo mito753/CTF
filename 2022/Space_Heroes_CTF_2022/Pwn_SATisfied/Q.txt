@@ -1,0 +1,15 @@
+Challenge
+13 Solves
+SATisfied
+477
+Hard
+Welcome to our SATellite Terminal
+
+nc 0.cloud.chals.io 34720
+
+Author: v10l3nt
+
+0.cloud.chals.io:34720
+0/25 attempts
+
+Flag

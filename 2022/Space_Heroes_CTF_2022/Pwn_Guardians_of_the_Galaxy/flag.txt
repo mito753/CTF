@@ -1,0 +1,9 @@
+mito@ubuntu:~/CTF/Space_Heroes_CTF_2022/Pwn_Guardians_of_the_Galaxy$ nc 0.cloud.chals.io 12690
+Does Quill manage to win the dance battle?
+%6$s
+
+Oh no, Ronan has seen through the distraction!
+shctf{im_distracting_you}
+
+
+Does Quill manage to win the dance battle?

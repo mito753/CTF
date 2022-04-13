@@ -1,0 +1,13 @@
+Challenge
+10 Solves
+Rocket
+488
+Hard
+nc 0.cloud.chals.io 13163
+
+Author: v10l3nt
+
+0.cloud.chals.io:13163
+0/25 attempts
+
+Flag

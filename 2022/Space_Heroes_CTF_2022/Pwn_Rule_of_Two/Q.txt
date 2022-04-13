@@ -1,0 +1,15 @@
+Challenge
+10 Solves
+Rule of Two
+488
+Hard
+"Always there are two. No more or no less." - Yoda
+
+Submit /sith.txt flag from 0.cloud.chals.io:20712
+
+Author: v10l3nt
+
+0.cloud.chals.io:20712
+0/25 attempts
+
+Flag

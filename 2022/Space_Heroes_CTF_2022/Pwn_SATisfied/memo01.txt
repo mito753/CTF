@@ -1,0 +1,45 @@
+[----------------------------------registers-----------------------------------]
+RAX: 0x7ffff7a26399 (<rand+9>:	add    rsp,0x8)
+RBX: 0x0 
+RCX: 0x3f3f3f3f3f3f ('??????')
+RDX: 0x723a803 
+RSI: 0x3f3f3f3f3f3f ('??????')
+RDI: 0x7ffff7a26399 (<rand+9>:	add    rsp,0x8)
+RBP: 0x7fffffffdd90 --> 0x7fffffffddc0 --> 0x401530 (<__libc_csu_init>:	push   r15)
+RSP: 0x7fffffffdd60 --> 0xd ('\r')
+RIP: 0x4014bb (<sat_access+85>:	call   0x40143b <auth_func>)
+R8 : 0x0 
+R9 : 0x0 
+R10: 0x0 
+R11: 0x402e45 --> 0x59206b6e61685400 ('')
+R12: 0x4010d0 (<_start>:	xor    ebp,ebp)
+R13: 0x7fffffffdea0 --> 0x1 
+R14: 0x0 
+R15: 0x0
+EFLAGS: 0x206 (carry PARITY adjust zero sign trap INTERRUPT direction overflow)
+[-------------------------------------code-------------------------------------]
+   0x4014b1 <sat_access+75>:	mov    rax,QWORD PTR [rbp-0x8]
+   0x4014b5 <sat_access+79>:	mov    rsi,rcx
+   0x4014b8 <sat_access+82>:	mov    rdi,rax
+=> 0x4014bb <sat_access+85>:	call   0x40143b <auth_func>
+   0x4014c0 <sat_access+90>:	cmp    rax,0x7a69
+   0x4014c6 <sat_access+96>:	je     0x4014d2 <sat_access+108>
+   0x4014c8 <sat_access+98>:	mov    edi,0x0
+   0x4014cd <sat_access+103>:	call   0x4010b0 <exit@plt>
+Guessed arguments:
+arg[0]: 0x7ffff7a26399 (<rand+9>:	add    rsp,0x8)
+arg[1]: 0x3f3f3f3f3f3f ('??????')
+arg[2]: 0x723a803 
+arg[3]: 0x3f3f3f3f3f3f ('??????')
+[------------------------------------stack-------------------------------------]
+0000| 0x7fffffffdd60 --> 0xd ('\r')
+0008| 0x7fffffffdd68 --> 0x723a803f7a25df2 
+0016| 0x7fffffffdd70 ('?' <repeats 22 times>)
+0024| 0x7fffffffdd78 ('?' <repeats 14 times>)
+0032| 0x7fffffffdd80 --> 0x3f3f3f3f3f3f ('??????')
+0040| 0x7fffffffdd88 --> 0x7ffff7a26399 (<rand+9>:	add    rsp,0x8)
+0048| 0x7fffffffdd90 --> 0x7fffffffddc0 --> 0x401530 (<__libc_csu_init>:	push   r15)
+0056| 0x7fffffffdd98 --> 0x401511 (<main+60>:	mov    edi,0x402e46)
+[------------------------------------------------------------------------------]
+Legend: code, data, rodata, value
+0x00000000004014bb in sat_access ()

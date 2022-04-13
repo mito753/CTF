@@ -1,0 +1,14 @@
+Challenge
+3 Solves
+Blackhole ROP
+500
+Hard
+nc 0.cloud.chals.io 12655
+
+yes, its intended to be solved without the binary
+
+Author: v10l3nt
+
+0/25 attempts
+
+Flag

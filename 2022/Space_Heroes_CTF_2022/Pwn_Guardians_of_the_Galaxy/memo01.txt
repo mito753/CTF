@@ -1,0 +1,67 @@
+[----------------------------------registers-----------------------------------]
+RAX: 0x0 
+RBX: 0x0 
+RCX: 0x7ffff7af2104 (<__GI___libc_write+20>:	cmp    rax,0xfffffffffffff000)
+RDX: 0x7ffff7dcf8c0 --> 0x0 
+RSI: 0x7ffff7dce7e3 --> 0xdcf8c0000000000a 
+RDI: 0x7fffffffdd40 --> 0x2c70252c70000a41 ('A\n')
+RBP: 0x7fffffffdd90 --> 0x555555555320 (<__libc_csu_init>:	endbr64)
+RSP: 0x7fffffffdd30 --> 0x7fffffffdd60 ("flag{", '1' <repeats 26 times>)
+RIP: 0x555555555302 (<main+178>:	call   0x5555555550e0 <printf@plt>)
+R8 : 0x30 ('0')
+R9 : 0x7ffff7fd54c0 (0x00007ffff7fd54c0)
+R10: 0x7ffff7fd54c0 (0x00007ffff7fd54c0)
+R11: 0x246 
+R12: 0x555555555120 (<_start>:	endbr64)
+R13: 0x7fffffffde70 --> 0x1 
+R14: 0x0 
+R15: 0x0
+EFLAGS: 0x202 (carry parity adjust zero sign trap INTERRUPT direction overflow)
+[-------------------------------------code-------------------------------------]
+   0x5555555552f6 <main+166>:	lea    rax,[rbp-0x50]
+   0x5555555552fa <main+170>:	mov    rdi,rax
+   0x5555555552fd <main+173>:	mov    eax,0x0
+=> 0x555555555302 <main+178>:	call   0x5555555550e0 <printf@plt>
+   0x555555555307 <main+183>:	mov    edi,0xa
+   0x55555555530c <main+188>:	call   0x5555555550b0 <putchar@plt>
+   0x555555555311 <main+193>:	jmp    0x5555555552c6 <main+118>
+   0x555555555313:	nop    WORD PTR cs:[rax+rax*1+0x0]
+Guessed arguments:
+arg[0]: 0x7fffffffdd40 --> 0x2c70252c70000a41 ('A\n')
+[------------------------------------stack-------------------------------------]
+0000| 0x7fffffffdd30 --> 0x7fffffffdd60 ("flag{", '1' <repeats 26 times>)
+0008| 0x7fffffffdd38 --> 0x555555559260 --> 0xfbad2488 
+0016| 0x7fffffffdd40 --> 0x2c70252c70000a41 ('A\n')
+0024| 0x7fffffffdd48 ("%p,%p,%p,%p\n")
+0032| 0x7fffffffdd50 --> 0x2c7025000a70252c (',%p\n')
+0040| 0x7fffffffdd58 --> 0x252c70252c7025 ('%p,%p,%')
+0048| 0x7fffffffdd60 ("flag{", '1' <repeats 26 times>)
+0056| 0x7fffffffdd68 ('1' <repeats 23 times>)
+[------------------------------------------------------------------------------]
+Legend: code, data, rodata, value
+0x0000555555555302 in main ()
+gdb-peda$ 
+
+
+gdb-peda$ vmmap
+Start              End                Perm	Name
+0x0000555555554000 0x0000555555555000 r--p	/home/mito/CTF/Space_Heroes_CTF_2022/Pwn_Guardians_of_the_Galaxy/guardians
+0x0000555555555000 0x0000555555556000 r-xp	/home/mito/CTF/Space_Heroes_CTF_2022/Pwn_Guardians_of_the_Galaxy/guardians
+0x0000555555556000 0x0000555555557000 r--p	/home/mito/CTF/Space_Heroes_CTF_2022/Pwn_Guardians_of_the_Galaxy/guardians
+0x0000555555557000 0x0000555555558000 r--p	/home/mito/CTF/Space_Heroes_CTF_2022/Pwn_Guardians_of_the_Galaxy/guardians
+0x0000555555558000 0x0000555555559000 rw-p	/home/mito/CTF/Space_Heroes_CTF_2022/Pwn_Guardians_of_the_Galaxy/guardians
+0x0000555555559000 0x000055555557a000 rw-p	[heap]
+0x00007ffff79e2000 0x00007ffff7bc9000 r-xp	/lib/x86_64-linux-gnu/libc-2.27.so
+0x00007ffff7bc9000 0x00007ffff7dc9000 ---p	/lib/x86_64-linux-gnu/libc-2.27.so
+0x00007ffff7dc9000 0x00007ffff7dcd000 r--p	/lib/x86_64-linux-gnu/libc-2.27.so
+0x00007ffff7dcd000 0x00007ffff7dcf000 rw-p	/lib/x86_64-linux-gnu/libc-2.27.so
+0x00007ffff7dcf000 0x00007ffff7dd3000 rw-p	mapped
+0x00007ffff7dd3000 0x00007ffff7dfc000 r-xp	/lib/x86_64-linux-gnu/ld-2.27.so
+0x00007ffff7fd4000 0x00007ffff7fd6000 rw-p	mapped
+0x00007ffff7ff7000 0x00007ffff7ffa000 r--p	[vvar]
+0x00007ffff7ffa000 0x00007ffff7ffc000 r-xp	[vdso]
+0x00007ffff7ffc000 0x00007ffff7ffd000 r--p	/lib/x86_64-linux-gnu/ld-2.27.so
+0x00007ffff7ffd000 0x00007ffff7ffe000 rw-p	/lib/x86_64-linux-gnu/ld-2.27.so
+0x00007ffff7ffe000 0x00007ffff7fff000 rw-p	mapped
+0x00007ffffffde000 0x00007ffffffff000 rw-p	[stack]
+0xffffffffff600000 0xffffffffff601000 r-xp	[vsyscall]

