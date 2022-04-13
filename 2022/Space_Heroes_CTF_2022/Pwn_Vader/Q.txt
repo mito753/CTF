@@ -1,0 +1,13 @@
+Challenge
+30 Solves
+Vader
+266
+Medium
+Submit flag from /flag.txt from 0.cloud.chals.io:20712
+
+Author: v10l3nt
+
+0.cloud.chals.io:20712
+0/25 attempts
+
+Flag
