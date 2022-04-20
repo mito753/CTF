@@ -1,0 +1,152 @@
+gdb-peda$ vmmap
+Start              End                Perm	Name
+0x00400000         0x00401000         r--p	/home/mito/CTF/TAMUctf_2022/Pwn_Void/void
+0x00401000         0x00402000         r-xp	/home/mito/CTF/TAMUctf_2022/Pwn_Void/void
+0x00402000         0x00403000         r--p	/home/mito/CTF/TAMUctf_2022/Pwn_Void/void
+0x00007ffff7ffb000 0x00007ffff7ffe000 r--p	[vvar]
+0x00007ffff7ffe000 0x00007ffff7fff000 r-xp	[vdso]
+0x00007ffffffde000 0x00007ffffffff000 rw-p	[stack]
+0xffffffffff600000 0xffffffffff601000 --xp	[vsyscall]
+
+
+gdb-peda$ run
+Starting program: /home/mito/CTF/TAMUctf_2022/Pwn_Void/void 
+AAA%AAsAABAA$AAnAACAA-AA(AADAA;AA)AAEAAaAA0AAFAAbAA1AAGAAcAA2AAHAAdAA3AAIAAeAA4AAJAAfAA5AAKAAgAA6AALAAhAA7AAMAAiAA8AANAAjAA9AAOAAkAAPA
+
+Program received signal SIGSEGV, Segmentation fault.
+[----------------------------------registers-----------------------------------]
+RAX: 0x87 
+RBX: 0x0 
+RCX: 0x40101a (<main+26>:	ret)
+RDX: 0x7d0 
+RSI: 0x7fffffffe048 ("AAA%AAsAABAA$AAnAACAA-AA(AADAA;AA)AAEAAaAA0AAFAAbAA1AAGAAcAA2AAHAAdAA3AAIAAeAA4AAJAAfAA5AAKAAgAA6AALAAhAA7AAMAAiA)
+RDI: 0x0 
+RBP: 0x0 
+RSP: 0x7fffffffe048 ("AAA%AAsAABAA$AAnAACAA-AA(AADAA;AA)AAEAAaAA0AAFAAbAA1AAGAAcAA2AAHAAdAA3AAIAAeAA4AAJAAfAA5AAKAAgAA6AALAAhAA7AAMAAiA)
+RIP: 0x40101a (<main+26>:	ret)
+R8 : 0x0 
+R9 : 0x0 
+R10: 0x0 
+R11: 0x246 
+R12: 0x0 
+R13: 0x0 
+R14: 0x0 
+R15: 0x0
+EFLAGS: 0x10246 (carry PARITY adjust ZERO sign trap INTERRUPT direction overflow)
+[-------------------------------------code-------------------------------------]
+   0x40100e <main+14>:	mov    rsi,rsp
+   0x401011 <main+17>:	mov    rdx,0x7d0
+   0x401018 <main+24>:	syscall 
+=> 0x40101a <main+26>:	ret    
+   0x40101b:	nop    DWORD PTR [rax+rax*1+0x0]
+   0x401020 <_start>:	xor    eax,eax
+   0x401022 <_start+2>:	call   0x401000 <main>
+   0x401027 <_start+7>:	mov    rax,0x3c
+[------------------------------------stack-------------------------------------]
+0000| 0x7fffffffe048 ("AAA%AAsAABAA$AAnAACAA-AA(AADAA;AA)AAEAAaAA0AAFAAbAA1AAGAAcAA2AAHAAdAA3AAIAAeAA4AAJAAfAA5AAKAAgAA6AALAAhAA7AAMAAi)
+0008| 0x7fffffffe050 ("ABAA$AAnAACAA-AA(AADAA;AA)AAEAAaAA0AAFAAbAA1AAGAAcAA2AAHAAdAA3AAIAAeAA4AAJAAfAA5AAKAAgAA6AALAAhAA7AAMAAiAA8AANAA)
+0016| 0x7fffffffe058 ("AACAA-AA(AADAA;AA)AAEAAaAA0AAFAAbAA1AAGAAcAA2AAHAAdAA3AAIAAeAA4AAJAAfAA5AAKAAgAA6AALAAhAA7AAMAAiAA8AANAAjAA9AAOA)
+0024| 0x7fffffffe060 ("(AADAA;AA)AAEAAaAA0AAFAAbAA1AAGAAcAA2AAHAAdAA3AAIAAeAA4AAJAAfAA5AAKAAgAA6AALAAhAA7AAMAAiAA8AANAAjAA9AAOAAkAAPA\n)
+0032| 0x7fffffffe068 ("A)AAEAAaAA0AAFAAbAA1AAGAAcAA2AAHAAdAA3AAIAAeAA4AAJAAfAA5AAKAAgAA6AALAAhAA7AAMAAiAA8AANAAjAA9AAOAAkAAPA\n")
+0040| 0x7fffffffe070 ("AA0AAFAAbAA1AAGAAcAA2AAHAAdAA3AAIAAeAA4AAJAAfAA5AAKAAgAA6AALAAhAA7AAMAAiAA8AANAAjAA9AAOAAkAAPA\n")
+0048| 0x7fffffffe078 ("bAA1AAGAAcAA2AAHAAdAA3AAIAAeAA4AAJAAfAA5AAKAAgAA6AALAAhAA7AAMAAiAA8AANAAjAA9AAOAAkAAPA\n")
+0056| 0x7fffffffe080 ("AcAA2AAHAAdAA3AAIAAeAA4AAJAAfAA5AAKAAgAA6AALAAhAA7AAMAAiAA8AANAAjAA9AAOAAkAAPA\n")
+[------------------------------------------------------------------------------]
+Legend: code, data, rodata, value
+Stopped reason: SIGSEGV
+0x000000000040101a in main ()
+gdb-peda$ patto AAA%
+AAA% found at offset: 0
+
+
+0x0000000000401006: add byte ptr [rax - 0x39], cl; mov dword ptr [rax], 0x48000000; mov esi, esp; mov rdx, 0x7d0; syscall; 
+0x0000000000401006: add byte ptr [rax - 0x39], cl; mov dword ptr [rax], 0x48000000; mov esi, esp; mov rdx, 0x7d0; syscall; ret; 
+0x000000000040100d: add byte ptr [rax - 0x77], cl; out 0x48, al; mov edx, 0x7d0; syscall; 
+0x000000000040100d: add byte ptr [rax - 0x77], cl; out 0x48, al; mov edx, 0x7d0; syscall; ret; 
+0x0000000000401004: add byte ptr [rax], al; add byte ptr [rax - 0x39], cl; mov dword ptr [rax], 0x48000000; mov esi, esp; mov rdx, 0x7d0; syscall; 
+0x0000000000401004: add byte ptr [rax], al; add byte ptr [rax - 0x39], cl; mov dword ptr [rax], 0x48000000; mov esi, esp; mov rdx, 0x7d0; syscall; ret; 
+0x000000000040100b: add byte ptr [rax], al; add byte ptr [rax - 0x77], cl; out 0x48, al; mov edx, 0x7d0; syscall; 
+0x000000000040100b: add byte ptr [rax], al; add byte ptr [rax - 0x77], cl; out 0x48, al; mov edx, 0x7d0; syscall; ret; 
+0x0000000000401003: add byte ptr [rax], al; add byte ptr [rax], al; mov rdi, 0; mov rsi, rsp; mov rdx, 0x7d0; syscall; 
+0x0000000000401003: add byte ptr [rax], al; add byte ptr [rax], al; mov rdi, 0; mov rsi, rsp; mov rdx, 0x7d0; syscall; ret; 
+0x000000000040100a: add byte ptr [rax], al; add byte ptr [rax], al; mov rsi, rsp; mov rdx, 0x7d0; syscall; 
+0x000000000040100a: add byte ptr [rax], al; add byte ptr [rax], al; mov rsi, rsp; mov rdx, 0x7d0; syscall; ret; 
+0x0000000000401031: add byte ptr [rax], al; add byte ptr [rax], al; syscall; 
+0x0000000000401031: add byte ptr [rax], al; add byte ptr [rax], al; syscall; ret; 
+0x0000000000401005: add byte ptr [rax], al; mov rdi, 0; mov rsi, rsp; mov rdx, 0x7d0; syscall; 
+0x0000000000401005: add byte ptr [rax], al; mov rdi, 0; mov rsi, rsp; mov rdx, 0x7d0; syscall; ret; 
+0x000000000040102c: add byte ptr [rax], al; mov rdi, 0; syscall; 
+0x000000000040102c: add byte ptr [rax], al; mov rdi, 0; syscall; ret; 
+0x000000000040100c: add byte ptr [rax], al; mov rsi, rsp; mov rdx, 0x7d0; syscall; 
+0x000000000040100c: add byte ptr [rax], al; mov rsi, rsp; mov rdx, 0x7d0; syscall; ret; 
+0x000000000040101e: add byte ptr [rax], al; xor eax, eax; call 0x1000; mov rax, 0x3c; mov rdi, 0; syscall; 
+0x000000000040101e: add byte ptr [rax], al; xor eax, eax; call 0x1000; mov rax, 0x3c; mov rdi, 0; syscall; ret; 
+0x0000000000401016: add byte ptr [rax], al; syscall; 
+0x0000000000401016: add byte ptr [rax], al; syscall; ret; 
+0x000000000040101d: add byte ptr [rax], r8b; xor eax, eax; call 0x1000; mov rax, 0x3c; mov rdi, 0; syscall; 
+0x000000000040101d: add byte ptr [rax], r8b; xor eax, eax; call 0x1000; mov rax, 0x3c; mov rdi, 0; syscall; ret; 
+0x0000000000401019: add eax, 0x441f0fc3; add byte ptr [rax], al; xor eax, eax; call 0x1000; mov rax, 0x3c; mov rdi, 0; syscall; 
+0x0000000000401022: call 0x1000; mov rax, 0x3c; mov rdi, 0; syscall; 
+0x0000000000401022: call 0x1000; mov rax, 0x3c; mov rdi, 0; syscall; ret; 
+0x000000000040102a: cmp al, 0; add byte ptr [rax], al; mov rdi, 0; syscall; 
+0x000000000040102a: cmp al, 0; add byte ptr [rax], al; mov rdi, 0; syscall; ret; 
+0x0000000000401009: mov dword ptr [rax], 0x48000000; mov esi, esp; mov rdx, 0x7d0; syscall; 
+0x0000000000401009: mov dword ptr [rax], 0x48000000; mov esi, esp; mov rdx, 0x7d0; syscall; ret; 
+0x0000000000401001: mov eax, 0; mov rdi, 0; mov rsi, rsp; mov rdx, 0x7d0; syscall; 
+0x0000000000401001: mov eax, 0; mov rdi, 0; mov rsi, rsp; mov rdx, 0x7d0; syscall; ret; 
+0x0000000000401028: mov eax, 0x3c; mov rdi, 0; syscall; 
+0x0000000000401028: mov eax, 0x3c; mov rdi, 0; syscall; ret; 
+0x0000000000401008: mov edi, 0; mov rsi, rsp; mov rdx, 0x7d0; syscall; 
+0x0000000000401008: mov edi, 0; mov rsi, rsp; mov rdx, 0x7d0; syscall; ret; 
+0x000000000040102f: mov edi, 0; syscall; 
+0x000000000040102f: mov edi, 0; syscall; ret; 
+0x0000000000401012: mov edx, 0x7d0; syscall; 
+0x0000000000401012: mov edx, 0x7d0; syscall; ret; 
+0x000000000040100f: mov esi, esp; mov rdx, 0x7d0; syscall; 
+0x000000000040100f: mov esi, esp; mov rdx, 0x7d0; syscall; ret; 
+0x0000000000401000: mov rax, 0; mov rdi, 0; mov rsi, rsp; mov rdx, 0x7d0; syscall; 
+0x0000000000401000: mov rax, 0; mov rdi, 0; mov rsi, rsp; mov rdx, 0x7d0; syscall; ret; 
+0x0000000000401027: mov rax, 0x3c; mov rdi, 0; syscall; 
+0x0000000000401027: mov rax, 0x3c; mov rdi, 0; syscall; ret; 
+0x0000000000401007: mov rdi, 0; mov rsi, rsp; mov rdx, 0x7d0; syscall; 
+0x0000000000401007: mov rdi, 0; mov rsi, rsp; mov rdx, 0x7d0; syscall; ret; 
+0x000000000040102e: mov rdi, 0; syscall; 
+0x000000000040102e: mov rdi, 0; syscall; ret; 
+0x0000000000401011: mov rdx, 0x7d0; syscall; 
+0x0000000000401011: mov rdx, 0x7d0; syscall; ret; 
+0x000000000040100e: mov rsi, rsp; mov rdx, 0x7d0; syscall; 
+0x000000000040100e: mov rsi, rsp; mov rdx, 0x7d0; syscall; ret; 
+0x000000000040101b: nop dword ptr [rax + rax]; xor eax, eax; call 0x1000; mov rax, 0x3c; mov rdi, 0; syscall; 
+0x000000000040101b: nop dword ptr [rax + rax]; xor eax, eax; call 0x1000; mov rax, 0x3c; mov rdi, 0; syscall; ret; 
+0x0000000000401010: out 0x48, al; mov edx, 0x7d0; syscall; 
+0x0000000000401010: out 0x48, al; mov edx, 0x7d0; syscall; ret; 
+0x0000000000401013: ret 0x7d0; 
+0x0000000000401002: rol byte ptr [rax], 0; add byte ptr [rax], al; mov rdi, 0; mov rsi, rsp; mov rdx, 0x7d0; syscall; 
+0x0000000000401002: rol byte ptr [rax], 0; add byte ptr [rax], al; mov rdi, 0; mov rsi, rsp; mov rdx, 0x7d0; syscall; ret; 
+0x0000000000401014: rol byte ptr [rdi], 1; add byte ptr [rax], al; syscall; 
+0x0000000000401014: rol byte ptr [rdi], 1; add byte ptr [rax], al; syscall; ret; 
+0x0000000000401020: xor eax, eax; call 0x1000; mov rax, 0x3c; mov rdi, 0; syscall; 
+0x0000000000401020: xor eax, eax; call 0x1000; mov rax, 0x3c; mov rdi, 0; syscall; ret; 
+0x000000000040101a: ret; 
+0x0000000000401018: syscall; 
+0x0000000000401018: syscall; ret;
+
+
+*RAX  0x7fffffffe5e8 ◂— 'LOGNAME=mito'
+*RBX  0x7fffffffe594 ◂— 'MATE_DESKTOP_SESSION_ID=this-is-deprecated'
+*RCX  0x7fffffffe5f5 ◂— 'XDG_SESSION_DESKTOP=mate'
+*RDX  0x7fffffffe5bf ◂— 'PWD=/home/mito/CTF/TAMUctf_2022/Pwn_Void'
+*RDI  0x7fffffffe52f ◂— 'SSH_AGENT_PID=1950'
+*RSI  0x7fffffffe542 ◂— 'GTK_MODULES=appmenu-gtk-module:gail:atk-bridge:canberra-gtk-module'
+*R8   0x7fffffffe444 ◂— 'WINDOWID=52582571'
+*R9   0x7fffffffe456 ◂— 'QT_ACCESSIBILITY=1'
+*R10  0x7fffffffe469 ◂— 'COLORTERM=truecolor'
+*R11  0x7fffffffe47d ◂— 'XDG_CONFIG_DIRS=/etc/xdg/xdg-mate:/etc/xdg'
+*R12  0x7fffffffe4a8 ◂— 'XDG_SESSION_PATH=/org/freedesktop/DisplayManager/Session0'
+*R13  0x7fffffffe4e2 ◂— 'LANGUAGE=en_US'
+*R14  0x7fffffffe4f1 ◂— 'SSH_AUTH_SOCK=/run/user/1000/keyring/ssh'
+*R15  0x7fffffffe51a ◂— 'DESKTOP_SESSION=mate'
+*RBP  0x7fffffffe585 ◂— 'XDG_SEAT=seat0'
+*RSP  0x7fffffffe60e ◂— 'QT_QPA_PLATFORMTHEME=gtk2'
+*RIP  0x7fffffffe628 ◂— 'XDG_SESSION_TYPE=x11'
+

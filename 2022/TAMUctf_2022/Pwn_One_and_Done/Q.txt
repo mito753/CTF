@@ -1,0 +1,11 @@
+Challenge
+47 Solves
+One and Done
+100
+Author: Addison
+
+It's trivial, but not! There are no other files in the target than this binary and the flag at /pwn/flag.txt, so you can't use anything else!
+
+SNI: one-and-done
+
+Flag

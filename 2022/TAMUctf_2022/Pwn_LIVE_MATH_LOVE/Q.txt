@@ -1,0 +1,11 @@
+Challenge
+40 Solves
+LIVE MATH LOVE
+184
+Author: Lane
+
+I made this cool calculator! Hope there's nothing vulnerable in here
+
+SNI: live-math-love
+
+Flag

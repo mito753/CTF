@@ -1,0 +1,86 @@
+gdb-peda$ pattc 128
+'AAA%AAsAABAA$AAnAACAA-AA(AADAA;AA)AAEAAaAA0AAFAAbAA1AAGAAcAA2AAHAAdAA3AAIAAeAA4AAJAAfAA5AAKAAgAA6AALAAhAA7AAMAAiAA8AANAAjAA9AAOA'
+gdb-peda$ run
+Starting program: /home/mito/CTF/TAMUctf_2022/Pwn_Rop_Golf/rop_golf 
+hi!
+AAA%AAsAABAA$AAnAACAA-AA(AADAA;AA)AAEAAaAA0AAFAAbAA1AAGAAcAA2AAHAAdAA3AAIAAeAA4AAJAAfAA5AAKAAgAA6AALAAhAA7AAMAAiAA8AANAAjAA9AAOA
+
+Program received signal SIGSEGV, Segmentation fault.
+[----------------------------------registers-----------------------------------]
+RAX: 0x48 ('H')
+RBX: 0x4011a0 (<__libc_csu_init>:	push   r15)
+RCX: 0x7ffff7ecf002 (<__GI___libc_read+18>:	cmp    rax,0xfffffffffffff000)
+RDX: 0x48 ('H')
+RSI: 0x7fffffffdf00 ("AAA%AAsAABAA$AAnAACAA-AA(AADAA;AA)AAEAAaAA0AAFAAbAA1AAGAAcAA2AAHAAdAA3AA(\340\377\377\377\177")
+RDI: 0x0 
+RBP: 0x6141414541412941 ('A)AAEAAa')
+RSP: 0x7fffffffdf28 ("AA0AAFAAbAA1AAGAAcAA2AAHAAdAA3AA(\340\377\377\377\177")
+RIP: 0x401162 (<vuln+32>:	ret)
+R8 : 0x4 
+R9 : 0x7ffff7fe0d50 (endbr64)
+R10: 0x4003e8 --> 0x6474730064616572 ('read')
+R11: 0x246 
+R12: 0x401060 (<_start>:	xor    ebp,ebp)
+R13: 0x7fffffffe020 --> 0x1 
+R14: 0x0 
+R15: 0x0
+EFLAGS: 0x10207 (CARRY PARITY adjust zero sign trap INTERRUPT direction overflow)
+[-------------------------------------code-------------------------------------]
+   0x40115b <vuln+25>:	call   0x401040 <read@plt>
+   0x401160 <vuln+30>:	nop
+   0x401161 <vuln+31>:	leave  
+=> 0x401162 <vuln+32>:	ret    
+   0x401163 <main>:	push   rbp
+   0x401164 <main+1>:	mov    rbp,rsp
+   0x401167 <main+4>:	mov    rax,QWORD PTR [rip+0x2ed2]        # 0x404040 <stdout@@GLIBC_2.2.5>
+   0x40116e <main+11>:	mov    ecx,0x0
+[------------------------------------stack-------------------------------------]
+0000| 0x7fffffffdf28 ("AA0AAFAAbAA1AAGAAcAA2AAHAAdAA3AA(\340\377\377\377\177")
+0008| 0x7fffffffdf30 ("bAA1AAGAAcAA2AAHAAdAA3AA(\340\377\377\377\177")
+0016| 0x7fffffffdf38 ("AcAA2AAHAAdAA3AA(\340\377\377\377\177")
+0024| 0x7fffffffdf40 ("AAdAA3AA(\340\377\377\377\177")
+0032| 0x7fffffffdf48 --> 0x7fffffffe028 --> 0x7fffffffe35d ("/home/mito/CTF/TAMUctf_2022/Pwn_Rop_Golf/rop_golf")
+0040| 0x7fffffffdf50 --> 0x100000000 
+0048| 0x7fffffffdf58 --> 0x401163 (<main>:	push   rbp)
+0056| 0x7fffffffdf60 --> 0x4011a0 (<__libc_csu_init>:	push   r15)
+[------------------------------------------------------------------------------]
+Legend: code, data, rodata, value
+Stopped reason: SIGSEGV
+0x0000000000401162 in vuln ()
+gdb-peda$ IAAeAA4AAJAAfAA5AAKAAgAA6AALAAhAA7AAMAAiAA8AANAAjAA9AAOA
+Undefined command: "IAAeAA4AAJAAfAA5AAKAAgAA6AALAAhAA7AAMAAiAA8AANAAjAA9AAOA".  Try "help".
+gdb-peda$ patto AA0A
+AA0A found at offset: 40
+gdb-peda$ vmmap
+Start              End                Perm	Name
+0x00400000         0x00401000         r--p	/home/mito/CTF/TAMUctf_2022/Pwn_Rop_Golf/rop_golf
+0x00401000         0x00402000         r-xp	/home/mito/CTF/TAMUctf_2022/Pwn_Rop_Golf/rop_golf
+0x00402000         0x00403000         r--p	/home/mito/CTF/TAMUctf_2022/Pwn_Rop_Golf/rop_golf
+0x00403000         0x00404000         r--p	/home/mito/CTF/TAMUctf_2022/Pwn_Rop_Golf/rop_golf
+0x00404000         0x00405000         rw-p	/home/mito/CTF/TAMUctf_2022/Pwn_Rop_Golf/rop_golf
+0x00007ffff7dc1000 0x00007ffff7de3000 r--p	/usr/lib/x86_64-linux-gnu/libc-2.31.so
+0x00007ffff7de3000 0x00007ffff7f5b000 r-xp	/usr/lib/x86_64-linux-gnu/libc-2.31.so
+0x00007ffff7f5b000 0x00007ffff7fa9000 r--p	/usr/lib/x86_64-linux-gnu/libc-2.31.so
+0x00007ffff7fa9000 0x00007ffff7fad000 r--p	/usr/lib/x86_64-linux-gnu/libc-2.31.so
+0x00007ffff7fad000 0x00007ffff7faf000 rw-p	/usr/lib/x86_64-linux-gnu/libc-2.31.so
+0x00007ffff7faf000 0x00007ffff7fb5000 rw-p	mapped
+0x00007ffff7fcb000 0x00007ffff7fce000 r--p	[vvar]
+0x00007ffff7fce000 0x00007ffff7fcf000 r-xp	[vdso]
+0x00007ffff7fcf000 0x00007ffff7fd0000 r--p	/usr/lib/x86_64-linux-gnu/ld-2.31.so
+0x00007ffff7fd0000 0x00007ffff7ff3000 r-xp	/usr/lib/x86_64-linux-gnu/ld-2.31.so
+0x00007ffff7ff3000 0x00007ffff7ffb000 r--p	/usr/lib/x86_64-linux-gnu/ld-2.31.so
+0x00007ffff7ffc000 0x00007ffff7ffd000 r--p	/usr/lib/x86_64-linux-gnu/ld-2.31.so
+0x00007ffff7ffd000 0x00007ffff7ffe000 rw-p	/usr/lib/x86_64-linux-gnu/ld-2.31.so
+0x00007ffff7ffe000 0x00007ffff7fff000 rw-p	mapped
+0x00007ffffffde000 0x00007ffffffff000 rw-p	[stack]
+0xffffffffff600000 0xffffffffff601000 --xp	[vsyscall]
+gdb-peda$ x/80gx 0x404000
+0x404000:	0x0000000000403e20	0x00007ffff7ffe190
+0x404010:	0x00007ffff7fe7bb0	0x00007ffff7e45450
+0x404020 <read@got.plt>:	0x00007ffff7eceff0	0x00007ffff7e45d10
+0x404030:	0x0000000000000000	0x0000000000000000
+0x404040 <stdout@@GLIBC_2.2.5>:	0x00007ffff7fae6a0	0x0000000000000000
+0x404050:	0x0000000000000000	0x0000000000000000
+
+0x00000000004011fb: pop rdi; ret; 
+0x00000000004011f9: pop rsi; pop r15; ret; 

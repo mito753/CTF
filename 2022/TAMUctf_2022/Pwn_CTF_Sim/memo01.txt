@@ -1,0 +1,129 @@
+mito@ubuntu:~/CTF/TAMUctf_2022/Pwn_CTF_Sim$ gdb -q ./ctf_sim
+Reading symbols from ./ctf_sim...
+(No debugging symbols found in ./ctf_sim)
+gdb-peda$ run
+Starting program: /home/mito/CTF/TAMUctf_2022/Pwn_CTF_Sim/ctf_sim 
+1CTF SIM
+1. Download a Challenge
+2. Solve a Challenge
+3. Submit a writeup
+4. Quit
+> 
+DOWNLOAD A CHALLENGE
+Choose a category
+1. Forensics
+2. Reversing
+3. Pwn
+4. Web
+5. Crypto
+> 3
+Choose an index to save your challenge to (0-3)
+> 0
+CTF SIM
+1. Download a Challenge
+2. Solve a Challenge
+3. Submit a writeup
+4. Quit
+> 1
+DOWNLOAD A CHALLENGE
+Choose a category
+1. Forensics
+2. Reversing
+3. Pwn
+4. Web
+5. Crypto
+> 4
+Choose an index to save your challenge to (0-3)
+> 1
+CTF SIM
+1. Download a Challenge
+2. Solve a Challenge
+3. Submit a writeup
+4. Quit
+> 1
+DOWNLOAD A CHALLENGE
+Choose a category
+1. Forensics
+2. Reversing
+3. Pwn
+4. Web
+5. Crypto
+> 5
+Choose an index to save your challenge to (0-3)
+> 2
+CTF SIM
+1. Download a Challenge
+2. Solve a Challenge
+3. Submit a writeup
+4. Quit
+> 2
+SOLVE A CHALLENGE
+Choose one of your downloaded challenges (0-3)
+> 0
+You solved a pwn challenge by keysmashing and being lucky!
+CTF SIM
+1. Download a Challenge
+2. Solve a Challenge
+3. Submit a writeup
+4. Quit
+> 2
+SOLVE A CHALLENGE
+Choose one of your downloaded challenges (0-3)
+> 1
+You solved a web challenge by copy and pasting payloadallthethings!
+CTF SIM
+1. Download a Challenge
+2. Solve a Challenge
+3. Submit a writeup
+4. Quit
+> 3
+SUBMIT A WRITEUP
+How long is your writeup?
+> 32
+Enter your writeup
+> aaaaaaaaaaaaaaaaaaaaaaaa
+CTF SIM
+1. Download a Challenge
+2. Solve a Challenge
+3. Submit a writeup
+4. Quit
+> 2
+SOLVE A CHALLENGE
+Choose one of your downloaded challenges (0-3)
+> 1
+
+Program received signal SIGSEGV, Segmentation fault.
+[----------------------------------registers-----------------------------------]
+RAX: 0x0 
+RBX: 0x401ab0 (<__libc_csu_init>:	push   r15)
+RCX: 0x8 
+RDX: 0x4176f0 --> 0x4176d0 --> 0x0 
+RSI: 0x0 
+RDI: 0x4176f0 --> 0x4176d0 --> 0x0 
+RBP: 0x7fffffffdf20 --> 0x7fffffffdf40 --> 0x0 
+RSP: 0x7fffffffdf08 --> 0x4015aa (<_Z14solveChallengev+206>:	mov    eax,DWORD PTR [rbp-0x4])
+RIP: 0x0 
+R8 : 0xa ('\n')
+R9 : 0x4041f0 --> 0x7ffff7fa9958 --> 0x7ffff7ee81d0 (<_ZTv0_n24_NSiD1Ev>:	endbr64)
+R10: 0xfffffffffffffe1e 
+R11: 0x246 
+R12: 0x4010f0 (<_start>:	xor    ebp,ebp)
+R13: 0x7fffffffe030 --> 0x1 
+R14: 0x0 
+R15: 0x0
+EFLAGS: 0x10293 (CARRY parity ADJUST zero SIGN trap INTERRUPT direction overflow)
+[-------------------------------------code-------------------------------------]
+Invalid $PC address: 0x0
+[------------------------------------stack-------------------------------------]
+0000| 0x7fffffffdf08 --> 0x4015aa (<_Z14solveChallengev+206>:	mov    eax,DWORD PTR [rbp-0x4])
+0008| 0x7fffffffdf10 --> 0x401ab0 (<__libc_csu_init>:	push   r15)
+0016| 0x7fffffffdf18 --> 0x1004010f0 
+0024| 0x7fffffffdf20 --> 0x7fffffffdf40 --> 0x0 
+0032| 0x7fffffffdf28 --> 0x4017ef (<main+300>:	jmp    0x4016cb <main+8>)
+0040| 0x7fffffffdf30 --> 0x7fffffffe030 --> 0x1 
+0048| 0x7fffffffdf38 --> 0x200000000 
+0056| 0x7fffffffdf40 --> 0x0 
+[------------------------------------------------------------------------------]
+Legend: code, data, rodata, value
+Stopped reason: SIGSEGV
+0x0000000000000000 in ?? ()

@@ -1,0 +1,11 @@
+Challenge
+34 Solves
+Void
+285
+Author: sky
+
+Can't exploit it if there isn't anything to exploit, right? NX, no libc, what else even can you do?!
+
+SNI: void
+
+Flag

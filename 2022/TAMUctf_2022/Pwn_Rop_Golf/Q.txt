@@ -1,0 +1,18 @@
+Challenge
+21 Solves
+Rop Golf
+405
+Author: sky
+
+I keep on getting hacked by people using my shells! Now that I've deleted all the nonessential programs off my computer I should be safe... right?
+
+The flag is in a *.txt file with a randomly generated name inside the same directory as the binary.
+
+SNI: rop-golf
+
+Flag
+
+
+Hint
+×
+"I've deleted all the nonessential programs off my computer I should be safe... right?" is implying that the server has executed rm /usr/bin/*; rm /sbin/*; rm /usr/sbin/*; rm /bin/*; you'll need arbitrary code exec without the assistance of execve :)

