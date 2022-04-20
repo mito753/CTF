@@ -17,6 +17,8 @@
 > live_math_love
 >
 > live_math_love.c
+>
+> solver-template.py
 
 ### C code:
 
