@@ -1,0 +1,8 @@
+extreme_64_part_2 417 Points1 day, 20 hours, 34 minutes, 23 seconds remaining
+Can you program in x86_64 assembly? Pass each level to get the flag.
+Note: separate each instruction by a semicolon
+nc ctf.b01lers.com 9302
+
+Author: novafacing
+Difficulty: Easy
+Please enter flag for challenge: extreme_64_part_2

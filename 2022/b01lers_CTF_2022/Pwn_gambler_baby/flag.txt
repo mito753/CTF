@@ -1,0 +1,12 @@
+    'Correct word: bxub\n'
+    'You won (wow)! +10 coins.\n'
+    'Your current balance: 990\n'
+    'Guess me a string of length 4 with lowercase letters: '
+[DEBUG] Sent 0x5 bytes:
+    'umen\n'
+[DEBUG] Received 0x11 bytes:
+    'Your guess: umen\n'
+[DEBUG] Received 0x5d bytes:
+    'Correct word: umen\n'
+    'You won (wow)! +10 coins.\n'
+    'flag{n0_pr4153_f0r_RNGesus}\n'

@@ -1,0 +1,51 @@
+>>> code{we_c4n_d0_th1s_all_d4y}
+Invalid password.
+================================= LEVEL 0x000 ==================================
+Add rdi to rsi and store the result in rax using only one instruction.
+>>> add rsi, rdi; mov rax, rsi
+--> 
+Success! Level password is: code{some_instructions_have_many_uses}
+
+Success! Level password is: code{some_instructions_have_many_uses}
+
+================================= LEVEL 0x000 ==================================
+Print the string 'hackerman' to stdout.
+>>> push 0x6e;
+movabs rax, 0x616d72656b636168;
+push rax;
+mov rsi, rsp;
+mov rax, 1;
+mov rdx, 9;
+mov rdi, 1;
+syscall;--> --> --> --> --> --> --> 
+--> 
+[=]	(fd = 0x1, buf = 0x11feff0, count = 0x9)
+Success! Level password is: code{asm_c4n_d0_anything_java_can_do}
+
+================================= LEVEL 0x000 ==================================
+ Register rsi contains a pointer to the flag, but the  flag has been encoded by
+XOR-ing each byte with 0x82.  Decode it and print it out to complete the
+challenge! Hint: the flag is 32 characters long...
+>>> push rsi;
+pop  rbx;
+mov  rcx, 0x20;
+pos1:
+xor  byte ptr[rbx], 0x82;
+inc  rbx;
+dec  rcx;
+cmp rcx, 0;
+jne pos1;
+mov rax, 1;
+mov rdi, 1;
+mov rdx, 0x20;
+syscall;--> --> --> --> --> --> --> --> --> --> --> --> 
+--> 
+[=]	(fd = 0x1, buf = 0x10000000, count = 0x20)
+stdout: b'bctf{c0ngrats_y0u_are_a_pr0!!!!}'
+Success! Level password is: code{did_you_get_the_flag?}
+
+You have completed all levels! Here's the flag: bctf{c0ngrats_y0u_are_a_pr0!!!!}
+
+
+
+

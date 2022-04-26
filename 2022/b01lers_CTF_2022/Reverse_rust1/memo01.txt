@@ -1,0 +1,167 @@
+mito@ubuntu:~/CTF/b01lers_CTF_2022/Reverse_rust1$ nc ctf.b01lers.com 9303
+To get the flag, you have to beat the monster the correct way
+Think you can handle it?....
+Prepare to lose
+
+    __,-----,,,,  ,,,--------,__ 
+    _-/|\\/|\\/|\\\|\//\\\//|/|//|\\_ 
+   /|\/\//\\\\\\\\\\//////////////\\\\ 
+ //|//           \\\///            |\\|\ 
+///|\/             \/               \|\|\ 
+|/|//                                 |\\|\  
+|/|/                                    \|\|\
+///;    ,,=====,,,  ~~-~~  ,,,=====,,    ;|\|\
+|/|/   '"          `'     '"          "'   ;|\|
+||/`;   _--~~~~--__         __--~~~~--_   ;/|\|
+/|||;  :  /       \~~-___-~~/       \  :  ;|\| 
+/\|;    -_\  (o)  / ,'; ;', \  (o)  /_-    ;|| 
+|\|;      ~-____--~'  ; ;  '~--____-~      ;\| 
+||;            ,`   ;   ;   ',            ;||
+__|\ ;        ,'`    (  _  )    `',        ;/|__ 
+_,-~   \|/;    ,'`        ~~ ~~        `',    ;|\   ~-,_ 
+,'         ||;  '                           '  ;\|/       `, 
+, _          ; ,         _--~~-~~--_           ;            _',
+,-' `;-,        ;        ,; |_| | |_| ;,       ;;        ,-;' `-,
+; `,      ;       ;_| : `~'~' : |_;       ;      ,' ;
+;  `,     ;     :  `\/       \/   :     ;     ,'  ;
+;   `,    ;     :               ;     ;    ,'   ;
+;    `,_  ;     ;./\_     _/\.;     ;   _,    ;
+spb   _-'        ;  ;     ~~--|~|~|--~~     ;   ;       '-_
+_,-'            ;  ;        ~~~~~        ;   ;           `-,_
+,~                 ;  \`~--__         __--~/  ;                ~,
+        ;   \   ~~-----~~    /   ;                   
+         ~-_  \  /  |  \   /  _-~                    
+            ~~-\/   |   \/ -~~                       
+           (=)=;==========;=(=)
+    
+Fee-fi-fo-fum
+
+I have 120 health, prepare to lose
+1) Flame
+2) Ice
+3) Wind
+Enter your attack
+1
+Any powerups?
+Y/N
+N
+You rolled: 16
+Monster rolled: 15
+Ouch! That's gonna leave a mark
+You now have 70 health
+ and the monster has 104 health
+1) Flame
+2) Ice
+3) Wind
+Enter your attack
+1
+Any powerups?
+Y/N
+N
+You rolled: 18
+Monster rolled: 19
+Nice try ;)
+You now have 51 health
+ and the monster has 104 health
+1) Flame
+2) Ice
+3) Wind
+Enter your attack
+1
+Any powerups?
+Y/N
+N
+You rolled: 25
+Monster rolled: 13
+Ouch! That's gonna leave a mark
+You now have 51 health
+ and the monster has 79 health
+1) Flame
+2) Ice
+3) Wind
+Enter your attack
+1
+Any powerups?
+Y/N
+N
+You rolled: 24
+Monster rolled: 15
+Ouch! That's gonna leave a mark
+You now have 51 health
+ and the monster has 55 health
+1) Flame
+2) Ice
+3) Wind
+Enter your attack
+1
+Any powerups?
+Y/N
+N
+You rolled: 23
+Monster rolled: 12
+Ouch! That's gonna leave a mark
+You now have 51 health
+ and the monster has 32 health
+1) Flame
+2) Ice
+3) Wind
+Enter your attack
+1
+Any powerups?
+Y/N
+N
+You rolled: 24
+Monster rolled: 24
+Ooooh a tie, let's do it again
+You now have 51 health
+ and the monster has 32 health
+1) Flame
+2) Ice
+3) Wind
+Enter your attack
+1
+Any powerups?
+Y/N
+N
+You rolled: 15
+Monster rolled: 28
+Nice try ;)
+You now have 23 health
+ and the monster has 32 health
+1) Flame
+2) Ice
+3) Wind
+Enter your attack
+1
+Any powerups?
+Y/N
+N
+You rolled: 25
+Monster rolled: 14
+Ouch! That's gonna leave a mark
+You now have 23 health
+ and the monster has 7 health
+1) Flame
+2) Ice
+3) Wind
+Enter your attack
+1
+Any powerups?
+Y/N
+N
+You rolled: 28
+Monster rolled: 13
+Ouch! That's gonna leave a mark
+You now have 23 health
+ and the monster has 0 health
+Ran out of attacks, try again later
+
+
+      if ((uint)*(byte *)((long)local_108 + 3) +
+          (uint)*(byte *)((long)local_108 + 2) +
+          (uint)*(byte *)((long)local_108 + 1) + (uint)*(byte *)local_108 != 0x115)
+
+
+      if ((uint)*(byte *)((long)local_108 + 7) +
+          (uint)*(byte *)((long)local_108 + 6) +
+          (uint)*(byte *)((long)local_108 + 5) * (uint)*(byte *)((long)local_108 + 4) != 0x1337)

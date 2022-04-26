@@ -1,0 +1,11 @@
+>>> pos2:
+cmp rax, 0;
+jle pos1;
+add rsi, rax;
+dec rax;
+jmp pos2;
+pos1:--> --> --> --> --> --> 
+--> 
+Success! Level password is: code{l00p_the_l00p}
+
+You have completed all levels! Here's the flag: bctf{c3rt1f13d_asm_pr0gr4mmer!!}

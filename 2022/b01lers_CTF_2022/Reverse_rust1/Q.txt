@@ -1,0 +1,8 @@
+rust1 482 Points1 day, 20 hours, 12 minutes, 23 seconds remaining
+Fight the monster well, and the flag is yours.
+nc ctf.b01lers.com 9303
+
+Author: akhbaar
+Difficulty: Easy
+rust1
+Please enter flag for challenge: rust1

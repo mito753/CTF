@@ -1,0 +1,3 @@
+mito@ubuntu:~/CTF/b01lers_CTF_2022/Reverse_TM$ ./tm
+bctf{tur1ng_m4_C_1n3}
+Input accepted.

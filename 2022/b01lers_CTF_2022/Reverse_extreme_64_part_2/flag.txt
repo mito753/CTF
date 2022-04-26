@@ -1,0 +1,23 @@
+================================= LEVEL 0x000 ==================================
+ Register rsi contains a pointer to the flag, but the  flag has been encoded by
+XOR-ing each byte with 0x82.  Decode it and print it out to complete the
+challenge! Hint: the flag is 32 characters long...
+>>> push rsi;
+pop  rbx;
+mov  rcx, 0x20;
+pos1:
+xor  byte ptr[rbx], 0x82;
+inc  rbx;
+dec  rcx;
+cmp rcx, 0;
+jne pos1;
+mov rax, 1;
+mov rdi, 1;
+mov rdx, 0x20;
+syscall;--> --> --> --> --> --> --> --> --> --> --> --> 
+--> 
+[=]	(fd = 0x1, buf = 0x10000000, count = 0x20)
+stdout: b'bctf{c0ngrats_y0u_are_a_pr0!!!!}'
+Success! Level password is: code{did_you_get_the_flag?}
+
+You have completed all levels! Here's the flag: bctf{c0ngrats_y0u_are_a_pr0!!!!}

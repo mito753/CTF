@@ -1,0 +1,79 @@
+mito@ubuntu:~/CTF/b01lers_CTF_2022/Reverse_crackme_2$ nc ctf.b01lers.com 9301
+Warning: _curses.error: setupterm: could not find terminfo database
+
+Terminal features will not be available.  Consider setting TERM variable to your current terminal name (or xterm).
+Enter a level password or press enter if you don't have one:
+>>> sssssssss
+Invalid password.
+================================= LEVEL 0x000 ==================================
+Set rdi to 0x1337 using only one instruction.
+>>> mov rdi,0x1337
+--> 
+Success! Level password is: code{very_1337}
+
+================================= LEVEL 0x001 ==================================
+Add rdi to rsi and store the result in rax using two or less instructions.
+>>> add rsi, rdi; mov rax, rsi
+--> 
+Success! Level password is: code{math_time}
+
+================================= LEVEL 0x002 ==================================
+
+================================================================================
+0001: if (rax == 0x1000) {
+0002:     rsi = 0x10;
+0003: }
+================================================================================
+
+>>> cmp rax, 0x1000;
+--> jne pos;
+--> mov rsi, 0x10;
+--> pos:
+--> 
+Success! Level password is: code{control_flow_is_the_best}
+
+================================= LEVEL 0x001 ==================================
+Translate the following C-Like pseudocode to x86_64 assembly:
+
+================================================================================
+0001: if (rax == 0x1000) {
+0002:     rsi = 0x10;
+0003: } else if (rax == 0x3000) {
+0004:     rsi = 0x20;
+0005: }
+================================================================================
+
+>>> cmp rax, 0x1000;
+--> jne pos1;
+--> mov rsi, 0x10;
+--> pos1:
+--> cmp rax, 0x3000;
+--> jne pos2;
+--> mov rsi, 0x20;
+--> pos2:
+--> 
+Success! Level password is: code{we_c4n_d0_th1s_all_d4y}
+
+================================= LEVEL 0x002 ==================================
+Translate the following C-Like pseudocode to x86_64 assembly:
+================================= LEVEL 0x000 ==================================
+Translate the following C-Like pseudocode to x86_64 assembly:
+
+================================================================================
+0001: while (rax > 0x0) {
+0002:     rsi += rax;
+0003:     rax--;
+0004: }
+================================================================================
+
+>>> pos2:
+cmp rax, 0;
+jle pos1;
+add rsi, rax;
+dec rax;
+jmp pos2;
+pos1:--> --> --> --> --> --> 
+--> 
+Success! Level password is: code{l00p_the_l00p}
+
+You have completed all levels! Here's the flag: bctf{c3rt1f13d_asm_pr0gr4mmer!!}

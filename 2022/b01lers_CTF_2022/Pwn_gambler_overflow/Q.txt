@@ -1,0 +1,8 @@
+gambler_overflow 500 Points1 day, 23 hours, 55 minutes, 17 seconds remaining
+Feeling luuuuuuuucky?
+nc ctf.b01lers.com 9203
+
+Author: robotearthpizza
+Difficulty: Easy
+gambler-baby2Size: 17.34 KBMD5: 7d34c464ae288e972fb064a51d7dc8bb
+Please enter flag for challenge: gambler_overflow

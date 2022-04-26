@@ -1,0 +1,7 @@
+TM 482 Points1 day, 20 hours, 11 minutes, 4 seconds remaining
+Guess who took theory of computation this semester...
+
+Author: robotearthpizza
+Difficulty: Medium
+tmSize: 18.13 KBMD5: 7fd5bb3e2e7898003215e7ef89a28769
+Please enter flag for challenge: TM

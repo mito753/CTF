@@ -1,0 +1,7 @@
+I Love Java 280 Points1 day, 21 hours, 30 minutes, 29 seconds remaining
+Can you Java?
+
+Author: TSBloxorz
+Difficulty: Medium
+CrackMe.classSize: 2.05 KBMD5: d7a80af353b9a39cc32c5e529d26d8c1
+Please enter flag for challenge: I Love Java

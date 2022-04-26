@@ -1,0 +1,7 @@
+crackme 92 Points1 day, 22 hours, 52 minutes, 30 seconds remaining
+Security through obscurity is no match for you!
+
+Author: novafacing
+Difficulty: Easy
+crackmeSize: 16.20 KBMD5: f956a20c692c4af26607d5109180b58f
+Please enter flag for challenge: crackme

@@ -1,0 +1,8 @@
+gambler_baby 500 Points1 day, 23 hours, 55 minutes, 57 seconds remaining
+Feeling lucky?
+nc ctf.b01lers.com 9202
+
+Author: robotearthpizza
+Difficulty: Easy
+gambler-baby1Size: 17.38 KBMD5: 4ac38a393c75f416802ea4ec8fccb130
+Please enter flag for challenge: gambler_baby

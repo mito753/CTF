@@ -1,0 +1,4 @@
+mito@ubuntu:~/CTF/b01lers_CTF_2022/Reverse_crackme_2$ ./crackme_2 
+Product key> bctf{4lg3br4!}
+Key correct, activating.
+mito@ubuntu:~/CTF/b01lers_

@@ -1,0 +1,8 @@
+gambler_supreme 500 Points1 day, 23 hours, 56 minutes, 39 seconds remaining
+The Casino, but with a cool new feature!
+nc ctf.b01lers.com 9201
+
+Author: robotearthpizza
+Difficulty: Hard
+gambler_supremeSize: 17.34 KBMD5: cd907b8f8e86a14fed86a06819c9d1c2
+Please enter flag for challenge: gambler_supreme

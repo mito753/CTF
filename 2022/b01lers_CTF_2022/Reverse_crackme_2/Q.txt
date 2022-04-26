@@ -1,0 +1,7 @@
+crackme_2 153 Points1 day, 22 hours, 47 minutes, 3 seconds remaining
+Time for some basic algebra...
+
+Author: novafacing
+Difficulty: Easy
+crackme_2Size: 16.55 KBMD5: 6daacff664a4ac7ca16a19d81378d979
+Please enter flag for challenge: crackme_2
