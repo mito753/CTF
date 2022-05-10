@@ -1,0 +1,100 @@
+gdb-peda$ vmmap
+Start              End                Perm	Name
+0x00400000         0x00401000         r-xp	/home/mito/CTF/San_Diego_CTF_2022/Pwn_Horoscope/horoscope
+0x00600000         0x00601000         r--p	/home/mito/CTF/San_Diego_CTF_2022/Pwn_Horoscope/horoscope
+0x00601000         0x00602000         rw-p	/home/mito/CTF/San_Diego_CTF_2022/Pwn_Horoscope/horoscope
+0x00602000         0x00623000         rw-p	[heap]
+0x00007ffff79e2000 0x00007ffff7bc9000 r-xp	/lib/x86_64-linux-gnu/libc-2.27.so
+0x00007ffff7bc9000 0x00007ffff7dc9000 ---p	/lib/x86_64-linux-gnu/libc-2.27.so
+0x00007ffff7dc9000 0x00007ffff7dcd000 r--p	/lib/x86_64-linux-gnu/libc-2.27.so
+0x00007ffff7dcd000 0x00007ffff7dcf000 rw-p	/lib/x86_64-linux-gnu/libc-2.27.so
+0x00007ffff7dcf000 0x00007ffff7dd3000 rw-p	mapped
+0x00007ffff7dd3000 0x00007ffff7dfc000 r-xp	/lib/x86_64-linux-gnu/ld-2.27.so
+0x00007ffff7fd4000 0x00007ffff7fd6000 rw-p	mapped
+0x00007ffff7ff7000 0x00007ffff7ffa000 r--p	[vvar]
+0x00007ffff7ffa000 0x00007ffff7ffc000 r-xp	[vdso]
+0x00007ffff7ffc000 0x00007ffff7ffd000 r--p	/lib/x86_64-linux-gnu/ld-2.27.so
+0x00007ffff7ffd000 0x00007ffff7ffe000 rw-p	/lib/x86_64-linux-gnu/ld-2.27.so
+0x00007ffff7ffe000 0x00007ffff7fff000 rw-p	mapped
+0x00007ffffffde000 0x00007ffffffff000 rw-p	[stack]
+0xffffffffff600000 0xffffffffff601000 r-xp	[vsyscall]
+
+gdb-peda$ x/80gx 0x00601000
+0x601000:	0x0000000000600e20	0x00007ffff7ffe170
+0x601010:	0x00007ffff7dea8f0	0x00007ffff7a62970
+0x601020:	0x0000000000400606	0x0000000000400616
+0x601030:	0x00007ffff7a60ad0	0x00007ffff7a60790
+0x601040:	0x0000000000400646	0x0000000000400656
+0x601050:	0x0000000000400666	0x0000000000000000
+0x601060:	0x0000000000000000	0x0000000000000000
+0x601070 <stdout@@GLIBC_2.2.5>:	0x00007ffff7dce760	0x0000000000000000
+0x601080 <stdin@@GLIBC_2.2.5>:	0x00007ffff7dcda00	0x0000000000000000
+0x601090:	0x0000000000000000	0x0000000000000000
+0x6010a0:	0x0000000000000000	0x0000000000000000
+
+gdb-peda$ x/80gx 0x0060100c
+0x60100c:	0xf7dea8f000007fff	0xf7a6297000007fff
+0x60101c:	0x0040060600007fff	0x0040061600000000
+0x60102c:	0xf7a60ad000000000	0xf7a6079000007fff
+0x60103c:	0x0040064600007fff	0x0040065600000000
+0x60104c:	0x0040066600000000	0x0000000000000000
+0x60105c:	0x0000000000000000	0x0000000000000000
+0x60106c:	0xf7dce76000000000	0x0000000000007fff
+0x60107c:	0xf7dcda0000000000	0x0000000000007fff
+0x60108c <temp>:	0x0000000000000000	0x0000000000000000
+0x60109c:	0x0000000000000000	0x0000000000000000
+
+
+gdb-peda$ pattc 300
+'AAA%AAsAABAA$AAnAACAA-AA(AADAA;AA)AAEAAaAA0AAFAAbAA1AAGAAcAA2AAHAAdAA3AAIAAeAA4AAJAAfAA5AAKAAgAA6AALAAhAA7AAMAAiAA8AANAAjAA9AAOAAkAAPAAlAAQAAmAARAAoAASAApAATAAqAAUAArAAVAAtAAWAAuAAXAAvAAYAAwAAZAAxAAyAAzA%%A%sA%BA%$A%nA%CA%-A%(A%DA%;A%)A%EA%aA%0A%FA%bA%1A%GA%cA%2A%HA%dA%3A%IA%eA%4A%JA%fA%5A%KA%gA%6A%'
+gdb-peda$ run
+Starting program: /home/mito/CTF/San_Diego_CTF_2022/Pwn_Horoscope/horoscope 
+Welcome to SDCTF's very own text based horoscope
+please put in your birthday and time in the format (month/day/year/time) and we will have your very own horoscope
+01/01/1111/11/AAA%AAsAABAA$AAnAACAA-AA(AADAA;AA)AAEAAaAA0AAFAAbAA1AAGAAcAA2AAHAAdAA3AAIAAeAA4AAJAAfAA5AAKAAgAA6AALAAhAA7AAMAAiAA8AANAAjAA9AAOAAkAAPAAlAAQAAmAARAAoAASAApAATAAqAAUAArAAVAAtAAWAAuAAXAAvAAYAAwAAZAAxAAyAAzA%%A%sA%BA%$A%nA%CA%-A%(A%DA%;A%)A%EA%aA%0A%FA%bA%1A%GA%cA%2A%HA%dA%3A%IA%eA%4A%JA%fA%5A%KA%gA%6A%
+wow, you were born in the month of January. I think that means you will have a great week! :)
+Program received signal SIGSEGV, Segmentation fault.
+
+[----------------------------------registers-----------------------------------]
+RAX: 0x0 
+RBX: 0x0 
+RCX: 0x7ffff7af2104 (<__GI___libc_write+20>:	cmp    rax,0xfffffffffffff000)
+RDX: 0x0 
+RSI: 0x7ffff7dcf8c0 --> 0x0 
+RDI: 0x1 
+RBP: 0x4141614141454141 ('AAEAAaAA')
+RSP: 0x7fffffffddc8 ("0AAFAAbAA1AAGAAcAA2AAHAAdAA3AAIAAeAA4AAJAAfAA5AAKAAgAA6AALAAhAA7AAMAAiAA8AANAAjAA9AAOAAkAAPAAlAAQAAmAARAAoAASAApAATAAqAAUAArAAVAAtAAWAAuAAXAAvAAYAAwAAZAAxAAyAAzA%%A%sA%BA%$A%nA%CA%-A%(A%DA%;A%)A%EA%aA"...)
+RIP: 0x4007bc (<main+101>:	ret)
+R8 : 0x7ffff7dcf8c0 --> 0x0 
+R9 : 0x7ffff7fd54c0 (0x00007ffff7fd54c0)
+R10: 0xfffffff9 
+R11: 0x246 
+R12: 0x400670 (<_start>:	xor    ebp,ebp)
+R13: 0x7fffffffdea0 ("cA%2A%HA%dA%3A%IA%eA%4A%JA%fA%5A%KA%gA%6A%\n")
+R14: 0x0 
+R15: 0x0
+EFLAGS: 0x10206 (carry PARITY adjust zero sign trap INTERRUPT direction overflow)
+[-------------------------------------code-------------------------------------]
+   0x4007b1 <main+90>:	call   0x4007bd <processInput>
+   0x4007b6 <main+95>:	mov    eax,0x0
+   0x4007bb <main+100>:	leave  
+=> 0x4007bc <main+101>:	ret    
+   0x4007bd <processInput>:	push   rbp
+   0x4007be <processInput+1>:	mov    rbp,rsp
+   0x4007c1 <processInput+4>:	sub    rsp,0x40
+   0x4007c5 <processInput+8>:	mov    QWORD PTR [rbp-0x38],rdi
+[------------------------------------stack-------------------------------------]
+0000| 0x7fffffffddc8 ("0AAFAAbAA1AAGAAcAA2AAHAAdAA3AAIAAeAA4AAJAAfAA5AAKAAgAA6AALAAhAA7AAMAAiAA8AANAAjAA9AAOAAkAAPAAlAAQAAmAARAAoAASAApAATAAqAAUAArAAVAAtAAWAAuAAXAAvAAYAAwAAZAAxAAyAAzA%%A%sA%BA%$A%nA%CA%-A%(A%DA%;A%)A%EA%aA"...)
+0008| 0x7fffffffddd0 ("A1AAGAAcAA2AAHAAdAA3AAIAAeAA4AAJAAfAA5AAKAAgAA6AALAAhAA7AAMAAiAA8AANAAjAA9AAOAAkAAPAAlAAQAAmAARAAoAASAApAATAAqAAUAArAAVAAtAAWAAuAAXAAvAAYAAwAAZAAxAAyAAzA%%A%sA%BA%$A%nA%CA%-A%(A%DA%;A%)A%EA%aA%0A%FA%b"...)
+0016| 0x7fffffffddd8 ("AA2AAHAAdAA3AAIAAeAA4AAJAAfAA5AAKAAgAA6AALAAhAA7AAMAAiAA8AANAAjAA9AAOAAkAAPAAlAAQAAmAARAAoAASAApAATAAqAAUAArAAVAAtAAWAAuAAXAAvAAYAAwAAZAAxAAyAAzA%%A%sA%BA%$A%nA%CA%-A%(A%DA%;A%)A%EA%aA%0A%FA%bA%1A%GA%"...)
+0024| 0x7fffffffdde0 ("dAA3AAIAAeAA4AAJAAfAA5AAKAAgAA6AALAAhAA7AAMAAiAA8AANAAjAA9AAOAAkAAPAAlAAQAAmAARAAoAASAApAATAAqAAUAArAAVAAtAAWAAuAAXAAvAAYAAwAAZAAxAAyAAzA%%A%sA%BA%$A%nA%CA%-A%(A%DA%;A%)A%EA%aA%0A%FA%bA%1A%GA%cA%2A%HA"...)
+0032| 0x7fffffffdde8 ("AeAA4AAJAAfAA5AAKAAgAA6AALAAhAA7AAMAAiAA8AANAAjAA9AAOAAkAAPAAlAAQAAmAARAAoAASAApAATAAqAAUAArAAVAAtAAWAAuAAXAAvAAYAAwAAZAAxAAyAAzA%%A%sA%BA%$A%nA%CA%-A%(A%DA%;A%)A%EA%aA%0A%FA%bA%1A%GA%cA%2A%HA%dA%3A%I"...)
+0040| 0x7fffffffddf0 ("AAfAA5AAKAAgAA6AALAAhAA7AAMAAiAA8AANAAjAA9AAOAAkAAPAAlAAQAAmAARAAoAASAApAATAAqAAUAArAAVAAtAAWAAuAAXAAvAAYAAwAAZAAxAAyAAzA%%A%sA%BA%$A%nA%CA%-A%(A%DA%;A%)A%EA%aA%0A%FA%bA%1A%GA%cA%2A%HA%dA%3A%IA%eA%4A%"...)
+0048| 0x7fffffffddf8 ("KAAgAA6AALAAhAA7AAMAAiAA8AANAAjAA9AAOAAkAAPAAlAAQAAmAARAAoAASAApAATAAqAAUAArAAVAAtAAWAAuAAXAAvAAYAAwAAZAAxAAyAAzA%%A%sA%BA%$A%nA%CA%-A%(A%DA%;A%)A%EA%aA%0A%FA%bA%1A%GA%cA%2A%HA%dA%3A%IA%eA%4A%JA%fA%5A"...)
+0056| 0x7fffffffde00 ("ALAAhAA7AAMAAiAA8AANAAjAA9AAOAAkAAPAAlAAQAAmAARAAoAASAApAATAAqAAUAArAAVAAtAAWAAuAAXAAvAAYAAwAAZAAxAAyAAzA%%A%sA%BA%$A%nA%CA%-A%(A%DA%;A%)A%EA%aA%0A%FA%bA%1A%GA%cA%2A%HA%dA%3A%IA%eA%4A%JA%fA%5A%KA%gA%6"...)
+[------------------------------------------------------------------------------]
+Legend: code, data, rodata, value
+Stopped reason: SIGSEGV
+0x00000000004007bc in main ()
+gdb-peda$ patto 0AAF
+0AAF found at offset: 42

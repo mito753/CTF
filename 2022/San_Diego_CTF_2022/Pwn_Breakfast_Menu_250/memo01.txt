@@ -1,0 +1,207 @@
+pwndbg> vmmap
+LEGEND: STACK | HEAP | CODE | DATA | RWX | RODATA
+          0x400000           0x401000 r-xp     1000 0      /home/mito/CTF/San_Diego_CTF_2022/Pwn_Breakfast_Menu_250/BreakfastMenu
+          0x601000           0x602000 r--p     1000 1000   /home/mito/CTF/San_Diego_CTF_2022/Pwn_Breakfast_Menu_250/BreakfastMenu
+          0x602000           0x603000 rw-p     1000 2000   /home/mito/CTF/San_Diego_CTF_2022/Pwn_Breakfast_Menu_250/BreakfastMenu
+          0x603000           0x624000 rw-p    21000 0      [heap]
+    0x7ffff79e2000     0x7ffff7bc9000 r-xp   1e7000 0      /lib/x86_64-linux-gnu/libc-2.27.so
+    0x7ffff7bc9000     0x7ffff7dc9000 ---p   200000 1e7000 /lib/x86_64-linux-gnu/libc-2.27.so
+    0x7ffff7dc9000     0x7ffff7dcd000 r--p     4000 1e7000 /lib/x86_64-linux-gnu/libc-2.27.so
+    0x7ffff7dcd000     0x7ffff7dcf000 rw-p     2000 1eb000 /lib/x86_64-linux-gnu/libc-2.27.so
+    0x7ffff7dcf000     0x7ffff7dd3000 rw-p     4000 0      
+    0x7ffff7dd3000     0x7ffff7dfc000 r-xp    29000 0      /lib/x86_64-linux-gnu/ld-2.27.so
+    0x7ffff7fd4000     0x7ffff7fd6000 rw-p     2000 0      
+    0x7ffff7ff7000     0x7ffff7ffa000 r--p     3000 0      [vvar]
+    0x7ffff7ffa000     0x7ffff7ffc000 r-xp     2000 0      [vdso]
+    0x7ffff7ffc000     0x7ffff7ffd000 r--p     1000 29000  /lib/x86_64-linux-gnu/ld-2.27.so
+    0x7ffff7ffd000     0x7ffff7ffe000 rw-p     1000 2a000  /lib/x86_64-linux-gnu/ld-2.27.so
+    0x7ffff7ffe000     0x7ffff7fff000 rw-p     1000 0      
+    0x7ffffffde000     0x7ffffffff000 rw-p    21000 0      [stack]
+0xffffffffff600000 0xffffffffff601000 r-xp     1000 0      [vsyscall]
+
+
+pwndbg> x/80gx 0x602000
+0x602000:	0x0000000000601e20	0x00007ffff7ffe170
+0x602010:	0x00007ffff7dea8f0	0x00000000004006c6
+0x602020:	0x00007ffff7a98200	0x00007ffff7a62970
+0x602030:	0x00007ffff7a46e40	0x00007ffff7b70e10
+0x602040:	0x00007ffff7a60ad0	0x00007ffff7a69ea0
+0x602050:	0x00007ffff7a79020	0x00007ffff7a60790
+0x602060:	0x00007ffff7a5de70	0x0000000000400766
+0x602070:	0x0000000000000000	0x0000000000000000
+0x602080 <stdout@@GLIBC_2.2.5>:	0x00007ffff7dce760	0x0000000000000000
+0x602090 <stdin@@GLIBC_2.2.5>:	0x00007ffff7dcda00	0x0000000000000000
+0x6020a0 <buf>:	0x0000000000000000	0x0000000000000000
+0x6020b0 <buf+16>:	0x0000000000000000	0x0000000000000000
+0x6020c0 <buf+32>:	0x0000000000000000	0x0000000000000000
+0x6020d0 <buf+48>:	0x0000000000000000	0x0000000000000000
+0x6020e0 <orders>:	0x0000000000603a80	0x0000000000603ab0
+0x6020f0 <orders+16>:	0x0000000000000000	0x0000000000000000
+0x602100 <orders+32>:	0x0000000000000000	0x0000000000000000
+0x602110 <orders+48>:	0x0000000000000000	0x0000000000000000
+0x602120 <orders+64>:	0x0000000000000000	0x0000000000000000
+0x602130 <orders+80>:	0x0000000000000000	0x0000000000000000
+0x602140 <orders+96>:	0x0000000000000000	0x0000000000000000
+0x602150 <orders+112>:	0x0000000000000000	0x0000000000000000
+0x602160:	0x0000000000000000	0x0000000000000000
+
+
+0x603a40:	0x0000000000000000	0x0000000000000000
+0x603a50:	0x0000000000000000	0x0000000000000000
+0x603a60:	0x0000000000000000	0x0000000000000000
+0x603a70:	0x0000000000000000	0x0000000000000031
+0x603a80:	0x6161616161616161	0x6161616161616161
+0x603a90:	0x6161616161616161	0x00000a6161616161
+0x603aa0:	0x0000000000000000	0x0000000000000031
+0x603ab0:	0x0000000000000000	0x0000000000000000
+0x603ac0:	0x0000000000000000	0x0000000000000000
+0x603ad0:	0x0000000000000000	0x0000000000020531
+0x603ae0:	0x0000000000000000	0x0000000000000000
+
+which order would you like to remove
+0
+free(): double free detected in tcache 2
+
+
+Disassembly of section .plt:
+
+00000000004006b0 <.plt>:
+  4006b0:	ff 35 52 19 20 00    	pushq  0x201952(%rip)        # 602008 <_GLOBAL_OFFSET_TABLE_+0x8>
+  4006b6:	ff 25 54 19 20 00    	jmpq   *0x201954(%rip)        # 602010 <_GLOBAL_OFFSET_TABLE_+0x10>
+  4006bc:	0f 1f 40 00          	nopl   0x0(%rax)
+
+00000000004006c0 <free@plt>:
+  4006c0:	ff 25 52 19 20 00    	jmpq   *0x201952(%rip)        # 602018 <free@GLIBC_2.2.5>
+  4006c6:	68 00 00 00 00       	pushq  $0x0
+  4006cb:	e9 e0 ff ff ff       	jmpq   4006b0 <.plt>
+
+00000000004006d0 <strcpy@plt>:
+  4006d0:	ff 25 4a 19 20 00    	jmpq   *0x20194a(%rip)        # 602020 <strcpy@GLIBC_2.2.5>
+  4006d6:	68 01 00 00 00       	pushq  $0x1
+  4006db:	e9 d0 ff ff ff       	jmpq   4006b0 <.plt>
+
+00000000004006e0 <puts@plt>:
+  4006e0:	ff 25 42 19 20 00    	jmpq   *0x201942(%rip)        # 602028 <puts@GLIBC_2.2.5>
+  4006e6:	68 02 00 00 00       	pushq  $0x2
+  4006eb:	e9 c0 ff ff ff       	jmpq   4006b0 <.plt>
+
+00000000004006f0 <printf@plt>:
+  4006f0:	ff 25 3a 19 20 00    	jmpq   *0x20193a(%rip)        # 602030 <printf@GLIBC_2.2.5>
+  4006f6:	68 03 00 00 00       	pushq  $0x3
+  4006fb:	e9 b0 ff ff ff       	jmpq   4006b0 <.plt>
+
+0000000000400700 <memset@plt>:
+  400700:	ff 25 32 19 20 00    	jmpq   *0x201932(%rip)        # 602038 <memset@GLIBC_2.2.5>
+  400706:	68 04 00 00 00       	pushq  $0x4
+  40070b:	e9 a0 ff ff ff       	jmpq   4006b0 <.plt>
+
+0000000000400710 <fgets@plt>:
+  400710:	ff 25 2a 19 20 00    	jmpq   *0x20192a(%rip)        # 602040 <fgets@GLIBC_2.2.5>
+  400716:	68 05 00 00 00       	pushq  $0x5
+  40071b:	e9 90 ff ff ff       	jmpq   4006b0 <.plt>
+
+0000000000400720 <getchar@plt>:
+  400720:	ff 25 22 19 20 00    	jmpq   *0x201922(%rip)        # 602048 <getchar@GLIBC_2.2.5>
+  400726:	68 06 00 00 00       	pushq  $0x6
+  40072b:	e9 80 ff ff ff       	jmpq   4006b0 <.plt>
+
+0000000000400730 <malloc@plt>:
+  400730:	ff 25 1a 19 20 00    	jmpq   *0x20191a(%rip)        # 602050 <malloc@GLIBC_2.2.5>
+  400736:	68 07 00 00 00       	pushq  $0x7
+  40073b:	e9 70 ff ff ff       	jmpq   4006b0 <.plt>
+
+0000000000400740 <fflush@plt>:
+  400740:	ff 25 12 19 20 00    	jmpq   *0x201912(%rip)        # 602058 <fflush@GLIBC_2.2.5>
+  400746:	68 08 00 00 00       	pushq  $0x8
+  40074b:	e9 60 ff ff ff       	jmpq   4006b0 <.plt>
+
+0000000000400750 <__isoc99_scanf@plt>:
+  400750:	ff 25 0a 19 20 00    	jmpq   *0x20190a(%rip)        # 602060 <__isoc99_scanf@GLIBC_2.7>
+  400756:	68 09 00 00 00       	pushq  $0x9
+  40075b:	e9 50 ff ff ff       	jmpq   4006b0 <.plt>
+
+0000000000400760 <exit@plt>:
+  400760:	ff 25 02 19 20 00    	jmpq   *0x201902(%rip)        # 602068 <exit@GLIBC_2.2.5>
+  400766:	68 0a 00 00 00       	pushq  $0xa
+  40076b:	e9 40 ff ff ff       	jmpq   4006b0 <.plt>
+
+
+BreakfastMenu:     file format elf64-x86-64
+
+
+Disassembly of section .plt:
+
+00000000004006b0 <.plt>:
+  4006b0:	ff 35 52 19 20 00    	pushq  0x201952(%rip)        # 602008 <_GLOBAL_OFFSET_TABLE_+0x8>
+  4006b6:	ff 25 54 19 20 00    	jmpq   *0x201954(%rip)        # 602010 <_GLOBAL_OFFSET_TABLE_+0x10>
+  4006bc:	0f 1f 40 00          	nopl   0x0(%rax)
+
+00000000004006c0 <free@plt>:
+  4006c0:	ff 25 52 19 20 00    	jmpq   *0x201952(%rip)        # 602018 <free@GLIBC_2.2.5>
+  4006c6:	68 00 00 00 00       	pushq  $0x0
+  4006cb:	e9 e0 ff ff ff       	jmpq   4006b0 <.plt>
+
+00000000004006d0 <strcpy@plt>:
+  4006d0:	ff 25 4a 19 20 00    	jmpq   *0x20194a(%rip)        # 602020 <strcpy@GLIBC_2.2.5>
+  4006d6:	68 01 00 00 00       	pushq  $0x1
+  4006db:	e9 d0 ff ff ff       	jmpq   4006b0 <.plt>
+
+00000000004006e0 <puts@plt>:
+  4006e0:	ff 25 42 19 20 00    	jmpq   *0x201942(%rip)        # 602028 <puts@GLIBC_2.2.5>
+  4006e6:	68 02 00 00 00       	pushq  $0x2
+  4006eb:	e9 c0 ff ff ff       	jmpq   4006b0 <.plt>
+
+00000000004006f0 <printf@plt>:
+  4006f0:	ff 25 3a 19 20 00    	jmpq   *0x20193a(%rip)        # 602030 <printf@GLIBC_2.2.5>
+  4006f6:	68 03 00 00 00       	pushq  $0x3
+  4006fb:	e9 b0 ff ff ff       	jmpq   4006b0 <.plt>
+
+0000000000400700 <memset@plt>:
+  400700:	ff 25 32 19 20 00    	jmpq   *0x201932(%rip)        # 602038 <memset@GLIBC_2.2.5>
+  400706:	68 04 00 00 00       	pushq  $0x4
+  40070b:	e9 a0 ff ff ff       	jmpq   4006b0 <.plt>
+
+0000000000400710 <fgets@plt>:
+  400710:	ff 25 2a 19 20 00    	jmpq   *0x20192a(%rip)        # 602040 <fgets@GLIBC_2.2.5>
+  400716:	68 05 00 00 00       	pushq  $0x5
+  40071b:	e9 90 ff ff ff       	jmpq   4006b0 <.plt>
+
+0000000000400720 <getchar@plt>:
+  400720:	ff 25 22 19 20 00    	jmpq   *0x201922(%rip)        # 602048 <getchar@GLIBC_2.2.5>
+  400726:	68 06 00 00 00       	pushq  $0x6
+  40072b:	e9 80 ff ff ff       	jmpq   4006b0 <.plt>
+
+0000000000400730 <malloc@plt>:
+  400730:	ff 25 1a 19 20 00    	jmpq   *0x20191a(%rip)        # 602050 <malloc@GLIBC_2.2.5>
+  400736:	68 07 00 00 00       	pushq  $0x7
+  40073b:	e9 70 ff ff ff       	jmpq   4006b0 <.plt>
+
+0000000000400740 <fflush@plt>:
+  400740:	ff 25 12 19 20 00    	jmpq   *0x201912(%rip)        # 602058 <fflush@GLIBC_2.2.5>
+  400746:	68 08 00 00 00       	pushq  $0x8
+  40074b:	e9 60 ff ff ff       	jmpq   4006b0 <.plt>
+
+0000000000400750 <__isoc99_scanf@plt>:
+  400750:	ff 25 0a 19 20 00    	jmpq   *0x20190a(%rip)        # 602060 <__isoc99_scanf@GLIBC_2.7>
+  400756:	68 09 00 00 00       	pushq  $0x9
+  40075b:	e9 50 ff ff ff       	jmpq   4006b0 <.plt>
+
+0000000000400760 <exit@plt>:
+  400760:	ff 25 02 19 20 00    	jmpq   *0x201902(%rip)        # 602068 <exit@GLIBC_2.2.5>
+  400766:	68 0a 00 00 00       	pushq  $0xa
+  40076b:	e9 40 ff ff ff       	jmpq   4006b0 <.plt>
+
+
+mito@ubuntu:~/CTF/San_Diego_CTF_2022/Pwn_Breakfast_Menu_250$ one_gadget  /lib/x86_64-linux-gnu/libc.so.6
+0x4f2a5 execve("/bin/sh", rsp+0x40, environ)
+constraints:
+  rsp & 0xf == 0
+  rcx == NULL
+
+0x4f302 execve("/bin/sh", rsp+0x40, environ)
+constraints:
+  [rsp+0x40] == NULL
+
+0x10a2fc execve("/bin/sh", rsp+0x70, environ)
+constraints:
+  [rsp+0x70] == NULL

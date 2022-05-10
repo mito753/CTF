@@ -1,0 +1,18 @@
+PWN - Medium
+Breakfast Menu
+I’m awfully hungry, with all these options to choose from, what should I order?
+Connect
+nc breakfast.sdc.tf 1337
+binary
+Breakfast Menu
+dockerfile
+Dockerfile
+By green beans
+
+
+🚨 This challenge currently has no captures! 🚨
+Do you have what it takes to be the first?
+Current # of Solves
+0
+Flag Point Value
+250

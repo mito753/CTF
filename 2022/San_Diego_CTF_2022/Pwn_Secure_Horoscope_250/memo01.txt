@@ -1,0 +1,97 @@
+gdb-peda$ vmmap
+Start              End                Perm	Name
+0x00400000         0x00401000         r-xp	/home/mito/CTF/San_Diego_CTF_2022/Pwn_Secure_Horoscope/secureHoroscope
+0x00600000         0x00601000         r--p	/home/mito/CTF/San_Diego_CTF_2022/Pwn_Secure_Horoscope/secureHoroscope
+0x00601000         0x00602000         rw-p	/home/mito/CTF/San_Diego_CTF_2022/Pwn_Secure_Horoscope/secureHoroscope
+0x00602000         0x00623000         rw-p	[heap]
+0x00007ffff79e2000 0x00007ffff7bc9000 r-xp	/lib/x86_64-linux-gnu/libc-2.27.so
+0x00007ffff7bc9000 0x00007ffff7dc9000 ---p	/lib/x86_64-linux-gnu/libc-2.27.so
+0x00007ffff7dc9000 0x00007ffff7dcd000 r--p	/lib/x86_64-linux-gnu/libc-2.27.so
+0x00007ffff7dcd000 0x00007ffff7dcf000 rw-p	/lib/x86_64-linux-gnu/libc-2.27.so
+0x00007ffff7dcf000 0x00007ffff7dd3000 rw-p	mapped
+0x00007ffff7dd3000 0x00007ffff7dfc000 r-xp	/lib/x86_64-linux-gnu/ld-2.27.so
+0x00007ffff7fd4000 0x00007ffff7fd6000 rw-p	mapped
+0x00007ffff7ff7000 0x00007ffff7ffa000 r--p	[vvar]
+0x00007ffff7ffa000 0x00007ffff7ffc000 r-xp	[vdso]
+0x00007ffff7ffc000 0x00007ffff7ffd000 r--p	/lib/x86_64-linux-gnu/ld-2.27.so
+0x00007ffff7ffd000 0x00007ffff7ffe000 rw-p	/lib/x86_64-linux-gnu/ld-2.27.so
+0x00007ffff7ffe000 0x00007ffff7fff000 rw-p	mapped
+0x00007ffffffde000 0x00007ffffffff000 rw-p	[stack]
+0xffffffffff600000 0xffffffffff601000 r-xp	[vsyscall]
+
+gdb-peda$ x/80gx 0x601000
+0x601000:	0x0000000000600e20	0x00007ffff7ffe170
+0x601010:	0x00007ffff7dea8f0	0x00007ffff7a62970
+0x601020:	0x00007ffff7a46e40	0x00007ffff7b70e10
+0x601030:	0x00007ffff7af2020	0x00007ffff7a60ad0
+0x601040:	0x00007ffff7a60790	0x0000000000000000
+0x601050:	0x0000000000000000	0x0000000000000000
+0x601060 <stdout@@GLIBC_2.2.5>:	0x00007ffff7dce760	0x0000000000000000
+0x601070 <stdin@@GLIBC_2.2.5>:	0x00007ffff7dcda00	0x0000000000000000
+0x601080:	0x0000000000000000	0x0000000000000000
+0x601090:	0x0000000000000000	0x0000000000000000
+
+
+[----------------------------------registers-----------------------------------]
+RAX: 0x0 
+RBX: 0x0 
+RCX: 0xb40 ('@\x0b')
+RDX: 0x0 
+RSI: 0x7ffff7dcf8c0 --> 0x0 
+RDI: 0x7ffff7dce760 --> 0xfbad2a84 
+RBP: 0x41414e4141384141 ('AA8AANAA')
+RSP: 0x7fffffffdd58 ("jAA9AAOAAkAAPAAlAAQA\001")
+RIP: 0x40080e (<getInfo+93>:	ret)
+R8 : 0x7ffff7dcf8c0 --> 0x0 
+R9 : 0x7ffff7fd54c0 (0x00007ffff7fd54c0)
+R10: 0x3 
+R11: 0x246 
+R12: 0x4005e0 (<_start>:	xor    ebp,ebp)
+R13: 0x7fffffffde80 --> 0x1 
+R14: 0x0 
+R15: 0x0
+EFLAGS: 0x10202 (carry parity adjust zero sign trap INTERRUPT direction overflow)
+[-------------------------------------code-------------------------------------]
+   0x400807 <getInfo+86>:	call   0x4005d0 <fflush@plt>
+   0x40080c <getInfo+91>:	nop
+   0x40080d <getInfo+92>:	leave  
+=> 0x40080e <getInfo+93>:	ret    
+   0x40080f:	nop
+   0x400810 <__libc_csu_init>:	push   r15
+   0x400812 <__libc_csu_init+2>:	push   r14
+   0x400814 <__libc_csu_init+4>:	mov    r15,rdx
+[------------------------------------stack-------------------------------------]
+0000| 0x7fffffffdd58 ("jAA9AAOAAkAAPAAlAAQA\001")
+0008| 0x7fffffffdd60 ("AkAAPAAlAAQA\001")
+0016| 0x7fffffffdd68 --> 0x141514141 
+0024| 0x7fffffffdd70 --> 0xa31313131 ('1111\n')
+0032| 0x7fffffffdd78 --> 0x0 
+0040| 0x7fffffffdd80 --> 0x400810 (<__libc_csu_init>:	push   r15)
+0048| 0x7fffffffdd88 --> 0x4005e0 (<_start>:	xor    ebp,ebp)
+0056| 0x7fffffffdd90 --> 0x7fffffffde80 --> 0x1 
+[------------------------------------------------------------------------------]
+Legend: code, data, rodata, value
+Stopped reason: SIGSEGV
+0x000000000040080e in getInfo () at secureHoroscope.c:34
+34	secureHoroscope.c: No such file or directory.
+gdb-peda$ 
+gdb-peda$ patto jAA9
+jAA9 found at offset: 120
+
+
+0x7fffffffdcc0:	0x0000000000000000	0x00007ffff7ffe170
+0x7fffffffdcd0:	0x0000000000000003	0x00000000004007e5
+0x7fffffffdce0:	0x6161616161616161	0x6161616161616161
+0x7fffffffdcf0:	0x6161616161616161	0x6161616161616161
+0x7fffffffdd00:	0x6161616161616161	0x6161616161616161
+0x7fffffffdd10:	0x000000000000000a	0x0000000000000000
+0x7fffffffdd20:	0x0000000000000000	0x0000000000000000
+0x7fffffffdd30:	0x0000000000000000	0x0000000000000000
+0x7fffffffdd40:	0x00007fff00000000	0x0000000000000000
+0x7fffffffdd50:	0x00007fffffffdda0	0x000000000040076a
+0x7fffffffdd60:	0x00007fffffffde88	0x000000010040085d
+0x7fffffffdd70:	0x3131313131313131	0x3131313131313131
+0x7fffffffdd80:	0x3131313131313131	0x3131313131313131
+0x7fffffffdd90:	0x0031313131313131	0x0000000000000000
+0x7fffffffdda0:	0x0000000000400810	0x00007ffff7a03c87
+0x7fffffffddb0:	0x0000000000000001	0x00007fffffffde88

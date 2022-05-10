@@ -1,0 +1,8 @@
+PWN - Easy
+Horoscope
+This program will predict your future!
+Connect
+nc horoscope.sdc.tf 1337
+binary
+horoscope
+By green beans

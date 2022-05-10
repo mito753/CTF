@@ -1,0 +1,17 @@
+PWN - Medium
+Secure Horoscope
+Our horoscope developers have pivoted to a more security-focused approach to predicting the future. You won’t find breaking into this one quite so easy!
+Connect
+nc sechoroscope.sdc.tf 1337
+dockerfile
+dockerfile
+binary
+Secure Horoscope
+By green beans
+
+🚨 This challenge currently has no captures! 🚨
+Do you have what it takes to be the first?
+Current # of Solves
+0
+Flag Point Value
+250
