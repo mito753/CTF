@@ -98,9 +98,11 @@ $1 = {
     000000f0  00 00 00 00  00 00 00 00  00 00 00 00  00 00 00 00  │····│····│····│····│
 ```
 
-`Dockerfile`の抜粋で`nsjail`で実行していることが原因かも。
+下記は`Dockerfile`の抜粋で`nsjail`で実行していることが原因かも。
 ```
-EXEC:"nsjail --config /home/user/nsjail.cfg -- /home/user/BreakfastMenu"
+    socat \
+      TCP-LISTEN:1337,reuseaddr,fork \
+      EXEC:"nsjail --config /home/user/nsjail.cfg -- /home/user/BreakfastMenu"
 ```
 
 ただし`_IO_write_base`の下位１バイトを`NULL`に書き換えるとサーバ環境でも下記のヒープ領域のみ出力可能。
