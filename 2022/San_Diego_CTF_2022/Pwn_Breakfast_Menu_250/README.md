@@ -30,7 +30,7 @@ There are three functions, `Create`, `Edit`, and `Delete`, and there is no displ
 
 There are the following two vulnerabilities.
 - There is a `UAF` vulnerability because the pointer is not cleared after free the area with the `Delete` function.
-- The `Edit` and `Delete` functions do not check for negative indexes. By using this, the area with the index value `-12` and `_IO_2_1_stdout_` can be rewritten, so the heap and the `libc` address can be leaked.
+- The `Edit` and `Delete` functions do not check for negative indexes. By using this, the area with the index value `-12` and `_IO_2_1_stdout_` can be rewritten, so the `heap` and the `libc` address can be leaked.
 
 ```c
     if (local_18 != 3) break;
