@@ -49,7 +49,7 @@
 
 ```c
     if (local_18 < local_14) {                          <--- 負のインデックス値をチェックしていない
-      free(*(void **)(orders + (long)local_18 * 8));  <--- フリーした後にポインタをクリアしていない
+      free(*(void **)(orders + (long)local_18 * 8));    <--- フリーした後にポインタをクリアしていない
     }
     else {
       puts("Order doesn\'t exist!!!");
@@ -131,7 +131,7 @@ EXEC:"nsjail --config /home/user/nsjail.cfg -- /home/user/BreakfastMenu"
     000000d0  6f 75 72 20  62 69 6c 6c  20 61 6e 64  20 6c 65     │our │bill│ and│ le│
 ```
 
-上記の限られた領域には`0x3c0`サイズの`tcachebin`が含まれているので、`0x3c0`サイズのchunkを別領域に作成して`Delete`するとヒープアドレスをリークさせることができる。
+上記の限られた領域には`0x3c0`サイズの`tcachebin`が含まれているので、`0x3c0`サイズのchunkを別領域に作成してフリーするとヒープアドレスをリークさせることができる。
 
 ```python
 for i in range(6):
@@ -197,7 +197,7 @@ tcachebins
 0x603260:	0x7461657243202e0a	0x2077656e20612065
 0x603270:	0x2e320a726564726f	0x6e61207469644520
 ```
-
+`libc`リークの`python`コード
 ```python
 # Make large chunk in tcache
 Delete(0)
