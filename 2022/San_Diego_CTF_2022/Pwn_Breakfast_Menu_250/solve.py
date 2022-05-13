@@ -24,11 +24,6 @@ def Edit(idx, data):
   s.sendlineafter("modify\n", str(idx))
   s.sendlineafter("order?\n", data)
 
-def Edit_S(idx, data):
-  s.sendline("2")
-  s.sendlineafter("modify\n", str(idx))
-  s.sendlineafter("order?\n", data)
-
 def Delete(idx):
   s.sendlineafter("leave\n", "3")
   s.sendlineafter("remove\n", str(idx))
