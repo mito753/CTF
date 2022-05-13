@@ -56,6 +56,7 @@ There are the following two vulnerabilities.
       fflush(stdout);
     }
 ```
+## Solution:
 
 In the local environment, we can leak the `libc` address as shown below by rewriting `_IO_write_base` to `0x602010`, but this was not possible in the server environment.
 
