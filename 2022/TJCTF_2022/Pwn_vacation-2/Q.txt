@@ -1,0 +1,13 @@
+pwn/vacation-2
+kfb
+7 solves / 469 points
+Travel agency said we can't go there anymore...
+
+nc tjc.tf 31705
+
+Flag
+Downloads
+
+chall.c
+chall
+Dockerfile

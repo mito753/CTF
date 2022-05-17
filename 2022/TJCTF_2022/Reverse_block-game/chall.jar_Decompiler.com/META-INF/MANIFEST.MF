@@ -1,0 +1,5 @@
+Manifest-Version: 1.0
+Mainfest-Version: 1.0
+Created-By: 1.8.0_241 (Oracle Corporation)
+Main-Class: Main
+

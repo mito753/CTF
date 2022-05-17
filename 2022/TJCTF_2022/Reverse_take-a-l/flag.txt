@@ -1,0 +1,2 @@
+mito@ubuntu:~/CTF/TJCTF_2022/Reverse_take-a-l$ python solve.py 
+tjctf{gggamersssssssss5s}

@@ -1,0 +1,12 @@
+pwn/favorite-color
+kpdfgo
+16 solves / 420 points
+I want to learn more about your favorite colors!
+
+nc tjc.tf 31453
+
+Flag
+Downloads
+
+chall.c
+chall

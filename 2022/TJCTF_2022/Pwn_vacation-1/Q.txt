@@ -1,0 +1,13 @@
+pwn/vacation-1
+kfb
+26 solves / 373 points
+Too much school, too much work, too much writing CTF challenges... can I just go on vacation?
+
+nc tjc.tf 31680
+
+Flag
+Downloads
+
+chall.c
+chall
+Dockerfile

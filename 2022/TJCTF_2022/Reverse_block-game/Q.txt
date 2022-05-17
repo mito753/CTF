@@ -1,0 +1,10 @@
+rev/block-game
+kpdfgo
+3 solves / 491 points
+I made a game with some blocks! I worked out how to save but I can't load my worlds back. It's ok, it wasn't that important anyway...
+
+Flag
+Downloads
+
+data.dat
+chall.jar
