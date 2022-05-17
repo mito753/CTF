@@ -142,8 +142,9 @@ for y in range(2000):
 ```
 
 data.datは最初の17バイトがヘッダ情報で、それ以降は４バイトで１つのブロックに対応してました。
+
 比較結果は下記になり、最初の１バイトのみ`0x0`から`0xf`などの変化がありました。
-このことから与えられた`data.dat`の2から4ビット目が1になっているものを探せばフラグを再現できると思いました。
+このことから与えられた`data.dat`の`0`バイト目の`2`から`4`ビット目が`1`になっているものを探せばフラグを再現できると思いました。
 
 ```
 mito@ubuntu:~/CTF/TJCTF_2022/Reverse_block-game$ python3 diff.py
@@ -161,7 +162,7 @@ mito@ubuntu:~/CTF/TJCTF_2022/Reverse_block-game$ python3 diff.py
 ...
 ```
 
-2から4ビット目が1ではヒットしなかったので、2ビット目のみを1で判定したところフラグを表示できました。
+`2`から`4`ビット目が`1`ではヒットしなかったので、`2`ビット目のみを`1`で判定したところフラグを表示できました。
 
 ```python
 from PIL import Image
@@ -183,7 +184,7 @@ im.save('flag.png')
 
 ## Results:
 
-![flag.png](https://github.com/mito753/CTF/blob/main/2022/TJCTF_2022/Reverse_block-game/flag.png)
+![flag.png](https://github.com/mito753/CTF/blob/main/2022/TJCTF_2022/Reverse_block-game/flag_exp.png)
 
 
 
