@@ -34,6 +34,7 @@ FPS: 38
 ```
 
 javaファイルは下記サイトでデコンパイルしました。
+
 http://www.decompiler.com
 
 デコンパイル結果の`Player.java`より、下記のキーが有効であることがわかりました。
@@ -101,7 +102,10 @@ http://www.decompiler.com
 
 ## Solution:
 
-マウスボタンをクリックすると色を変更することができます。この機能を使ってフラグを書いたと思いますが、どのように`data.dat`が変化するか不明なので、マウスボタンをクリックする前と後で`data.dat`を比較して確認しました。
+マウスボタンをクリックするとブロックの色を変更することができます。この機能を使ってフラグを書いたと思いますが、どのように`data.dat`が変化するか下記のjavaコードでは不明なので、マウスボタンをクリックする前と後で`data.dat`を比較して確認しました。
+
+![](https://github.com/mito753/CTF/blob/main/2022/TJCTF_2022/Reverse_block-game/chall_click_before.png)
+
 ```java
    public void mouseClicked(MouseEvent var1) {
    }
@@ -117,6 +121,8 @@ http://www.decompiler.com
 
    }
 ```
+
+下記はデータを比較するためのコードです。
 
 ```python
 f1 = open("data_click_before.dat", "rb")
