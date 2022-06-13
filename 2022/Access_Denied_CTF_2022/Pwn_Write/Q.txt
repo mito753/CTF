@@ -1,0 +1,9 @@
+Pwn/Write
+CodeIIEST
+8 solves / 970 points
+As you read till now. you have to write now.
+server: nc 107.178.209.165 5337
+Flag
+Downloads
+
+format_write

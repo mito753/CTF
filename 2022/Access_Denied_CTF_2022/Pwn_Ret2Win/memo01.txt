@@ -1,0 +1,61 @@
+gdb-peda$ vmmap
+Start      End        Perm	Name
+0x08048000 0x08049000 r--p	/home/mito/CTF/Access_Denied_CTF_2022/Pwn_Ret2Win/ret2win/ret2win
+0x08049000 0x0804a000 r-xp	/home/mito/CTF/Access_Denied_CTF_2022/Pwn_Ret2Win/ret2win/ret2win
+0x0804a000 0x0804b000 r--p	/home/mito/CTF/Access_Denied_CTF_2022/Pwn_Ret2Win/ret2win/ret2win
+0x0804b000 0x0804c000 r--p	/home/mito/CTF/Access_Denied_CTF_2022/Pwn_Ret2Win/ret2win/ret2win
+0x0804c000 0x0804d000 rw-p	/home/mito/CTF/Access_Denied_CTF_2022/Pwn_Ret2Win/ret2win/ret2win
+0xf7dd1000 0xf7fa6000 r-xp	/lib/i386-linux-gnu/libc-2.27.so
+0xf7fa6000 0xf7fa7000 ---p	/lib/i386-linux-gnu/libc-2.27.so
+0xf7fa7000 0xf7fa9000 r--p	/lib/i386-linux-gnu/libc-2.27.so
+0xf7fa9000 0xf7faa000 rw-p	/lib/i386-linux-gnu/libc-2.27.so
+0xf7faa000 0xf7fad000 rw-p	mapped
+0xf7fcf000 0xf7fd1000 rw-p	mapped
+0xf7fd1000 0xf7fd4000 r--p	[vvar]
+0xf7fd4000 0xf7fd6000 r-xp	[vdso]
+0xf7fd6000 0xf7ffc000 r-xp	/lib/i386-linux-gnu/ld-2.27.so
+0xf7ffc000 0xf7ffd000 r--p	/lib/i386-linux-gnu/ld-2.27.so
+0xf7ffd000 0xf7ffe000 rw-p	/lib/i386-linux-gnu/ld-2.27.so
+0xfffdd000 0xffffe000 rw-p	[stack]
+
+mito@ubuntu:~/CTF/Access_Denied_CTF_2022/Pwn_Ret2Win/ret2win$ gdb -q ./ret2win 
+Reading symbols from ./ret2win...(no debugging symbols found)...done.
+gdb-peda$ pattc 128
+'AAA%AAsAABAA$AAnAACAA-AA(AADAA;AA)AAEAAaAA0AAFAAbAA1AAGAAcAA2AAHAAdAA3AAIAAeAA4AAJAAfAA5AAKAAgAA6AALAAhAA7AAMAAiAA8AANAAjAA9AAOA'
+gdb-peda$ run
+Starting program: /home/mito/CTF/Access_Denied_CTF_2022/Pwn_Ret2Win/ret2win/ret2win 
+AAA%AAsAABAA$AAnAACAA-AA(AADAA;AA)AAEAAaAA0AAFAAbAA1AAGAAcAA2AAHAAdAA3AAIAAeAA4AAJAAfAA5AAKAAgAA6AALAAhAA7AAMAAiAA8AANAAjAA9AAOA
+AAA%AAsAABAA$AAnAACAA-AA(AADAA;AA)AAEAAaAA0AAFAAbAA1AAGAAcAA2AA
+
+Program received signal SIGSEGV, Segmentation fault.
+
+[----------------------------------registers-----------------------------------]
+EAX: 0x40 ('@')
+EBX: 0x61414145 ('EAAa')
+ECX: 0xf7fa9dc7 --> 0xfaa8900a 
+EDX: 0xf7faa890 --> 0x0 
+ESI: 0xf7fa9000 --> 0x1d7d8c 
+EDI: 0x0 
+EBP: 0x41304141 ('AA0A')
+ESP: 0xffffcf50 ("bAA1AAGAAcAA2AA")
+EIP: 0x41414641 ('AFAA')
+EFLAGS: 0x10282 (carry parity adjust zero SIGN trap INTERRUPT direction overflow)
+[-------------------------------------code-------------------------------------]
+Invalid $PC address: 0x41414641
+[------------------------------------stack-------------------------------------]
+0000| 0xffffcf50 ("bAA1AAGAAcAA2AA")
+0004| 0xffffcf54 ("AAGAAcAA2AA")
+0008| 0xffffcf58 ("AcAA2AA")
+0012| 0xffffcf5c --> 0x414132 ('2AA')
+0016| 0xffffcf60 --> 0xf7fa9000 --> 0x1d7d8c 
+0020| 0xffffcf64 --> 0xf7fa9000 --> 0x1d7d8c 
+0024| 0xffffcf68 --> 0x0 
+0028| 0xffffcf6c --> 0xf7de9fa1 (<__libc_start_main+241>:	add    esp,0x10)
+[------------------------------------------------------------------------------]
+Legend: code, data, rodata, value
+Stopped reason: SIGSEGV
+0x41414641 in ?? ()
+gdb-peda$ HAAdAA3AAIAAeAA4AAJAAfAA5AAKAAgAA6AALAAhAA7AAMAAiAA8AANAAjAA9AAOA
+Undefined command: "HAAdAA3AAIAAeAA4AAJAAfAA5AAKAAgAA6AALAAhAA7AAMAAiAA8AANAAjAA9AAOA".  Try "help".
+gdb-peda$ patto AFAA
+AFAA found at offset: 44

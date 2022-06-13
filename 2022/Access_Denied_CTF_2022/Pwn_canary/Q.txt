@@ -1,0 +1,9 @@
+Pwn/canary
+CodeIIEST
+1 solve / 996 points
+Cookies. Cookies.
+server: nc 35.202.65.196 1337
+Flag
+Downloads
+
+canary.zip

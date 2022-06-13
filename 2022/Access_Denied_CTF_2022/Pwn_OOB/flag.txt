@@ -1,0 +1,10 @@
+mito@ubuntu:~/CTF/Access_Denied_CTF_2022/Pwn_OOB/oob$ python solve.py r
+[*] '/home/mito/CTF/Access_Denied_CTF_2022/Pwn_OOB/oob/oob'
+    Arch:     amd64-64-little
+    RELRO:    Partial RELRO
+    Stack:    Canary found
+    NX:       NX enabled
+    PIE:      No PIE (0x400000)
+[+] Opening connection to 34.71.207.70 on port 1337: Done
+[*] Switching to interactive mode
+accessdenied{00b_4r3_v3ry_us3ful_r1ght_54a4ce45}

