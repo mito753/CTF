@@ -1,0 +1,8 @@
+xfd\xfd\xfd\xfd\xfd\xfd\xfd\xfd\xfd\xfd\xfd\xfd\xfd\xfd\xfd\xfd\xfd\xfd\xfd\xfd\xid
+uid=1000(ubuntu) gid=1000(ubuntu) groups=1000(ubuntu)
+$ ls
+chall
+flag.txt
+$ cat flag.txt
+uoftctf{r3m3mb3r_7h47_ch4r_15_516n3d_by_d3f4ul7}[*] Got EOF while reading in interactive
+$  

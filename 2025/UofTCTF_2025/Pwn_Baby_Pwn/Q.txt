@@ -1,0 +1,11 @@
+Challenge
+459 Solves
+Baby Pwn
+100
+Here's a baby pwn challenge for you to try out. Can you get the flag?
+
+nc 34.162.142.123 5000
+
+Author: atom
+
+Flag

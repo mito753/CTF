@@ -1,0 +1,138 @@
+pwndbg> vmmap
+LEGEND: STACK | HEAP | CODE | DATA | WX | RODATA
+             Start                End Perm     Size Offset File
+    0x555555554000     0x555555555000 r--p     1000      0 /home/mito/CTF/UofTCTF_2025/Pwn_Counting_Sort/chall
+    0x555555555000     0x555555556000 r-xp     1000   1000 /home/mito/CTF/UofTCTF_2025/Pwn_Counting_Sort/chall
+    0x555555556000     0x555555557000 r--p     1000   2000 /home/mito/CTF/UofTCTF_2025/Pwn_Counting_Sort/chall
+    0x555555557000     0x555555558000 r--p     1000   2000 /home/mito/CTF/UofTCTF_2025/Pwn_Counting_Sort/chall
+    0x555555558000     0x555555559000 rw-p     1000   3000 /home/mito/CTF/UofTCTF_2025/Pwn_Counting_Sort/chall
+    0x555555559000     0x55555557a000 rw-p    21000      0 [heap]
+    0x7ffff7c00000     0x7ffff7c28000 r--p    28000      0 /usr/lib/x86_64-linux-gnu/libc.so.6
+    0x7ffff7c28000     0x7ffff7db0000 r-xp   188000  28000 /usr/lib/x86_64-linux-gnu/libc.so.6
+    0x7ffff7db0000     0x7ffff7dff000 r--p    4f000 1b0000 /usr/lib/x86_64-linux-gnu/libc.so.6
+    0x7ffff7dff000     0x7ffff7e03000 r--p     4000 1fe000 /usr/lib/x86_64-linux-gnu/libc.so.6
+    0x7ffff7e03000     0x7ffff7e05000 rw-p     2000 202000 /usr/lib/x86_64-linux-gnu/libc.so.6
+    0x7ffff7e05000     0x7ffff7e12000 rw-p     d000      0 [anon_7ffff7e05]
+    0x7ffff7fa4000     0x7ffff7fa7000 rw-p     3000      0 [anon_7ffff7fa4]
+    0x7ffff7fbd000     0x7ffff7fbf000 rw-p     2000      0 [anon_7ffff7fbd]
+    0x7ffff7fbf000     0x7ffff7fc3000 r--p     4000      0 [vvar]
+    0x7ffff7fc3000     0x7ffff7fc5000 r-xp     2000      0 [vdso]
+    0x7ffff7fc5000     0x7ffff7fc6000 r--p     1000      0 /usr/lib/x86_64-linux-gnu/ld-linux-x86-64.so.2
+    0x7ffff7fc6000     0x7ffff7ff1000 r-xp    2b000   1000 /usr/lib/x86_64-linux-gnu/ld-linux-x86-64.so.2
+    0x7ffff7ff1000     0x7ffff7ffb000 r--p     a000  2c000 /usr/lib/x86_64-linux-gnu/ld-linux-x86-64.so.2
+    0x7ffff7ffb000     0x7ffff7ffd000 r--p     2000  36000 /usr/lib/x86_64-linux-gnu/ld-linux-x86-64.so.2
+    0x7ffff7ffd000     0x7ffff7fff000 rw-p     2000  38000 /usr/lib/x86_64-linux-gnu/ld-linux-x86-64.so.2
+    0x7ffffffde000     0x7ffffffff000 rw-p    21000      0 [stack]
+0xffffffffff600000 0xffffffffff601000 --xp     1000      0 [vsyscall]
+
+pwndbg> x/80gx 0x7fffffffdb00
+0x7fffffffdb00:	0x0000000000000000	0x000000000000001f
+0x7fffffffdb10:	0x000000000000001f	0x0000000000000000
+0x7fffffffdb20:	0x0000555555557d98	0x5c9ae2e671488700
+0x7fffffffdb30:	0x00007fffffffdb60	0x00007ffff7e03ac0
+0x7fffffffdb40:	0x000000000000001f	0xffffffffffffffc0
+0x7fffffffdb50:	0x0000555555557d98	0x00007ffff7ffd000
+0x7fffffffdb60:	0x00007fffffffdba0	0x00007ffff7cad7e2
+0x7fffffffdb70:	0x0000000000000000	0x0000000000000000
+0x7fffffffdb80:	0x0000000000000000	0x00007fffffffde28
+0x7fffffffdb90:	0x0000000000000001	0x0000000000000000
+0x7fffffffdba0:	0x00007fffffffdcf0	0x00005555555553bc
+0x7fffffffdbb0:	0x00007fffffffdc10	0x00000001f7fdde8c
+0x7fffffffdbc0:	0x0000000000000000	0x00c300000000000b
+0x7fffffffdbd0:	0x00007fffffffdbe0	0x01005555555592a0
+0x7fffffffdbe0:	0x0000000000000000	0x0000000000000000
+0x7fffffffdbf0:	0x0000000000000000	0x0000000000000000
+0x7fffffffdc00:	0x0000000000000000	0x0000000000000000
+0x7fffffffdc10:	0x0000000000000000	0x0000000000000000
+0x7fffffffdc20:	0x0000000000000000	0x0000000000000000
+0x7fffffffdc30:	0x0000000000000000	0x0000000000000000
+0x7fffffffdc40:	0x0000000000000000	0x0000000000000000
+0x7fffffffdc50:	0x0000000000000000	0x0000000000000000
+0x7fffffffdc60:	0x0000000000000000	0x0000000000000000
+0x7fffffffdc70:	0x0000000000000000	0x0000000000000000
+0x7fffffffdc80:	0x0000000000000000	0x0000000000000000
+0x7fffffffdc90:	0x0000000000000000	0x0000000000000000
+0x7fffffffdca0:	0x0000000000000000	0x0000000000000000
+0x7fffffffdcb0:	0x0000000000000000	0x0000000000000000
+0x7fffffffdcc0:	0x0000000000000000	0x0000000000000000
+0x7fffffffdcd0:	0x0000000000000000	0x0000000000000000
+0x7fffffffdce0:	0x00007fffffffdcf0	0x5c9ae2e671488700
+0x7fffffffdcf0:	0x00007fffffffdd00	0x00005555555554bc
+0x7fffffffdd00:	0x00007fffffffdda0	0x00007ffff7c2a1ca
+0x7fffffffdd10:	0x00007fffffffdd50	0x00007fffffffde28
+0x7fffffffdd20:	0x0000000155554040	0x00005555555554a0
+0x7fffffffdd30:	0x00007fffffffde28	0x18e8d1d0f10565d1
+0x7fffffffdd40:	0x0000000000000001	0x0000000000000000
+0x7fffffffdd50:	0x0000555555557d98	0x00007ffff7ffd000
+0x7fffffffdd60:	0x18e8d1d0f06565d1	0x18e8c1aa094765d1
+0x7fffffffdd70:	0x00007fff00000000	0x0000000000000000
+
+
+pwndbg> x/80i 0x00007ffff7c2a150
+   0x7ffff7c2a150 <__libc_start_call_main>:	push   rbp
+   0x7ffff7c2a151 <__libc_start_call_main+1>:	mov    rbp,rsp
+   0x7ffff7c2a154 <__libc_start_call_main+4>:	sub    rsp,0x90
+   0x7ffff7c2a15b <__libc_start_call_main+11>:	mov    QWORD PTR [rbp-0x78],rdi
+   0x7ffff7c2a15f <__libc_start_call_main+15>:	lea    rdi,[rbp-0x70]
+   0x7ffff7c2a163 <__libc_start_call_main+19>:	mov    DWORD PTR [rbp-0x7c],esi
+   0x7ffff7c2a166 <__libc_start_call_main+22>:	mov    QWORD PTR [rbp-0x88],rdx
+   0x7ffff7c2a16d <__libc_start_call_main+29>:	mov    rax,QWORD PTR fs:0x28
+   0x7ffff7c2a176 <__libc_start_call_main+38>:	mov    QWORD PTR [rbp-0x8],rax
+   0x7ffff7c2a17a <__libc_start_call_main+42>:	xor    eax,eax
+   0x7ffff7c2a17c <__libc_start_call_main+44>:	call   0x7ffff7c44f90 <__GI__setjmp>
+   0x7ffff7c2a181 <__libc_start_call_main+49>:	endbr64
+   0x7ffff7c2a185 <__libc_start_call_main+53>:	test   eax,eax
+   0x7ffff7c2a187 <__libc_start_call_main+55>:	jne    0x7ffff7c2a1d1 <__libc_start_call_main+129>
+   0x7ffff7c2a189 <__libc_start_call_main+57>:	mov    rax,QWORD PTR fs:0x300
+   0x7ffff7c2a192 <__libc_start_call_main+66>:	mov    QWORD PTR [rbp-0x28],rax
+   0x7ffff7c2a196 <__libc_start_call_main+70>:	mov    rax,QWORD PTR fs:0x2f8
+   0x7ffff7c2a19f <__libc_start_call_main+79>:	mov    QWORD PTR [rbp-0x20],rax
+   0x7ffff7c2a1a3 <__libc_start_call_main+83>:	lea    rax,[rbp-0x70]
+   0x7ffff7c2a1a7 <__libc_start_call_main+87>:	mov    QWORD PTR fs:0x300,rax
+   0x7ffff7c2a1b0 <__libc_start_call_main+96>:	mov    rax,QWORD PTR [rip+0x1d8de9]        # 0x7ffff7e02fa0
+   0x7ffff7c2a1b7 <__libc_start_call_main+103>:	mov    rsi,QWORD PTR [rbp-0x88]
+   0x7ffff7c2a1be <__libc_start_call_main+110>:	mov    edi,DWORD PTR [rbp-0x7c]
+   0x7ffff7c2a1c1 <__libc_start_call_main+113>:	mov    rdx,QWORD PTR [rax]
+   0x7ffff7c2a1c4 <__libc_start_call_main+116>:	mov    rax,QWORD PTR [rbp-0x78]
+   0x7ffff7c2a1c8 <__libc_start_call_main+120>:	call   rax
+   0x7ffff7c2a1ca <__libc_start_call_main+122>:	mov    edi,eax
+   0x7ffff7c2a1cc <__libc_start_call_main+124>:	call   0x7ffff7c47b90 <__GI_exit>
+   0x7ffff7c2a1d1 <__libc_start_call_main+129>:	call   0x7ffff7c99280 <__GI___nptl_deallocate_tsd>
+   0x7ffff7c2a1d6 <__libc_start_call_main+134>:	
+    lock sub DWORD PTR [rip+0x1d8ef2],0x1        # 0x7ffff7e030d0 <__nptl_nthreads>
+   0x7ffff7c2a1de <__libc_start_call_main+142>:	je     0x7ffff7c2a1f0 <__libc_start_call_main+160>
+   0x7ffff7c2a1e0 <__libc_start_call_main+144>:	mov    edx,0x3c
+   0x7ffff7c2a1e5 <__libc_start_call_main+149>:	nop    DWORD PTR [rax]
+   0x7ffff7c2a1e8 <__libc_start_call_main+152>:	xor    edi,edi
+   0x7ffff7c2a1ea <__libc_start_call_main+154>:	mov    eax,edx
+   0x7ffff7c2a1ec <__libc_start_call_main+156>:	syscall
+   0x7ffff7c2a1ee <__libc_start_call_main+158>:	jmp    0x7ffff7c2a1e8 <__libc_start_call_main+152>
+   0x7ffff7c2a1f0 <__libc_start_call_main+160>:	xor    eax,eax
+   0x7ffff7c2a1f2 <__libc_start_call_main+162>:	jmp    0x7ffff7c2a1ca <__libc_start_call_main+122>
+
+mito@mito-virtual-machine:~/CTF/UofTCTF_2025/Pwn_Counting_Sort$ one_gadget libc.so.6 
+0x583dc posix_spawn(rsp+0xc, "/bin/sh", 0, rbx, rsp+0x50, environ)
+constraints:
+  address rsp+0x68 is writable
+  rsp & 0xf == 0
+  rax == NULL || {"sh", rax, rip+0x17302e, r12, ...} is a valid argv
+  rbx == NULL || (u16)[rbx] == NULL
+
+0x583e3 posix_spawn(rsp+0xc, "/bin/sh", 0, rbx, rsp+0x50, environ)
+constraints:
+  address rsp+0x68 is writable
+  rsp & 0xf == 0
+  rcx == NULL || {rcx, rax, rip+0x17302e, r12, ...} is a valid argv
+  rbx == NULL || (u16)[rbx] == NULL
+
+0xef4ce execve("/bin/sh", rbp-0x50, r12)
+constraints:
+  address rbp-0x48 is writable
+  rbx == NULL || {"/bin/sh", rbx, NULL} is a valid argv
+  [r12] == NULL || r12 == NULL || r12 is a valid envp
+
+0xef52b execve("/bin/sh", rbp-0x50, [rbp-0x78])
+constraints:
+  address rbp-0x50 is writable
+  rax == NULL || {"/bin/sh", rax, NULL} is a valid argv
+  [[rbp-0x78]] == NULL || [rbp-0x78] == NULL || [rbp-0x78] is a valid envp

@@ -1,0 +1,43 @@
+[----------------------------------registers-----------------------------------]
+RAX: 0x8d 
+RBX: 0x0 
+RCX: 0x7ffff7e90887 (<__GI___libc_write+23>:	cmp    rax,0xfffffffffffff000)
+RDX: 0x0 
+RSI: 0x7fffffffbc90 ("You entered: AAA%AAsAABAA$AAnAACAA-AA(AADAA;AA)AAEAAaAA0AAFAAbAA1AAGAAcAA2AAHAAdAA3AAIAAeAA4AAJAAfAA5AAKAAgAA6AALAAhAA7)
+RDI: 0x7fffffffbb70 --> 0x7ffff7dde050 (<__funlockfile>:	endbr64)
+RBP: 0x4141334141644141 ('AAdAA3AA')
+RSP: 0x7fffffffddf8 ("IAAeAA4AAJAAfAA5AAKAAgAA6AALAAhAA7AAMAAiAA8AANAAjAA9AAO")
+RIP: 0x401216 (<vulnerable_function+81>:	ret)
+R8 : 0x8d 
+R9 : 0x7fffffff 
+R10: 0x0 
+R11: 0x246 
+R12: 0x7fffffffdf18 --> 0x7fffffffe280 ("/home/mito/CTF/UofTCTF_2025/Pwn_Baby_Pwn/baby-pwn")
+R13: 0x401217 (<main>:	push   rbp)
+R14: 0x403df0 --> 0x401130 (endbr64)
+R15: 0x7ffff7ffd040 --> 0x7ffff7ffe2e0 --> 0x0
+EFLAGS: 0x10202 (carry parity adjust zero sign trap INTERRUPT direction overflow)
+[-------------------------------------code-------------------------------------]
+   0x40120f <vulnerable_function+74>:	call   0x401040 <printf@plt>
+   0x401214 <vulnerable_function+79>:	nop
+   0x401215 <vulnerable_function+80>:	leave  
+=> 0x401216 <vulnerable_function+81>:	ret    
+   0x401217 <main>:	push   rbp
+   0x401218 <main+1>:	mov    rbp,rsp
+   0x40121b <main+4>:	mov    rax,QWORD PTR [rip+0x2e1e]        # 0x404040 <stdout@GLIBC_2.2.5>
+   0x401222 <main+11>:	mov    ecx,0x0
+[------------------------------------stack-------------------------------------]
+0000| 0x7fffffffddf8 ("IAAeAA4AAJAAfAA5AAKAAgAA6AALAAhAA7AAMAAiAA8AANAAjAA9AAO")
+0008| 0x7fffffffde00 ("AJAAfAA5AAKAAgAA6AALAAhAA7AAMAAiAA8AANAAjAA9AAO")
+0016| 0x7fffffffde08 ("AAKAAgAA6AALAAhAA7AAMAAiAA8AANAAjAA9AAO")
+0024| 0x7fffffffde10 ("6AALAAhAA7AAMAAiAA8AANAAjAA9AAO")
+0032| 0x7fffffffde18 ("A7AAMAAiAA8AANAAjAA9AAO")
+0040| 0x7fffffffde20 ("AA8AANAAjAA9AAO")
+0048| 0x7fffffffde28 --> 0x4f41413941416a ('jAA9AAO')
+0056| 0x7fffffffde30 --> 0x0 
+[------------------------------------------------------------------------------]
+Legend: code, data, rodata, value
+Stopped reason: SIGSEGV
+0x0000000000401216 in vulnerable_function ()
+gdb-peda$ patto IAAe
+IAAe found at offset: 72

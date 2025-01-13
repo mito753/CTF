@@ -1,0 +1,121 @@
+pwndbg> vmmap
+LEGEND: STACK | HEAP | CODE | DATA | WX | RODATA
+             Start                End Perm     Size Offset File
+    0x555555554000     0x555555555000 r--p     1000      0 /home/mito/CTF/UofTCTF_2025/Pwn_Echo/chall
+    0x555555555000     0x555555556000 r-xp     1000   1000 /home/mito/CTF/UofTCTF_2025/Pwn_Echo/chall
+    0x555555556000     0x555555557000 r--p     1000   2000 /home/mito/CTF/UofTCTF_2025/Pwn_Echo/chall
+    0x555555557000     0x555555558000 r--p     1000   2000 /home/mito/CTF/UofTCTF_2025/Pwn_Echo/chall
+    0x555555558000     0x555555559000 rw-p     1000   3000 /home/mito/CTF/UofTCTF_2025/Pwn_Echo/chall
+    0x7ffff7c00000     0x7ffff7c28000 r--p    28000      0 /usr/lib/x86_64-linux-gnu/libc.so.6
+    0x7ffff7c28000     0x7ffff7db0000 r-xp   188000  28000 /usr/lib/x86_64-linux-gnu/libc.so.6
+    0x7ffff7db0000     0x7ffff7dff000 r--p    4f000 1b0000 /usr/lib/x86_64-linux-gnu/libc.so.6
+    0x7ffff7dff000     0x7ffff7e03000 r--p     4000 1fe000 /usr/lib/x86_64-linux-gnu/libc.so.6
+    0x7ffff7e03000     0x7ffff7e05000 rw-p     2000 202000 /usr/lib/x86_64-linux-gnu/libc.so.6
+    0x7ffff7e05000     0x7ffff7e12000 rw-p     d000      0 [anon_7ffff7e05]
+    0x7ffff7fa4000     0x7ffff7fa7000 rw-p     3000      0 [anon_7ffff7fa4]
+    0x7ffff7fbd000     0x7ffff7fbf000 rw-p     2000      0 [anon_7ffff7fbd]
+    0x7ffff7fbf000     0x7ffff7fc3000 r--p     4000      0 [vvar]
+    0x7ffff7fc3000     0x7ffff7fc5000 r-xp     2000      0 [vdso]
+    0x7ffff7fc5000     0x7ffff7fc6000 r--p     1000      0 /usr/lib/x86_64-linux-gnu/ld-linux-x86-64.so.2
+    0x7ffff7fc6000     0x7ffff7ff1000 r-xp    2b000   1000 /usr/lib/x86_64-linux-gnu/ld-linux-x86-64.so.2
+    0x7ffff7ff1000     0x7ffff7ffb000 r--p     a000  2c000 /usr/lib/x86_64-linux-gnu/ld-linux-x86-64.so.2
+    0x7ffff7ffb000     0x7ffff7ffd000 r--p     2000  36000 /usr/lib/x86_64-linux-gnu/ld-linux-x86-64.so.2
+    0x7ffff7ffd000     0x7ffff7fff000 rw-p     2000  38000 /usr/lib/x86_64-linux-gnu/ld-linux-x86-64.so.2
+    0x7ffffffde000     0x7ffffffff000 rw-p    21000      0 [stack]
+0xffffffffff600000 0xffffffffff601000 --xp     1000      0 [vsyscall]
+
+
+pwndbg> c
+Continuing.
+aaaaaaa
+
+Breakpoint 1, 0x000055555555522d in vuln ()
+LEGEND: STACK | HEAP | CODE | DATA | WX | RODATA
+─────────────────────────────[ REGISTERS / show-flags off / show-compact-regs off ]──────────────────────────────
+*RAX  0
+ RBX  0x7fffffffddd8 —▸ 0x7fffffffe170 ◂— '/home/mito/CTF/UofTCTF_2025/Pwn_Echo/chall'
+ RCX  0x7ffff7d1ba61 (read+17) ◂— cmp rax, -0x1000 /* 'H=' */
+ RDX  0x100
+*RDI  0x7fffffffdc87 ◂— 0xa61616161616161 ('aaaaaaa\n')
+ RSI  0x7fffffffdc87 ◂— 0xa61616161616161 ('aaaaaaa\n')
+ R8   0
+ R9   0x7ffff7fca380 (_dl_fini) ◂— endbr64 
+ R10  0x7ffff7c109d8 ◂— 0x11001200001bd3
+ R11  0x246
+ R12  1
+ R13  0
+ R14  0x555555557df0 (__do_global_dtors_aux_fini_array_entry) —▸ 0x555555555160 (__do_global_dtors_aux) ◂— endbr64 
+ R15  0x7ffff7ffd000 (_rtld_global) —▸ 0x7ffff7ffe2e0 —▸ 0x555555554000 ◂— 0x10102464c457f
+ RBP  0x7fffffffdc90 —▸ 0x7fffffffdcb0 —▸ 0x7fffffffdd50 —▸ 0x7fffffffddb0 ◂— 0
+*RSP  0x7fffffffdc80 ◂— 0x61007fffffffdc90
+*RIP  0x55555555522d (vuln+61) ◂— call printf@plt
+──────────────────────────────────────[ DISASM / x86-64 / set emulate on ]───────────────────────────────────────
+   0x7ffff7d1bac4 <read+116>    mov    rax, 0xffffffffffffffff     RAX => 0xffffffffffffffff
+   0x7ffff7d1bacb <read+123>    ret                                <vuln+49>
+    ↓
+   0x555555555221 <vuln+49>     lea    rax, [rbp - 9]              RAX => 0x7fffffffdc87 ◂— 0x955c54fc207d0000
+   0x555555555225 <vuln+53>     mov    rdi, rax                    RDI => 0x7fffffffdc87 ◂— 0x955c54fc207d0000
+   0x555555555228 <vuln+56>     mov    eax, 0                      EAX => 0
+ ► 0x55555555522d <vuln+61>     call   printf@plt                  <printf@plt>
+        format: 0x7fffffffdc87 ◂— 0xa61616161616161 ('aaaaaaa\n')
+        vararg: 0x7fffffffdc87 ◂— 0xa61616161616161 ('aaaaaaa\n')
+ 
+   0x555555555232 <vuln+66>     nop    
+   0x555555555233 <vuln+67>     mov    rdx, qword ptr [rbp - 8]
+   0x555555555237 <vuln+71>     sub    rdx, qword ptr fs:[0x28]
+   0x555555555240 <vuln+80>     je     vuln+87                     <vuln+87>
+ 
+   0x555555555242 <vuln+82>     call   __stack_chk_fail@plt        <__stack_chk_fail@plt>
+────────────────────────────────────────────────────[ STACK ]────────────────────────────────────────────────────
+00:0000│ rsp rdi-7 rsi-7 0x7fffffffdc80 ◂— 0x61007fffffffdc90
+01:0008│-008             0x7fffffffdc88 ◂— 0x7a0a616161616161 ('aaaaaa\nz')
+02:0010│ rbp             0x7fffffffdc90 —▸ 0x7fffffffdcb0 —▸ 0x7fffffffdd50 —▸ 0x7fffffffddb0 ◂— 0
+03:0018│+008             0x7fffffffdc98 —▸ 0x555555555275 (main+44) ◂— mov eax, 0
+04:0020│+010             0x7fffffffdca0 —▸ 0x7fffffffdd90 —▸ 0x5555555550c0 (_start) ◂— endbr64 
+05:0028│+018             0x7fffffffdca8 ◂— 0xffffddd8
+06:0030│+020             0x7fffffffdcb0 —▸ 0x7fffffffdd50 —▸ 0x7fffffffddb0 ◂— 0
+07:0038│+028             0x7fffffffdcb8 —▸ 0x7ffff7c2a1ca (__libc_start_call_main+122) ◂— mov edi, eax
+──────────────────────────────────────────────────[ BACKTRACE ]──────────────────────────────────────────────────
+ ► 0   0x55555555522d vuln+61
+   1   0x555555555275 main+44
+   2   0x7ffff7c2a1ca __libc_start_call_main+122
+   3   0x7ffff7c2a28b __libc_start_main+139
+   4   0x5555555550e5 _start+37
+─────────────────────────────────────────────────────────────────────────────────────────────────────────────────
+pwndbg> x/80gx  0x7fffffffdc80 
+0x7fffffffdc80:	0x61007fffffffdc90	0x7a0a616161616161
+0x7fffffffdc90:	0x00007fffffffdcb0	0x0000555555555275
+0x7fffffffdca0:	0x00007fffffffdd90	0x00000000ffffddd8
+0x7fffffffdcb0:	0x00007fffffffdd50	0x00007ffff7c2a1ca
+0x7fffffffdcc0:	0x00007fffffffdd00	0x00007fffffffddd8
+0x7fffffffdcd0:	0x0000000155554040	0x0000555555555249
+0x7fffffffdce0:	0x00007fffffffddd8	0x65b2337b2199c264
+0x7fffffffdcf0:	0x0000000000000001	0x0000000000000000
+0x7fffffffdd00:	0x0000555555557df0	0x00007ffff7ffd000
+0x7fffffffdd10:	0x65b2337b22b9c264	0x65b22301d83bc264
+0x7fffffffdd20:	0x00007fff00000000	0x0000000000000000
+0x7fffffffdd30:	0x0000000000000000	0x0000000000000001
+0x7fffffffdd40:	0x00007fffffffddd0	0x7a955c54fc207d00
+0x7fffffffdd50:	0x00007fffffffddb0	0x00007ffff7c2a28b
+0x7fffffffdd60:	0x00007fffffffdde8	0x0000555555557df0
+0x7fffffffdd70:	0x00007fffffffdde8	0x0000555555555249
+0x7fffffffdd80:	0x0000000000000000	0x0000000000000000
+0x7fffffffdd90:	0x00005555555550c0	0x00007fffffffddd0
+0x7fffffffdda0:	0x0000000000000000	0x0000000000000000
+0x7fffffffddb0:	0x0000000000000000	0x00005555555550e5
+0x7fffffffddc0:	0x00007fffffffddc8	0x0000000000000038
+0x7fffffffddd0:	0x0000000000000001	0x00007fffffffe170
+0x7fffffffdde0:	0x0000000000000000	0x00007fffffffe19b
+0x7fffffffddf0:	0x00007fffffffe1ab	0x00007fffffffe219
+0x7fffffffde00:	0x00007fffffffe22b	0x00007fffffffe23e
+0x7fffffffde10:	0x00007fffffffe252	0x00007fffffffe27d
+
+
+pwndbg> x/80gx 0x0000555555558008
+0x555555558008:	0x00007ffff7ffe2e0	0x00007ffff7fda2f0
+0x555555558018 <__stack_chk_fail@got.plt>:	0x0000555555555030	0x0000555555555040
+0x555555558028 <read@got.plt>:	0x00007ffff7d1ba50	0x00007ffff7c88540
+0x555555558038:	0x0000000000000000	0x0000555555558040
+0x555555558048:	0x0000000000000000	0x00007ffff7e045c0
+0x555555558058:	0x0000000000000000	0x00007ffff7e038e0
+0x555555558068 <completed.0>:	0x0000000000000000	0x0000000000000000
