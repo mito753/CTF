@@ -1,0 +1,12 @@
+Challenge
+3 Solves
+
+Localstack
+ 499
+Easy
+This is my stack implementation for data structure course's homework I. I enabled all protections so it should be safe, right?
+
+Author: pwn2ooown
+
+nc 172.31.1.2 11100
+TSC{...}

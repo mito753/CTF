@@ -1,0 +1,10 @@
+Challenge
+0 Solves
+
+BabyStack
+ 500
+nc 172.31.2.2 36902
+
+Author : Curious
+
+TSC{...}

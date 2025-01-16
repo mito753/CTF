@@ -1,0 +1,6 @@
+mito@mito-virtual-machine:~/CTF/TSCCTF_2025/Pwn_gamble_bad_bad$ nc 172.31.0.2 1337
+歡迎來到拉霸機！試著獲得 777 大獎吧！
+輸入你的投注金額：12345678901234567890777
+這次的結果為：777
+恭喜你中了 777 大獎！
+Flag 是：TSC{Gamb1e_Very_bad_bad_but_}

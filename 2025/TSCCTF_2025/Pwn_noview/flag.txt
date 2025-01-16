@@ -1,0 +1,118 @@
+[DEBUG] Received 0x1 bytes:
+    b'i'
+[DEBUG] Received 0x7 bytes:
+    b'ndex > '
+[DEBUG] Sent 0x3 bytes:
+    b'10\n'
+[*] Switching to interactive mode
+$ is
+[DEBUG] Sent 0x3 bytes:
+    b'is\n'
+$ id
+[DEBUG] Sent 0x3 bytes:
+    b'id\n'
+[DEBUG] Received 0x36 bytes:
+    b'uid=1000(noview) gid=1000(noview) groups=1000(noview)\n'
+uid=1000(noview) gid=1000(noview) groups=1000(noview)
+$ ls -l
+[DEBUG] Sent 0x6 bytes:
+    b'ls -l\n'
+[DEBUG] Received 0x451 bytes:
+    b'total 64\n'
+    b'lrwxrwxrwx    1 root root    7 Oct 11 02:03 bin -> usr/bin\n'
+    b'drwxr-xr-x    2 root root 4096 Apr 15  2020 boot\n'
+    b'drwxr-xr-x    5 root root  340 Jan 13 13:48 dev\n'
+    b'drwxr-xr-x    1 root root 4096 Jan 13 13:48 etc\n'
+    b'drwxr-xr-x    1 root root 4096 Jan 13 13:48 home\n'
+    b'lrwxrwxrwx    1 root root    7 Oct 11 02:03 lib -> usr/lib\n'
+    b'lrwxrwxrwx    1 root root    9 Oct 11 02:03 lib32 -> usr/lib32\n'
+    b'lrwxrwxrwx    1 root root    9 Oct 11 02:03 lib64 -> usr/lib64\n'
+    b'lrwxrwxrwx    1 root root   10 Oct 11 02:03 libx32 -> usr/libx32\n'
+    b'drwxr-xr-x    2 root root 4096 Oct 11 02:03 media\n'
+    b'drwxr-xr-x    2 root root 4096 Oct 11 02:03 mnt\n'
+    b'drwxr-xr-x    2 root root 4096 Oct 11 02:03 opt\n'
+    b'dr-xr-xr-x 1180 root root    0 Jan 13 13:48 proc\n'
+    b'drwx------    2 root root 4096 Oct 11 02:09 root\n'
+    b'drwxr-xr-x    5 root root 4096 Oct 11 02:09 run\n'
+    b'lrwxrwxrwx    1 root root    8 Oct 11 02:03 sbin -> usr/sbin\n'
+    b'drwxr-xr-x    2 root root 4096 Oct 11 02:03 srv\n'
+    b'dr-xr-xr-x   13 root root    0 Jan 13 13:48 sys\n'
+    b'drwxrwxrwt    1 root root 4096 Jan 13 13:39 tmp\n'
+    b'drwxr-xr-x    1 root root 4096 Oct 11 02:03 usr\n'
+    b'drwxr-xr-x    1 root root 4096 Oct 11 02:09 var\n'
+total 64
+lrwxrwxrwx    1 root root    7 Oct 11 02:03 bin -> usr/bin
+drwxr-xr-x    2 root root 4096 Apr 15  2020 boot
+drwxr-xr-x    5 root root  340 Jan 13 13:48 dev
+drwxr-xr-x    1 root root 4096 Jan 13 13:48 etc
+drwxr-xr-x    1 root root 4096 Jan 13 13:48 home
+lrwxrwxrwx    1 root root    7 Oct 11 02:03 lib -> usr/lib
+lrwxrwxrwx    1 root root    9 Oct 11 02:03 lib32 -> usr/lib32
+lrwxrwxrwx    1 root root    9 Oct 11 02:03 lib64 -> usr/lib64
+lrwxrwxrwx    1 root root   10 Oct 11 02:03 libx32 -> usr/libx32
+drwxr-xr-x    2 root root 4096 Oct 11 02:03 media
+drwxr-xr-x    2 root root 4096 Oct 11 02:03 mnt
+drwxr-xr-x    2 root root 4096 Oct 11 02:03 opt
+dr-xr-xr-x 1180 root root    0 Jan 13 13:48 proc
+drwx------    2 root root 4096 Oct 11 02:09 root
+drwxr-xr-x    5 root root 4096 Oct 11 02:09 run
+lrwxrwxrwx    1 root root    8 Oct 11 02:03 sbin -> usr/sbin
+drwxr-xr-x    2 root root 4096 Oct 11 02:03 srv
+dr-xr-xr-x   13 root root    0 Jan 13 13:48 sys
+drwxrwxrwt    1 root root 4096 Jan 13 13:39 tmp
+drwxr-xr-x    1 root root 4096 Oct 11 02:03 usr
+drwxr-xr-x    1 root root 4096 Oct 11 02:09 var
+$ cd /home
+[DEBUG] Sent 0x9 bytes:
+    b'cd /home\n'
+$ ls
+[DEBUG] Sent 0x3 bytes:
+    b'ls\n'
+[DEBUG] Received 0x7 bytes:
+    b'noview\n'
+noview
+$ cd noview
+[DEBUG] Sent 0xa bytes:
+    b'cd noview\n'
+$ ls
+[DEBUG] Sent 0x3 bytes:
+    b'ls\n'
+[DEBUG] Received 0x22 bytes:
+    b'chal\n'
+    b'chal.c\n'
+    b'flag\n'
+    b'libc.so.6\n'
+    b'run.sh\n'
+chal
+chal.c
+flag
+libc.so.6
+run.sh
+$ cat flag
+[DEBUG] Sent 0x9 bytes:
+    b'cat flag\n'
+[DEBUG] Received 0x3a bytes:
+    b'TSCCTF{w0w_y0u_hav3_succ3ss4_1nsp3ct_th3_s3cr3t_congrats}\n'
+TSCCTF{w0w_y0u_hav3_succ3ss4_1nsp3ct_th3_s3cr3t_congrats}
+$ ls -l
+[DEBUG] Sent 0x6 bytes:
+    b'ls -l\n'
+[DEBUG] Received 0x109 bytes:
+    b'total 2016\n'
+    b'-rwxr-xr-x 1 root root   17544 Jan  5 11:28 chal\n'
+    b'-rw-r--r-- 1 root root    1541 Jan  5 11:28 chal.c\n'
+    b'-rw-r--r-- 1 root root      58 Jan  5 11:28 flag\n'
+    b'-rwxr-xr-x 1 root root 2029592 Jan  5 11:28 libc.so.6\n'
+    b'-rwxr-xr-x 1 root root      57 Jan  5 11:28 run.sh\n'
+total 2016
+-rwxr-xr-x 1 root root   17544 Jan  5 11:28 chal
+-rw-r--r-- 1 root root    1541 Jan  5 11:28 chal.c
+-rw-r--r-- 1 root root      58 Jan  5 11:28 flag
+-rwxr-xr-x 1 root root 2029592 Jan  5 11:28 libc.so.6
+-rwxr-xr-x 1 root root      57 Jan  5 11:28 run.sh
+$ cat flag
+[DEBUG] Sent 0x9 bytes:
+    b'cat flag\n'
+[DEBUG] Received 0x3a bytes:
+    b'TSCCTF{w0w_y0u_hav3_succ3ss4_1nsp3ct_th3_s3cr3t_congrats}\n'
+TSCCTF{w0w_y0u_hav3_succ3ss4_1nsp3ct_th3_s3cr3t_congrats}
