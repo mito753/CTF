@@ -1,8 +1,8 @@
 Challenge
-2 Solves
+10 Solves
 
 Globalstack
- 500
+ 478
 Easy
 Now I learned some global variables and pointer stuff, so I rewrote my stack implementation! It should be safe now, right?
 

@@ -1,8 +1,8 @@
 Challenge
-38 Solves
+152 Solves
 
 gamble_bad_bad
- 115
+ 50
 baby
 就
 

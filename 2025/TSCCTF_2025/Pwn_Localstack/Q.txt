@@ -1,8 +1,8 @@
 Challenge
-3 Solves
+27 Solves
 
 Localstack
- 499
+ 310
 Easy
 This is my stack implementation for data structure course's homework I. I enabled all protections so it should be safe, right?
 

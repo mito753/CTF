@@ -1,11 +1,14 @@
 Challenge
-2 Solves
+12 Solves
 
 babyheap
- 500
+ 466
+medium
 Let's warm up for heap challenges! Yssring wish you a good luck!
 
 nc 172.31.3.2 4241
+
+flag is locate at /home/babyheap/flag
 
 Author : Terry1234
 

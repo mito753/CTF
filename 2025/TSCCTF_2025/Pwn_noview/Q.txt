@@ -1,11 +1,14 @@
 Challenge
-0 Solves
+5 Solves
 
 noview
- 500
+ 496
+hard
 Can you inspect the secret on heap?
 
 nc 172.31.3.2 4240
+
+flag is locate at /home/noview/flag
 
 Author : Terry1234
 

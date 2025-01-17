@@ -1,8 +1,9 @@
 Challenge
-0 Solves
+8 Solves
 
 BabyStack
- 500
+ 487
+Hard
 nc 172.31.2.2 36902
 
 Author : Curious
