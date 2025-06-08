@@ -1,0 +1,59 @@
+ffffffff81c000f6:       48 89 e7                mov    rdi,rsp
+ffffffff81c000f9:       65 48 8b 24 25 04 60    mov    rsp,QWORD PTR gs:0x6004
+ffffffff81c00100:       00 00 
+ffffffff81c00102:       ff 77 28                push   QWORD PTR [rdi+0x28]
+ffffffff81c00105:       ff 37                   push   QWORD PTR [rdi]
+ffffffff81c00107:       50                      push   rax
+ffffffff81c00108:       eb 43                   jmp    ffffffff81c0014d <syscall_return_via_sysret+0x6c>
+ffffffff81c0010a:       0f 20 df                mov    rdi,cr3
+ffffffff81c0010d:       eb 34                   jmp    ffffffff81c00143 <syscall_return_via_sysret+0x62>
+ffffffff81c0010f:       48 89 f8                mov    rax,rdi
+ffffffff81c00112:       48 81 e7 ff 07 00 00    and    rdi,0x7ff
+ffffffff81c00119:       65 48 0f a3 3c 25 d6    bt     QWORD PTR gs:0x273d6,rdi
+ffffffff81c00120:       73 02 00 
+ffffffff81c00123:       73 0f                   jae    ffffffff81c00134 <syscall_return_via_sysret+0x53>
+ffffffff81c00125:       65 48 0f b3 3c 25 d6    btr    QWORD PTR gs:0x273d6,rdi
+ffffffff81c0012c:       73 02 00 
+ffffffff81c0012f:       48 89 c7                mov    rdi,rax
+ffffffff81c00132:       eb 08                   jmp    ffffffff81c0013c <syscall_return_via_sysret+0x5b>
+ffffffff81c00134:       48 89 c7                mov    rdi,rax
+ffffffff81c00137:       48 0f ba ef 3f          bts    rdi,0x3f
+ffffffff81c0013c:       48 81 cf 00 08 00 00    or     rdi,0x800
+ffffffff81c00143:       48 81 cf 00 10 00 00    or     rdi,0x1000
+ffffffff81c0014a:       0f 22 df                mov    cr3,rdi
+ffffffff81c0014d:       58                      pop    rax
+ffffffff81c0014e:       5f                      pop    rdi
+ffffffff81c0014f:       5c                      pop    rsp
+ffffffff81c00150:       0f 01 f8                swapgs
+
+
+ffffffff81c00a45:       48 89 e7                mov    rdi,rsp
+ffffffff81c00a48:       65 48 8b 24 25 04 60    mov    rsp,QWORD PTR gs:0x6004
+ffffffff81c00a4f:       00 00 
+ffffffff81c00a51:       ff 77 30                push   QWORD PTR [rdi+0x30]
+ffffffff81c00a54:       ff 77 28                push   QWORD PTR [rdi+0x28]
+ffffffff81c00a57:       ff 77 20                push   QWORD PTR [rdi+0x20]
+ffffffff81c00a5a:       ff 77 18                push   QWORD PTR [rdi+0x18]
+ffffffff81c00a5d:       ff 77 10                push   QWORD PTR [rdi+0x10]
+ffffffff81c00a60:       ff 37                   push   QWORD PTR [rdi]
+ffffffff81c00a62:       50                      push   rax
+ffffffff81c00a63:       eb 43                   jmp    ffffffff81c00aa8 <swapgs_restore_regs_and_return_to_usermode+0x79>
+ffffffff81c00a65:       0f 20 df                mov    rdi,cr3
+ffffffff81c00a68:       eb 34                   jmp    ffffffff81c00a9e <swapgs_restore_regs_and_return_to_usermode+0x6f>
+ffffffff81c00a6a:       48 89 f8                mov    rax,rdi
+ffffffff81c00a6d:       48 81 e7 ff 07 00 00    and    rdi,0x7ff
+ffffffff81c00a74:       65 48 0f a3 3c 25 d6    bt     QWORD PTR gs:0x273d6,rdi
+ffffffff81c00a7b:       73 02 00 
+ffffffff81c00a7e:       73 0f                   jae    ffffffff81c00a8f <swapgs_restore_regs_and_return_to_usermode+0x60>
+ffffffff81c00a80:       65 48 0f b3 3c 25 d6    btr    QWORD PTR gs:0x273d6,rdi
+ffffffff81c00a87:       73 02 00 
+ffffffff81c00a8a:       48 89 c7                mov    rdi,rax
+ffffffff81c00a8d:       eb 08                   jmp    ffffffff81c00a97 <swapgs_restore_regs_and_return_to_usermode+0x68>
+ffffffff81c00a8f:       48 89 c7                mov    rdi,rax
+ffffffff81c00a92:       48 0f ba ef 3f          bts    rdi,0x3f
+ffffffff81c00a97:       48 81 cf 00 08 00 00    or     rdi,0x800
+ffffffff81c00a9e:       48 81 cf 00 10 00 00    or     rdi,0x1000
+ffffffff81c00aa5:       0f 22 df                mov    cr3,rdi
+ffffffff81c00aa8:       58                      pop    rax
+ffffffff81c00aa9:       5f                      pop    rdi
+ffffffff81c00aaa:       0f 01 f8                swapgs

