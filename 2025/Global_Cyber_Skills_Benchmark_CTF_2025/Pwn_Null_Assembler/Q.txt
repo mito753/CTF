@@ -1,0 +1,17 @@
+CHALLENGE NAME
+Null Assembler
+Step into the world of Volnaya’s underground cyber operations and take control of the Null-Assembler—a custom-built assembler interface. You’ll be greeted with a prompt and a set of simple, powerful instructions: mov, add, sub, cmp, je, jne, jmp, and more. Your mission: craft assembly code line by line, define your own labels, and see your logic come to life as the engine executes your instructions.
+Submit flag & press enter
+Spawn Docker
+Spawned for all team members
+
+
+Scenario Files
+Files to assist you in finding the flag
+
+
+
+1000
+POINTS
+easy
+DIFFICULTY
