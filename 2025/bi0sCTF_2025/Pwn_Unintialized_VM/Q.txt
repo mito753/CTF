@@ -1,0 +1,28 @@
+Unintialized VM
+1000
+
+Points
+Pwn
+
+Category
+Unrated
+
+Difficulty
+Submit Flag
+bi0sctf{}
+
+
+Open Deployment
+View challenge deployment
+
+
+View Attachments
+View files attached to this challenge
+
+Description
+Just cooked up a simple VM, forgot to check for bugs tho.
+
+Flag Format:
+bi0sctf{}
+0 Solved
+1 Attempted

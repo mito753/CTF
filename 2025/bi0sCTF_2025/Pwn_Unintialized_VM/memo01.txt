@@ -1,0 +1,105 @@
+pwndbg> vmmap
+LEGEND: STACK | HEAP | CODE | DATA | WX | RODATA
+             Start                End Perm     Size Offset File
+    0x555555554000     0x555555555000 r--p     1000      0 /home/mito/CTF/bi0sCTF_2025/Pwn_Unintialized_VM/Handout/vm_chall
+    0x555555555000     0x555555556000 r-xp     1000   1000 /home/mito/CTF/bi0sCTF_2025/Pwn_Unintialized_VM/Handout/vm_chall
+    0x555555556000     0x555555557000 r--p     1000   2000 /home/mito/CTF/bi0sCTF_2025/Pwn_Unintialized_VM/Handout/vm_chall
+    0x555555557000     0x555555558000 r--p     1000   2000 /home/mito/CTF/bi0sCTF_2025/Pwn_Unintialized_VM/Handout/vm_chall
+    0x555555558000     0x555555559000 rw-p     1000   3000 /home/mito/CTF/bi0sCTF_2025/Pwn_Unintialized_VM/Handout/vm_chall
+    0x555555559000     0x55555557a000 rw-p    21000      0 [heap]
+    0x7ffff7c00000     0x7ffff7c28000 r--p    28000      0 /usr/lib/x86_64-linux-gnu/libc.so.6
+    0x7ffff7c28000     0x7ffff7db0000 r-xp   188000  28000 /usr/lib/x86_64-linux-gnu/libc.so.6
+    0x7ffff7db0000     0x7ffff7dff000 r--p    4f000 1b0000 /usr/lib/x86_64-linux-gnu/libc.so.6
+    0x7ffff7dff000     0x7ffff7e03000 r--p     4000 1fe000 /usr/lib/x86_64-linux-gnu/libc.so.6
+    0x7ffff7e03000     0x7ffff7e05000 rw-p     2000 202000 /usr/lib/x86_64-linux-gnu/libc.so.6
+    0x7ffff7e05000     0x7ffff7e12000 rw-p     d000      0 [anon_7ffff7e05]
+    0x7ffff7fa3000     0x7ffff7fa6000 rw-p     3000      0 [anon_7ffff7fa3]
+    0x7ffff7fbd000     0x7ffff7fbf000 rw-p     2000      0 [anon_7ffff7fbd]
+    0x7ffff7fbf000     0x7ffff7fc3000 r--p     4000      0 [vvar]
+    0x7ffff7fc3000     0x7ffff7fc5000 r-xp     2000      0 [vdso]
+    0x7ffff7fc5000     0x7ffff7fc6000 r--p     1000      0 /usr/lib/x86_64-linux-gnu/ld-linux-x86-64.so.2
+    0x7ffff7fc6000     0x7ffff7ff1000 r-xp    2b000   1000 /usr/lib/x86_64-linux-gnu/ld-linux-x86-64.so.2
+    0x7ffff7ff1000     0x7ffff7ffb000 r--p     a000  2c000 /usr/lib/x86_64-linux-gnu/ld-linux-x86-64.so.2
+    0x7ffff7ffb000     0x7ffff7ffd000 r--p     2000  36000 /usr/lib/x86_64-linux-gnu/ld-linux-x86-64.so.2
+    0x7ffff7ffd000     0x7ffff7fff000 rw-p     2000  38000 /usr/lib/x86_64-linux-gnu/ld-linux-x86-64.so.2
+    0x7ffffffde000     0x7ffffffff000 rw-p    21000      0 [stack]
+0xffffffffff600000 0xffffffffff601000 --xp     1000      0 [vsyscall]
+pwndbg> x/80gx 0x555555558000
+0x555555558000:	0x0000000000000000	0x0000555555558008
+0x555555558010 <stdout@GLIBC_2.2.5>:	0x00007ffff7e045c0	0x0000000000000000
+0x555555558020 <stdin@GLIBC_2.2.5>:	0x00007ffff7e038e0	0x0000000000000000
+0x555555558030:	0x0000000000000000	0x0000000000000000
+
+0x555555559280:	0x0000000000000000	0x0000000000000000
+0x555555559290:	0x0000000000000000	0x0000000000000911
+0x5555555592a0:	0x0000000000000039	0x0000000000000000
+0x5555555592b0:	0x0000000000000000	0x0000000000000000
+0x5555555592c0:	0x0000000000000000	0x0000000000000000
+
+
+0x555555559b90:	0x0000000000000000	0x0000000000000000
+0x555555559ba0:	0x0000000000000000	0x0000000000000061
+0x555555559bb0:	0x00005555555592a0	0x0000555555559b98
+0x555555559bc0:	0x0000555555559b98	0x0000000000000000
+0x555555559bd0:	0x0000000000000000	0x0000000000000000
+0x555555559be0:	0x0000000000000000	0x0000000000000000
+0x555555559bf0:	0x0000000000000000	0x0000000000000000
+0x555555559c00:	0x0000000000000000	0x0000000000020401
+
+0x7fffffffdbd0:	0x00007fffffffdc20	0x000055555555549e
+0x7fffffffdbe0:	0x0000000000000000	0x0000000100000000
+0x7fffffffdbf0:	0x0000000000000000	0x00005555555592a0
+0x7fffffffdc00:	0x0000555555559bb0	0x0000000000000000
+0x7fffffffdc10:	0x0000000000000000	0x473d82a1ec44da00
+0x7fffffffdc20:	0x00007fffffffdcc0	0x00007ffff7c2a1ca
+
+
+0x555555559290:	0x0000000000000000	0x0000000000000911
+0x5555555592a0:	0x0000000000000039	0x0000000000000000
+                   Byte Code(BC) 
+
+0x555555559b90:	0x0000000000000000	0x0000000000000000
+0x555555559ba0:	0x0000000000000000	0x0000000000000061
+0x555555559bb0:	0x00005555555592aa	0x0000555555559b98
+                Program Counter(PC)        Pointer 0 (P0)
+0x555555559bc0:	0x0000555555559b98	0x0000000000000000
+                   Pointer 1 (P1)          Register 0 (R0)
+0x555555559bd0:	0x0000000000000000	0x0000000000000000
+                   Register 1 (R1)         Register 2 (R2)
+0x555555559be0:	0x0000000000000000	0x0000000000000000
+                   Register 3 (R3)         Register 4 (R4)
+0x555555559bf0:	0x0000000000000000	0x0000000000000000
+                   Register 5 (R5)         Register 6 (R6)
+0x555555559c00:	0x3837363534333231	0x0000000000020401
+                   Register 7 (R7)
+
+Maximum bytecode is 255 bytes
+
+1: if BC+0x100 <= P0 then *P0=V, P0=P0-8   e.g.: "1z"
+2: if BC+0x100 <= P0 then *P0=RX, P0=P0-8    X=0-7
+3: if P0<=P1 then P0=P0+8, RX=*P0  e.g.: "37"
+4: RX=RY   e.g.: "417" -> R1=R7 
+5: RX=8 bytes setting  e.g.: "5712345678" -> R7=0x3837363534333231
+6: memcpy(BC+RX&0xff*8+0x100, BC+RY&0xff*8+0x100, size)   e.g.:  "617z"
+7: RX=RX&RY    X=0-7, Y=0-7
+8: RX=RX|RY    X=0-7, Y=0-7
+9: RX=RX^RY    X=0-7, Y=0-7
+@: RX=-RX      X=0-7
+A: RX=RX>>RY   X=0-7, Y=0-7
+B: RX=RX<<RY   X=0-7, Y=0-7
+C: RX=RX+RY    X=0-7, Y=0-7
+D: RX=RX-RY    X=0-7, Y=0-7
+E: PC=PC+V  e.g.: "E1" -> PC=PC+0x31
+
+
+0x55555555c510:    0x0000000000000000    0x0000000000000061
+0x55555555c520:    0x000055555555bc10    0x000055555555c4b0
+0x55555555c530:    0x000055555555c508    0x00000000000000ff
+0x55555555c540:    0x00000000000000e5    0x0000000000000000
+0x55555555c550:    0x0000000000000000    0x0000000000000000
+0x55555555c560:    0x0000000000000000    0x000055555555bb98
+                                            R6 = heap address
+0x55555555c570:    0x00007ffff7fb4b20    0x000000000001fa91
+                   R7 = libc address
+
+

