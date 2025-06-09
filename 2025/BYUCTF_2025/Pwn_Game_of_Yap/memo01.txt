@@ -1,0 +1,86 @@
+pwndbg> vmmap
+LEGEND: STACK | HEAP | CODE | DATA | WX | RODATA
+             Start                End Perm     Size Offset File
+    0x555555554000     0x555555555000 r--p     1000      0 /home/mito/CTF/BYUCTF_2025/Pwn_Game_of_Yap/game-of-yap
+    0x555555555000     0x555555556000 r-xp     1000   1000 /home/mito/CTF/BYUCTF_2025/Pwn_Game_of_Yap/game-of-yap
+    0x555555556000     0x555555557000 r--p     1000   2000 /home/mito/CTF/BYUCTF_2025/Pwn_Game_of_Yap/game-of-yap
+    0x555555557000     0x555555558000 r--p     1000   2000 /home/mito/CTF/BYUCTF_2025/Pwn_Game_of_Yap/game-of-yap
+    0x555555558000     0x555555559000 rw-p     1000   3000 /home/mito/CTF/BYUCTF_2025/Pwn_Game_of_Yap/game-of-yap
+    0x7ffff7c00000     0x7ffff7c28000 r--p    28000      0 /usr/lib/x86_64-linux-gnu/libc.so.6
+    0x7ffff7c28000     0x7ffff7db0000 r-xp   188000  28000 /usr/lib/x86_64-linux-gnu/libc.so.6
+    0x7ffff7db0000     0x7ffff7dff000 r--p    4f000 1b0000 /usr/lib/x86_64-linux-gnu/libc.so.6
+    0x7ffff7dff000     0x7ffff7e03000 r--p     4000 1fe000 /usr/lib/x86_64-linux-gnu/libc.so.6
+    0x7ffff7e03000     0x7ffff7e05000 rw-p     2000 202000 /usr/lib/x86_64-linux-gnu/libc.so.6
+    0x7ffff7e05000     0x7ffff7e12000 rw-p     d000      0 [anon_7ffff7e05]
+    0x7ffff7fa3000     0x7ffff7fa6000 rw-p     3000      0 [anon_7ffff7fa3]
+    0x7ffff7fbd000     0x7ffff7fbf000 rw-p     2000      0 [anon_7ffff7fbd]
+    0x7ffff7fbf000     0x7ffff7fc3000 r--p     4000      0 [vvar]
+    0x7ffff7fc3000     0x7ffff7fc5000 r-xp     2000      0 [vdso]
+    0x7ffff7fc5000     0x7ffff7fc6000 r--p     1000      0 /usr/lib/x86_64-linux-gnu/ld-linux-x86-64.so.2
+    0x7ffff7fc6000     0x7ffff7ff1000 r-xp    2b000   1000 /usr/lib/x86_64-linux-gnu/ld-linux-x86-64.so.2
+    0x7ffff7ff1000     0x7ffff7ffb000 r--p     a000  2c000 /usr/lib/x86_64-linux-gnu/ld-linux-x86-64.so.2
+    0x7ffff7ffb000     0x7ffff7ffd000 r--p     2000  36000 /usr/lib/x86_64-linux-gnu/ld-linux-x86-64.so.2
+    0x7ffff7ffd000     0x7ffff7fff000 rw-p     2000  38000 /usr/lib/x86_64-linux-gnu/ld-linux-x86-64.so.2
+    0x7ffffffde000     0x7ffffffff000 rw-p    21000      0 [stack]
+0xffffffffff600000 0xffffffffff601000 --xp     1000      0 [vsyscall]
+
+
+pwndbg> x/80gx 0x555555558000
+0x555555558000:	0x0000000000000000	0x0000555555558008
+0x555555558010:	0x0000000000000000	0x0000000000000000
+0x555555558020 <stdout@GLIBC_2.2.5>:	0x00007ffff7e045c0	0x0000000000000000
+0x555555558030 <stdin@GLIBC_2.2.5>:	0x00007ffff7e038e0	0x0000000000000000
+0x555555558040 <stderr@GLIBC_2.2.5>:	0x00007ffff7e044e0	0x0000000000000000
+0x555555558050:	0x0000000000000000	0x0000000000000000
+0x555555558060:	0x0000000000000000	0x0000000000000000
+
+
+
+───────────────────────────────[ REGISTERS / show-flags off / show-compact-regs off ]────────────────────────────────
+ RAX  0x12d
+ RBX  0x7fffffffdd78 —▸ 0x7fffffffe117 ◂— '/home/mito/CTF/BYUCTF_2025/Pwn_Game_of_Yap/game-of-yap'
+ RCX  0x7ffff7d1ba61 (read+17) ◂— cmp rax, -0x1000 /* 'H=' */
+ RDX  0x256
+ RDI  0
+ RSI  0x7fffffffdb30 ◂— 0x6161616261616161 ('aaaabaaa')
+ R8   0x1b
+ R9   0x7ffff7fca380 (_dl_fini) ◂— endbr64 
+ R10  0x7fffffffd970 ◂— 0x800000
+ R11  0x246
+ R12  1
+ R13  0
+ R14  0x555555557da0 (__do_global_dtors_aux_fini_array_entry) —▸ 0x555555555180 (__do_global_dtors_aux) ◂— endbr64 
+ R15  0x7ffff7ffd000 (_rtld_global) —▸ 0x7ffff7ffe2e0 —▸ 0x555555554000 ◂— 0x10102464c457f
+ RBP  0x636161706361616f ('oaacpaac')
+ RSP  0x7fffffffdc38 ◂— 0x6361617263616171 ('qaacraac')
+ RIP  0x55555555523a (play+42) ◂— ret 
+────────────────────────────────────────[ DISASM / x86-64 / set emulate on ]─────────────────────────────────────────
+ ► 0x55555555523a <play+42>    ret                                <0x6361617263616171>
+    ↓
+
+
+
+
+
+
+
+
+
+──────────────────────────────────────────────────────[ STACK ]──────────────────────────────────────────────────────
+00:0000│ rsp 0x7fffffffdc38 ◂— 0x6361617263616171 ('qaacraac')
+01:0008│     0x7fffffffdc40 ◂— 0x6361617463616173 ('saactaac')
+02:0010│     0x7fffffffdc48 ◂— 0x6361617663616175 ('uaacvaac')
+03:0018│     0x7fffffffdc50 ◂— 0x6361617863616177 ('waacxaac')
+04:0020│     0x7fffffffdc58 ◂— 0x7f0a63616179
+05:0028│     0x7fffffffdc60 —▸ 0x7fffffffdc90 ◂— 1
+06:0030│     0x7fffffffdc68 —▸ 0x7fffffffdd78 —▸ 0x7fffffffe117 ◂— '/home/mito/CTF/BYUCTF_2025/Pwn_Game_of_Yap/game-of-yap'
+07:0038│     0x7fffffffdc70 ◂— 0x1f7e044e0
+────────────────────────────────────────────────────[ BACKTRACE ]────────────────────────────────────────────────────
+ ► 0   0x55555555523a play+42
+   1 0x6361617263616171 None
+   2 0x6361617463616173 None
+   3 0x6361617663616175 None
+   4 0x6361617863616177 None
+   5   0x7f0a63616179 None
+   6   0x7fffffffdc90 None
+   7   0x7fffffffdd78 None

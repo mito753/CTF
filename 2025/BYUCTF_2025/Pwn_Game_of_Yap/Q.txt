@@ -1,0 +1,10 @@
+Challenge
+14 Solves
+Game of Yap
+499
+Author: deltabluejay
+yap yap yap
+
+nc yap.chal.cyberjousting.com 1355
+
+Flag

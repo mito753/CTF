@@ -1,0 +1,10 @@
+Challenge
+5 Solves
+Goat
+500
+Author: Legoclones
+To prevent excessive brute forcing for those experiencing a skissue, I made sure to add a PoW.
+
+nc goat.chal.cyberjousting.com 1349
+
+Flag

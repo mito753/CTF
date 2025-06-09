@@ -1,0 +1,10 @@
+Challenge
+4 Solves
+Minecraft YouTuber
+500
+Author: overllama
+Oh boy, I hit a million subscribers on YouTube, what do I do now?
+
+nc minecraft.chal.cyberjousting.com 1354
+
+Flag

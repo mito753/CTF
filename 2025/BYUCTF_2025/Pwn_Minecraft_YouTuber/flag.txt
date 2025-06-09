@@ -1,0 +1,5 @@
+mito@mito-virtual-machine:~/CTF/BYUCTF_2025/Pwn_Minecraft_YouTuber$ python3 solve.py r
+[+] Opening connection to minecraft.chal.cyberjousting.com on port 1354: Done
+[*] Switching to interactive mode
+You have freed Loki! In gratitude, he offers you a flag!
+byuctf{th3_3xpl01t_n4m3_1s_l1t3r4lly_gr00m1ng}[
